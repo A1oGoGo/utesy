@@ -1549,7 +1549,17 @@ mapRiverOverlay=L.layerGroup().addTo(leafletMap);
 mapDecorationsLayer=L.layerGroup().addTo(leafletMap);
 mapCitiesLayer=L.layerGroup().addTo(leafletMap);
 mapPhotosLayer=L.layerGroup().addTo(leafletMap);
-leafletMap.on('zoomend',()=>{renderRiverVectorOverlay();renderMapCities();renderRouteDecorations();renderlet TRACK_GEOTAG_PHOTOS=[];
+leafletMap.on('zoomend',()=>{renderRiverVectorOverlay();renderMapCities();renderRouteDecorations();renderMapPhotos()});
+renderRiverVectorOverlay();
+renderMapRoutes();
+renderMapCities();
+renderMapPhotos();
+const slider=document.getElementById('map-line-weight'),label=document.getElementById('line-width-label');if(slider)slider.value=String(currentLineWeight);if(label)label.textContent=currentLineWeight+'px';
+const opSlider=document.getElementById('map-bg-opacity'),opLabel=document.getElementById('bg-opacity-label');if(opSlider)opSlider.value=String(currentBgOpacity);if(opLabel)opLabel.textContent=currentBgOpacity+'%';
+updateMapStyleButtons();
+updateMapBadge();}
+
+let TRACK_GEOTAG_PHOTOS=[];
 let isTrackPhotosLoaded=false,isTrackPhotosLoading=false;
 async function ensureTrackPhotosLoaded(fitAfterLoad=false){
 if(isTrackPhotosLoaded){
@@ -1581,7 +1591,7 @@ console.warn('Не удалось загрузить photos.json:',e);
 }finally{
 isTrackPhotosLoading=false;
 }
-}N8lb5YmjF2guP9pUHlfnmmv9e/Bhhl+R0H5EebQ0KSPEvpTTQjZEHUv3VmV0vYx1SSmTo2khVXxNJRgGB+Yz35WxTk1cvrHosSOfJCBbplFCtZFGbeQobMWBbRvXqQMehzeXxcLL64jnSPyybPa7kBbBCc+2Sn39Lj4p1/FkA2ryfDxiCI4VmSUc+xgmosYIjSPkE3bOR/YZV4yuA435aqmppBXkWR7fxchq76ypss+4KrL+0V/a3mAxwy6vVoMZsnM79ZCPJAnFZ6ZtbhIjGBMKVg9Wys9I3tVnv3w3vIt0VAAMuO9LNOR/R+AIuUClikFQ7Y4WxodnOFlUWtVS8elZdA8sUQUkBYQHMvCvI/N96ZR+lUi785Gwx0qzsrl3ZAlosnH6OoIxJLRF16MzTwRrCuuffdgfPS/E+8vHN/aIdosvayYijz9StMgVqVGvMDDZjimgBpbhHeFEZC8fi2KrGXa5XSXLhtLg5hcVUR6v0kM4F06k28jYsmlcdLOHMbGjrUnyXiOOWAEIiRTx40yf/vKqnC1LiWVRABLKqfGAAAAA="}];
+}
 let mapPhotosLayer=null,activePhotoIdx=0;
 
 function renderMapPhotos(){
@@ -1677,7 +1687,7 @@ return DEFAULT_DRIVE_TRACKS_FOLDER;
 function renderMapRoutes(){if(!leafletMap)return;Object.values(mapPolylines).forEach(p=>leafletMap.removeLayer(p));Object.values(mapRouteOutlines).forEach(p=>leafletMap.removeLayer(p));Object.values(mapRouteGlows).forEach(p=>leafletMap.removeLayer(p));mapPolylines={};mapRouteOutlines={};mapRouteGlows={};const S=MAP_STYLES[currentMapStyle]||MAP_STYLES.minecraft;const adminRoutesList=document.getElementById('map-admin-routes-list');if(adminRoutesList)adminRoutesList.innerHTML='';portalState.mapRoutes.forEach(route=>{if(!Array.isArray(route.coords)||!route.coords.length)return;const outline=L.polyline(route.coords,{color:S.routeOutline||'#090c10',weight:currentLineWeight+6,opacity:0.92,lineCap:'round',lineJoin:'round',interactive:false}).addTo(leafletMap);const glow=L.polyline(route.coords,{color:route.color||'#f59e0b',weight:currentLineWeight+3,opacity:0.45,lineCap:'round',lineJoin:'round',interactive:false}).addTo(leafletMap);const poly=L.polyline(route.coords,{color:route.color||'#f59e0b',weight:currentLineWeight+1,opacity:1,lineCap:'round',lineJoin:'round',interactive:true}).addTo(leafletMap);const sStory=sanitizeUrl(route.storyUrl),sDownload=resolveTrackDownloadUrl(route),sFolder=sanitizeUrl(route.driveFolderUrl)||DEFAULT_DRIVE_TRACKS_FOLDER;const multiStoriesHtml=(Array.isArray(route.storyLinks)&&route.storyLinks.length>0)?route.storyLinks.map(st=>{const u=sanitizeUrl(st.url);if(!u)return'';return`<div style="margin-top:6px;padding:6px;background:rgba(26,18,8,0.18);border:1px solid #3d2914"><div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#1a1208;margin-bottom:4px;line-height:1.35">${escapeHtml(st.desc||'')}</div><a href="${escapeHtml(u)}" target="_blank" rel="noopener noreferrer" class="mc-popup-btn">📖 ${escapeHtml(st.title||'РАССКАЗ')} ↗</a></div>`}).join(''):(sStory?`<a href="${escapeHtml(sStory)}" target="_blank" rel="noopener noreferrer" class="mc-popup-btn">📖 РАССКАЗ ↗</a>`:'');poly.bindPopup(`<div class="min-w-[230px] max-w-[300px]"><span class="mc-popup-badge">${escapeHtml(route.km)}</span><div class="mc-popup-title">${escapeHtml(route.name)}</div><div class="mc-popup-desc">${escapeHtml(route.desc)}</div>${multiStoriesHtml}<a href="${escapeHtml(sDownload)}" target="_blank" rel="noopener noreferrer" download class="mc-popup-btn cyan">📥 СКАЧАТЬ ТРЕК (.GPX) ↗</a><a href="https://notebook.google.com/notebook/7959d135-4395-4f56-8f7b-4fa29ddd0fd6/preview" target="_blank" rel="noopener noreferrer" class="mc-popup-btn cyan">✨ ИИ-БАЗА МАРШРУТА ↗</a><button type="button" onclick="closeActiveMapPopup()" class="mc-popup-btn dark">✕ ЗАКРЫТЬ</button></div>`,{closeButton:true,autoPan:true,className:'mc-popup'});mapRouteOutlines[route.id]=outline;mapRouteGlows[route.id]=glow;mapPolylines[route.id]=poly;if(isAdminLoggedIn&&adminRoutesList){const item=document.createElement('div');item.className='p-2.5 rounded-xl bg-graphite-900 border border-graphite-800 flex items-center justify-between gap-2 text-xs';item.innerHTML=`<span class="inline-flex items-center gap-1.5 font-semibold text-white truncate"><span class="w-2.5 h-2.5 shrink-0" style="background:${escapeHtml(route.color)};border-radius:0"></span>${escapeHtml(route.name)} (${escapeHtml(route.km)})</span><div class="flex items-center gap-2 shrink-0"><button type="button" data-action="edit-route" data-id="${escapeHtml(route.id)}" class="font-mono text-volga-400 hover:underline">Изменить</button><button type="button" data-action="del-route" data-id="${escapeHtml(route.id)}" class="font-mono text-red-400 hover:underline">Удалить</button></div>`;adminRoutesList.appendChild(item)}});renderRouteDecorations()}
 
 function updateMapLineWeight(val){currentLineWeight=Math.min(5,Math.max(2,parseInt(val,10)||3));localStorage.setItem(LINE_WEIGHT_KEY,String(currentLineWeight));portalState.mapLineWeight=currentLineWeight;savePortalState();const lbl=document.getElementById('line-width-label');if(lbl)lbl.textContent=currentLineWeight+'px';Object.values(mapRouteOutlines).forEach(p=>p.setStyle({weight:currentLineWeight+6}));Object.values(mapRouteGlows).forEach(p=>p.setStyle({weight:currentLineWeight+3}));Object.values(mapPolylines).forEach(p=>p.setStyle({weight:currentLineWeight+1}))}
-function toggleMapCollapse(){const body=document.getElementById('map-collapsible-body'),sliders=document.getElementById('map-sliders-wrap'),icon=document.getElementById('map-collapse-icon'),textEl=document.getElementById('map-collapse-text');if(!body)return;body.classList.toggle('hidden');const hidden=body.classList.contains('hidden');if(sliders){sliders.classList.toggle('hidden',hidden);sliders.classList.toggle('flex',!hidden);}if(icon)icon.textContent=hidden?'▶':'▼';if(textEl)textEl.textContent=hidden?'Развернуть карту':'Свернуть карту';if(!hidden){if(!leafletMap)const mapBodyEl=document.getElementById('map-collapsible-body');if(mapBodyEl&&!mapBodyEl.classList.contains('hidden')){initLeafletMap();loadExternalRoutesJson();}const fitAll=()=>{leafletMap.invalidateSize();const layers=Object.values(mapPolylines);if(layers.length)leafletMap.fitBounds(L.featureGroup(layers).getBounds(),{padding:[25,25]})};setTimeout(fitAll,80);setTimeout(fitAll,300)}}
+function toggleMapCollapse(){const body=document.getElementById('map-collapsible-body'),sliders=document.getElementById('map-sliders-wrap'),icon=document.getElementById('map-collapse-icon'),textEl=document.getElementById('map-collapse-text');if(!body)return;body.classList.toggle('hidden');const hidden=body.classList.contains('hidden');if(sliders){sliders.classList.toggle('hidden',hidden);sliders.classList.toggle('flex',!hidden);}if(icon)icon.textContent=hidden?'▶':'▼';if(textEl)textEl.textContent=hidden?'Развернуть карту':'Свернуть карту';if(!hidden){if(!leafletMap)initLeafletMap();loadExternalRoutesJson();const fitAll=()=>{leafletMap.invalidateSize();const layers=Object.values(mapPolylines);if(layers.length)leafletMap.fitBounds(L.featureGroup(layers).getBounds(),{padding:[25,25]})};setTimeout(fitAll,80);setTimeout(fitAll,300)}}
 let isMapFullscreen=false;
 function syncMapFullscreenUI(active){
 isMapFullscreen=Boolean(active);
@@ -2932,7 +2942,7 @@ initEditableStaticTexts();
 pickHeroSubtitleVariant();
 const bgColors={minecraft:'#3d6b2f',heroes:'#7ba83a',diablo:'#0a0806',osm:'#161b22'};
 const mapEl=document.getElementById('leaflet-map');if(mapEl)mapEl.style.background=bgColors[currentMapStyle]||'#3d6b2f';
-initLeafletMap();loadExternalRoutesJson();
+const mapBodyEl=document.getElementById('map-collapsible-body');if(mapBodyEl&&!mapBodyEl.classList.contains('hidden')){initLeafletMap();loadExternalRoutesJson();}
 renderSectors();renderFaqs();renderStories();
 renderPublicProtocol();renderPublicResultsTable();
 renderAdminResultsSection();
