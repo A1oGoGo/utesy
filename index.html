@@ -602,7 +602,10 @@ img,video{max-width:100%;height:auto}
 <div id="participant-form-step" class="hidden">
 <div class="flex flex-wrap items-center justify-between gap-2 pb-3 mb-4 border-b border-graphite-800">
 <div><div class="flex items-center gap-1.5"><span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-mono text-[11px]">Участник</span><span class="px-2 py-0.5 rounded bg-volga-500/15 text-volga-300 font-mono text-[11px]">✓ Email</span></div><div id="active-user-fio-label" class="font-bold text-sm text-white mt-1"></div></div>
+<div class="flex items-center gap-2">
+<button type="button" id="delete-own-application-btn" onclick="deleteOwnApplication()" title="Полностью удалить свою заявку и данные из списка участников" class="px-3 py-1.5 rounded-lg bg-red-950/70 hover:bg-red-900 border border-red-600/70 text-red-200 hover:text-white text-xs font-semibold transition flex items-center gap-1.5"><span>🗑</span><span>Удалить мою заявку</span></button>
 <button type="button" onclick="logoutParticipant()" class="px-2.5 py-1 rounded-lg bg-graphite-800 hover:bg-graphite-700 border border-graphite-600 text-slate-300 text-xs font-mono transition">Выйти</button>
+</div>
 </div>
 <div id="participant-status-banner" class="mb-4 p-3 rounded-xl bg-graphite-950 border border-graphite-700 text-xs"></div>
 
@@ -644,6 +647,10 @@ img,video{max-width:100%;height:auto}
 
 <label class="flex items-start gap-2.5 p-2.5 rounded-xl bg-graphite-950 border border-graphite-800 cursor-pointer"><input type="checkbox" id="reg-consent" required class="mt-0.5 w-4 h-4 accent-ochre-500 rounded"><span class="text-xs text-slate-300 leading-snug">С правилами (полная ответственность, ПДД РФ, правило 8 часов) ознакомлен и согласен.</span></label>
 <button type="submit" id="app-submit-btn" class="w-full py-3 px-4 rounded-xl bg-ochre-500 hover:bg-ochre-400 text-graphite-950 font-bold text-xs sm:text-sm uppercase tracking-wider transition shadow-md">Отправить заявку</button>
+<div id="own-app-delete-panel" class="hidden pt-3 mt-3 border-t border-graphite-800 flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 text-xs">
+<span class="text-slate-400">Передумали участвовать или хотите подать заявку заново?</span>
+<button type="button" onclick="deleteOwnApplication()" class="px-3.5 py-2 rounded-xl bg-red-950/60 hover:bg-red-900/80 border border-red-700/60 text-red-200 hover:text-white font-semibold transition shrink-0">🗑 Отозвать и удалить мою заявку</button>
+</div>
 </form>
 
 <div id="participant-preliminary-section" class="mt-6 pt-5 border-t-2 border-volga-500/50 space-y-3 hidden">
@@ -711,14 +718,15 @@ img,video{max-width:100%;height:auto}
 <div>
 <div class="flex items-center gap-2.5"><h3 class="font-display font-bold text-xl text-white uppercase">ПУБЛИЧНЫЙ СПИСОК ЗАЯВОК</h3><span class="px-2.5 py-0.5 rounded-lg bg-graphite-800 border border-graphite-700 text-xs font-mono text-ochre-400 group-open:rotate-180 transition-transform">▼</span></div>
 </div>
-<div class="flex items-center gap-2 text-xs font-mono">
+<div class="flex flex-wrap items-center gap-2 text-xs font-mono">
 <span class="px-2.5 py-1 rounded-lg bg-emerald-500/15 border border-emerald-500/30 text-emerald-300">Подтверждены: <strong id="stat-public-approved">0</strong></span>
 <span class="px-2.5 py-1 rounded-lg bg-ochre-500/15 border border-ochre-500/30 text-ochre-300">Ожидают: <strong id="stat-public-pending">0</strong></span>
+<span class="px-2.5 py-1 rounded-lg bg-red-500/15 border border-red-500/30 text-red-300">Отклонены: <strong id="stat-public-rejected">0</strong></span>
 </div>
 </summary>
 <div class="border-t border-graphite-800 overflow-x-auto bg-graphite-950">
 <table class="w-full text-left border-collapse">
-<thead><tr class="border-b border-graphite-800 text-[11px] font-mono uppercase text-slate-400 bg-graphite-900/70"><th class="py-2.5 px-3">№</th><th class="py-2.5 px-3">ФИО / Год</th><th class="py-2.5 px-3">Telegram</th><th class="py-2.5 px-3">Опыт</th><th class="py-2.5 px-3">Велосипед</th><th class="py-2.5 px-3 text-right">Статус</th></tr></thead>
+<thead><tr class="border-b border-graphite-800 text-[11px] font-mono uppercase text-slate-400 bg-graphite-900/70"><th class="py-2.5 px-3">№</th><th class="py-2.5 px-3">ФИО / Год</th><th class="py-2.5 px-3">Telegram</th><th class="py-2.5 px-3">Опыт</th><th class="py-2.5 px-3">Велосипед</th><th class="py-2.5 px-3 text-center">Опрос</th><th class="py-2.5 px-3 text-right">Статус</th></tr></thead>
 <tbody id="public-protocol-tbody" class="divide-y divide-graphite-800 text-xs"></tbody>
 </table>
 </div>
@@ -740,7 +748,7 @@ img,video{max-width:100%;height:auto}
 <div class="p-4 border-t border-graphite-800 space-y-3">
 <p class="text-xs text-slate-300 leading-relaxed">URL веб-приложения <strong>Google Apps Script</strong>:</p>
 <div class="flex flex-col sm:flex-row gap-2">
-<input type="url" id="admin-gsheet-url-input" value="https://script.google.com/macros/s/AKfycbwljQJSPk3A7uXriSS7Jw_qbzviV4x9OtvjKsnhb3fVsVcQOe0ymP8a54tezHQDJ5xj/exec" placeholder="https://script.google.com/macros/s/.../exec" class="flex-1 bg-graphite-900 border border-graphite-700 rounded-xl px-3.5 py-2 text-xs text-white font-mono focus:outline-none focus:border-emerald-400">
+<input type="url" id="admin-gsheet-url-input" value="https://script.google.com/macros/s/AKfycbx9EkxdYVQ9HwRpOt3ggwLGsFdUfuJq9XavcY0R5BlWzKoB1Gt2w1bzZUR383W_pkKL/exec" placeholder="https://script.google.com/macros/s/.../exec" class="flex-1 bg-graphite-900 border border-graphite-700 rounded-xl px-3.5 py-2 text-xs text-white font-mono focus:outline-none focus:border-emerald-400">
 <button type="button" onclick="saveGoogleSheetUrl()" class="px-4 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-graphite-950 font-bold text-xs uppercase tracking-wider transition shrink-0">Сохранить URL</button>
 <button type="button" onclick="pullFromGoogleSheet(true)" class="px-3.5 py-2 rounded-xl bg-graphite-800 hover:bg-graphite-700 border border-volga-500/40 text-volga-300 font-mono text-xs transition shrink-0">🔄 Загрузить</button>
 <button type="button" onclick="pushAllToGoogleSheet()" class="px-3.5 py-2 rounded-xl bg-graphite-800 hover:bg-graphite-700 border border-ochre-500/40 text-ochre-300 font-mono text-xs transition shrink-0">☁️ Выгрузить</button>
@@ -1032,9 +1040,10 @@ const LEGACY_GSHEET_URLS=[
 'https://script.google.com/macros/s/AKfycbxBNr7CmdCqj7k7Cnfiz89B0dv2cTRJBE6qt_TZibEuVHHeHpWQhveMcR-1rwmDpkVuJQ/exec',
 'https://script.google.com/macros/s/AKfycbys3PU7VdQ2FGPse1f3VHnACfIVVrKjaVSWQ0ALtcEOoxRiadcLo1cRI6GTSxi07fUFuXg/exec',
 'https://script.google.com/macros/s/AKfycbzD8lj4ZR1Kw-2pb3SaN_OTJ4ZxiY5BzopoLI-gromtgo5lA0J26kUeAlfcuf8qGFGZXA/exec',
-'https://script.google.com/macros/s/AKfycbwmxmJnL3i3UilIpK8LC8vx4HLJHM-P08NnPT8dzFB8Kk-51FE7G6B_gO0DZ2BSBGAdzA/exec'
+'https://script.google.com/macros/s/AKfycbwmxmJnL3i3UilIpK8LC8vx4HLJHM-P08NnPT8dzFB8Kk-51FE7G6B_gO0DZ2BSBGAdzA/exec',
+'https://script.google.com/macros/s/AKfycbwljQJSPk3A7uXriSS7Jw_qbzviV4x9OtvjKsnhb3fVsVcQOe0ymP8a54tezHQDJ5xj/exec'
 ];
-const CURRENT_GSHEET_URL='https://script.google.com/macros/s/AKfycbwljQJSPk3A7uXriSS7Jw_qbzviV4x9OtvjKsnhb3fVsVcQOe0ymP8a54tezHQDJ5xj/exec';
+const CURRENT_GSHEET_URL='https://script.google.com/macros/s/AKfycbx9EkxdYVQ9HwRpOt3ggwLGsFdUfuJq9XavcY0R5BlWzKoB1Gt2w1bzZUR383W_pkKL/exec';
 
 const MAP_STYLES={
 minecraft:{name:'Minecraft',icon:'⛏',badge:'⛏ МИР УТЁСОВ',artUrl:'',fallbackArtUrl:'',grass:['#4a7c3a','#558b42','#3d6b2f','#4f843d','#487938','#427233'],steppe:['#8c8248','#9a8f50','#7e7540','#857c45'],floodplain:['#397a3e','#448c49','#2f6a34'],salt:'#d8e8ea',riverOuter:'#1a4a6a',riverMain:'#3d8fb5',riverHi:'#6fc3e0',cityStone:'#a89070',cityRoof:'#c9a77a',cityWall:'#8b7355',cityWindow:'#f5d76e',labelBg:'rgba(20,15,8,0.92)',labelFg:'#f5d76e',labelBorder:'#3d2914',routeOutline:'#1a1208',font:"'Press Start 2P', monospace",tree:'#265218',treeHi:'#3c7a26',mountain:'#786a52',cliff:'#ded8c8'},
@@ -2012,7 +2021,7 @@ function updateGoogleSheetStatusUI(msg,isOk=true){const a=document.getElementByI
 function saveGoogleSheetUrl(){if(!isAdminLoggedIn)return;const i=document.getElementById('admin-gsheet-url-input');if(!i)return;portalState.googleSheetUrl=sanitizeUrl(i.value.trim());savePortalState();updateGoogleSheetStatusUI();if(portalState.googleSheetUrl){showToast('URL сохранён. Загружаем…');pullFromGoogleSheet(true)}else showToast('URL очищен')}
 async function pushToGoogleSheet(payload={}){const url=getGoogleSheetUrl();if(!url)return null;try{updateGoogleSheetStatusUI('☁️ Сохранение…',true);const body={...payload,adminTokenHash:isAdminLoggedIn?currentAdminPassHash:'',sessionToken:adminSessionToken};const r=await fetch(url,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(body)});updateGoogleSheetStatusUI('✓ Сохранено',true);try{return await r.json()}catch(e){return{status:'ok'}}}catch(e){console.warn('push warn:',e);updateGoogleSheetStatusUI('⚠️ Локально',false);return null}}
 async function pushAllToGoogleSheet(){if(!isAdminLoggedIn)return;if(!getGoogleSheetUrl()){showToast('Сначала URL Google Apps Script','error');return}await pushToGoogleSheet({action:'adminSync',registrations:registrationsList,results:raceResultsList,stories:portalState.stories,portalConfig:stripHeavyCoordsForStorage(portalState)});showToast('Всё выгружено')}
-function mergeRegistrationItems(localItem,cloudItem){if(!localItem)return cloudItem;if(!cloudItem)return localItem;const lt=toMs(localItem.updatedAt),ct=toMs(cloudItem.updatedAt);const primary=ct>=lt?cloudItem:localItem,secondary=ct>=lt?localItem:cloudItem;const merged={...secondary,...primary};['email','fio','passwordHash','emailVerifiedAt','birthYear','telegram','socialUrl','experience','bikeType','bikeBrand','bikeYear','phone','status','createdAt','survey'].forEach(f=>{const pv=primary[f],sv=secondary[f];if((pv===undefined||pv===null||String(pv).trim()==='')&&(sv!==undefined&&sv!==null&&String(sv).trim()!==''))merged[f]=sv});return merged}
+function mergeRegistrationItems(localItem,cloudItem){if(!localItem)return cloudItem;if(!cloudItem)return localItem;const lt=toMs(localItem.updatedAt),ct=toMs(cloudItem.updatedAt);const primary=ct>=lt?cloudItem:localItem,secondary=ct>=lt?localItem:cloudItem;const merged={...secondary,...primary};['email','fio','passwordHash','emailVerifiedAt','birthYear','telegram','socialUrl','experience','bikeType','bikeBrand','bikeYear','phone','status','createdAt','survey','surveyScore'].forEach(f=>{const pv=primary[f],sv=secondary[f];if((pv===undefined||pv===null||String(pv).trim()==='')&&(sv!==undefined&&sv!==null&&String(sv).trim()!==''))merged[f]=sv});return merged}
 function mergeResultItem(localItem,cloudItem){if(!localItem)return cloudItem;if(!cloudItem)return localItem;const lt=toMs(localItem.updatedAt),ct=toMs(cloudItem.updatedAt);return ct>=lt?{...localItem,...cloudItem}:{...cloudItem,...localItem}}
 async function pullFromGoogleSheet(showNotification=false){const url=getGoogleSheetUrl();if(!url){if(showNotification)showToast('Сначала URL','error');return}try{updateGoogleSheetStatusUI('🔄 Загрузка…',true);const q=new URLSearchParams({action:'getAll',t:String(Date.now())});if(isAdminLoggedIn&&currentAdminPassHash)q.set('adminTokenHash',currentAdminPassHash);const res=await fetch(`${url}${url.includes('?')?'&':'?'}${q.toString()}`,{method:'GET',redirect:'follow'});const data=await res.json();const needInitialPurge=!localStorage.getItem('volga_cliffs_cloud_purged_v14');
 if(needInitialPurge){
@@ -2287,21 +2296,80 @@ entry.survey.questionIds=picked.map(q=>q.id);
 return picked;
 }
 
+function computeSurveyScoreStats(entry){
+const pool=getSurveyQuestionsPool();
+const survey=(entry&&entry.survey&&typeof entry.survey==='object')?entry.survey:{};
+const answers=survey.answers||{};
+const qIds=(Array.isArray(survey.questionIds)&&survey.questionIds.length>0)?survey.questionIds:Object.keys(answers);
+const activeQuestions=qIds.map(id=>pool.find(q=>q.id===id)).filter(Boolean);
+let totalCorrectOptions=0;
+let totalWrongOptions=0;
+let chosenCorrectOptions=0;
+let chosenWrongOptions=0;
+let questionsExactCorrect=0;
+activeQuestions.forEach(q=>{
+const opts=Array.isArray(q.options)?q.options:[];
+const val=answers[q.id];
+const selectedArr=Array.isArray(val)?val:(typeof val==='string'&&val?[val]:[]);
+const selectedSet=new Set(selectedArr);
+const correctSet=new Set(opts.filter(o=>o.correct).map(o=>o.v));
+totalCorrectOptions+=correctSet.size;
+totalWrongOptions+=Math.max(0,opts.length-correctSet.size);
+selectedArr.forEach(v=>{
+if(correctSet.has(v))chosenCorrectOptions++;
+else chosenWrongOptions++;
+});
+if(correctSet.size>0&&correctSet.size===selectedSet.size&&Array.from(correctSet).every(v=>selectedSet.has(v))){
+questionsExactCorrect++;
+}
+});
+const totalQuestions=activeQuestions.length||SURVEY_RANDOM_COUNT;
+const questionsWrong=Math.max(0,totalQuestions-questionsExactCorrect);
+const hasScore=Boolean(survey.completedAt)&&activeQuestions.length>0;
+const isAutoRejected=hasScore&&(
+chosenWrongOptions>chosenCorrectOptions||
+(totalWrongOptions>0&&chosenWrongOptions>(totalWrongOptions/2))||
+(questionsWrong>(totalQuestions/2))
+);
+return{
+hasScore,
+chosenCorrectOptions,
+totalCorrectOptions,
+chosenWrongOptions,
+totalWrongOptions,
+questionsExactCorrect,
+totalQuestions,
+isAutoRejected,
+scoreText:hasScore?`${chosenCorrectOptions} / ${totalCorrectOptions}`:'—'
+};
+}
 function renderSurveyForm(entry){
 const section=document.getElementById('participant-survey-section');
 const container=document.getElementById('survey-questions-container');
 if(!section||!container)return;
 if(!entry){section.classList.add('hidden');return;}
 section.classList.remove('hidden');
+const isLocked=Boolean(entry.survey&&entry.survey.completedAt);
 const activeQuestions=getParticipantSurveyQuestions(entry);
 const answers=(entry.survey&&entry.survey.answers)||{};
 const banner=document.getElementById('survey-status-banner');
-if(entry.survey&&entry.survey.completedAt){
+const clearBtn=section.querySelector('button[onclick="clearSurveyAnswers()"]');
+if(clearBtn){
+if(isLocked)clearBtn.classList.add('hidden');
+else clearBtn.classList.remove('hidden');
+}
+if(isLocked){
+const stats=computeSurveyScoreStats(entry);
+if(stats.isAutoRejected){
+banner.className='p-3 rounded-xl bg-red-950/60 border border-red-500/50 text-xs text-red-200 leading-relaxed';
+banner.innerHTML=`✕ <strong>Опросник завершён и заблокирован для изменений</strong> (${escapeHtml(entry.survey.completedAt)}). Правильных вариантов: <strong>${escapeHtml(stats.scoreText)}</strong> (ошибочных: ${stats.chosenWrongOptions}). Заявка отклонена автоматически из-за большого числа неверных ответов.`;
+}else{
 banner.className='p-3 rounded-xl bg-emerald-950/50 border border-emerald-500/50 text-xs text-emerald-200 leading-relaxed';
-banner.innerHTML=`✓ <strong>Опросник заполнен</strong> (${escapeHtml(entry.survey.completedAt)}). Вы можете изменить выбранные варианты и сохранить заявку.`;
+banner.innerHTML=`✓ <strong>Опросник пройден и зафиксирован</strong> (${escapeHtml(entry.survey.completedAt)}). Результат: <strong>${escapeHtml(stats.scoreText)}</strong> правильных вариантов. Повторное изменение ответов недоступно.`;
+}
 }else{
 banner.className='p-3 rounded-xl bg-ochre-500/10 border border-ochre-500/40 text-xs text-ochre-300 leading-relaxed';
-banner.innerHTML='Отметьте верные варианты ответа в 5 вопросах о плане, правилах и безопасности (без текстовых комментариев). В каждом вопросе 6 вариантов. Ответы видит <strong>только администратор</strong>.';
+banner.innerHTML='Отметьте верные варианты ответа в 5 вопросах о плане, правилах и безопасности. Внимание: <strong>после отправки заявки изменить ответы будет нельзя</strong>, а при выборе более половины неверных ответов заявка автоматически отклоняется.';
 }
 container.innerHTML='';
 activeQuestions.forEach((q,idx)=>{
@@ -2313,7 +2381,11 @@ wrap.dataset.dnum=String(displayNum);
 const savedVal=answers[q.id];
 const savedArr=Array.isArray(savedVal)?savedVal:(typeof savedVal==='string'&&savedVal?[savedVal]:[]);
 const opts=Array.isArray(q.options)?q.options:[];
-const inputHtml=`<div class="space-y-1.5">`+opts.map(o=>`<label class="flex items-start gap-2.5 p-2 rounded-lg bg-graphite-900/80 hover:bg-graphite-900 border border-graphite-800 hover:border-graphite-700 cursor-pointer text-xs text-slate-200 transition"><input type="checkbox" name="${escapeHtml(q.id)}" value="${escapeHtml(o.v)}" ${savedArr.includes(o.v)?'checked':''} class="mt-0.5 w-4 h-4 accent-ochre-500 rounded shrink-0"><span>${escapeHtml(o.label)}</span></label>`).join('')+`</div>`;
+const inputHtml=`<div class="space-y-1.5">`+opts.map(o=>{
+const isChecked=savedArr.includes(o.v);
+const labelCursor=isLocked?'cursor-not-allowed opacity-85':'hover:bg-graphite-900 hover:border-graphite-700 cursor-pointer';
+return `<label class="flex items-start gap-2.5 p-2 rounded-lg bg-graphite-900/80 border border-graphite-800 ${labelCursor} text-xs text-slate-200 transition"><input type="checkbox" name="${escapeHtml(q.id)}" value="${escapeHtml(o.v)}" ${isChecked?'checked':''} ${isLocked?'disabled':''} class="mt-0.5 w-4 h-4 accent-ochre-500 rounded shrink-0"><span>${escapeHtml(o.label)}</span></label>`;
+}).join('')+`</div>`;
 wrap.innerHTML=`<div class="flex items-start gap-2.5"><span class="shrink-0 w-6 h-6 rounded bg-ochre-500/20 text-ochre-400 text-[11px] font-bold font-mono flex items-center justify-center">${displayNum}</span><div class="flex-1"><div class="text-xs font-bold text-white mb-1">${escapeHtml(q.title)}</div><div class="text-[11px] text-slate-300 leading-relaxed mb-2.5">${escapeHtml(q.question)}</div>${inputHtml}</div></div>`;
 container.appendChild(wrap);
 });
@@ -2350,9 +2422,10 @@ if(errBox)errBox.classList.add('hidden');
 
 function clearSurveyAnswers(){
 if(!currentParticipantId)return;
-if(!confirm('Очистить выбранные ответы опросника?'))return;
 const entry=registrationsList.find(r=>r.id===currentParticipantId)||(pendingAuthDraft&&pendingAuthDraft.id===currentParticipantId?pendingAuthDraft:null);
 if(!entry)return;
+if(entry.survey&&entry.survey.completedAt){showToast('Опросник уже пройден — изменение ответов заблокировано','error');return;}
+if(!confirm('Очистить выбранные ответы опросника?'))return;
 const keepIds=(entry.survey&&Array.isArray(entry.survey.questionIds))?entry.survey.questionIds:[];
 entry.survey={answers:{},completedAt:null,questionIds:keepIds};
 saveRegistrationsLocal();
@@ -2770,18 +2843,48 @@ closePasswordResetBox();
 openParticipantForm(userEntry,existingIdx===-1);
 showToast('Пароль успешно обновлён! Вы авторизованы.');
 }
-function openParticipantForm(entry,isNewDraft){document.getElementById('participant-auth-step').classList.add('hidden');document.getElementById('participant-form-step').classList.remove('hidden');document.getElementById('active-user-fio-label').textContent=entry.fio?`${entry.fio} (${entry.email||''})`:(entry.email||'Новый участник');const banner=document.getElementById('participant-status-banner');if(isNewDraft||entry.status==='draft'){banner.className='mb-4 p-3 rounded-xl bg-volga-500/15 border border-volga-500/40 text-xs text-slate-200';banner.innerHTML='Заполните поля и отправьте заявку. После отправки статус — <strong>«Ожидает подтверждения»</strong>.'}else if(entry.status==='approved'){banner.className='mb-4 p-3 rounded-xl bg-emerald-950/50 border border-emerald-500/50 text-xs text-emerald-200';banner.innerHTML='Статус: <strong>Подтверждена</strong>. Вы в стартовом протоколе.'}else if(entry.status==='rejected'){banner.className='mb-4 p-3 rounded-xl bg-red-950/50 border border-red-500/50 text-xs text-red-200';banner.innerHTML='Статус: <strong>Отклонена</strong>. Отредактируйте данные.'}else{banner.className='mb-4 p-3 rounded-xl bg-ochre-500/15 border border-ochre-500/40 text-xs text-ochre-300';banner.innerHTML='Статус: <strong>Ожидает подтверждения</strong>.'}const emailEl=document.getElementById('reg-email');emailEl.value=entry.email||'';emailEl.readOnly=true;document.getElementById('reg-fio').value=entry.fio||'';document.getElementById('reg-birth-year').value=entry.birthYear||'';document.getElementById('reg-telegram').value=entry.telegram||'';document.getElementById('reg-social').value=entry.socialUrl||'';document.getElementById('reg-experience').value=(entry.experience||'нет').toLowerCase()==='есть'?'есть':'нет';document.getElementById('reg-bike-type').value=entry.bikeType||'Грэвел';document.getElementById('reg-bike-brand').value=entry.bikeBrand||'';document.getElementById('reg-bike-year').value=entry.bikeYear||'';document.getElementById('reg-phone').value=entry.phone||'';document.getElementById('reg-consent').checked=!isNewDraft;renderSurveyForm(entry);renderParticipantPreliminaryBox(entry);renderParticipantGpxBox(entry)}
+function openParticipantForm(entry,isNewDraft){document.getElementById('participant-auth-step').classList.add('hidden');document.getElementById('participant-form-step').classList.remove('hidden');document.getElementById('active-user-fio-label').textContent=entry.fio?`${entry.fio} (${entry.email||''})`:(entry.email||'Новый участник');const banner=document.getElementById('participant-status-banner');if(isNewDraft||entry.status==='draft'){banner.className='mb-4 p-3 rounded-xl bg-volga-500/15 border border-volga-500/40 text-xs text-slate-200';banner.innerHTML='Заполните поля и отправьте заявку. После отправки статус — <strong>«Ожидает подтверждения»</strong>.'}else if(entry.status==='approved'){banner.className='mb-4 p-3 rounded-xl bg-emerald-950/50 border border-emerald-500/50 text-xs text-emerald-200';banner.innerHTML='Статус: <strong>Подтверждена</strong>. Вы в стартовом протоколе.'}else if(entry.status==='rejected'){banner.className='mb-4 p-3 rounded-xl bg-red-950/50 border border-red-500/50 text-xs text-red-200';banner.innerHTML='Статус: <strong>Отклонена</strong>. Отредактируйте данные.'}else{banner.className='mb-4 p-3 rounded-xl bg-ochre-500/15 border border-ochre-500/40 text-xs text-ochre-300';banner.innerHTML='Статус: <strong>Ожидает подтверждения</strong>.'}const emailEl=document.getElementById('reg-email');emailEl.value=entry.email||'';emailEl.readOnly=true;document.getElementById('reg-fio').value=entry.fio||'';document.getElementById('reg-birth-year').value=entry.birthYear||'';document.getElementById('reg-telegram').value=entry.telegram||'';document.getElementById('reg-social').value=entry.socialUrl||'';document.getElementById('reg-experience').value=(entry.experience||'нет').toLowerCase()==='есть'?'есть':'нет';document.getElementById('reg-bike-type').value=entry.bikeType||'Грэвел';document.getElementById('reg-bike-brand').value=entry.bikeBrand||'';document.getElementById('reg-bike-year').value=entry.bikeYear||'';document.getElementById('reg-phone').value=entry.phone||'';document.getElementById('reg-consent').checked=!isNewDraft;const isDraftState=(isNewDraft||entry.status==='draft');
+const delBtn=document.getElementById('delete-own-application-btn');
+if(delBtn){delBtn.innerHTML=isDraftState?'<span>✕</span><span>Отменить черновик</span>':'<span>🗑</span><span>Удалить мою заявку</span>';}
+const delPanel=document.getElementById('own-app-delete-panel');
+if(delPanel){if(isDraftState)delPanel.classList.add('hidden');else delPanel.classList.remove('hidden');}
+renderSurveyForm(entry);renderParticipantPreliminaryBox(entry);renderParticipantGpxBox(entry)}
+async function deleteOwnApplication(){
+if(!currentParticipantId){showToast('Сначала авторизуйтесь','error');return;}
+const existingIdx=registrationsList.findIndex(r=>r.id===currentParticipantId);
+const isDraftOnly=(existingIdx===-1&&pendingAuthDraft&&pendingAuthDraft.id===currentParticipantId);
+const entry=existingIdx!==-1?registrationsList[existingIdx]:(isDraftOnly?pendingAuthDraft:null);
+if(!entry){showToast('Заявка не найдена','error');return;}
+const label=entry.fio?`«${entry.fio}» (${entry.email})`:entry.email;
+if(!confirm(`Вы действительно хотите отозвать и безвозвратно удалить свою заявку ${label} из списка участников?\n\nВсе ваши данные анкеты и результаты опроса будут удалены.`))return;
+if(existingIdx!==-1){
+registrationsList.splice(existingIdx,1);
+saveRegistrationsLocal();
+await pushToGoogleSheet({
+action:'deleteRegistration',
+id:entry.id,
+email:entry.email||'',
+passwordHash:entry.passwordHash||'',
+registrations:registrationsList
+});
+}
+renderPublicProtocol();
+renderAdminApplications();
+renderAdminResultsSection();
+logoutParticipant();
+showToast('Ваша заявка отозвана и полностью удалена из списка');
+}
 function logoutParticipant(){currentParticipantId=null;pendingAuthDraft=null;document.getElementById('participant-form-step').classList.add('hidden');document.getElementById('participant-auth-step').classList.remove('hidden');document.getElementById('auth-password-input').value='';document.getElementById('auth-error-msg').classList.add('hidden')}
 function openAppThankYouModal(entry){
 const modal=document.getElementById('app-thankyou-modal');
 const summaryEl=document.getElementById('app-thankyou-summary');
 const detailsEl=document.getElementById('app-thankyou-details');
 if(!modal||!summaryEl||!detailsEl||!entry)return;
+const stats=computeSurveyScoreStats(entry);
 const pool=getSurveyQuestionsPool();
 const qIds=(entry.survey&&Array.isArray(entry.survey.questionIds)&&entry.survey.questionIds.length>0)?entry.survey.questionIds:pool.slice(0,SURVEY_RANDOM_COUNT).map(q=>q.id);
 const activeQuestions=qIds.map(id=>pool.find(q=>q.id===id)).filter(Boolean);
 const answers=(entry.survey&&entry.survey.answers)||{};
-let correctCount=0;
 const itemsHtml=activeQuestions.map((q,idx)=>{
 const val=answers[q.id];
 const opts=Array.isArray(q.options)?q.options:[];
@@ -2789,7 +2892,6 @@ const selectedArr=Array.isArray(val)?val:(typeof val==='string'&&val?[val]:[]);
 const correctSet=new Set(opts.filter(o=>o.correct).map(o=>o.v));
 const selectedSet=new Set(selectedArr);
 const isExact=correctSet.size>0&&correctSet.size===selectedSet.size&&Array.from(correctSet).every(v=>selectedSet.has(v));
-if(isExact)correctCount++;
 const chosenHtml=selectedArr.map(v=>{
 const opt=opts.find(o=>o.v===v);
 if(!opt)return'';
@@ -2798,11 +2900,16 @@ return opt.correct?`<div class="text-emerald-300 text-xs">✓ ${escapeHtml(opt.l
 const missedHtml=opts.filter(o=>o.correct&&!selectedSet.has(o.v)).map(o=>`<div class="text-ochre-300 text-xs">⚠️ Не отмечен верный ответ: ${escapeHtml(o.label)}</div>`).join('');
 const borderCls=isExact?'border-emerald-500/40 bg-emerald-950/20':'border-red-500/40 bg-red-950/20';
 const pillCls=isExact?'bg-emerald-500/20 text-emerald-300 border-emerald-500/40':'bg-red-500/20 text-red-300 border-red-500/40';
-const pillText=isExact?'✓ Отвечено правильно':'✕ Отвечено неправильно';
+const pillText=isExact?'✓ Отвечено правильно':'✕ Есть ошибки';
 return `<div class="p-3.5 rounded-xl border ${borderCls} space-y-2"><div class="flex flex-wrap items-center justify-between gap-2"><span class="font-bold text-white text-xs sm:text-sm">${idx+1}. ${escapeHtml(q.title)}</span><span class="px-2 py-0.5 rounded border font-mono text-[11px] font-bold ${pillCls}">${pillText}</span></div><div class="text-xs text-slate-300">${escapeHtml(q.question)}</div><div class="space-y-1 pt-1.5 border-t border-graphite-800/80">${chosenHtml}${missedHtml}</div></div>`;
 }).join('');
-const totalQ=activeQuestions.length||SURVEY_RANDOM_COUNT;
-summaryEl.innerHTML=`<div class="font-bold text-white text-sm sm:text-base mb-1">Спасибо за вашу заявку, ${escapeHtml(entry.fio||'участник')}!</div><div class="text-slate-300">Ваша заявка отправлена организаторам и ожидает подтверждения. Вы ответили правильно на <strong class="text-emerald-400 font-mono text-base">${correctCount} из ${totalQ}</strong> вопросов опросника.</div>`;
+if(entry.status==='rejected'||stats.isAutoRejected){
+summaryEl.className='p-3.5 rounded-xl bg-red-950/60 border border-red-500/60 text-xs sm:text-sm text-red-100 leading-relaxed shrink-0';
+summaryEl.innerHTML=`<div class="font-bold text-red-300 text-sm sm:text-base mb-1">✕ Заявка автоматически отклонена (${escapeHtml(entry.fio||'участник')})</div><div class="text-slate-200">Вы выбрали правильных вариантов: <strong class="text-white font-mono text-base">${stats.chosenCorrectOptions} / ${stats.totalCorrectOptions}</strong> (ошибочных вариантов: <strong class="text-red-300 font-mono">${stats.chosenWrongOptions}</strong>). Поскольку выбрано более половины неверных ответов, заявка получила статус <strong>«Отклонена»</strong>. Вы можете изучить правила, удалить эту заявку в личном кабинете и подать новую.</div>`;
+}else{
+summaryEl.className='p-3.5 rounded-xl bg-graphite-950 border border-emerald-500/40 text-xs sm:text-sm text-slate-200 leading-relaxed shrink-0';
+summaryEl.innerHTML=`<div class="font-bold text-white text-sm sm:text-base mb-1">Спасибо за вашу заявку, ${escapeHtml(entry.fio||'участник')}!</div><div class="text-slate-300">Ваша заявка отправлена организаторам и ожидает подтверждения. Выбрано правильных вариантов в опросе: <strong class="text-emerald-400 font-mono text-base">${stats.chosenCorrectOptions} / ${stats.totalCorrectOptions}</strong>.</div>`;
+}
 detailsEl.innerHTML=itemsHtml;
 modal.classList.remove('hidden');
 modal.classList.add('flex');
@@ -2814,9 +2921,134 @@ logoutParticipant();
 const regSec=document.getElementById('registration');
 if(regSec)regSec.scrollIntoView({behavior:'smooth',block:'start'});
 }
-async function handleSaveApplication(e){if(e)e.preventDefault();const existingIdx=registrationsList.findIndex(r=>r.id===currentParticipantId);const prevEntry=existingIdx!==-1?registrationsList[existingIdx]:(pendingAuthDraft&&pendingAuthDraft.id===currentParticipantId?pendingAuthDraft:null);if(!prevEntry){showToast('Ошибка сессии','error');return}const surveyCheck=collectAndValidateSurveyFromDOM(prevEntry);if(!surveyCheck.ok){const errBox=document.getElementById('survey-error-msg');if(errBox){errBox.textContent=`Отправка заявки невозможна без ответов на опросник. Заполните вопросы: ${surveyCheck.missing.join(', ')}.`;errBox.classList.remove('hidden');errBox.scrollIntoView({behavior:'smooth',block:'center'})}showToast(`Ответьте на все 5 вопросов опросника (остались: ${surveyCheck.missing.join(', ')})`,'error');return}const email=prevEntry.email||normalizeEmail(document.getElementById('reg-email').value);const fio=document.getElementById('reg-fio').value.trim();const birthYear=document.getElementById('reg-birth-year').value.trim();let telegram=document.getElementById('reg-telegram').value.trim();if(telegram&&!telegram.startsWith('@')&&!telegram.startsWith('http'))telegram='@'+telegram;const socialUrl=sanitizeUrl(document.getElementById('reg-social').value.trim());const experience=document.getElementById('reg-experience').value;const bikeType=document.getElementById('reg-bike-type').value;const bikeBrand=document.getElementById('reg-bike-brand').value.trim();const bikeYear=document.getElementById('reg-bike-year').value.trim();const phone=document.getElementById('reg-phone').value.trim();const completedAtStr=new Date().toLocaleString('ru-RU');const updatedEntry={id:prevEntry.id,email,fio,passwordHash:prevEntry.passwordHash,emailVerifiedAt:prevEntry.emailVerifiedAt||null,birthYear,telegram,socialUrl,experience,bikeType,bikeBrand,bikeYear,phone,status:prevEntry.status==='approved'?'approved':'pending',createdAt:prevEntry.createdAt||completedAtStr,updatedAt:Date.now(),survey:{answers:surveyCheck.answers,questionIds:surveyCheck.questionIds,completedAt:completedAtStr,updatedAt:Date.now()}};if(existingIdx!==-1)registrationsList[existingIdx]=updatedEntry;else registrationsList.push(updatedEntry);pendingAuthDraft=null;saveRegistrationsLocal();await pushToGoogleSheet({action:'upsertRegistration',entry:updatedEntry,registrations:registrationsList});renderPublicProtocol();renderAdminApplications();openAppThankYouModal(updatedEntry)}
+async function handleSaveApplication(e){
+if(e)e.preventDefault();
+const existingIdx=registrationsList.findIndex(r=>r.id===currentParticipantId);
+const prevEntry=existingIdx!==-1?registrationsList[existingIdx]:(pendingAuthDraft&&pendingAuthDraft.id===currentParticipantId?pendingAuthDraft:null);
+if(!prevEntry){showToast('Ошибка сессии','error');return;}
+const alreadyCompleted=Boolean(prevEntry.survey&&prevEntry.survey.completedAt);
+let finalSurveyObj=null;
+if(alreadyCompleted){
+finalSurveyObj=JSON.parse(JSON.stringify(prevEntry.survey));
+}else{
+const surveyCheck=collectAndValidateSurveyFromDOM(prevEntry);
+if(!surveyCheck.ok){
+const errBox=document.getElementById('survey-error-msg');
+if(errBox){errBox.textContent=`Отправка заявки невозможна без ответов на опросник. Заполните вопросы: ${surveyCheck.missing.join(', ')}.`;errBox.classList.remove('hidden');errBox.scrollIntoView({behavior:'smooth',block:'center'});}
+showToast(`Ответьте на все 5 вопросов опросника (остались: ${surveyCheck.missing.join(', ')})`,'error');
+return;
+}
+const completedAtStr=new Date().toLocaleString('ru-RU');
+finalSurveyObj={answers:surveyCheck.answers,questionIds:surveyCheck.questionIds,completedAt:completedAtStr,updatedAt:Date.now()};
+}
+const email=prevEntry.email||normalizeEmail(document.getElementById('reg-email').value);
+const fio=document.getElementById('reg-fio').value.trim();
+const birthYear=document.getElementById('reg-birth-year').value.trim();
+let telegram=document.getElementById('reg-telegram').value.trim();
+if(telegram&&!telegram.startsWith('@')&&!telegram.startsWith('http'))telegram='@'+telegram;
+const socialUrl=sanitizeUrl(document.getElementById('reg-social').value.trim());
+const experience=document.getElementById('reg-experience').value;
+const bikeType=document.getElementById('reg-bike-type').value;
+const bikeBrand=document.getElementById('reg-bike-brand').value.trim();
+const bikeYear=document.getElementById('reg-bike-year').value.trim();
+const phone=document.getElementById('reg-phone').value.trim();
+const nowStr=new Date().toLocaleString('ru-RU');
+const tempEntry={...prevEntry,survey:finalSurveyObj};
+const stats=computeSurveyScoreStats(tempEntry);
+finalSurveyObj.chosenCorrectOptions=stats.chosenCorrectOptions;
+finalSurveyObj.totalCorrectOptions=stats.totalCorrectOptions;
+finalSurveyObj.chosenWrongOptions=stats.chosenWrongOptions;
+finalSurveyObj.isAutoRejected=stats.isAutoRejected;
+let nextStatus=prevEntry.status==='approved'?'approved':'pending';
+if(stats.isAutoRejected&&prevEntry.status!=='approved'){
+nextStatus='rejected';
+}
+const updatedEntry={
+id:prevEntry.id,
+email,
+fio,
+passwordHash:prevEntry.passwordHash,
+emailVerifiedAt:prevEntry.emailVerifiedAt||null,
+birthYear,
+telegram,
+socialUrl,
+experience,
+bikeType,
+bikeBrand,
+bikeYear,
+phone,
+status:nextStatus,
+surveyScore:{
+correct:stats.chosenCorrectOptions,
+total:stats.totalCorrectOptions,
+wrong:stats.chosenWrongOptions,
+autoRejected:stats.isAutoRejected
+},
+createdAt:prevEntry.createdAt||nowStr,
+updatedAt:Date.now(),
+survey:finalSurveyObj
+};
+if(existingIdx!==-1)registrationsList[existingIdx]=updatedEntry;
+else registrationsList.push(updatedEntry);
+pendingAuthDraft=null;
+saveRegistrationsLocal();
+await pushToGoogleSheet({action:'upsertRegistration',entry:updatedEntry,registrations:registrationsList});
+renderPublicProtocol();
+renderAdminApplications();
+openAppThankYouModal(updatedEntry);
+}
 
-function renderPublicProtocol(){const tbody=document.getElementById('public-protocol-tbody');if(!tbody)return;tbody.innerHTML='';const visible=registrationsList.filter(r=>r.status!=='draft'&&r.status!=='rejected'&&String(r.fio||'').trim()!=='');const approved=visible.filter(r=>r.status==='approved').length;const pending=visible.filter(r=>r.status==='pending').length;document.getElementById('stat-public-approved').textContent=approved;document.getElementById('stat-public-pending').textContent=pending;document.getElementById('nav-reg-count').textContent=visible.length;document.getElementById('admin-bar-pending-num').textContent=pending;if(visible.length===0){tbody.innerHTML='<tr><td colspan="6" class="py-6 px-4 text-center text-slate-400">Пока нет заявок.</td></tr>';return}visible.forEach((r,idx)=>{const tgClean=String(r.telegram||'').replace(/^@/,'').replace(/[^a-zA-Z0-9_]/g,'');const statusBadge=r.status==='approved'?'<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-mono text-[11px]">✓ Подтверждена</span>':'<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-ochre-500/20 text-ochre-300 border border-ochre-500/30 font-mono text-[11px]">⏳ Ожидает</span>';const tr=document.createElement('tr');tr.className='hover:bg-graphite-900/50 transition';tr.innerHTML=`<td class="py-3 px-3 font-mono text-slate-400">${String(idx+1).padStart(2,'0')}</td><td class="py-3 px-3"><div class="font-semibold text-white">${escapeHtml(r.fio||'Участник')}</div><div class="text-[11px] font-mono text-slate-400">${escapeHtml(r.birthYear||'—')} г.р.</div></td><td class="py-3 px-3 font-mono">${tgClean?`<a href="https://t.me/${escapeHtml(tgClean)}" target="_blank" rel="noopener noreferrer" class="text-volga-400 hover:underline">@${escapeHtml(tgClean)}</a>`:'—'}</td><td class="py-3 px-3"><span class="px-2 py-0.5 rounded bg-graphite-800 text-slate-200 font-mono text-[11px]">${escapeHtml(r.experience||'нет')}</span></td><td class="py-3 px-3"><div class="text-slate-200 font-medium">${escapeHtml(r.bikeType||'Вело')} • ${escapeHtml(r.bikeBrand||'—')}</div><div class="text-[11px] font-mono text-slate-400">${escapeHtml(r.bikeYear||'—')} г.</div></td><td class="py-3 px-3 text-right">${statusBadge}</td>`;tbody.appendChild(tr)})}
+function getPublicSurveyScoreDisplay(r){
+if(!r)return{text:'—',bad:false};
+if(r.surveyScore&&typeof r.surveyScore==='object'&&Number(r.surveyScore.total)>0){
+const corr=Number(r.surveyScore.correct)||0;
+const tot=Number(r.surveyScore.total)||0;
+const bad=Boolean(r.surveyScore.autoRejected)||r.status==='rejected';
+return{text:`${corr} / ${tot}`,bad};
+}
+const stats=computeSurveyScoreStats(r);
+if(stats.hasScore){
+return{text:stats.scoreText,bad:stats.isAutoRejected||r.status==='rejected'};
+}
+return{text:'—',bad:r.status==='rejected'};
+}
+function renderPublicProtocol(){
+const tbody=document.getElementById('public-protocol-tbody');
+if(!tbody)return;
+tbody.innerHTML='';
+const visible=registrationsList.filter(r=>r.status!=='draft'&&String(r.fio||'').trim()!=='');
+const approved=visible.filter(r=>r.status==='approved').length;
+const pending=visible.filter(r=>r.status==='pending').length;
+const rejected=visible.filter(r=>r.status==='rejected').length;
+document.getElementById('stat-public-approved').textContent=approved;
+document.getElementById('stat-public-pending').textContent=pending;
+const rejEl=document.getElementById('stat-public-rejected');
+if(rejEl)rejEl.textContent=rejected;
+document.getElementById('nav-reg-count').textContent=approved+pending;
+document.getElementById('admin-bar-pending-num').textContent=pending;
+if(visible.length===0){
+tbody.innerHTML='<tr><td colspan="7" class="py-6 px-4 text-center text-slate-400">Пока нет заявок.</td></tr>';
+return;
+}
+visible.forEach((r,idx)=>{
+const tgClean=String(r.telegram||'').replace(/^@/,'').replace(/[^a-zA-Z0-9_]/g,'');
+let statusBadge='';
+if(r.status==='approved'){
+statusBadge='<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-mono text-[11px]">✓ Подтверждена</span>';
+}else if(r.status==='rejected'){
+statusBadge='<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-red-500/20 text-red-300 border border-red-500/30 font-mono text-[11px]">✕ Отклонена</span>';
+}else{
+statusBadge='<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-ochre-500/20 text-ochre-300 border border-ochre-500/30 font-mono text-[11px]">⏳ Ожидает</span>';
+}
+const sc=getPublicSurveyScoreDisplay(r);
+const scorePillClass=sc.text==='—'?'bg-graphite-800 text-slate-400 border-graphite-700':(sc.bad?'bg-red-500/20 text-red-300 border-red-500/40':'bg-emerald-500/15 text-emerald-300 border-emerald-500/30');
+const scoreBadge=`<span class="inline-flex items-center px-2 py-0.5 rounded border font-mono text-[11px] font-bold ${scorePillClass}" title="Правильных вариантов ответа в опросе">${escapeHtml(sc.text)}</span>`;
+const tr=document.createElement('tr');
+tr.className=(r.status==='rejected'?'bg-red-950/15 hover:bg-red-950/25':'hover:bg-graphite-900/50')+' transition';
+tr.innerHTML=`<td class="py-3 px-3 font-mono text-slate-400">${String(idx+1).padStart(2,'0')}</td><td class="py-3 px-3"><div class="font-semibold text-white">${escapeHtml(r.fio||'Участник')}</div><div class="text-[11px] font-mono text-slate-400">${escapeHtml(r.birthYear||'—')} г.р.</div></td><td class="py-3 px-3 font-mono">${tgClean?`<a href="https://t.me/${escapeHtml(tgClean)}" target="_blank" rel="noopener noreferrer" class="text-volga-400 hover:underline">@${escapeHtml(tgClean)}</a>`:'—'}</td><td class="py-3 px-3"><span class="px-2 py-0.5 rounded bg-graphite-800 text-slate-200 font-mono text-[11px]">${escapeHtml(r.experience||'нет')}</span></td><td class="py-3 px-3"><div class="text-slate-200 font-medium">${escapeHtml(r.bikeType||'Вело')} • ${escapeHtml(r.bikeBrand||'—')}</div><div class="text-[11px] font-mono text-slate-400">${escapeHtml(r.bikeYear||'—')} г.</div></td><td class="py-3 px-3 text-center">${scoreBadge}</td><td class="py-3 px-3 text-right">${statusBadge}</td>`;
+tbody.appendChild(tr);
+});
+}
 function toggleAdminPassChange(){if(!isAdminLoggedIn)return;document.getElementById('admin-pass-change-box').classList.toggle('hidden')}
 async function saveNewAdminPassword(){if(!isAdminLoggedIn)return;const val=document.getElementById('new-admin-pass-input').value.trim();if(!isPasswordSecure(val)){showToast('Пароль: мин. 8 символов, буквы + цифры','error');return}const newHash=await hashPasswordSHA256(val);localStorage.setItem(ADMIN_PASS_HASH_KEY,newHash);currentAdminPassHash=newHash;document.getElementById('admin-pass-change-box').classList.add('hidden');showToast('Пароль обновлён. Обновите Code.gs.')}
 async function setApplicationStatus(id,newStatus){if(!isAdminLoggedIn)return;const item=registrationsList.find(r=>r.id===id);if(!item)return;item.status=newStatus;item.updatedAt=Date.now();saveRegistrationsLocal();await pushToGoogleSheet({action:'upsertRegistration',entry:item,registrations:registrationsList});renderPublicProtocol();renderAdminApplications();renderAdminResultsSection();if(currentParticipantId===id)openParticipantForm(item,false);showToast(`Статус «${item.fio}»: ${newStatus==='approved'?'Подтверждена':newStatus==='rejected'?'Отклонена':'Ожидает'}`)}
@@ -3074,7 +3306,7 @@ function doGet(e) {
   if (p.action === 'requestVerification') return json_(sendVerificationEmail_(p.email));
   if (p.action === 'verifyEmailCode') return json_(checkVerificationCode_(p.email, p.code));
   const isAdmin = p.adminTokenHash === ADMIN_TOKEN_HASH;
-  const regSheet = getOrCreateSheet_(ss, 'Registrations', ['ID','Статус','Email','ФИО','Год рождения','Telegram','Соцсети','Опыт','Тип вело','Марка вело','Год вело','Телефон','Почта подтверждена','JSON']);
+  const regSheet = getOrCreateSheet_(ss, 'Registrations', ['ID','Статус','Email','ФИО','Год рождения','Telegram','Соцсети','Опыт','Тип вело','Марка вело','Год вело','Телефон','Почта подтверждена','JSON','Опрос']);
   const resSheet = getOrCreateSheet_(ss, 'Results', ['ID','Участник','Статус','Дистанция км','Общее мин','Движение мин','Штраф мин','Итог мин','JSON']);
   const stSheet = getOrCreateSheet_(ss, 'Stories', ['ID','Автор','Название','Км','Даты','Ссылка','Трек','JSON']);
   const cfgSheet = getOrCreateSheet_(ss, 'PortalConfig', ['Key','JSON']);
@@ -3086,7 +3318,7 @@ function doGet(e) {
     try {
       const parsed = JSON.parse(rawJson);
       if (isAdmin) registrations.push(parsed);
-      else registrations.push({ id: parsed.id, fio: parsed.fio, birthYear: parsed.birthYear, telegram: parsed.telegram, socialUrl: parsed.socialUrl, experience: parsed.experience, bikeType: parsed.bikeType, bikeBrand: parsed.bikeBrand, bikeYear: parsed.bikeYear, status: parsed.status, emailVerified: Boolean(parsed.emailVerifiedAt), createdAt: parsed.createdAt, updatedAt: parsed.updatedAt || 0 });
+      else registrations.push({ id: parsed.id, fio: parsed.fio, birthYear: parsed.birthYear, telegram: parsed.telegram, socialUrl: parsed.socialUrl, experience: parsed.experience, bikeType: parsed.bikeType, bikeBrand: parsed.bikeBrand, bikeYear: parsed.bikeYear, status: parsed.status, surveyScore: parsed.surveyScore || null, emailVerified: Boolean(parsed.emailVerifiedAt), createdAt: parsed.createdAt, updatedAt: parsed.updatedAt || 0 });
     } catch (err) {}
   }
   const results = [];
@@ -3112,7 +3344,7 @@ function doPost(e) {
     const lock = LockService.getScriptLock();
     if (!lock.tryLock(5000)) return json_({ status: 'error', message: 'Занято' });
     try {
-      const sheet = getOrCreateSheet_(ss, 'Registrations', ['ID','Статус','Email','ФИО','Год рождения','Telegram','Соцсети','Опыт','Тип вело','Марка вело','Год вело','Телефон','Почта подтверждена','JSON']);
+      const sheet = getOrCreateSheet_(ss, 'Registrations', ['ID','Статус','Email','ФИО','Год рождения','Telegram','Соцсети','Опыт','Тип вело','Марка вело','Год вело','Телефон','Почта подтверждена','JSON','Опрос']);
       const rows = sheet.getDataRange().getValues();
       for (let i = 1; i < rows.length; i++) {
         if (String(rows[i][2]).toLowerCase() === String(body.email).toLowerCase()) {
@@ -3127,7 +3359,7 @@ function doPost(e) {
       return json_({ status: 'ok', updated: false });
     } finally { lock.releaseLock(); }
   }
-  const regHeaders = ['ID','Статус','Email','ФИО','Год рождения','Telegram','Соцсети','Опыт','Тип вело','Марка вело','Год вело','Телефон','Почта подтверждена','JSON'];
+  const regHeaders = ['ID','Статус','Email','ФИО','Год рождения','Telegram','Соцсети','Опыт','Тип вело','Марка вело','Год вело','Телефон','Почта подтверждена','JSON','Опрос'];
   const resHeaders = ['ID','Участник','Статус','Дистанция км','Общее мин','Движение мин','Штраф мин','Итог мин','JSON'];
   const stHeaders = ['ID','Автор','Название','Км','Даты','Ссылка','Трек','JSON'];
   if (action === 'upsertRegistration' && body.entry && body.entry.id) {
@@ -3139,7 +3371,8 @@ function doPost(e) {
       const rows = sheet.getDataRange().getValues();
       let foundRow = -1;
       for (let i = 1; i < rows.length; i++) { if (String(rows[i][0]) === String(r.id) || (r.email && String(rows[i][2]).toLowerCase() === String(r.email).toLowerCase())) { foundRow = i + 1; break; } }
-      const vals = [r.id, r.status, r.email || '', r.fio, r.birthYear, r.telegram, r.socialUrl || '', r.experience, r.bikeType, r.bikeBrand, r.bikeYear, r.phone || '', r.emailVerifiedAt || '', JSON.stringify(r)];
+      const scoreStr = (r.surveyScore && r.surveyScore.total) ? (r.surveyScore.correct + ' / ' + r.surveyScore.total) : '';
+      const vals = [r.id, r.status, r.email || '', r.fio, r.birthYear, r.telegram, r.socialUrl || '', r.experience, r.bikeType, r.bikeBrand, r.bikeYear, r.phone || '', r.emailVerifiedAt || '', JSON.stringify(r), scoreStr];
       if (foundRow !== -1) sheet.getRange(foundRow, 1, 1, vals.length).setValues([vals]); else sheet.appendRow(vals);
       return json_({ status: 'ok' });
     } finally { lock.releaseLock(); }
@@ -3180,11 +3413,44 @@ function doPost(e) {
       return json_({ status: 'ok' });
     } finally { lock.releaseLock(); }
   }
-  if (isAdmin && (action === 'deleteRegistration' || action === 'deleteResult' || action === 'deleteStory') && body.id) {
+  if (action === 'deleteRegistration' && body.id) {
     const lock = LockService.getScriptLock();
     if (!lock.tryLock(5000)) return json_({ status: 'error' });
     try {
-      const sheetName = action === 'deleteRegistration' ? 'Registrations' : (action === 'deleteResult' ? 'Results' : 'Stories');
+      const sheet = ss.getSheetByName('Registrations');
+      let deleted = false;
+      if (sheet && sheet.getLastRow() >= 2) {
+        const rows = sheet.getDataRange().getValues();
+        for (let i = rows.length - 1; i >= 1; i--) {
+          if (String(rows[i][0]) === String(body.id)) {
+            let authorized = isAdmin;
+            if (!authorized && body.email) {
+              try {
+                const parsed = JSON.parse(rows[i][13] || '{}');
+                const rowEmail = String(parsed.email || rows[i][2] || '').toLowerCase();
+                if (rowEmail && rowEmail === String(body.email).toLowerCase()) {
+                  if (body.passwordHash && parsed.passwordHash === body.passwordHash) {
+                    authorized = true;
+                  }
+                }
+              } catch (err) {}
+            }
+            if (authorized) {
+              sheet.deleteRow(i + 1);
+              deleted = true;
+            }
+            break;
+          }
+        }
+      }
+      return json_({ status: deleted ? 'ok' : 'forbidden', deleted: deleted });
+    } finally { lock.releaseLock(); }
+  }
+  if (isAdmin && (action === 'deleteResult' || action === 'deleteStory') && body.id) {
+    const lock = LockService.getScriptLock();
+    if (!lock.tryLock(5000)) return json_({ status: 'error' });
+    try {
+      const sheetName = action === 'deleteResult' ? 'Results' : 'Stories';
       const sheet = ss.getSheetByName(sheetName);
       if (sheet && sheet.getLastRow() >= 2) {
         const rows = sheet.getDataRange().getValues();
@@ -3332,7 +3598,7 @@ openMapSectionFromNav,closeAdminLoginModal,handleAdminLogin,openAiRouteModal,clo
 closeDailyRestModal,openDonateModal,closeDonateModal,toggleDonateEditorInModal,handleSaveDonateConfig,copyDonateValue,triggerDonateThankYou,handleDonateSberClick,closeActiveMapPopup,toggleEditMode,exportPageData,openImportModal,
 toggleMapAdminDrawer,scrollToAdminSectors,scrollToAdminApplications,scrollToAdminResults,logoutAdmin,
 updateRaceTargetDate,toggleMapCollapse,updateMapLineWeight,handleSaveMapRoute,handleGpxFileUpload,
-resetMapRouteForm,addNewSector,handleParticipantAuth,cancelPreAuthVerification,logoutParticipant,
+resetMapRouteForm,addNewSector,handleParticipantAuth,cancelPreAuthVerification,logoutParticipant,deleteOwnApplication,
 handleSaveApplication,requestEmailVerificationCode,confirmEmailVerificationCode,handleParticipantGpxUpload,
 handleParticipantAddStory,saveAllAdminDataManual,saveGoogleSheetUrl,pullFromGoogleSheet,pushAllToGoogleSheet,
 downloadGoogleAppsScriptCode,testGoogleMailApp,renderAdminApplications,exportRegistrationsCSV,
@@ -3343,7 +3609,7 @@ scrollToAdminSurvey,renderAdminSurveySection,handleAdminSaveSurveyQuestion,editA
 openPasswordResetBox,closePasswordResetBox,requestPasswordResetCode,confirmPasswordReset,
 toggleAdminPasswordResetBox,requestAdminPasswordResetCode,confirmAdminPasswordReset,
 setResultsFilter,toggleStoryForm,handleAddStory,triggerAdminGear,
-clearSurveyAnswers,handleSurveySubmit,
+clearSurveyAnswers,handleSurveySubmit,computeSurveyScoreStats,
 recalcParticipantPreliminary,handleParticipantPreliminarySubmit,
 setMapStyle,updateMapBgOpacity,toggleMapFullscreen,openTrackPhotoModal,closeTrackPhotoModal,stepTrackPhoto,openAppThankYouModal,closeAppThankYouModal,scrollToAdminStories,renderAdminStoriesSection,setStoryStatusAdmin
 });
