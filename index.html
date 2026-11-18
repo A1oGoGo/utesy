@@ -19,6 +19,13 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;700&family=Oswald:wght@600;700&family=Press+Start+2P&display=swap" rel="stylesheet">
 <style id="tailwind-compiled">*,::before,::after{box-sizing:border-box;border-width:0;border-style:solid;border-color:#30363d}
 html{line-height:1.5;-webkit-text-size-adjust:100%;tab-size:4;font-family:'Inter',sans-serif}
+@media (max-width:640px){
+html{font-size:17.5px}
+#up-blogger-portal .text-xs{font-size:0.86rem;line-height:1.45}
+#up-blogger-portal .text-sm{font-size:0.96rem;line-height:1.55}
+#up-blogger-portal .text-\[11px\]{font-size:13px;line-height:1.4}
+#up-blogger-portal .text-\[10px\]{font-size:12px;line-height:1.35}
+}
 body{margin:0;line-height:inherit}
 hr{height:0;color:inherit;border-top-width:1px}
 h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit;margin:0}
@@ -194,6 +201,23 @@ img,video{max-width:100%;height:auto}
 
 
 
+<div id="app-thankyou-modal" role="dialog" aria-modal="true" class="fixed inset-0 z-50 items-center justify-center bg-black/80 backdrop-blur-sm p-4 hidden">
+<div class="bg-graphite-900 border-2 border-emerald-500/60 rounded-2xl max-w-2xl w-full p-5 sm:p-6 shadow-2xl space-y-4 max-h-[90vh] flex flex-col">
+<div class="flex items-start justify-between border-b border-graphite-800 pb-3 gap-3 shrink-0">
+<div>
+<span class="px-2.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-mono text-xs font-bold uppercase">✓ Заявка принята</span>
+<h3 class="font-display font-bold text-xl sm:text-2xl text-white uppercase mt-1">Спасибо за вашу заявку!</h3>
+</div>
+<button type="button" onclick="closeAppThankYouModal()" aria-label="Закрыть" class="text-slate-400 hover:text-white text-sm font-mono px-2">✕</button>
+</div>
+<div id="app-thankyou-summary" class="p-3.5 rounded-xl bg-graphite-950 border border-emerald-500/40 text-xs sm:text-sm text-slate-200 leading-relaxed shrink-0"></div>
+<div id="app-thankyou-details" class="space-y-2.5 overflow-y-auto pr-1 flex-1"></div>
+<div class="pt-3 border-t border-graphite-800 flex justify-end shrink-0">
+<button type="button" onclick="closeAppThankYouModal()" class="w-full sm:w-auto px-6 py-2.5 rounded-xl bg-ochre-500 hover:bg-ochre-400 text-graphite-950 font-bold text-xs sm:text-sm uppercase tracking-wider transition shadow-md">Закрыть окно</button>
+</div>
+</div>
+</div>
+
 <div id="donate-modal" role="dialog" aria-modal="true" class="fixed inset-0 z-50 items-center justify-center bg-black/80 backdrop-blur-sm p-4 hidden">
 <div class="bg-graphite-900 border-2 border-ochre-500/60 rounded-2xl max-w-lg w-full p-6 shadow-2xl space-y-4 max-h-[90vh] overflow-y-auto">
 <div class="flex items-start justify-between border-b border-graphite-800 pb-3 gap-3">
@@ -295,6 +319,7 @@ img,video{max-width:100%;height:auto}
 <button type="button" onclick="scrollToAdminSectors()" class="px-3 py-1.5 rounded-xl bg-graphite-800 hover:bg-graphite-700 border border-ochre-500/40 text-xs font-semibold text-ochre-300 transition">📍 Участки</button>
 <button type="button" onclick="scrollToAdminSurvey()" class="px-3 py-1.5 rounded-xl bg-graphite-800 hover:bg-graphite-700 border border-volga-500/40 text-xs font-semibold text-volga-300 transition">📝 Опросник</button>
 <button type="button" onclick="scrollToAdminApplications()" class="px-3 py-1.5 rounded-xl bg-graphite-800 hover:bg-graphite-700 border border-ochre-500/40 text-xs font-semibold text-ochre-300 transition">📋 Заявки</button>
+<button type="button" onclick="scrollToAdminStories()" class="px-3 py-1.5 rounded-xl bg-graphite-800 hover:bg-graphite-700 border border-ochre-500/40 text-xs font-semibold text-ochre-300 transition">📖 Рассказы (<span id="admin-bar-stories-pending-num">0</span>)</button>
 <button type="button" onclick="scrollToAdminResults()" class="px-3 py-1.5 rounded-xl bg-graphite-800 hover:bg-graphite-700 border border-emerald-500/40 text-xs font-semibold text-emerald-300 transition">🏆 Результаты</button>
 <button type="button" onclick="logoutAdmin()" class="px-3 py-1.5 rounded-xl bg-red-950/70 hover:bg-red-900 border border-red-700/60 text-xs font-bold text-red-200 transition">🔒 Выйти</button>
 </div>
@@ -421,7 +446,7 @@ img,video{max-width:100%;height:auto}
 <div class="p-4 sm:px-6 bg-graphite-950/90 border-b border-graphite-800 flex flex-wrap items-center justify-between gap-3">
 <div class="flex flex-wrap items-center gap-2.5">
 <button type="button" onclick="toggleMapCollapse()" class="px-3.5 py-2 rounded-xl bg-ochre-500 hover:bg-ochre-400 text-graphite-950 font-bold text-xs uppercase tracking-wider transition flex items-center gap-2"><span id="map-collapse-icon">▶</span><span id="map-collapse-text">Развернуть карту</span></button>
-<button type="button" onclick="toggleMapFullscreen()" id="map-fs-top-btn" class="px-3.5 py-2 rounded-xl bg-graphite-800 hover:bg-graphite-700 border border-volga-500/40 text-volga-300 font-bold text-xs uppercase tracking-wider transition flex items-center gap-2" title="Открыть карту во весь экран"><span>⛶</span><span id="map-fs-top-text">Во весь экран</span></button>
+<button type="button" onclick="toggleMapFullscreen()" id="map-fs-top-btn" aria-label="Во весь экран" class="p-2 rounded-xl bg-graphite-800 hover:bg-graphite-700 border border-volga-500/40 text-volga-300 font-bold text-base leading-none transition flex items-center justify-center w-9 h-9" title="Открыть карту во весь экран"><span id="map-fs-top-icon">⛶</span></button>
 </div>
 <div id="map-sliders-wrap" class="hidden flex-wrap items-center gap-3">
 <div class="flex items-center gap-2 bg-graphite-900 border border-graphite-700 px-3 py-1.5 rounded-xl text-xs font-mono">
@@ -437,14 +462,16 @@ img,video{max-width:100%;height:auto}
 <div id="map-collapsible-body" class="hidden">
 <div id="map-fullscreen-wrap" class="relative">
 <div id="leaflet-map" class="w-full h-[420px] sm:h-[520px] z-10"></div>
-<div id="map-style-picker" class="absolute top-2 right-2 z-[470] flex flex-col gap-1 p-1" style="background:rgba(0,0,0,0.75);border:2px solid #1a1208;box-shadow:0 4px 0 rgba(0,0,0,0.5)">
-<div class="text-center text-[7px] text-[#d4c5a0] mb-0.5" style="font-family:'Press Start 2P',monospace">СТИЛЬ</div>
+<details id="map-style-picker" open class="group/picker absolute top-2 right-2 z-[470] p-1" style="background:rgba(0,0,0,0.82);border:2px solid #1a1208;box-shadow:0 4px 0 rgba(0,0,0,0.5)">
+<summary class="cursor-pointer text-center text-[8px] text-[#f5d76e] px-1.5 py-1 flex items-center justify-between gap-1.5 select-none" style="font-family:'Press Start 2P',monospace"><span>🗺 СЛОИ</span><span class="group-open/picker:rotate-180 transition-transform">▼</span></summary>
+<div class="flex flex-col gap-1 pt-1 mt-1 border-t border-[#3d2914]">
 <button type="button" class="map-style-btn active-mc" data-mapstyle="minecraft" onclick="setMapStyle('minecraft')" title="Minecraft">⛏ MC</button>
 <button type="button" class="map-style-btn" data-mapstyle="heroes" onclick="setMapStyle('heroes')" title="Heroes of Might and Magic III">🏰 HoMM</button>
 <button type="button" class="map-style-btn" data-mapstyle="diablo" onclick="setMapStyle('diablo')" title="Diablo II">💀 D2</button>
 <button type="button" class="map-style-btn" data-mapstyle="osm" onclick="setMapStyle('osm')" title="OpenTopoMap (Топокарта с рельефом)">⛰️ TOPO</button>
 <button type="button" class="map-style-btn" data-mapstyle="topo_photos" onclick="setMapStyle('topo_photos')" title="Топокарта OpenTopoMap с круглыми миниатюрами фотографий по геометке">📷 ФОТО</button>
 </div>
+</details>
 
 </div>
 <div id="map-admin-drawer" class="hidden border-t-2 border-volga-500/50 bg-graphite-950 p-5 space-y-4">
@@ -604,7 +631,7 @@ img,video{max-width:100%;height:auto}
 </div>
 
 <label class="flex items-start gap-2.5 p-2.5 rounded-xl bg-graphite-950 border border-graphite-800 cursor-pointer"><input type="checkbox" id="reg-consent" required class="mt-0.5 w-4 h-4 accent-ochre-500 rounded"><span class="text-xs text-slate-300 leading-snug">С правилами (полная ответственность, ПДД РФ, правило 8 часов) ознакомлен и согласен.</span></label>
-<button type="submit" id="app-submit-btn" class="w-full py-3 px-4 rounded-xl bg-ochre-500 hover:bg-ochre-400 text-graphite-950 font-bold text-xs sm:text-sm uppercase tracking-wider transition shadow-md">Сохранить и отправить заявку</button>
+<button type="submit" id="app-submit-btn" class="w-full py-3 px-4 rounded-xl bg-ochre-500 hover:bg-ochre-400 text-graphite-950 font-bold text-xs sm:text-sm uppercase tracking-wider transition shadow-md">Отправить заявку</button>
 </form>
 
 <div id="participant-preliminary-section" class="mt-6 pt-5 border-t-2 border-volga-500/50 space-y-3 hidden">
@@ -852,6 +879,16 @@ img,video{max-width:100%;height:auto}
 <div class="flex justify-end gap-2 pt-1"><button type="button" onclick="resetAdminSurveyForm()" class="px-3.5 py-2 rounded-xl bg-graphite-800 text-slate-300 font-mono">Очистить</button><button type="submit" class="px-4 py-2 rounded-xl bg-ochre-500 hover:bg-ochre-400 text-graphite-950 font-bold uppercase">Сохранить вопрос</button></div>
 </form>
 <div id="admin-survey-list" class="space-y-2.5"></div>
+</div>
+</details>
+<details id="admin-stories-manager" class="group bg-graphite-950 border border-volga-500/40 rounded-xl overflow-hidden">
+<summary class="cursor-pointer p-4 bg-graphite-950 hover:bg-graphite-900/80 transition flex flex-wrap items-center justify-between gap-2">
+<div class="flex items-center gap-2.5"><span class="px-2 py-0.5 rounded bg-volga-500/20 text-volga-400 font-mono text-[11px] font-bold uppercase">7. Рассказы</span><h4 class="font-display font-bold text-base sm:text-lg text-white uppercase">Модерация и публикация рассказов</h4></div>
+<div class="flex items-center gap-2"><span class="px-2.5 py-0.5 rounded bg-ochre-500/20 text-ochre-300 font-mono text-xs">На модерации: <strong id="adm-stories-pending-count">0</strong></span><span class="px-2.5 py-0.5 rounded bg-graphite-800 border border-graphite-700 text-xs font-mono text-volga-400 group-open:rotate-180 transition-transform">▼</span></div>
+</summary>
+<div class="p-4 border-t border-graphite-800 space-y-3">
+<p class="text-xs text-slate-300 leading-relaxed">Рассказы, отправленные участниками, появляются на сайте только после подтверждения администратором.</p>
+<div id="admin-stories-list" class="space-y-2.5"></div>
 </div>
 </details>
 </div>
@@ -1135,9 +1172,9 @@ return[...coreSectors,...extraSectors];
 }
 function mergeDefaultStories(stories){
 const sm=new Map();
-defaultPortalState.stories.forEach(st=>{if(st&&st.id)sm.set(st.id,JSON.parse(JSON.stringify(st)))});
+defaultPortalState.stories.forEach(st=>{if(st&&st.id){const c=JSON.parse(JSON.stringify(st));c.status='approved';sm.set(st.id,c)}});
 if(Array.isArray(stories)){
-stories.forEach(cst=>{if(cst&&cst.id&&String(cst.title||'').trim()&&!sm.has(cst.id))sm.set(cst.id,cst)});
+stories.forEach(cst=>{if(cst&&cst.id&&String(cst.title||'').trim()){if(sm.has(cst.id)){const def=sm.get(cst.id);sm.set(cst.id,{...def,...cst,status:cst.status||'approved'})}else{sm.set(cst.id,{...cst,status:cst.status||'approved'})}}});
 }
 return Array.from(sm.values());
 }
@@ -1692,10 +1729,17 @@ let isMapFullscreen=false;
 function syncMapFullscreenUI(active){
 isMapFullscreen=Boolean(active);
 const card=document.getElementById('map-card-container');
-const topText=document.getElementById('map-fs-top-text');
+const topBtn=document.getElementById('map-fs-top-btn');
+const topIcon=document.getElementById('map-fs-top-icon');
+const picker=document.getElementById('map-style-picker');
 if(card)card.classList.toggle('map-is-fullscreen',isMapFullscreen);
 document.body.style.overflow=isMapFullscreen?'hidden':'';
-if(topText)topText.textContent=isMapFullscreen?'Свернуть экран':'Во весь экран';
+if(topBtn)topBtn.title=isMapFullscreen?'Свернуть экран':'Открыть карту во весь экран';
+if(topIcon)topIcon.textContent=isMapFullscreen?'✕':'⛶';
+if(picker){
+if(isMapFullscreen)picker.removeAttribute('open');
+else picker.setAttribute('open','');
+}
 if(leafletMap){
 setTimeout(()=>leafletMap.invalidateSize(),60);
 setTimeout(()=>leafletMap.invalidateSize(),260);
@@ -1754,9 +1798,9 @@ function askAiAboutCurrentRoute(){const qInput=document.getElementById('ai-custo
 function openAdminLoginModal(){const modal=document.getElementById('admin-auth-modal'),input=document.getElementById('admin-modal-password-input'),errEl=document.getElementById('admin-modal-error'),hint=document.getElementById('admin-auth-hint'),btn=document.getElementById('admin-auth-submit-btn');hint.textContent='Введите пароль администратора. На новом устройстве используйте «Забыли пароль?» (код придёт на a1onzo@yandex.ru).';btn.textContent='Войти';input.value='';errEl.classList.add('hidden');toggleAdminPasswordResetBox(false);modal.classList.remove('hidden');modal.classList.add('flex');setTimeout(()=>input.focus(),50)}
 function toggleAdminPasswordResetBox(show){const formEl=document.getElementById('admin-login-form-el'),resetBox=document.getElementById('admin-reset-pass-box');if(!formEl||!resetBox)return;if(show){formEl.classList.add('hidden');resetBox.classList.remove('hidden')}else{resetBox.classList.add('hidden');formEl.classList.remove('hidden')}}
 async function requestAdminPasswordResetCode(){const targetEmail='a1onzo@yandex.ru';const hint=document.getElementById('admin-reset-hint');const url=getGoogleSheetUrl();if(!url){showToast('Не настроен URL Google Apps Script','error');return}if(hint){hint.classList.remove('hidden');hint.textContent='⏳ Отправка кода на '+targetEmail+'…'}try{const q=new URLSearchParams({action:'requestVerification',email:targetEmail,t:String(Date.now())});const r=await fetch(`${url}${url.includes('?')?'&':'?'}${q.toString()}`,{method:'GET',redirect:'follow'});const res=await r.json();if(res&&res.codeSent===true){if(hint)hint.innerHTML=`✓ Код отправлен на <strong>${escapeHtml(targetEmail)}</strong>. Введите его ниже.`;showToast('Код отправлен на '+targetEmail)}else{if(hint)hint.textContent='Ошибка отправки: '+(res&&res.message?res.message:'проверьте развертывание');showToast('Не удалось отправить код','error')}}catch(e){if(hint)hint.textContent='Ошибка соединения с сервером.';showToast('Ошибка соединения','error')}}
-async function confirmAdminPasswordReset(){const targetEmail='a1onzo@yandex.ru';const code=(document.getElementById('admin-reset-code-input').value||'').trim();const newPass=(document.getElementById('admin-reset-new-pass').value||'').trim();if(!/^\d{6}$/.test(code)){showToast('Введите 6-значный код из письма','error');return}if(!isPasswordSecure(newPass)){showToast('Пароль: мин. 8 символов, буквы + цифры','error');return}const url=getGoogleSheetUrl();if(!url){showToast('Сервер не подключён','error');return}let verified=false;try{const q=new URLSearchParams({action:'verifyEmailCode',email:targetEmail,code,t:String(Date.now())});const r=await fetch(`${url}${url.includes('?')?'&':'?'}${q.toString()}`,{method:'GET',redirect:'follow'});const res=await r.json();if(res&&res.verified===true)verified=true}catch(e){}if(!verified){showToast('Неверный или просроченный код','error');return}const newHash=await hashPasswordSHA256(newPass);localStorage.setItem(ADMIN_PASS_HASH_KEY,newHash);isAdminLoggedIn=true;currentAdminPassHash=newHash;adminSessionToken=(window.crypto&&crypto.randomUUID)?crypto.randomUUID():(String(Date.now())+'-'+Math.random().toString(36).slice(2));closeAdminLoginModal();document.getElementById('admin-top-bar').classList.remove('hidden');document.getElementById('admin-panel-wrapper').classList.remove('hidden');renderAdminApplications();renderAdminResultsSection();renderAdminSurveySection();renderAdminSectorsSection();renderAdminFaqSection();renderAdminSurveySection();renderMapRoutes();showToast('Пароль администратора обновлён!')}
+async function confirmAdminPasswordReset(){const targetEmail='a1onzo@yandex.ru';const code=(document.getElementById('admin-reset-code-input').value||'').trim();const newPass=(document.getElementById('admin-reset-new-pass').value||'').trim();if(!/^\d{6}$/.test(code)){showToast('Введите 6-значный код из письма','error');return}if(!isPasswordSecure(newPass)){showToast('Пароль: мин. 8 символов, буквы + цифры','error');return}const url=getGoogleSheetUrl();if(!url){showToast('Сервер не подключён','error');return}let verified=false;try{const q=new URLSearchParams({action:'verifyEmailCode',email:targetEmail,code,t:String(Date.now())});const r=await fetch(`${url}${url.includes('?')?'&':'?'}${q.toString()}`,{method:'GET',redirect:'follow'});const res=await r.json();if(res&&res.verified===true)verified=true}catch(e){}if(!verified){showToast('Неверный или просроченный код','error');return}const newHash=await hashPasswordSHA256(newPass);localStorage.setItem(ADMIN_PASS_HASH_KEY,newHash);isAdminLoggedIn=true;currentAdminPassHash=newHash;adminSessionToken=(window.crypto&&crypto.randomUUID)?crypto.randomUUID():(String(Date.now())+'-'+Math.random().toString(36).slice(2));closeAdminLoginModal();document.getElementById('admin-top-bar').classList.remove('hidden');document.getElementById('admin-panel-wrapper').classList.remove('hidden');renderAdminApplications();renderAdminResultsSection();renderAdminSurveySection();renderAdminSectorsSection();renderAdminFaqSection();renderAdminSurveySection();renderStories();renderMapRoutes();showToast('Пароль администратора обновлён!')}
 function closeAdminLoginModal(){document.getElementById('admin-auth-modal').classList.add('hidden');document.getElementById('admin-auth-modal').classList.remove('flex')}
-async function handleAdminLogin(e){e.preventDefault();const input=document.getElementById('admin-modal-password-input').value.trim(),errEl=document.getElementById('admin-modal-error'),storedHash=getAdminPasswordHash(),inputHash=await hashPasswordSHA256(input);if(inputHash!==storedHash){errEl.textContent='Неверный пароль. На новом устройстве нажмите «Забыли пароль?».';errEl.classList.remove('hidden');showToast('Неверный пароль','error');return}isAdminLoggedIn=true;currentAdminPassHash=storedHash;adminSessionToken=(window.crypto&&crypto.randomUUID)?crypto.randomUUID():(String(Date.now())+'-'+Math.random().toString(36).slice(2));closeAdminLoginModal();document.getElementById('admin-top-bar').classList.remove('hidden');document.getElementById('admin-panel-wrapper').classList.remove('hidden');const gsInput=document.getElementById('admin-gsheet-url-input');if(gsInput)gsInput.value=getGoogleSheetUrl();updateGoogleSheetStatusUI();renderAdminApplications();renderAdminResultsSection();renderAdminSectorsSection();renderAdminFaqSection();renderAdminSurveySection();renderMapRoutes();if(getGoogleSheetUrl())pullFromGoogleSheet(false);showToast('Режим админа активирован')}
+async function handleAdminLogin(e){e.preventDefault();const input=document.getElementById('admin-modal-password-input').value.trim(),errEl=document.getElementById('admin-modal-error'),storedHash=getAdminPasswordHash(),inputHash=await hashPasswordSHA256(input);if(inputHash!==storedHash){errEl.textContent='Неверный пароль. На новом устройстве нажмите «Забыли пароль?».';errEl.classList.remove('hidden');showToast('Неверный пароль','error');return}isAdminLoggedIn=true;currentAdminPassHash=storedHash;adminSessionToken=(window.crypto&&crypto.randomUUID)?crypto.randomUUID():(String(Date.now())+'-'+Math.random().toString(36).slice(2));closeAdminLoginModal();document.getElementById('admin-top-bar').classList.remove('hidden');document.getElementById('admin-panel-wrapper').classList.remove('hidden');const gsInput=document.getElementById('admin-gsheet-url-input');if(gsInput)gsInput.value=getGoogleSheetUrl();updateGoogleSheetStatusUI();renderAdminApplications();renderAdminResultsSection();renderAdminSectorsSection();renderAdminFaqSection();renderAdminSurveySection();renderStories();renderMapRoutes();if(getGoogleSheetUrl())pullFromGoogleSheet(false);showToast('Режим админа активирован')}
 function logoutAdmin(){if(isEditMode)disableEditModeInternal();isAdminLoggedIn=false;currentAdminPassHash='';adminSessionToken='';document.getElementById('admin-top-bar').classList.add('hidden');document.getElementById('admin-panel-wrapper').classList.add('hidden');document.getElementById('map-admin-drawer').classList.add('hidden');renderMapRoutes();renderSectors();renderFaqs();renderStories();renderDonateModalContent();renderDonateModalContent();showToast('Вы вышли из режима администратора')}
 function triggerAdminGear(){if(isAdminLoggedIn)scrollToAdminApplications();else openAdminLoginModal()}
 function scrollToAdminApplications(){if(!isAdminLoggedIn)return;const p=document.getElementById('admin-panel-wrapper');if(!p)return;p.classList.remove('hidden');const sp=document.getElementById('admin-applications-spoiler');if(sp)sp.open=true;(sp||p).scrollIntoView({behavior:'smooth',block:'start'})}
@@ -1883,10 +1927,67 @@ function editAdminFaq(idx){if(!isAdminLoggedIn)return;const item=portalState.faq
 function deleteAdminFaq(idx){if(!isAdminLoggedIn)return;portalState.faqs.splice(idx,1);savePortalState();renderFaqs();renderAdminFaqSection();showToast('FAQ удалён')}
 function resetAdminFaqForm(){const f=document.getElementById('admin-faq-form');if(f)f.reset();document.getElementById('faq-edit-idx').value=''}
 
-function renderStories(){const grid=document.getElementById('stories-grid');if(!grid)return;grid.innerHTML='';(portalState.stories||[]).forEach(story=>{const safeUrl=sanitizeUrl(story.url),safeTrack=sanitizeUrl(story.trackUrl),safeImg=sanitizeUrl(story.imgUrl);const card=document.createElement('article');card.className='bg-graphite-950 border border-graphite-800 hover:border-ochre-500/50 rounded-2xl overflow-hidden flex flex-col justify-between transition shadow-lg';card.innerHTML=`<div>${safeImg?`<div class="h-44 w-full overflow-hidden bg-graphite-900 border-b border-graphite-800"><img src="${escapeHtml(safeImg)}" alt="${escapeHtml(story.title)}" class="w-full h-full object-cover opacity-90 hover:opacity-100 transition" onerror="this.style.display='none'"></div>`:''}<div class="p-5 space-y-2.5"><div class="flex flex-wrap items-center justify-between gap-2 text-[11px] font-mono"><span class="px-2 py-0.5 rounded bg-ochre-500/20 text-ochre-400 font-bold">${escapeHtml(story.author||'Участник')}</span><span class="text-slate-400">${escapeHtml(story.date||'')} ${story.km?'• '+escapeHtml(story.km):''}</span></div><h3 class="font-display font-bold text-lg text-white leading-snug">${escapeHtml(story.title)}</h3><p class="text-xs text-slate-300 leading-relaxed">${escapeHtml(story.summary)}</p></div></div><div class="px-5 pb-5 pt-3 border-t border-graphite-800/80 flex flex-wrap items-center justify-between gap-2">${safeUrl?`<a href="${escapeHtml(safeUrl)}" target="_blank" rel="noopener noreferrer" class="px-3.5 py-2 rounded-xl bg-ochre-500 hover:bg-ochre-400 text-graphite-950 font-bold text-xs uppercase tracking-wider transition">Читать ↗</a>`:'<span></span>'}<div class="flex items-center gap-2">${safeTrack?`<a href="${escapeHtml(safeTrack)}" target="_blank" rel="noopener noreferrer" class="px-2.5 py-1.5 rounded-xl bg-graphite-800 hover:bg-graphite-700 border border-graphite-700 text-volga-400 font-mono text-xs transition">Трек ↗</a>`:''}${isAdminLoggedIn?`<button type="button" data-action="del-story" data-id="${escapeHtml(story.id)}" class="px-2.5 py-1.5 rounded-xl bg-red-950/60 hover:bg-red-900 text-red-300 font-mono text-xs">Удалить</button>`:''}</div></div>`;grid.appendChild(card)})}
+function renderStories(){
+const grid=document.getElementById('stories-grid');
+const allStories=portalState.stories||[];
+const pendingCount=allStories.filter(s=>s&&s.status==='pending').length;
+const topBadge=document.getElementById('admin-bar-stories-pending-num');
+if(topBadge)topBadge.textContent=String(pendingCount);
+const admCount=document.getElementById('adm-stories-pending-count');
+if(admCount)admCount.textContent=String(pendingCount);
+if(grid){
+grid.innerHTML='';
+const publicStories=allStories.filter(s=>s&&s.status!=='pending'&&s.status!=='rejected');
+publicStories.forEach(story=>{
+const safeUrl=sanitizeUrl(story.url),safeTrack=sanitizeUrl(story.trackUrl),safeImg=sanitizeUrl(story.imgUrl);
+const card=document.createElement('article');
+card.className='bg-graphite-950 border border-graphite-800 hover:border-ochre-500/50 rounded-2xl overflow-hidden flex flex-col justify-between transition shadow-lg';
+card.innerHTML=`<div>${safeImg?`<div class="h-44 w-full overflow-hidden bg-graphite-900 border-b border-graphite-800"><img src="${escapeHtml(safeImg)}" alt="${escapeHtml(story.title)}" class="w-full h-full object-cover opacity-90 hover:opacity-100 transition" onerror="this.style.display='none'"></div>`:''}<div class="p-5 space-y-2.5"><div class="flex flex-wrap items-center justify-between gap-2 text-[11px] font-mono"><span class="px-2 py-0.5 rounded bg-ochre-500/20 text-ochre-400 font-bold">${escapeHtml(story.author||'Участник')}</span><span class="text-slate-400">${escapeHtml(story.date||'')} ${story.km?'• '+escapeHtml(story.km):''}</span></div><h3 class="font-display font-bold text-lg text-white leading-snug">${escapeHtml(story.title)}</h3><p class="text-xs text-slate-300 leading-relaxed">${escapeHtml(story.summary)}</p></div></div><div class="px-5 pb-5 pt-3 border-t border-graphite-800/80 flex flex-wrap items-center justify-between gap-2">${safeUrl?`<a href="${escapeHtml(safeUrl)}" target="_blank" rel="noopener noreferrer" class="px-3.5 py-2 rounded-xl bg-ochre-500 hover:bg-ochre-400 text-graphite-950 font-bold text-xs uppercase tracking-wider transition">Читать ↗</a>`:'<span></span>'}<div class="flex items-center gap-2">${safeTrack?`<a href="${escapeHtml(safeTrack)}" target="_blank" rel="noopener noreferrer" class="px-2.5 py-1.5 rounded-xl bg-graphite-800 hover:bg-graphite-700 border border-graphite-700 text-volga-400 font-mono text-xs transition">Трек ↗</a>`:''}${isAdminLoggedIn?`<button type="button" data-action="del-story" data-id="${escapeHtml(story.id)}" class="px-2.5 py-1.5 rounded-xl bg-red-950/60 hover:bg-red-900 text-red-300 font-mono text-xs">Удалить</button>`:''}</div></div>`;
+grid.appendChild(card);
+});
+}
+if(isAdminLoggedIn)renderAdminStoriesSection();
+}
+function scrollToAdminStories(){
+if(!isAdminLoggedIn)return;
+document.getElementById('admin-panel-wrapper').classList.remove('hidden');
+const s=document.getElementById('admin-stories-manager');
+if(s){s.open=true;s.scrollIntoView({behavior:'smooth',block:'start'})}
+}
+function renderAdminStoriesSection(){
+if(!isAdminLoggedIn)return;
+const listEl=document.getElementById('admin-stories-list');
+if(!listEl)return;
+listEl.innerHTML='';
+const allStories=portalState.stories||[];
+if(allStories.length===0){
+listEl.innerHTML='<div class="p-4 text-center text-xs text-slate-400 bg-graphite-900 rounded-xl border border-graphite-800">Рассказов пока нет.</div>';
+return;
+}
+allStories.forEach(story=>{
+const st=story.status||'approved';
+const badge=st==='approved'?'<span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 font-mono text-[11px]">✓ Опубликован</span>':(st==='rejected'?'<span class="px-2 py-0.5 rounded bg-red-500/20 text-red-300 border border-red-500/40 font-mono text-[11px]">✕ Отклонён</span>':'<span class="px-2 py-0.5 rounded bg-ochre-500/20 text-ochre-300 border border-ochre-500/40 font-mono text-[11px]">⏳ На модерации</span>');
+const safeUrl=sanitizeUrl(story.url);
+const row=document.createElement('div');
+row.className='p-3.5 rounded-xl bg-graphite-900 border border-graphite-800 flex flex-col lg:flex-row lg:items-center justify-between gap-3 text-xs';
+row.innerHTML=`<div class="space-y-1 flex-1"><div class="flex flex-wrap items-center gap-2"><strong class="text-white text-sm">${escapeHtml(story.title)}</strong>${badge}<span class="font-mono text-ochre-400">${escapeHtml(story.author||'Участник')}</span><span class="font-mono text-slate-400">${escapeHtml(story.date||'')} ${story.km?'• '+escapeHtml(story.km):''}</span></div><p class="text-slate-300 leading-relaxed">${escapeHtml(story.summary||'')}</p>${safeUrl?`<div><a href="${escapeHtml(safeUrl)}" target="_blank" rel="noopener noreferrer" class="font-mono text-volga-400 hover:underline break-all">${escapeHtml(safeUrl)} ↗</a></div>`:''}</div><div class="flex flex-wrap items-center gap-2 shrink-0">${st!=='approved'?`<button type="button" data-action="story-approve" data-id="${escapeHtml(story.id)}" class="px-3 py-1.5 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-graphite-950 font-bold transition">✓ Опубликовать</button>`:`<button type="button" data-action="story-pending" data-id="${escapeHtml(story.id)}" class="px-3 py-1.5 rounded-lg bg-graphite-800 hover:bg-graphite-700 border border-graphite-600 text-ochre-300 font-mono transition">⏳ В черновик</button>`}<button type="button" data-action="del-story" data-id="${escapeHtml(story.id)}" class="px-3 py-1.5 rounded-lg bg-red-950/60 hover:bg-red-900/70 text-red-300 font-mono transition">Удалить</button></div>`;
+listEl.appendChild(row);
+});
+}
+async function setStoryStatusAdmin(id,newStatus){
+if(!isAdminLoggedIn)return;
+const story=(portalState.stories||[]).find(s=>s.id===id);
+if(!story)return;
+story.status=newStatus;
+story.updatedAt=Date.now();
+savePortalState();
+await pushToGoogleSheet({action:'upsertStory',story});
+renderStories();
+showToast(newStatus==='approved'?'Рассказ подтверждён и опубликован на сайте!':'Статус рассказа изменён');
+}
 function toggleStoryForm(){document.getElementById('add-story-panel').classList.toggle('hidden')}
-function handleAddStory(e){e.preventDefault();if(!currentParticipantId&&!isAdminLoggedIn){showToast('Только авторизованный участник','error');return}const safeUrl=sanitizeUrl(document.getElementById('st-url').value.trim());if(!safeUrl){showToast('Укажите корректную ссылку','error');return}const newStory={id:'st-'+Date.now(),author:document.getElementById('st-author').value.trim(),title:document.getElementById('st-title').value.trim(),km:document.getElementById('st-km').value.trim()||'',url:safeUrl,trackUrl:sanitizeUrl(document.getElementById('st-track').value.trim()),imgUrl:sanitizeUrl(document.getElementById('st-img').value.trim()),date:document.getElementById('st-date').value.trim()||'',summary:document.getElementById('st-summary').value.trim()};portalState.stories.unshift(newStory);savePortalState();pushToGoogleSheet({action:'upsertStory',story:newStory});renderStories();document.getElementById('story-form').reset();document.getElementById('add-story-panel').classList.add('hidden');showToast('Рассказ добавлен')}
-function handleParticipantAddStory(e){e.preventDefault();if(!currentParticipantId){showToast('Сначала авторизуйтесь','error');return}const p=registrationsList.find(r=>r.id===currentParticipantId);const authorName=p&&p.fio?p.fio:'Участник';const safeUrl=sanitizeUrl(document.getElementById('p-st-url').value.trim());if(!safeUrl){showToast('Укажите корректную ссылку','error');return}const newStory={id:'st-'+Date.now(),author:authorName,title:document.getElementById('p-st-title').value.trim(),km:document.getElementById('p-st-km').value.trim()||'',url:safeUrl,trackUrl:'',imgUrl:'',date:document.getElementById('p-st-date').value.trim()||'',summary:document.getElementById('p-st-summary').value.trim()};portalState.stories.unshift(newStory);savePortalState();pushToGoogleSheet({action:'upsertStory',story:newStory});renderStories();document.getElementById('participant-story-form').reset();showToast('Рассказ опубликован!');const sp=document.getElementById('stories-spoiler');if(sp)sp.open=true;document.getElementById('stories').scrollIntoView({behavior:'smooth'})}
+function handleAddStory(e){e.preventDefault();if(!currentParticipantId&&!isAdminLoggedIn){showToast('Только авторизованный участник','error');return}const safeUrl=sanitizeUrl(document.getElementById('st-url').value.trim());if(!safeUrl){showToast('Укажите корректную ссылку','error');return}const stStatus=isAdminLoggedIn?'approved':'pending';const newStory={id:'st-'+Date.now(),author:document.getElementById('st-author').value.trim(),title:document.getElementById('st-title').value.trim(),km:document.getElementById('st-km').value.trim()||'',url:safeUrl,trackUrl:sanitizeUrl(document.getElementById('st-track').value.trim()),imgUrl:sanitizeUrl(document.getElementById('st-img').value.trim()),date:document.getElementById('st-date').value.trim()||'',summary:document.getElementById('st-summary').value.trim(),status:stStatus,createdAt:new Date().toLocaleString('ru-RU')};portalState.stories.unshift(newStory);savePortalState();pushToGoogleSheet({action:'upsertStory',story:newStory});renderStories();document.getElementById('story-form').reset();document.getElementById('add-story-panel').classList.add('hidden');showToast(isAdminLoggedIn?'Рассказ опубликован':'Рассказ отправлен на модерацию администратору!')}
+function handleParticipantAddStory(e){e.preventDefault();if(!currentParticipantId){showToast('Сначала авторизуйтесь','error');return}const p=registrationsList.find(r=>r.id===currentParticipantId);const authorName=p&&p.fio?p.fio:'Участник';const safeUrl=sanitizeUrl(document.getElementById('p-st-url').value.trim());if(!safeUrl){showToast('Укажите корректную ссылку','error');return}const stStatus=isAdminLoggedIn?'approved':'pending';const newStory={id:'st-'+Date.now(),author:authorName,title:document.getElementById('p-st-title').value.trim(),km:document.getElementById('p-st-km').value.trim()||'',url:safeUrl,trackUrl:'',imgUrl:'',date:document.getElementById('p-st-date').value.trim()||'',summary:document.getElementById('p-st-summary').value.trim(),status:stStatus,createdAt:new Date().toLocaleString('ru-RU')};portalState.stories.unshift(newStory);savePortalState();pushToGoogleSheet({action:'upsertStory',story:newStory});renderStories();document.getElementById('participant-story-form').reset();showToast(isAdminLoggedIn?'Рассказ опубликован!':'Рассказ отправлен на подтверждение администратору!');}
 function deleteStory(id){if(!isAdminLoggedIn)return;portalState.stories=portalState.stories.filter(s=>s.id!==id);savePortalState();pushToGoogleSheet({action:'deleteStory',id,stories:portalState.stories});renderStories();showToast('Рассказ удалён')}
 
 const DEFAULT_SURVEY_QUESTIONS=[
@@ -2422,7 +2523,49 @@ async function requestPasswordResetCode(){const now=Date.now();if(now-lastVerifi
 async function confirmPasswordReset(){const targetEmail=normalizeEmail(document.getElementById('reset-email-input').value);const code=(document.getElementById('reset-code-input').value||'').trim();const newPass=(document.getElementById('reset-new-password').value||'').trim();const confirmPass=(document.getElementById('reset-confirm-password').value||'').trim();const errEl=document.getElementById('reset-error-msg');if(errEl)errEl.classList.add('hidden');if(!targetEmail||!targetEmail.includes('@')){if(errEl){errEl.textContent='Введите корректный Email.';errEl.classList.remove('hidden')}return}if(!/^\d{6}$/.test(code)){if(errEl){errEl.textContent='Введите 6-значный код из письма.';errEl.classList.remove('hidden')}return}if(!isPasswordSecure(newPass)){if(errEl){errEl.textContent='Новый пароль должен быть не короче 8 символов и содержать буквы и цифры.';errEl.classList.remove('hidden')}return}if(newPass!==confirmPass){if(errEl){errEl.textContent='Пароли не совпадают.';errEl.classList.remove('hidden')}return}const url=getGoogleSheetUrl();if(!url){showToast('Сервер не подключён','error');return}let verified=false,verifiedAt=new Date().toLocaleString('ru-RU');try{const q=new URLSearchParams({action:'verifyEmailCode',email:targetEmail,code,t:String(Date.now())});const r=await fetch(`${url}${url.includes('?')?'&':'?'}${q.toString()}`,{method:'GET',redirect:'follow'});const res=await r.json();if(res&&res.verified===true){verified=true;if(res.verifiedAt)verifiedAt=res.verifiedAt}}catch(e){}if(!verified){if(errEl){errEl.textContent='Неверный или просроченный 6-значный код.';errEl.classList.remove('hidden')}showToast('Неверный или просроченный код','error');return}const newHash=await hashPasswordSHA256(newPass);let existingIdx=registrationsList.findIndex(r=>normalizeEmail(r.email)===targetEmail);let userEntry=null;if(existingIdx!==-1){registrationsList[existingIdx].passwordHash=newHash;registrationsList[existingIdx].emailVerifiedAt=registrationsList[existingIdx].emailVerifiedAt||verifiedAt;registrationsList[existingIdx].updatedAt=Date.now();delete registrationsList[existingIdx].legacyPlainPassword;userEntry=registrationsList[existingIdx];saveRegistrationsLocal();await pushToGoogleSheet({action:'upsertRegistration',entry:userEntry,registrations:registrationsList})}else{userEntry={id:'reg-'+Date.now(),email:targetEmail,fio:'',passwordHash:newHash,emailVerifiedAt:verifiedAt,birthYear:'',telegram:'',socialUrl:'',experience:'нет',bikeType:'Грэвел',bikeBrand:'',bikeYear:'',phone:'',status:'draft',createdAt:verifiedAt,updatedAt:Date.now(),survey:{answers:{},completedAt:null}};await pushToGoogleSheet({action:'resetPassword',email:targetEmail,passwordHash:newHash,verifiedAt})}currentParticipantId=userEntry.id;pendingAuthDraft=existingIdx===-1?userEntry:null;document.getElementById('reset-code-input').value='';document.getElementById('reset-new-password').value='';document.getElementById('reset-confirm-password').value='';closePasswordResetBox();openParticipantForm(userEntry,existingIdx===-1);showToast('Пароль успешно обновлён! Вы авторизованы.')}
 function openParticipantForm(entry,isNewDraft){document.getElementById('participant-auth-step').classList.add('hidden');document.getElementById('participant-form-step').classList.remove('hidden');document.getElementById('active-user-fio-label').textContent=entry.fio?`${entry.fio} (${entry.email||''})`:(entry.email||'Новый участник');const banner=document.getElementById('participant-status-banner');if(isNewDraft||entry.status==='draft'){banner.className='mb-4 p-3 rounded-xl bg-volga-500/15 border border-volga-500/40 text-xs text-slate-200';banner.innerHTML='Заполните поля и отправьте заявку. После отправки статус — <strong>«Ожидает подтверждения»</strong>.'}else if(entry.status==='approved'){banner.className='mb-4 p-3 rounded-xl bg-emerald-950/50 border border-emerald-500/50 text-xs text-emerald-200';banner.innerHTML='Статус: <strong>Подтверждена</strong>. Вы в стартовом протоколе.'}else if(entry.status==='rejected'){banner.className='mb-4 p-3 rounded-xl bg-red-950/50 border border-red-500/50 text-xs text-red-200';banner.innerHTML='Статус: <strong>Отклонена</strong>. Отредактируйте данные.'}else{banner.className='mb-4 p-3 rounded-xl bg-ochre-500/15 border border-ochre-500/40 text-xs text-ochre-300';banner.innerHTML='Статус: <strong>Ожидает подтверждения</strong>.'}const emailEl=document.getElementById('reg-email');emailEl.value=entry.email||'';emailEl.readOnly=true;document.getElementById('reg-fio').value=entry.fio||'';document.getElementById('reg-birth-year').value=entry.birthYear||'';document.getElementById('reg-telegram').value=entry.telegram||'';document.getElementById('reg-social').value=entry.socialUrl||'';document.getElementById('reg-experience').value=(entry.experience||'нет').toLowerCase()==='есть'?'есть':'нет';document.getElementById('reg-bike-type').value=entry.bikeType||'Грэвел';document.getElementById('reg-bike-brand').value=entry.bikeBrand||'';document.getElementById('reg-bike-year').value=entry.bikeYear||'';document.getElementById('reg-phone').value=entry.phone||'';document.getElementById('reg-consent').checked=!isNewDraft;renderSurveyForm(entry);renderParticipantPreliminaryBox(entry);renderParticipantGpxBox(entry)}
 function logoutParticipant(){currentParticipantId=null;pendingAuthDraft=null;document.getElementById('participant-form-step').classList.add('hidden');document.getElementById('participant-auth-step').classList.remove('hidden');document.getElementById('auth-password-input').value='';document.getElementById('auth-error-msg').classList.add('hidden')}
-async function handleSaveApplication(e){if(e)e.preventDefault();const existingIdx=registrationsList.findIndex(r=>r.id===currentParticipantId);const prevEntry=existingIdx!==-1?registrationsList[existingIdx]:(pendingAuthDraft&&pendingAuthDraft.id===currentParticipantId?pendingAuthDraft:null);if(!prevEntry){showToast('Ошибка сессии','error');return}const surveyCheck=collectAndValidateSurveyFromDOM(prevEntry);if(!surveyCheck.ok){const errBox=document.getElementById('survey-error-msg');if(errBox){errBox.textContent=`Отправка заявки невозможна без ответов на опросник. Заполните вопросы: ${surveyCheck.missing.join(', ')}.`;errBox.classList.remove('hidden');errBox.scrollIntoView({behavior:'smooth',block:'center'})}showToast(`Ответьте на все 5 вопросов опросника (остались: ${surveyCheck.missing.join(', ')})`,'error');return}const email=prevEntry.email||normalizeEmail(document.getElementById('reg-email').value);const fio=document.getElementById('reg-fio').value.trim();const birthYear=document.getElementById('reg-birth-year').value.trim();let telegram=document.getElementById('reg-telegram').value.trim();if(telegram&&!telegram.startsWith('@')&&!telegram.startsWith('http'))telegram='@'+telegram;const socialUrl=sanitizeUrl(document.getElementById('reg-social').value.trim());const experience=document.getElementById('reg-experience').value;const bikeType=document.getElementById('reg-bike-type').value;const bikeBrand=document.getElementById('reg-bike-brand').value.trim();const bikeYear=document.getElementById('reg-bike-year').value.trim();const phone=document.getElementById('reg-phone').value.trim();const completedAtStr=new Date().toLocaleString('ru-RU');const updatedEntry={id:prevEntry.id,email,fio,passwordHash:prevEntry.passwordHash,emailVerifiedAt:prevEntry.emailVerifiedAt||null,birthYear,telegram,socialUrl,experience,bikeType,bikeBrand,bikeYear,phone,status:prevEntry.status==='approved'?'approved':'pending',createdAt:prevEntry.createdAt||completedAtStr,updatedAt:Date.now(),survey:{answers:surveyCheck.answers,questionIds:surveyCheck.questionIds,completedAt:completedAtStr,updatedAt:Date.now()}};if(existingIdx!==-1)registrationsList[existingIdx]=updatedEntry;else registrationsList.push(updatedEntry);pendingAuthDraft=null;saveRegistrationsLocal();await pushToGoogleSheet({action:'upsertRegistration',entry:updatedEntry,registrations:registrationsList});openParticipantForm(updatedEntry,false);renderPublicProtocol();renderAdminApplications();showToast('Анкета, опросник и заявка успешно отправлены!')}
+function openAppThankYouModal(entry){
+const modal=document.getElementById('app-thankyou-modal');
+const summaryEl=document.getElementById('app-thankyou-summary');
+const detailsEl=document.getElementById('app-thankyou-details');
+if(!modal||!summaryEl||!detailsEl||!entry)return;
+const pool=getSurveyQuestionsPool();
+const qIds=(entry.survey&&Array.isArray(entry.survey.questionIds)&&entry.survey.questionIds.length>0)?entry.survey.questionIds:pool.slice(0,SURVEY_RANDOM_COUNT).map(q=>q.id);
+const activeQuestions=qIds.map(id=>pool.find(q=>q.id===id)).filter(Boolean);
+const answers=(entry.survey&&entry.survey.answers)||{};
+let correctCount=0;
+const itemsHtml=activeQuestions.map((q,idx)=>{
+const val=answers[q.id];
+const opts=Array.isArray(q.options)?q.options:[];
+const selectedArr=Array.isArray(val)?val:(typeof val==='string'&&val?[val]:[]);
+const correctSet=new Set(opts.filter(o=>o.correct).map(o=>o.v));
+const selectedSet=new Set(selectedArr);
+const isExact=correctSet.size>0&&correctSet.size===selectedSet.size&&Array.from(correctSet).every(v=>selectedSet.has(v));
+if(isExact)correctCount++;
+const chosenHtml=selectedArr.map(v=>{
+const opt=opts.find(o=>o.v===v);
+if(!opt)return'';
+return opt.correct?`<div class="text-emerald-300 text-xs">✓ ${escapeHtml(opt.label)}</div>`:`<div class="text-red-300 text-xs">✕ Выбрано ошибочно: ${escapeHtml(opt.label)}</div>`;
+}).join('');
+const missedHtml=opts.filter(o=>o.correct&&!selectedSet.has(o.v)).map(o=>`<div class="text-ochre-300 text-xs">⚠️ Не отмечен верный ответ: ${escapeHtml(o.label)}</div>`).join('');
+const borderCls=isExact?'border-emerald-500/40 bg-emerald-950/20':'border-red-500/40 bg-red-950/20';
+const pillCls=isExact?'bg-emerald-500/20 text-emerald-300 border-emerald-500/40':'bg-red-500/20 text-red-300 border-red-500/40';
+const pillText=isExact?'✓ Отвечено правильно':'✕ Отвечено неправильно';
+return `<div class="p-3.5 rounded-xl border ${borderCls} space-y-2"><div class="flex flex-wrap items-center justify-between gap-2"><span class="font-bold text-white text-xs sm:text-sm">${idx+1}. ${escapeHtml(q.title)}</span><span class="px-2 py-0.5 rounded border font-mono text-[11px] font-bold ${pillCls}">${pillText}</span></div><div class="text-xs text-slate-300">${escapeHtml(q.question)}</div><div class="space-y-1 pt-1.5 border-t border-graphite-800/80">${chosenHtml}${missedHtml}</div></div>`;
+}).join('');
+const totalQ=activeQuestions.length||SURVEY_RANDOM_COUNT;
+summaryEl.innerHTML=`<div class="font-bold text-white text-sm sm:text-base mb-1">Спасибо за вашу заявку, ${escapeHtml(entry.fio||'участник')}!</div><div class="text-slate-300">Ваша заявка отправлена организаторам и ожидает подтверждения. Вы ответили правильно на <strong class="text-emerald-400 font-mono text-base">${correctCount} из ${totalQ}</strong> вопросов опросника.</div>`;
+detailsEl.innerHTML=itemsHtml;
+modal.classList.remove('hidden');
+modal.classList.add('flex');
+}
+function closeAppThankYouModal(){
+const modal=document.getElementById('app-thankyou-modal');
+if(modal){modal.classList.add('hidden');modal.classList.remove('flex');}
+logoutParticipant();
+const regSec=document.getElementById('registration');
+if(regSec)regSec.scrollIntoView({behavior:'smooth',block:'start'});
+}
+async function handleSaveApplication(e){if(e)e.preventDefault();const existingIdx=registrationsList.findIndex(r=>r.id===currentParticipantId);const prevEntry=existingIdx!==-1?registrationsList[existingIdx]:(pendingAuthDraft&&pendingAuthDraft.id===currentParticipantId?pendingAuthDraft:null);if(!prevEntry){showToast('Ошибка сессии','error');return}const surveyCheck=collectAndValidateSurveyFromDOM(prevEntry);if(!surveyCheck.ok){const errBox=document.getElementById('survey-error-msg');if(errBox){errBox.textContent=`Отправка заявки невозможна без ответов на опросник. Заполните вопросы: ${surveyCheck.missing.join(', ')}.`;errBox.classList.remove('hidden');errBox.scrollIntoView({behavior:'smooth',block:'center'})}showToast(`Ответьте на все 5 вопросов опросника (остались: ${surveyCheck.missing.join(', ')})`,'error');return}const email=prevEntry.email||normalizeEmail(document.getElementById('reg-email').value);const fio=document.getElementById('reg-fio').value.trim();const birthYear=document.getElementById('reg-birth-year').value.trim();let telegram=document.getElementById('reg-telegram').value.trim();if(telegram&&!telegram.startsWith('@')&&!telegram.startsWith('http'))telegram='@'+telegram;const socialUrl=sanitizeUrl(document.getElementById('reg-social').value.trim());const experience=document.getElementById('reg-experience').value;const bikeType=document.getElementById('reg-bike-type').value;const bikeBrand=document.getElementById('reg-bike-brand').value.trim();const bikeYear=document.getElementById('reg-bike-year').value.trim();const phone=document.getElementById('reg-phone').value.trim();const completedAtStr=new Date().toLocaleString('ru-RU');const updatedEntry={id:prevEntry.id,email,fio,passwordHash:prevEntry.passwordHash,emailVerifiedAt:prevEntry.emailVerifiedAt||null,birthYear,telegram,socialUrl,experience,bikeType,bikeBrand,bikeYear,phone,status:prevEntry.status==='approved'?'approved':'pending',createdAt:prevEntry.createdAt||completedAtStr,updatedAt:Date.now(),survey:{answers:surveyCheck.answers,questionIds:surveyCheck.questionIds,completedAt:completedAtStr,updatedAt:Date.now()}};if(existingIdx!==-1)registrationsList[existingIdx]=updatedEntry;else registrationsList.push(updatedEntry);pendingAuthDraft=null;saveRegistrationsLocal();await pushToGoogleSheet({action:'upsertRegistration',entry:updatedEntry,registrations:registrationsList});renderPublicProtocol();renderAdminApplications();openAppThankYouModal(updatedEntry)}
 
 function renderPublicProtocol(){const tbody=document.getElementById('public-protocol-tbody');if(!tbody)return;tbody.innerHTML='';const visible=registrationsList.filter(r=>r.status!=='draft'&&r.status!=='rejected'&&String(r.fio||'').trim()!=='');const approved=visible.filter(r=>r.status==='approved').length;const pending=visible.filter(r=>r.status==='pending').length;document.getElementById('stat-public-approved').textContent=approved;document.getElementById('stat-public-pending').textContent=pending;document.getElementById('nav-reg-count').textContent=visible.length;document.getElementById('admin-bar-pending-num').textContent=pending;if(visible.length===0){tbody.innerHTML='<tr><td colspan="6" class="py-6 px-4 text-center text-slate-400">Пока нет заявок.</td></tr>';return}visible.forEach((r,idx)=>{const tgClean=String(r.telegram||'').replace(/^@/,'').replace(/[^a-zA-Z0-9_]/g,'');const statusBadge=r.status==='approved'?'<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-mono text-[11px]">✓ Подтверждена</span>':'<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-ochre-500/20 text-ochre-300 border border-ochre-500/30 font-mono text-[11px]">⏳ Ожидает</span>';const tr=document.createElement('tr');tr.className='hover:bg-graphite-900/50 transition';tr.innerHTML=`<td class="py-3 px-3 font-mono text-slate-400">${String(idx+1).padStart(2,'0')}</td><td class="py-3 px-3"><div class="font-semibold text-white">${escapeHtml(r.fio||'Участник')}</div><div class="text-[11px] font-mono text-slate-400">${escapeHtml(r.birthYear||'—')} г.р.</div></td><td class="py-3 px-3 font-mono">${tgClean?`<a href="https://t.me/${escapeHtml(tgClean)}" target="_blank" rel="noopener noreferrer" class="text-volga-400 hover:underline">@${escapeHtml(tgClean)}</a>`:'—'}</td><td class="py-3 px-3"><span class="px-2 py-0.5 rounded bg-graphite-800 text-slate-200 font-mono text-[11px]">${escapeHtml(r.experience||'нет')}</span></td><td class="py-3 px-3"><div class="text-slate-200 font-medium">${escapeHtml(r.bikeType||'Вело')} • ${escapeHtml(r.bikeBrand||'—')}</div><div class="text-[11px] font-mono text-slate-400">${escapeHtml(r.bikeYear||'—')} г.</div></td><td class="py-3 px-3 text-right">${statusBadge}</td>`;tbody.appendChild(tr)})}
 function toggleAdminPassChange(){if(!isAdminLoggedIn)return;document.getElementById('admin-pass-change-box').classList.toggle('hidden')}
@@ -2838,7 +2981,7 @@ function json_(obj) { return ContentService.createTextOutput(JSON.stringify(obj)
 function downloadGoogleAppsScriptCode(){if(!isAdminLoggedIn)return;const code=buildGasCode();const blob=new Blob([code],{type:'text/plain;charset=utf-8'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='Code.gs';document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);showToast('Code.gs скачан')}
 async function testGoogleMailApp(){const url=getGoogleSheetUrl(),box=document.getElementById('gsheet-mail-test-result');if(!url){showToast('Сначала URL','error');return}if(box){box.classList.remove('hidden');box.textContent='⏳ Отправка тестового запроса…'}try{const q=new URLSearchParams({action:'requestVerification',email:'utesy.povolzhya@gmail.com',t:String(Date.now())});const r=await fetch(`${url}${url.includes('?')?'&':'?'}${q.toString()}`,{method:'GET',redirect:'follow'});const res=await r.json();if(res&&res.codeSent===true){if(box){box.className='p-3 rounded-xl bg-emerald-950/60 border border-emerald-500/50 text-xs font-mono text-emerald-200 leading-relaxed';box.textContent='✓ Письмо с кодом отправлено на utesy.povolzhya@gmail.com!'}showToast('✓ Письмо отправлено!','success')}else if(res&&res.codeSent===false){if(box){box.className='p-3 rounded-xl bg-red-950/70 border border-red-500/50 text-xs font-mono text-red-200 leading-relaxed';box.textContent=`✕ MailApp: ${res.message||'Нет прав'}. Выполните authorizeMail.`}showToast('Ошибка MailApp','error')}else{if(box){box.className='p-3 rounded-xl bg-ochre-500/15 border border-ochre-500/50 text-xs font-mono text-ochre-200 leading-relaxed';box.textContent='⚠️ Старая версия развертывания.'}}}catch(e){if(box){box.className='p-3 rounded-xl bg-red-950/70 border border-red-500/50 text-xs font-mono text-red-200 leading-relaxed';box.textContent='✕ Ошибка соединения. Проверьте «Все (Anyone)».'}}}
 
-window.addEventListener('keydown',(e)=>{if(e.ctrlKey&&e.shiftKey&&(e.key==='A'||e.key==='a'||e.key==='Ф'||e.key==='ф')){e.preventDefault();triggerAdminGear()}if(e.key==='Escape'){if(isMapFullscreen)syncMapFullscreenUI(false);['custom-modal','admin-auth-modal','ai-route-modal','daily-rest-modal','donate-modal','track-photo-modal'].forEach(id=>{const m=document.getElementById(id);if(m&&!m.classList.contains('hidden')){m.classList.add('hidden');m.classList.remove('flex')}})}});
+window.addEventListener('keydown',(e)=>{if(e.ctrlKey&&e.shiftKey&&(e.key==='A'||e.key==='a'||e.key==='Ф'||e.key==='ф')){e.preventDefault();triggerAdminGear()}if(e.key==='Escape'){if(isMapFullscreen)syncMapFullscreenUI(false);['custom-modal','admin-auth-modal','ai-route-modal','daily-rest-modal','donate-modal','track-photo-modal','app-thankyou-modal'].forEach(id=>{const m=document.getElementById(id);if(m&&!m.classList.contains('hidden')){m.classList.add('hidden');m.classList.remove('flex')}})}});
 
 function isMobileOrTouchEnv(){
 const ua=navigator.userAgent||'';
@@ -2904,7 +3047,7 @@ const styleBtn=e.target.closest('[data-mapstyle]');
 if(styleBtn){
 e.stopPropagation();
 }
-const btn=e.target.closest('[data-action]');if(!btn)return;const action=btn.dataset.action;const id=btn.dataset.id,idx=btn.dataset.idx;if(action==='edit-route')editMapRoute(id);else if(action==='del-route')deleteMapRoute(id);else if(action==='focus-route')focusRouteOnMap(id);else if(action==='open-ai')openAiRouteModal(id);else if(action==='del-sector')deleteSector(parseInt(idx,10));else if(action==='edit-sector')editAdminSector(parseInt(idx,10));else if(action==='edit-faq')editAdminFaq(parseInt(idx,10));else if(action==='del-faq')deleteAdminFaq(parseInt(idx,10));else if(action==='edit-sq')editAdminSurveyQuestion(parseInt(idx,10));else if(action==='del-sq')deleteAdminSurveyQuestion(parseInt(idx,10));else if(action==='del-story')deleteStory(id);else if(action==='app-approve')setApplicationStatus(id,'approved');else if(action==='app-pending')setApplicationStatus(id,'pending');else if(action==='app-reject')setApplicationStatus(id,'rejected');else if(action==='app-edit')loadParticipantIntoEditorFromAdmin(id);else if(action==='app-del')deleteApplicationAdmin(id);else if(action==='res-edit')editResultAdmin(id);else if(action==='res-del')deleteResultAdmin(id);else if(action==='open-daily')openDailyRestModal(id)});
+const btn=e.target.closest('[data-action]');if(!btn)return;const action=btn.dataset.action;const id=btn.dataset.id,idx=btn.dataset.idx;if(action==='edit-route')editMapRoute(id);else if(action==='del-route')deleteMapRoute(id);else if(action==='focus-route')focusRouteOnMap(id);else if(action==='open-ai')openAiRouteModal(id);else if(action==='del-sector')deleteSector(parseInt(idx,10));else if(action==='edit-sector')editAdminSector(parseInt(idx,10));else if(action==='edit-faq')editAdminFaq(parseInt(idx,10));else if(action==='del-faq')deleteAdminFaq(parseInt(idx,10));else if(action==='edit-sq')editAdminSurveyQuestion(parseInt(idx,10));else if(action==='del-sq')deleteAdminSurveyQuestion(parseInt(idx,10));else if(action==='del-story')deleteStory(id);else if(action==='story-approve')setStoryStatusAdmin(id,'approved');else if(action==='story-pending')setStoryStatusAdmin(id,'pending');else if(action==='app-approve')setApplicationStatus(id,'approved');else if(action==='app-pending')setApplicationStatus(id,'pending');else if(action==='app-reject')setApplicationStatus(id,'rejected');else if(action==='app-edit')loadParticipantIntoEditorFromAdmin(id);else if(action==='app-del')deleteApplicationAdmin(id);else if(action==='res-edit')editResultAdmin(id);else if(action==='res-del')deleteResultAdmin(id);else if(action==='open-daily')openDailyRestModal(id)});
 
 Object.assign(window,{
 openMapSectionFromNav,closeAdminLoginModal,handleAdminLogin,openAiRouteModal,closeAiRouteModal,askAiAboutCurrentRoute,
@@ -2924,7 +3067,7 @@ toggleAdminPasswordResetBox,requestAdminPasswordResetCode,confirmAdminPasswordRe
 setResultsFilter,toggleStoryForm,handleAddStory,triggerAdminGear,
 clearSurveyAnswers,handleSurveySubmit,
 recalcParticipantPreliminary,handleParticipantPreliminarySubmit,
-setMapStyle,updateMapBgOpacity,toggleMapFullscreen,openTrackPhotoModal,closeTrackPhotoModal,stepTrackPhoto
+setMapStyle,updateMapBgOpacity,toggleMapFullscreen,openTrackPhotoModal,closeTrackPhotoModal,stepTrackPhoto,openAppThankYouModal,closeAppThankYouModal,scrollToAdminStories,renderAdminStoriesSection,setStoryStatusAdmin
 });
 
 window.addEventListener('DOMContentLoaded',()=>{
