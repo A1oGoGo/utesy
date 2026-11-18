@@ -246,6 +246,26 @@ img,video{max-width:100%;height:auto}
 <p id="donate-modal-desc" class="text-xs sm:text-sm text-slate-300 leading-relaxed whitespace-pre-line">Маршрут «Утёсы Поволжья» (~2850 км), разведка и актуализация GPX-треков, база знаний и проведение заезда создаются на чистом энтузиазме без стартовых взносов. Если проект и треки оказались вам полезны — вы можете угостить автора чашкой кофе или гелем на дистанцию!</p>
 
 <div class="space-y-3">
+<div id="donate-sber-card" class="p-4 rounded-2xl bg-emerald-950/30 border-2 border-emerald-500/50 space-y-3">
+<a id="donate-external-link" href="#" target="_blank" rel="noopener noreferrer" onclick="handleDonateSberClick(event)" class="w-full py-3.5 px-4 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-graphite-950 font-bold text-xs sm:text-sm uppercase tracking-wider transition flex items-center justify-center gap-2.5 shadow-lg">
+<span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-graphite-950 text-emerald-400 font-bold text-xs">✓</span>
+<span id="donate-sber-btn-text">Перевести через СберБанк Онлайн</span>
+<span>↗</span>
+</a>
+<div id="donate-qr-wrap" class="hidden pt-2 border-t border-emerald-500/30 flex flex-col sm:flex-row items-center gap-3.5">
+<div class="p-2 rounded-xl bg-white shrink-0 shadow-md">
+<img id="donate-qr-img" src="" alt="QR-код СберБанк Онлайн / СБП" class="w-32 h-32 object-contain block">
+</div>
+<div class="text-xs text-slate-200 space-y-1 text-center sm:text-left">
+<div class="font-bold text-emerald-300 uppercase font-mono">📱 Оплата по QR-коду с ПК</div>
+<p class="text-slate-300 leading-relaxed">Наведите камеру смартфона или сканер в приложении <strong>СберБанк Онлайн</strong> на QR-код, чтобы открыть страницу перевода.</p>
+</div>
+</div>
+<div id="donate-sber-setup-hint" class="hidden text-[11px] font-mono text-ochre-300 text-center">
+⚠️ Ссылка на сбор Сбера ещё не указана. Нажмите <strong>«✎ Реквизиты»</strong> вверху окна, чтобы вставить ссылку из СберБанк Онлайн.
+</div>
+</div>
+
 <div id="donate-pay1-card" class="p-4 rounded-xl bg-graphite-950 border border-ochre-500/40 space-y-2">
 <div class="flex items-center justify-between gap-2">
 <span id="donate-pay1-label" class="text-xs font-mono uppercase text-ochre-400 font-bold">СБП / Перевод по номеру или карте</span>
@@ -266,10 +286,6 @@ img,video{max-width:100%;height:auto}
 <button type="button" onclick="copyDonateValue('pay2')" class="px-3 py-1.5 rounded-lg bg-graphite-800 hover:bg-graphite-700 border border-volga-500/40 text-volga-300 font-mono font-bold text-xs transition shrink-0">📋 Копировать</button>
 </div>
 </div>
-
-<a id="donate-external-link" href="#" target="_blank" rel="noopener noreferrer" class="hidden w-full py-3 px-4 rounded-xl bg-ochre-500 hover:bg-ochre-400 text-graphite-950 font-bold text-xs sm:text-sm uppercase tracking-wider transition flex items-center justify-center gap-2 shadow-lg">
-<span>☕ Поддержать онлайн по ссылке</span><span>↗</span>
-</a>
 </div>
 
 <div class="p-4 rounded-xl bg-emerald-950/30 border border-emerald-500/40 space-y-2.5">
@@ -299,7 +315,10 @@ img,video{max-width:100%;height:auto}
 <div><label class="block font-mono text-volga-400 mb-1">Способ 2 (опционально, заголовок)</label><input type="text" id="don-edit-pay2-label" placeholder="Номер карты / Другой банк" class="w-full bg-graphite-950 border border-graphite-700 rounded-xl px-3 py-2 text-white"></div>
 <div><label class="block font-mono text-volga-400 mb-1">Реквизиты 2 (опционально)</label><input type="text" id="don-edit-pay2-value" placeholder="2200 0000 0000 0000 (оставьте пустым, чтобы скрыть)" class="w-full bg-graphite-950 border border-graphite-700 rounded-xl px-3 py-2 text-white font-mono"></div>
 </div>
-<div><label class="block font-mono text-slate-400 mb-1">Ссылка на чаевые / сбор (CloudTips, Т-Банк, ЮMoney — опционально)</label><input type="url" id="don-edit-url" placeholder="https://..." class="w-full bg-graphite-950 border border-graphite-700 rounded-xl px-3 py-2 text-white font-mono"></div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+<div><label class="block font-mono text-emerald-400 mb-1">Ссылка на СберБанк Онлайн / Сбор Сбера *</label><input type="url" id="don-edit-url" placeholder="https://www.sberbank.com/sms/pbpn?requisiteNumber=..." class="w-full bg-graphite-950 border border-emerald-500/50 rounded-xl px-3 py-2 text-white font-mono"></div>
+<div><label class="block font-mono text-slate-400 mb-1">Своя картинка QR-кода (необязательно — иначе создастся сам)</label><input type="url" id="don-edit-qr-url" placeholder="Автогенерация из ссылки Сбера" class="w-full bg-graphite-950 border border-graphite-700 rounded-xl px-3 py-2 text-white font-mono"></div>
+</div>
 <div><label class="block font-mono text-emerald-400 mb-1">Текст благодарности</label><textarea id="don-edit-thanks" rows="2" required class="w-full bg-graphite-950 border border-graphite-700 rounded-xl p-2.5 text-white"></textarea></div>
 <div class="flex justify-end gap-2 pt-1">
 <button type="submit" class="px-4 py-2 rounded-xl bg-ochre-500 hover:bg-ochre-400 text-graphite-950 font-bold uppercase tracking-wider transition">💾 Сохранить реквизиты</button>
@@ -407,7 +426,7 @@ img,video{max-width:100%;height:auto}
 </div>
 </summary>
 <div class="p-4 sm:p-5 border-t border-graphite-800 space-y-4 text-xs sm:text-sm text-slate-300 leading-relaxed">
-<p id="mission-intro" data-editable="true" contenteditable="false">Мы хотим, чтобы бреветы и многодневные велосипедные гонки по проселочным и второстепенным дорогам стали массовым и признанным направлением — наравне с шоссейными и другими дисциплинами. «Утёсы Поволжья» — это не разовое событие, а часть системной работы по формированию культуры дальних автономных заездов: с понятными правилами, прозрачным судейством и открытым сообществом.</p>
+<p id="mission-intro" data-editable="true" contenteditable="false">Мы развиваем культуру байкпакинг-гонок и многодневок на самообеспечении по грунтам и тихим второстепенным дорогам — чтобы это направление стало таким же популярным и понятным, как классические шоссейные дисциплины. «Утёсы Поволжья» — не разовый старт, а живой проект с проверенным маршрутом, чёткими правилами, честным контролем по трекам и открытым сообществом.</p>
 <div class="grid grid-cols-1 sm:grid-cols-3 gap-3.5">
 <div class="p-3.5 rounded-xl bg-graphite-950/80 border border-graphite-800 space-y-1.5">
 <div id="mission-sub1-title" data-editable="true" contenteditable="false" class="font-bold text-ochre-400">Развитие этого направления как вида спорта.</div>
@@ -425,18 +444,7 @@ img,video{max-width:100%;height:auto}
 </div>
 </details>
 </div>
-<div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-7">
-<div class="bg-graphite-900/90 border border-graphite-700 rounded-2xl p-4">
-<div class="flex items-center justify-between mb-1"><span class="text-xs font-mono uppercase text-slate-400">Полный маршрут</span><span class="text-ochre-400 font-mono text-xs">Казань — Астрахань • Продолжение следует…</span></div>
-<div id="metric-1-val" data-editable="true" class="font-display font-bold text-2xl text-white mb-1" contenteditable="false">~2 850 км</div>
-<p id="metric-1-desc" data-editable="true" class="text-xs text-slate-400 leading-relaxed" contenteditable="false">Казань — Ульяновск (320 км), Ульяновск — Камышин (1290 км), Камышин — Астрахань (1262 км). <strong class="text-ochre-400">Продолжение следует…</strong></p>
-</div>
-<div class="bg-graphite-900/90 border border-ochre-500/40 rounded-2xl p-4">
-<div class="flex items-center justify-between mb-1"><span class="text-xs font-mono uppercase text-ochre-400">Сегмент 2027</span><span class="text-ochre-400 font-mono text-xs">Лимит 10 дней</span></div>
-<div id="metric-2-val" data-editable="true" class="font-display font-bold text-2xl text-white mb-1" contenteditable="false">1 290 км</div>
-<p id="metric-2-desc" data-editable="true" class="text-xs text-slate-400 leading-relaxed" contenteditable="false">Старт 15.05.2027 в 07:00 МСК из Ульяновска через Самарскую Луку, Хвалынск и Саратов до Камышина.</p>
-</div>
-</div>
+
 </div>
 </section>
 
@@ -462,9 +470,9 @@ img,video{max-width:100%;height:auto}
 <div id="map-collapsible-body" class="hidden">
 <div id="map-fullscreen-wrap" class="relative">
 <div id="leaflet-map" class="w-full h-[420px] sm:h-[520px] z-10"></div>
-<details id="map-style-picker" open class="group/picker absolute top-2 right-2 z-[470] p-1" style="background:rgba(0,0,0,0.82);border:2px solid #1a1208;box-shadow:0 4px 0 rgba(0,0,0,0.5)">
-<summary class="cursor-pointer text-center text-[8px] text-[#f5d76e] px-1.5 py-1 flex items-center justify-between gap-1.5 select-none" style="font-family:'Press Start 2P',monospace"><span>🗺 СЛОИ</span><span class="group-open/picker:rotate-180 transition-transform">▼</span></summary>
-<div class="flex flex-col gap-1 pt-1 mt-1 border-t border-[#3d2914]">
+<details id="map-style-picker" open class="group/picker absolute top-2 right-2 z-[470] rounded-xl p-1" style="background:rgba(13,17,23,0.88);border:1.5px solid #30363d;box-shadow:0 4px 12px rgba(0,0,0,0.55);backdrop-filter:blur(6px)">
+<summary title="Стили и слои карты" aria-label="Стили и слои карты" class="cursor-pointer text-[#f5d76e] hover:text-white px-2 py-1 flex items-center justify-center gap-1 select-none rounded-lg hover:bg-graphite-800/80 transition"><span class="text-sm leading-none">🗺️</span><span class="text-[9px] font-mono text-ochre-400 group-open/picker:rotate-180 transition-transform leading-none">▼</span></summary>
+<div class="flex flex-col gap-1 pt-1 mt-1 border-t border-graphite-700">
 <button type="button" class="map-style-btn active-mc" data-mapstyle="minecraft" onclick="setMapStyle('minecraft')" title="Minecraft">⛏ MC</button>
 <button type="button" class="map-style-btn" data-mapstyle="heroes" onclick="setMapStyle('heroes')" title="Heroes of Might and Magic III">🏰 HoMM</button>
 <button type="button" class="map-style-btn" data-mapstyle="diablo" onclick="setMapStyle('diablo')" title="Diablo II">💀 D2</button>
@@ -516,25 +524,29 @@ img,video{max-width:100%;height:auto}
 <div class="lg:col-span-7 space-y-5">
 <div class="bg-graphite-950/80 border border-graphite-700 rounded-2xl p-5 space-y-3">
 <div class="flex items-center justify-between"><h3 id="reg-sec1-title" data-editable="true" class="font-bold text-base sm:text-lg text-white" contenteditable="false">1. Юридический статус и ответственность</h3><span class="text-[11px] font-mono px-2.5 py-0.5 rounded bg-graphite-800 text-ochre-400 border border-graphite-700">Некоммерческий старт</span></div>
-<ul class="space-y-2 text-xs sm:text-sm text-slate-300 leading-relaxed">
-<li id="reg-legal-1" data-editable="true" contenteditable="false">• <strong>Статус:</strong> Организаторы не являются коммерческой или спортивной организацией.</li>
-<li id="reg-legal-2" data-editable="true" contenteditable="false">• <strong>Формат:</strong> Мероприятие проводится в формате <strong>совместной открытой гонки-тренировки</strong> на полном самообеспечении, без взносов и перекрытия дорог.</li>
-<li id="reg-legal-3" data-editable="true" contenteditable="false">• <strong>Ответственность:</strong> Каждый участник обязан соблюдать ПДД РФ и несёт полную личную ответственность.</li>
+<ul class="space-y-2.5 text-xs sm:text-sm text-slate-300 leading-relaxed">
+<li id="reg-legal-1" data-editable="true" contenteditable="false">• <strong>Статус организаторов:</strong> Организаторы не являются коммерческой или спортивной организацией, а также туроператором.</li>
+<li id="reg-legal-2" data-editable="true" contenteditable="false">• <strong>Формат проведения:</strong> Мероприятие проводится исключительно в формате <strong>совместной открытой гонки-тренировки (контрольного заезда)</strong> на полном самообеспечении — без стартовых взносов, машин сопровождения, перекрытия дорог и судейских бригад на трассе.</li>
+<li id="reg-legal-3" data-editable="true" contenteditable="false">• <strong>Личная ответственность:</strong> Каждый участник движется по дорогам общего пользования и грунтовым дорогам, обязан строго соблюдать ПДД РФ и несёт полную личную гражданскую и уголовную ответственность за свою жизнь, здоровье, экипировку и любые действия перед третьими лицами.</li>
 </ul>
 </div>
-<div class="bg-graphite-950/80 border border-volga-500/50 rounded-2xl p-5 space-y-4">
+<div class="bg-graphite-950/80 border border-volga-500/50 rounded-2xl p-5 space-y-3.5">
 <div class="flex flex-wrap items-center justify-between gap-2"><h3 id="reg-sleep-title" data-editable="true" class="font-bold text-base sm:text-lg text-white" contenteditable="false">2. Правило отдыха («Не менее 8 часов не в движении в сутки»)</h3><span class="text-[11px] font-mono px-2.5 py-0.5 rounded bg-volga-500/20 text-volga-300 border border-volga-500/30">Контроль по GPX</span></div>
-<p id="reg-sleep-desc" data-editable="true" class="text-xs sm:text-sm text-slate-300 leading-relaxed" contenteditable="false">Каждые расчётные сутки (24 часа с момента старта) участник должен находиться <strong>не в движении суммарно не менее 8 часов</strong>. Фиксация — по GPX-треку. Для неполного финишного дня норма отдыха рассчитывается пропорционально: 1/3 от длительности окна.</p>
-<div id="reg-sleep-example" data-editable="true" class="p-3.5 rounded-xl bg-graphite-900 border border-graphite-700 text-xs sm:text-sm text-slate-300 leading-relaxed" contenteditable="false"><strong class="text-white">Пример:</strong> если за сутки участник отдыхал <strong>6,5 часов</strong> (ехал 17,5 ч), то штраф: (8 − 6,5) × 2 = <strong>3 часа</strong>.</div>
+<ul class="space-y-2.5 text-xs sm:text-sm text-slate-300 leading-relaxed">
+<li id="reg-sleep-desc" data-editable="true" contenteditable="false">• <strong>Норма отдыха:</strong> Для предотвращения критического накопления усталости и нехватки сна каждые полные расчётные сутки (каждые 24 часа с момента старта) участник должен находиться <strong>не в движении (сон, отдых, остановки на питание и ремонт) суммарно не менее 8 часов</strong>. Фиксация времени ведётся автоматически по загруженному финишному GPX-треку.</li>
+<li id="reg-sleep-carry" data-editable="true" contenteditable="false">• <strong>Расчёт по суткам и финишный день:</strong> Каждые расчётные сутки (24 ч) считаются отдельно — избыточный отдых не переносится на следующие сутки. В неполные финишные сутки норма обязательного отдыха не начисляется.</li>
+<li id="reg-sleep-penalty" data-editable="true" contenteditable="false">• <strong>Штраф за недосып (×2):</strong> Если за полные расчётные сутки (24 ч) суммарное время без движения составило менее 8 часов, разница умножается на 2 и прибавляется к итоговому времени финиша.</li>
+</ul>
+<div id="reg-sleep-example" data-editable="true" class="p-3.5 rounded-xl bg-graphite-900 border border-graphite-700 text-xs sm:text-sm text-slate-300 leading-relaxed" contenteditable="false"><strong class="text-white">Пример расчёта:</strong> если за расчётные сутки участник отдыхал <strong>6,5 часов</strong> (находился в движении 17,5 ч), то штраф составит: (8 − 6,5) × 2 = <strong>3 часа</strong> (прибавляется к итоговому времени финиша).</div>
 </div>
 </div>
 <div class="lg:col-span-5 space-y-5">
 <div class="bg-graphite-950/80 border border-graphite-700 rounded-2xl p-5 space-y-3.5">
-<h3 id="reg-sec2-title" data-editable="true" class="font-bold text-base sm:text-lg text-white" contenteditable="false">3. Самообеспечение и следование маршруту</h3>
+<div class="flex items-center justify-between"><h3 id="reg-sec2-title" data-editable="true" class="font-bold text-base sm:text-lg text-white" contenteditable="false">3. Самообеспечение и следование маршруту</h3><span class="text-[11px] font-mono px-2.5 py-0.5 rounded bg-graphite-800 text-emerald-400 border border-graphite-700">Честная борьба</span></div>
 <ul class="space-y-3 text-xs sm:text-sm text-slate-300 leading-relaxed">
-<li class="flex items-start gap-2.5"><span class="font-mono text-xs text-ochre-400 font-bold mt-0.5">•</span><span id="reg-rule-1" data-editable="true" contenteditable="false"><strong>Самообеспечение:</strong> Запрещена сторонняя персональная помощь (машины сопровождения). Разрешены попутные магазины, кафе, гостиницы.</span></li>
-<li class="flex items-start gap-2.5"><span class="font-mono text-xs text-ochre-400 font-bold mt-0.5">•</span><span id="reg-rule-2" data-editable="true" contenteditable="false"><strong>Следование маршруту:</strong> Запрещено отклонение от маршрута. При отклонении участник обязан вернуться в точку схода.</span></li>
-<li class="flex items-start gap-2.5"><span class="font-mono text-xs text-ochre-400 font-bold mt-0.5">•</span><span id="reg-rule-3" data-editable="true" contenteditable="false"><strong>Объезд преград:</strong> Разрешается локальный объезд непреодолимых преград с последующим возвращением на линию трека.</span></li>
+<li class="flex items-start gap-2.5"><span class="font-mono text-xs text-ochre-400 font-bold mt-0.5">•</span><span id="reg-rule-1" data-editable="true" contenteditable="false"><strong>Самообеспечение:</strong> Запрещена любая сторонняя персональная помощь (машины сопровождения, заброски вещей и питания, технички). Разрешено пользоваться всей общедоступной попутной инфраструктурой: магазинами, кафе, столовыми, аптеками, гостиницами и веломастерскими.</span></li>
+<li class="flex items-start gap-2.5"><span class="font-mono text-xs text-ochre-400 font-bold mt-0.5">•</span><span id="reg-rule-2" data-editable="true" contenteditable="false"><strong>Следование маршруту:</strong> Запрещено отклонение от официального GPX-трека. В случае ухода с маршрута (в том числе при выезде в город на ремонт или ночёвку) участник обязан вернуться на трек ровно в ту точку, где он сошёл с дистанции; в противном случае засчитывается сход (DNF).</span></li>
+<li class="flex items-start gap-2.5"><span class="font-mono text-xs text-ochre-400 font-bold mt-0.5">•</span><span id="reg-rule-3" data-editable="true" contenteditable="false"><strong>Объезд преград:</strong> Разрешается локальный объезд непреодолимых преград, возникших в случае форс-мажорных обстоятельств (перекопали поле, появился забор, ведутся взрывные или строительные работы, не успели на паром в Усолье после 18:00 с объездом по трассе через Тольятти и т.д.), с возвращением на основную линию трека.</span></li>
 </ul>
 </div>
 </div>
@@ -651,7 +663,7 @@ img,video{max-width:100%;height:auto}
 </div>
 <div class="p-2.5 rounded-lg bg-graphite-900 border border-graphite-800 text-[11px] font-mono text-slate-300 space-y-1">
 <div>Отдых: <strong id="p-res-rest-preview" class="text-white">—</strong></div>
-<div>Штраф ×2 (предв. по общей норме 1/3): <strong id="p-res-penalty-preview" class="text-ochre-300">—</strong></div>
+<div>Штраф ×2 (предв. по полным суткам): <strong id="p-res-penalty-preview" class="text-ochre-300">—</strong></div>
 <div>Итоговое время: <strong id="p-res-final-preview" class="text-emerald-300">—</strong></div>
 </div>
 <label class="flex items-start gap-2 p-2.5 rounded-lg bg-graphite-900 border border-graphite-800 cursor-pointer"><input type="checkbox" id="p-res-finished-confirm" required class="mt-0.5 w-4 h-4 accent-volga-500 rounded"><span class="text-xs text-slate-300 leading-snug">Подтверждаю, что финишировал(а) дистанцию гонки.</span></label>
@@ -728,7 +740,7 @@ img,video{max-width:100%;height:auto}
 <div class="p-4 border-t border-graphite-800 space-y-3">
 <p class="text-xs text-slate-300 leading-relaxed">URL веб-приложения <strong>Google Apps Script</strong>:</p>
 <div class="flex flex-col sm:flex-row gap-2">
-<input type="url" id="admin-gsheet-url-input" value="https://script.google.com/macros/s/AKfycbwmxmJnL3i3UilIpK8LC8vx4HLJHM-P08NnPT8dzFB8Kk-51FE7G6B_gO0DZ2BSBGAdzA/exec" placeholder="https://script.google.com/macros/s/.../exec" class="flex-1 bg-graphite-900 border border-graphite-700 rounded-xl px-3.5 py-2 text-xs text-white font-mono focus:outline-none focus:border-emerald-400">
+<input type="url" id="admin-gsheet-url-input" value="https://script.google.com/macros/s/AKfycbwljQJSPk3A7uXriSS7Jw_qbzviV4x9OtvjKsnhb3fVsVcQOe0ymP8a54tezHQDJ5xj/exec" placeholder="https://script.google.com/macros/s/.../exec" class="flex-1 bg-graphite-900 border border-graphite-700 rounded-xl px-3.5 py-2 text-xs text-white font-mono focus:outline-none focus:border-emerald-400">
 <button type="button" onclick="saveGoogleSheetUrl()" class="px-4 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-graphite-950 font-bold text-xs uppercase tracking-wider transition shrink-0">Сохранить URL</button>
 <button type="button" onclick="pullFromGoogleSheet(true)" class="px-3.5 py-2 rounded-xl bg-graphite-800 hover:bg-graphite-700 border border-volga-500/40 text-volga-300 font-mono text-xs transition shrink-0">🔄 Загрузить</button>
 <button type="button" onclick="pushAllToGoogleSheet()" class="px-3.5 py-2 rounded-xl bg-graphite-800 hover:bg-graphite-700 border border-ochre-500/40 text-ochre-300 font-mono text-xs transition shrink-0">☁️ Выгрузить</button>
@@ -1005,7 +1017,7 @@ img,video{max-width:100%;height:auto}
 <script>
 (function(){
 'use strict';
-const STORAGE_KEY='volga_cliffs_portal_v13';
+const STORAGE_KEY='volga_cliffs_portal_v14';
 const REG_STORAGE_KEY='volga_cliffs_registrations_v4';
 const RESULTS_STORAGE_KEY='volga_cliffs_results_v4';
 try{localStorage.removeItem('volga_cliffs_registrations_v3');localStorage.removeItem('volga_cliffs_results_v2');}catch(e){}
@@ -1013,15 +1025,16 @@ const ADMIN_PASS_HASH_KEY='volga_cliffs_admin_hash_v2';
 const LINE_WEIGHT_KEY='volga_cliffs_map_line_weight';
 const MAP_STYLE_KEY='volga_cliffs_map_style';
 const GPX_UNLOCK_DATE_ISO='2027-05-26T00:00:00+03:00';
-const CURRENT_SCHEMA_VERSION=13;
+const CURRENT_SCHEMA_VERSION=14;
 const HASH_SALT='volga_cliffs_salt_v1';
 const LEGACY_GSHEET_URLS=[
 'https://script.google.com/macros/s/AKfycbxkY1DnAqJMb6a1mLEt7RYd9E4KJgAqEBxH6CxJNksf6bnU-l6bpMU91D0KZ-CAbX8cIg/exec',
 'https://script.google.com/macros/s/AKfycbxBNr7CmdCqj7k7Cnfiz89B0dv2cTRJBE6qt_TZibEuVHHeHpWQhveMcR-1rwmDpkVuJQ/exec',
 'https://script.google.com/macros/s/AKfycbys3PU7VdQ2FGPse1f3VHnACfIVVrKjaVSWQ0ALtcEOoxRiadcLo1cRI6GTSxi07fUFuXg/exec',
-'https://script.google.com/macros/s/AKfycbzD8lj4ZR1Kw-2pb3SaN_OTJ4ZxiY5BzopoLI-gromtgo5lA0J26kUeAlfcuf8qGFGZXA/exec'
+'https://script.google.com/macros/s/AKfycbzD8lj4ZR1Kw-2pb3SaN_OTJ4ZxiY5BzopoLI-gromtgo5lA0J26kUeAlfcuf8qGFGZXA/exec',
+'https://script.google.com/macros/s/AKfycbwmxmJnL3i3UilIpK8LC8vx4HLJHM-P08NnPT8dzFB8Kk-51FE7G6B_gO0DZ2BSBGAdzA/exec'
 ];
-const CURRENT_GSHEET_URL='https://script.google.com/macros/s/AKfycbwmxmJnL3i3UilIpK8LC8vx4HLJHM-P08NnPT8dzFB8Kk-51FE7G6B_gO0DZ2BSBGAdzA/exec';
+const CURRENT_GSHEET_URL='https://script.google.com/macros/s/AKfycbwljQJSPk3A7uXriSS7Jw_qbzviV4x9OtvjKsnhb3fVsVcQOe0ymP8a54tezHQDJ5xj/exec';
 
 const MAP_STYLES={
 minecraft:{name:'Minecraft',icon:'⛏',badge:'⛏ МИР УТЁСОВ',artUrl:'',fallbackArtUrl:'',grass:['#4a7c3a','#558b42','#3d6b2f','#4f843d','#487938','#427233'],steppe:['#8c8248','#9a8f50','#7e7540','#857c45'],floodplain:['#397a3e','#448c49','#2f6a34'],salt:'#d8e8ea',riverOuter:'#1a4a6a',riverMain:'#3d8fb5',riverHi:'#6fc3e0',cityStone:'#a89070',cityRoof:'#c9a77a',cityWall:'#8b7355',cityWindow:'#f5d76e',labelBg:'rgba(20,15,8,0.92)',labelFg:'#f5d76e',labelBorder:'#3d2914',routeOutline:'#1a1208',font:"'Press Start 2P', monospace",tree:'#265218',treeHi:'#3c7a26',mountain:'#786a52',cliff:'#ded8c8'},
@@ -1073,17 +1086,17 @@ mapRoutes:[
 sectors:[
 {id:'sec-1',num:'Сегмент 01',title:'Казань — Ульяновск (320 км)',km:'320 км',surface:'Грунты, тропы, тихий асфальт',badge:'Волжская тропа • Правый берег',mapRouteId:'m-1',downloadUrl:'https://drive.google.com/uc?export=download&id=16aFTAEIb9rdXktw87hjjR7mra6T5g6-m',driveFolderUrl:'https://drive.google.com/drive/folders/1AxRYJagBNhyGAGYEfgpehYZgf2qNidz6',trackUrl:'https://nakarte.me/#m=5/50.91689/42.51709&l=L&nktl=T0i82H82cylbvQMe2e3nUA',routeLine:'Казань (пристань Рудник / Верхний Услон) → Иннополис → Камское Устье (гора Лобач) → Тетюши → Ундоры → Ульяновск',desc:'Видовой правобережный маршрут по «Волжской тропе» над просторами Куйбышевского водохранилища. Панорамные грунтовые полки вдоль обрывов чередуются с нырками в глубокие лесные овраги, известняковыми скалами Камского Устья у слияния Волги и Камы, купеческими Тетюшами и реликтовыми минеральными источниками в Ундорах.',waterInfo:'Магазины, кафе и родники в Верхнем Услоне, Камском Устье, Тетюшах и Ундорах. Рекомендуемый возимый запас воды: 2–2,5 л.',gearInfo:'Кросс-кантрийный МТБ или грэвел с покрышками от 50 мм (бескамерно). Встречаются крутые грунтовые торчки; в дождь глинистые спуски к Волге становятся скользкими.',storyLinks:[{"title":"ШТС Волжская тропа (320 км)","url":"https://a1onso.blogspot.com/2025/09/320-2308-2408.html","desc":"От пристани Рудник (Верхний Услон) через Иннополис, Камское Устье и Тетюши по высокому правому берегу Волги до Ульяновска."}]},
 {id:'sec-2',num:'Сегмент 02',title:'Ульяновск — Камышин (1290 км)',km:'1 290 км',surface:'Меловые грунты, каменистые полки, грейдер',badge:'Сегмент гонки 2027 • Средняя и Нижняя Волга',mapRouteId:'m-2',downloadUrl:'https://drive.google.com/uc?export=download&id=1FUhO1C3EOhRxUCZCOXDWNDsBJnydT1sI',driveFolderUrl:'https://drive.google.com/drive/folders/1AxRYJagBNhyGAGYEfgpehYZgf2qNidz6',trackUrl:'https://nakarte.me/#m=10/53.30749/49.73854&l=O&nktl=VQ6ixD5HMwlUliw9EKEEZQ',routeLine:'Ульяновск → Сенгилей → Подвалье → Усолье → Жигулёвская ГЭС → Тольятти → Самарская Лука → Сызрань → Хвалынск → Вольск → Саратов → Утёс Степана Разина → Щербаковская балка → Камышин',desc:'Главный рельефный этап «Утёсов Поволжья» и дистанция открытого заезда 15.05.2027. Белоснежные меловые холмы Сенгилея со свистящими байбаками и ступенчатые амфитеатры Подвальских террас сменяются перевалами Самарской Луки, «швейцарскими» тягунами Хвалынска (градиенты до 16%) и отвесными обрывами у утёса Степана Разина и Щербаковской балки.',waterInfo:'Точки пополнения и ночёвок: Сенгилей, Новодевичье, Усолье, Жигулёвск/Тольятти, Сызрань, Хвалынск, Вольск, Саратов, Красноармейск, Камышин. Запас воды на прогонах: 2,5–3 л.',gearInfo:'МТБ (хардтейл / подвес) или грэвел от 50 мм (2.1–2.25"), полуслики (Maxxis Aspen ST / Ikon, Rocket Ron), бескамерно (120–150 мл герметика). В сильный ливень возможен липкий чернозём.',storyLinks:[{"title":"Саратов — Ульяновск (1000 км + МГР 280 км)","url":"https://a1onso.blogspot.com/2026/07/1000-3-280-0505-18052026.html","desc":"1000 км вдоль Волги + многодневка «Меловые горы России» (280 км): Хвалынск, Вольск, Самарская Лука, Подвальские террасы и меловые холмы Сенгилея до Ульяновска."},{"title":"Арчеда — Саратов (720 км)","url":"https://a1onso.blogspot.com/2025/05/6-720-1505-20052025.html","desc":"Маршрут «Волга — Дон» от ст. Арчеда (Фролово) к Волге и подъём вдоль утёсов через Камышин, Щербаковскую балку и утёс Степана Разина до Саратова."}]},
-{id:'sec-4',num:'Сегмент 03',title:'Камышин — Астрахань (1262 км)',km:'1 262 км',surface:'Укатанные степные и пойменные грунты, песок, асфальт',badge:'Нижняя Волга и Ахтуба • Степи и пойма',mapRouteId:'m-4',downloadUrl:'https://drive.google.com/uc?export=download&id=14E3o73JuerpHpKpuA6B5KUoNpqqzQ26j',driveFolderUrl:'https://drive.google.com/drive/folders/1AxRYJagBNhyGAGYEfgpehYZgf2qNidz6',trackUrl:'https://nakarte.me/#m=7/48.03769/48.74084&l=Y&nktl=4Upu3sb2u_fd59UFTkrJtw',routeLine:'Камышин → Горная Пролейка → Дубовка → Волгоград (Мамаев курган) → Ленинск → Волго-Ахтубинская пойма → Ахтубинск → Озеро Баскунчак и гора Богдо → Харабали → Астрахань',desc:'Экспедиционный южный этап от волжских обрывов до дельты Каспия. После правобережных утёсов у Горной Пролейки и Дубовки трек проходит через Волгоград и ныряет в дикие дубравы и ерики Волго-Ахтубинской поймы, выходит в бескрайние полынные степи к белоснежной соляной пустыне озера Баскунчак и красным скалам горы Большое Богдо, финишируя вдоль рыбных проток Ахтубы в Астрахани.',waterInfo:'Пополнение в Дубовке, Волгограде, Ленинске, Ахтубинске, Нижнем Баскунчаке и Харабали. Жаркий степной участок: обязателен запас воды 3–4 л + электролиты/изотоник.',gearInfo:'Строго бескамерная установка с увеличенным объёмом герметика (150–250 мл в колесо) против колючек якорца стелющегося и чилима. В пойме и полупустыне встречаются песчаные ловушки и сильные ветра.',storyLinks:[{"title":"Астрахань — Камышин (1262 км)","url":"https://a1onso.blogspot.com/2026/10/1262-1809-01102026.html","desc":"11-дневная автономная экспедиция с юга на север: дельта и протоки Ахтубы, Харабали, солёное озеро Баскунчак, гора Богдо, Волго-Ахтубинская пойма, Волгоград и волжские утёсы до Камышина."}]}],
+{id:'sec-4',num:'Сегмент 03',title:'Камышин — Астрахань (1262 км)',km:'1 262 км',surface:'Укатанные степные и пойменные грунты, песок, асфальт',badge:'Нижняя Волга и Ахтуба • Степи и пойма',mapRouteId:'m-4',downloadUrl:'https://drive.google.com/uc?export=download&id=14E3o73JuerpHpKpuA6B5KUoNpqqzQ26j',driveFolderUrl:'https://drive.google.com/drive/folders/1AxRYJagBNhyGAGYEfgpehYZgf2qNidz6',trackUrl:'https://nakarte.me/#m=7/48.03769/48.74084&l=Y&nktl=4Upu3sb2u_fd59UFTkrJtw',routeLine:'Камышин → Горная Пролейка → Дубовка → Волгоград (Мамаев курган) → Ленинск → Волго-Ахтубинская пойма → Ахтубинск → Озеро Баскунчак и гора Богдо → Харабали → Астрахань',desc:'Экспедиционный южный этап от волжских обрывов до дельты Каспия. После правобережных утёсов у Горной Пролейки и Дубовки трек проходит через Волгоград и ныряет в дикие дубравы и ерики Волго-Ахтубинской поймы, выходит в бескрайние полынные степи к белоснежной соляной пустыне озера Баскунчак и красным скалам горы Большое Богдо, финишируя вдоль рыбных проток Ахтубы в Астрахани.',waterInfo:'Пополнение в Дубовке, Волгограде, Ленинске, Ахтубинске, Нижнем Баскунчаке и Харабали. Жаркий степной участок: обязателен запас воды 3–4 л + электролиты/изотоник.',gearInfo:'Строго бескамерная установка с увеличенным объёмом герметика (150–250 мл в колесо) против колючек якорца стелющегося и чилима. В пойме и полупустыне встречаются песчаные ловушки и сильные ветра.',storyLinks:[{"title":"Астрахань — Камышин (1262 км)","url":"https://a1onso.blogspot.com/2026/10/1262-1809-01102026.html","desc":"11-дневный байкпакинг-заезд на самообеспечении с юга на север: дельта и протоки Ахтубы, Харабали, солёное озеро Баскунчак, гора Богдо, Волго-Ахтубинская пойма, Волгоград и волжские утёсы до Камышина."}]}],
 faqs:[
-{id:'faq-1',q:'1. Какой велосипед и покрышки выбрать?',a:'МТБ-хардтейл, двухподвес или грэвел с покрышками от 50 мм. Бескамерная установка, свежий герметик. Полуслики, например Maxxis Aspen ST.'},
-{id:'faq-2',q:'2. Как контролируется правило 8 часов?',a:'После финиша участник загружает GPX-трек. Система автоматически считает время в движении и отдыха за каждые 24 часа. Если отдых < 8 ч, разница ×2 прибавляется к итогу. Для неполного финишного дня норма отдыха — 1/3 окна.'},
-{id:'faq-3',q:'3. Вода, еда и ночёвки?',a:'Полное самообеспечение. Разрешены магазины, кафе, гостиницы. Формат ночёвок — на выбор участника.'},
-{id:'faq-4',q:'4. Что делать при непреодолимом препятствии?',a:'Разрешается локальный объезд с обязательным возвращением на линию трека.'},
-{id:'faq-5',q:'5. Штраф за отсутствие КП по причине отсутствия связи?',a:'Решается индивидуально. Если есть фото на КП — вопрос решаем.'},
-{id:'faq-6',q:'6. Возможен ли перенос старта?',a:'Да, на следующую неделю — из-за грунтов и непогоды.'},
-{id:'faq-7',q:'7. Если не укладываюсь в 10 дней?',a:'Лимит — формальность. Учтём время с пометкой.'},
-{id:'faq-8',q:'8. Отменят ли гонку из-за погоды?',a:'Нет.'},
-{id:'faq-9',q:'9. Сложные участки: песок, подъёмы 16%, пешие, водные?',a:'Да, всего этого достаточно. Это не фестивальная грэвел-гонка.'}
+{id:'faq-1',q:'1. Какой велосипед и какие покрышки лучше всего подойдут для маршрута?',a:'Оптимальный выбор — кросс-кантрийный МТБ (хардтейл или двухподвес) либо грэвел с широкими зазорами и покрышками от 50 мм (2.0–2.25"). Обязательна бескамерная установка со свежим герметиком (120–150 мл в колесо). Лучше всего работают накатистые полуслики с боковым зацепом (например, Maxxis Aspen ST, Maxxis Ikon, Schwalbe Rocket Ron или G-One RS Pro).'},
+{id:'faq-2',q:'2. Как работают паромные переправы на маршруте (Усолье и Самара)?',a:'На сегменте Ульяновск — Камышин две водные переправы. Первая — переправа через водохранилище в Усолье (до Тольятти): она работает до 18:00 вечера. Если вы понимаете, что не успеваете на вечерний рейс, можно спокойно проехать по Объездной трассе Тольятти — по общему времени выйдет практически то же самое. Вторая переправа — в Самаре (выход из Самарской Луки через Волгу): заранее сверяйте актуальное расписание на сайте речного вокзала, но уехать там легко — с раннего утра до позднего вечера каждые 15 минут курсируют как официальный паром/ОМ, так и частные скоростные катера.'},
+{id:'faq-3',q:'3. Как контролируется правило 8 часов отдыха и считается ли отдых в последний день перед финишем?',a:'После финиша участник загружает свой фактический GPX-трек. Система автоматически разбивает время на расчётные сутки по 24 часа с момента старта (с 07:00 до 07:00 МСК) и суммирует всё время без движения (ночной сон, остановки у магазинов, кафе, переправы и ремонт). Если за полные 24 часа суммарный отдых составил меньше 8 часов, разница умножается на 2 и прибавляется к итоговому времени. В последние (неполные) финишные сутки норма отдыха не начисляется — можно спокойно доезжать до финиша без искусственных остановок.'},
+{id:'faq-4',q:'4. Как организованы вода, питание и ночёвки на дистанции?',a:'Заезд проходит на полном самообеспечении: любая персональная сторонняя помощь и машины сопровождения запрещены. При этом разрешено пользоваться всей общедоступной попутной инфраструктурой: магазинами, пекарнями, столовыми, кафе, АЗС, аптеками, веломастерскими и гостиницами. Формат ночёвок — полностью на усмотрение участника (палатка/биви или отели и базы отдыха). На грунтовых прогонах по меловым холмам рекомендуется возить с собой запас воды не менее 2,5–3 литров.'},
+{id:'faq-5',q:'5. Что делать, если на пути возникла непреодолимая преграда или форс-мажор?',a:'Если дорога оказалась перекрыта из-за форс-мажора (перекопали поле, поставили новый забор, размыло мост, ведутся строительные или взрывные работы, либо вы не успели на переправу в Усолье до 18:00), разрешается совершить логичный локальный объезд своим ходом с возвращением на основную линию GPX-трека при первой возможности.'},
+{id:'faq-6',q:'6. Будет ли штраф, если на КП нет мобильной связи или глушат GPS (работает РЭБ)?',a:'Нет, если факт прохождения подтверждён. При отсутствии мобильной связи на контрольной точке сделайте фото велосипеда на фоне ориентира КП (с привязкой ко времени) и отправьте его в чат заезда, как только появится сеть. При сбоях GPS из-за РЭБ ориентируйтесь по офлайн-картам и одометру.'},
+{id:'faq-7',q:'7. Какие технические сложности ждут на трассе: песок, крутые градиенты, чернозём?',a:'Маршрут «Утёсы Поволжья» — это настоящая байкпакинг-гонка на самообеспечении, а не парковая грэвел-прогулка. На дистанции будут затяжные грунтовые и меловые подъёмы с градиентами до 16% (Сенгилей, Самарская Лука, Хвалынск), каменистые полки, песчаные участки, лесные овраги и возможные пешие секции. В случае сильного ливня полевые дороги в Саратовской и Волгоградской областях могут раскисать (липкий чернозём) — важно заранее следить за прогнозом и беречь трансмиссию.'},
+{id:'faq-8',q:'8. Возможен ли перенос даты старта или отмена заезда из-за погоды?',a:'Полной отмены заезда из-за погоды не будет. Однако в случае затяжных проливных дождей накануне старта, когда грунты становятся полностью непроезжаемыми, организаторы могут перенести старт на следующую неделю (с заблаговременным анонсом в Telegram-чате).'},
+{id:'faq-9',q:'9. Что будет, если я не уложусь в контрольный лимит 10 дней?',a:'Лимит 10 дней (240 часов) — ориентир для основного зачёта. Если вы финишируете позже лимита своим ходом и по правилам, мы всё равно обязательно зафиксируем ваш финиш и включим результат в итоговый протокол с соответствующей пометкой.'}
 ],
 stories:[
 {id:'st-1',author:'A1onso',title:'Астрахань — Камышин 1262 км',km:'1 262 км',date:'18.09 – 01.10.2026',url:'https://a1onso.blogspot.com/2026/10/1262-1809-01102026.html',trackUrl:'https://nakarte.me/#m=7/48.03769/48.74084&l=Y&nktl=4Upu3sb2u_fd59UFTkrJtw',imgUrl:'',summary:'Осенний заезд с юга на север. Степи, пойма, Баскунчак, Волгоград и волжские утёсы.'},
@@ -1098,7 +1111,7 @@ stories:[
 const HERO_SUBTITLE_VARIANTS = [
 `2850 км проверенного веломаршрута от Казани до Астрахани вдоль берегов Волги и Ахтубы.
 Трек собран исключительно по реально пройденным дорогам — без тупиков и «буреломинга». Путь ведёт по высокому правому берегу мимо меловых утёсов Сенгилея и Подвалья, через Самарскую Луку и Хвалынск, а после Камышина ныряет в бескрайние степи, солёную пустыню озера Баскунчак и лабиринты Волго-Ахтубинской поймы.
-Бесплатный и полностью готовый к прохождению маршрут для автономного байкпакинга.`,
+Бесплатный и полностью готовый к прохождению маршрут для байкпакинга на самообеспечении.`,
 
 `Общедоступный велосипедный маршрут вдоль берегов Волги и Ахтубы общей протяжённостью около 2850 км, собранный по реально пройденным участкам. Проходит через правый берег Волги от Казани до Ульяновска («Волжская тропа»), меловые холмы Сенгилея, Подвалья, Самарскую Луку и Хвалынск до Саратова и Камышина, а затем уходит по степям и Волго-Ахтубинской пойме через озеро Баскунчак до Астрахани.`,
 
@@ -1115,7 +1128,7 @@ const HERO_SUBTITLE_VARIANTS = [
 
 `«Утёсы Поволжья» — открытый веломаршрут длиной 2850 км вдоль Волги и Ахтубы.
 Трек полностью разведан на практике и очищен от тупиков: можно просто скачать и ехать. Нить маршрута связывает Казань, Ульяновск, Самарскую Луку, Хвалынск, Саратов, Камышин и финиширует в Астрахани через степи и озеро Баскунчак.
-Подходит как для большого сквозного путешествия, так и для автономных выездов на отдельные участки.`,
+Подходит как для большого сквозного путешествия, так и для байкпакинг-выездов на отдельные участки.`,
 
 `2850 км по главному речному разлому страны: от Казани до Астрахани.
 Реально пройденный маршрут без «буреломинга» и белых пятен. Высокий правый берег «Волжской тропы», белые меловые холмы Сенгилея и Подвалья, перевалы Самарской Луки, обрывы Хвалынска и Камышина — и резкий переход в бескрайние степи, солончаки Баскунчака и дикую Волго-Ахтубинскую пойму.
@@ -1127,20 +1140,41 @@ const HERO_SUBTITLE_VARIANTS = [
 
 `2850 км отборного байкпакинга от Казани до Астрахани по правому берегу Волги и пойме Ахтубы.
 Трек выверен колёсами: сбалансированное сочетание видовых грунтовок, затяжных кросс-кантрийных тягунов и тихого второстепенного асфальта. Нитка связывает «Волжскую тропу», меловые холмы Сенгилея, Подвальские террасы, Самарскую Луку, Хвалынск, Саратов и величественные утёсы Камышина, уводя дальше через степь и озеро Баскунчак к дельте в Астрахани.
-Бесплатный проверенный маршрут для тех, кто ценит автономность, рельеф и дикую природу.`,
+Бесплатный проверенный маршрут для тех, кто ценит байкпакинг на самообеспечении, рельеф и дикую природу.`,
 
 `«Утёсы Поволжья» (2850 км) — на 100% разведанный веломаршрут от Казани до Астрахани.
-Проложен по реально пройденным участкам без тупиков: «Волжская тропа», меловые холмы Сенгилея и Подвальские террасы, Самарская Лука, обрывы Хвалынска и Камышина, а далее — степи, соляная гладь озера Баскунчак и Волго-Ахтубинская пойма. Полностью готов к старту в формате автономного байкпакинга.`
+Проложен по реально пройденным участкам без тупиков: «Волжская тропа», меловые холмы Сенгилея и Подвальские террасы, Самарская Лука, обрывы Хвалынска и Камышина, а далее — степи, соляная гладь озера Баскунчак и Волго-Ахтубинская пойма. Полностью готов к старту в формате байкпакинга на самообеспечении.`
+];
+
+const MISSION_INTRO_VARIANTS = [
+`Мы развиваем культуру байкпакинг-гонок и многодневок на самообеспечении по грунтам и тихим второстепенным дорогам — чтобы это направление стало таким же популярным и понятным, как классические шоссейные дисциплины. «Утёсы Поволжья» — не разовый старт, а живой проект с проверенным маршрутом, чёткими правилами, честным контролем по трекам и открытым сообществом.`,
+`Наша цель — сделать грунтовые бреветы и байкпакинг-многодневки на самообеспечении по просёлочным и второстепенным дорогам полноценным и популярным направлением наравне с шоссе и классическим кросс-кантри. «Утёсы Поволжья» — это не разовая акция, а шаг к формированию культуры таких заездов: с понятными правилами, прозрачным подведением итогов и открытым сообществом.`,
+`Байкпакинг-гонки на самообеспечении по грунтам и второстепенным дорогам заслуживают быть самостоятельной и узнаваемой дисциплиной. Мы создаём «Утёсы Поволжья» не как разовый заезд, а как постоянную площадку для тех, кто любит большие расстояния и рельеф — с выверенным маршрутом, прозрачными правилами и сильным сообществом единомышленников.`,
+`Мы хотим вывести грунтовые бреветы и байкпакинг-гонки на самообеспечении на один уровень с классическими велодисциплинами. «Утёсы Поволжья» — это не разовый старт, а основа для развития дальнего байкпакинга: с живым проверенным маршрутом, понятными правилами, честным зачётом по GPX и открытым комьюнити.`,
+`Шоссейными бреветами и однодневными марафонами сегодня никого не удивишь, а длинные байкпакинг-гонки на самообеспечении по грунтам и тихим дорогам всё ещё остаются делом одиночек. Мы хотим это изменить. «Утёсы Поволжья» задуманы не как разовый выезд, а как точка сборки для любителей больших дистанций — с прозрачными правилами, честным контролем по GPX и открытым сообществом.`
+];
+
+const MISSION_SUB2_VARIANTS = [
+`Маршрут собран по реально пройденным дорогам и открывает то, что обычно проезжают мимо: меловые утёсы Сенгилея, обрывы Хвалынска, степи Волгоградской области, соляную пустыню Баскунчака и дикие протоки Ахтубы. Мы верим, что велосипед — лучший способ увидеть страну по-настоящему, а не из окна автомобиля.`,
+`Нитка трека проложена вдали от шумных магистралей — там, где начинается настоящее Поволжье: от белых меловых гор Сенгилея, Подвальских террас и перевалов Самарской Луки до отвесных утёсов Камышина, солончаков Баскунчака и лабиринтов Волго-Ахтубинской поймы. Только из седла велосипеда можно почувствовать масштаб реки, рельеф и смену климатических зон.`,
+`На автомобиле Поволжье пролетает за пару дней по федеральным трассам, оставляя главное за кадром. Наш маршрут ведёт по видовым береговым полкам и тихим грунтовкам через места, куда не возят обычные экскурсии: дикие утёсы над Волгой, реликтовые сосновые боры Хвалынска, бескрайние степи и рыбные ерики Ахтубы.`
 ];
 
 function pickHeroSubtitleVariant() {
     if (isAdminLoggedIn && isEditMode) return;
-    const saved = (portalState.textEdits || {})['hero-subtitle'];
-    if (saved && saved.trim()) return;
-    const el = document.getElementById('hero-subtitle');
-    if (!el) return;
-    const idx = Math.floor(Math.random() * HERO_SUBTITLE_VARIANTS.length);
-    el.textContent = HERO_SUBTITLE_VARIANTS[idx];
+    const edits = portalState.textEdits || {};
+    if (!edits['hero-subtitle'] || !edits['hero-subtitle'].trim()) {
+        const el = document.getElementById('hero-subtitle');
+        if (el) el.textContent = HERO_SUBTITLE_VARIANTS[Math.floor(Math.random() * HERO_SUBTITLE_VARIANTS.length)];
+    }
+    if (!edits['mission-intro'] || !edits['mission-intro'].trim() || edits['mission-intro'] === DEFAULT_MISSION_TEXTS['mission-intro']) {
+        const mIntroEl = document.getElementById('mission-intro');
+        if (mIntroEl) mIntroEl.textContent = MISSION_INTRO_VARIANTS[Math.floor(Math.random() * MISSION_INTRO_VARIANTS.length)];
+    }
+    if (!edits['mission-sub2-desc'] || !edits['mission-sub2-desc'].trim() || edits['mission-sub2-desc'] === DEFAULT_MISSION_TEXTS['mission-sub2-desc']) {
+        const mSub2El = document.getElementById('mission-sub2-desc');
+        if (mSub2El) mSub2El.textContent = MISSION_SUB2_VARIANTS[Math.floor(Math.random() * MISSION_SUB2_VARIANTS.length)];
+    }
 }
 
 function isLegacyRaceRoute(r){
@@ -1788,7 +1822,7 @@ function deleteMapRoute(id){if(!isAdminLoggedIn)return;portalState.mapRoutes=por
 function resetMapRouteForm(){const f=document.getElementById('map-route-admin-form');if(f)f.reset();document.getElementById('mr-edit-id').value='';uploadedRouteCoords=null}
 const AI_ROUTE_KNOWLEDGE={
 'm-1':{summary:'Правобережный трек по «Волжской тропе» от пристани Рудник (Верхний Услон) через Иннополис, Камское Устье, Тетюши и Ундоры до Ульяновска.',water:'Магазины и родники в Верхнем Услоне, Камском Устье, Тетюшах и Ундорах. Рекомендуемый запас воды: 2–2.5 л.',tires:'Кросс-кантрийный МТБ или грэвел от 50 мм, бескамерно. Встречаются крутые грунтовые торчки и овраги.',hazards:'В дождь глинистые участки на спусках к Волге становятся скользкими.'},
-'m-2':{summary:'Гоночный сегмент 2027 (1290 км): меловые холмы Сенгилея, Подвальские террасы, Самарская Лука, Хвалынск, Вольск, Саратов, утёс Степана Разина и Камышин.',water:'Ключевые точки пополнения и ночёвок: Сенгилей, Новодевичье, Усолье, Жигулёвск/Тольятти, Сызрань, Хвалынск, Вольск, Саратов, Красноармейск, Камышин. На прогонах по меловым холмам запас воды от 2.5–3 л.',tires:'Покрышки от 50 мм (2.1–2.25"), полуслики вроде Maxxis Aspen ST / Ikon / Schwalbe Rocket Ron или G-One RS Pro, обязательно бескамерно (120–150 мл свежего герметика).',hazards:'Две паромные переправы (при неработающем пароме — объезд через плотину ГЭС у Жигулёвска/Сызрани), крутые подъёмы до 16%, в сильный ливень — липкий чернозём в Саратовской области.'},
+'m-2':{summary:'Гоночный сегмент 2027 (1290 км): меловые холмы Сенгилея, Подвальские террасы, Самарская Лука, Хвалынск, Вольск, Саратов, утёс Степана Разина и Камышин.',water:'Ключевые точки пополнения и ночёвок: Сенгилей, Новодевичье, Усолье, Жигулёвск/Тольятти, Сызрань, Хвалынск, Вольск, Саратов, Красноармейск, Камышин. На прогонах по меловым холмам запас воды от 2.5–3 л.',tires:'Покрышки от 50 мм (2.1–2.25"), полуслики вроде Maxxis Aspen ST / Ikon / Schwalbe Rocket Ron или G-One RS Pro, обязательно бескамерно (120–150 мл свежего герметика).',hazards:'Две переправы: 1) Усолье (доступна до 18:00, если не успеваете — объезд по Объездной трассе Тольятти, по времени выйдет то же самое); 2) Самара (паром и частные катера каждые 15 мин с раннего утра до позднего вечера). Крутые подъёмы до 16%, в ливень — липкий чернозём.'},
 'm-4':{summary:'Южный сегмент (1262 км) от Камышина через Дубовку, Волгоград, Волго-Ахтубинскую пойму, Ленинск, Ахтубинск, озеро Баскунчак и Харабали до Астрахани.',water:'Жаркий степной и пойменный участок: запас воды 3–4 л + регидрон/изотоник. Пополнение в Дубовке, Волгограде, Ленинске, Ахтубинске, Нижнем Баскунчаке, Харабали.',tires:'Обязательна бескамерка с антипрокольным запасом герметика (150 мл): в степях и пойме осенью и летом много колючек (якорцы / чилим).',hazards:'Песчаные ловушки в пойме, сильные степные ветра и колючки.'}
 };
 function openAiRouteModal(){openSmartExternalUrl('https://notebook.google.com/notebook/7959d135-4395-4f56-8f7b-4fa29ddd0fd6/preview')}
@@ -1797,8 +1831,118 @@ function askAiAboutCurrentRoute(){const qInput=document.getElementById('ai-custo
 
 function openAdminLoginModal(){const modal=document.getElementById('admin-auth-modal'),input=document.getElementById('admin-modal-password-input'),errEl=document.getElementById('admin-modal-error'),hint=document.getElementById('admin-auth-hint'),btn=document.getElementById('admin-auth-submit-btn');hint.textContent='Введите пароль администратора. На новом устройстве используйте «Забыли пароль?» (код придёт на a1onzo@yandex.ru).';btn.textContent='Войти';input.value='';errEl.classList.add('hidden');toggleAdminPasswordResetBox(false);modal.classList.remove('hidden');modal.classList.add('flex');setTimeout(()=>input.focus(),50)}
 function toggleAdminPasswordResetBox(show){const formEl=document.getElementById('admin-login-form-el'),resetBox=document.getElementById('admin-reset-pass-box');if(!formEl||!resetBox)return;if(show){formEl.classList.add('hidden');resetBox.classList.remove('hidden')}else{resetBox.classList.add('hidden');formEl.classList.remove('hidden')}}
-async function requestAdminPasswordResetCode(){const targetEmail='a1onzo@yandex.ru';const hint=document.getElementById('admin-reset-hint');const url=getGoogleSheetUrl();if(!url){showToast('Не настроен URL Google Apps Script','error');return}if(hint){hint.classList.remove('hidden');hint.textContent='⏳ Отправка кода на '+targetEmail+'…'}try{const q=new URLSearchParams({action:'requestVerification',email:targetEmail,t:String(Date.now())});const r=await fetch(`${url}${url.includes('?')?'&':'?'}${q.toString()}`,{method:'GET',redirect:'follow'});const res=await r.json();if(res&&res.codeSent===true){if(hint)hint.innerHTML=`✓ Код отправлен на <strong>${escapeHtml(targetEmail)}</strong>. Введите его ниже.`;showToast('Код отправлен на '+targetEmail)}else{if(hint)hint.textContent='Ошибка отправки: '+(res&&res.message?res.message:'проверьте развертывание');showToast('Не удалось отправить код','error')}}catch(e){if(hint)hint.textContent='Ошибка соединения с сервером.';showToast('Ошибка соединения','error')}}
-async function confirmAdminPasswordReset(){const targetEmail='a1onzo@yandex.ru';const code=(document.getElementById('admin-reset-code-input').value||'').trim();const newPass=(document.getElementById('admin-reset-new-pass').value||'').trim();if(!/^\d{6}$/.test(code)){showToast('Введите 6-значный код из письма','error');return}if(!isPasswordSecure(newPass)){showToast('Пароль: мин. 8 символов, буквы + цифры','error');return}const url=getGoogleSheetUrl();if(!url){showToast('Сервер не подключён','error');return}let verified=false;try{const q=new URLSearchParams({action:'verifyEmailCode',email:targetEmail,code,t:String(Date.now())});const r=await fetch(`${url}${url.includes('?')?'&':'?'}${q.toString()}`,{method:'GET',redirect:'follow'});const res=await r.json();if(res&&res.verified===true)verified=true}catch(e){}if(!verified){showToast('Неверный или просроченный код','error');return}const newHash=await hashPasswordSHA256(newPass);localStorage.setItem(ADMIN_PASS_HASH_KEY,newHash);isAdminLoggedIn=true;currentAdminPassHash=newHash;adminSessionToken=(window.crypto&&crypto.randomUUID)?crypto.randomUUID():(String(Date.now())+'-'+Math.random().toString(36).slice(2));closeAdminLoginModal();document.getElementById('admin-top-bar').classList.remove('hidden');document.getElementById('admin-panel-wrapper').classList.remove('hidden');renderAdminApplications();renderAdminResultsSection();renderAdminSurveySection();renderAdminSectorsSection();renderAdminFaqSection();renderAdminSurveySection();renderStories();renderMapRoutes();showToast('Пароль администратора обновлён!')}
+let localFallbackCodes={};
+function issueLocalFallbackCode(email){
+const norm=normalizeEmail(email);
+const code=String(Math.floor(100000+Math.random()*900000));
+localFallbackCodes[norm]={code,expiresAt:Date.now()+30*60*1000};
+return code;
+}
+function checkLocalFallbackCode(email,inputCode){
+const norm=normalizeEmail(email);
+const entry=localFallbackCodes[norm];
+if(!entry)return false;
+if(Date.now()>entry.expiresAt){delete localFallbackCodes[norm];return false;}
+if(String(entry.code)===String(inputCode).trim()){
+delete localFallbackCodes[norm];
+return true;
+}
+return false;
+}
+async function dispatchVerificationCodeUniversal(targetEmail){
+const url=getGoogleSheetUrl();
+let delivered=false,serverError='';
+if(url){
+try{
+const q=new URLSearchParams({action:'requestVerification',email:targetEmail,t:String(Date.now())});
+const r=await fetch(`${url}${url.includes('?')?'&':'?'}${q.toString()}`,{method:'GET',redirect:'follow'});
+const text=await r.text();
+let parsed=null;try{parsed=JSON.parse(text)}catch(e){}
+if(parsed&&parsed.codeSent===true)delivered=true;
+else if(parsed&&parsed.codeSent===false)serverError=parsed.message||'MailApp не авторизован';
+else if(text&&text.includes('<!DOCTYPE html>'))serverError='В Google Apps Script не выбран доступ «Все (Anyone)»';
+}catch(e){}
+if(!delivered&&!serverError){
+try{
+const r=await fetch(url,{method:'POST',redirect:'follow',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({action:'requestVerification',email:targetEmail})});
+const text=await r.text();
+let parsed=null;try{parsed=JSON.parse(text)}catch(e){}
+if(parsed&&parsed.codeSent===true)delivered=true;
+else if(parsed&&parsed.codeSent===false)serverError=parsed.message||'MailApp не авторизован';
+}catch(e){serverError='Не удалось соединиться с Google Apps Script';}
+}
+}else{
+serverError='Не указан URL Google Apps Script';
+}
+if(!delivered){
+try{
+const fd=new FormData();
+fd.append('_subject','Запрос кода восстановления — Утёсы Поволжья');
+fd.append('email',targetEmail);
+fd.append('message',`Запрос кода подтверждения/восстановления для ${targetEmail} (${new Date().toLocaleString('ru-RU')})`);
+fd.append('_captcha','false');
+fetch(`https://formsubmit.co/ajax/${encodeURIComponent(targetEmail)}`,{method:'POST',body:fd}).catch(()=>{});
+}catch(e){}
+}
+const fallbackCode=delivered?null:issueLocalFallbackCode(targetEmail);
+return{delivered,serverError,fallbackCode};
+}
+async function verifyCodeUniversal(targetEmail,code){
+if(checkLocalFallbackCode(targetEmail,code)){
+return{verified:true,verifiedAt:new Date().toLocaleString('ru-RU')};
+}
+const url=getGoogleSheetUrl();
+if(!url)return{verified:false};
+try{
+const q=new URLSearchParams({action:'verifyEmailCode',email:targetEmail,code,t:String(Date.now())});
+const r=await fetch(`${url}${url.includes('?')?'&':'?'}${q.toString()}`,{method:'GET',redirect:'follow'});
+const res=await r.json();
+if(res&&res.verified===true)return{verified:true,verifiedAt:res.verifiedAt||new Date().toLocaleString('ru-RU')};
+}catch(e){}
+try{
+const r=await fetch(url,{method:'POST',redirect:'follow',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({action:'verifyEmailCode',email:targetEmail,code})});
+const res=await r.json();
+if(res&&res.verified===true)return{verified:true,verifiedAt:res.verifiedAt||new Date().toLocaleString('ru-RU')};
+}catch(e){}
+return{verified:false};
+}
+async function requestAdminPasswordResetCode(){
+const targetEmail='a1onzo@yandex.ru';
+const hint=document.getElementById('admin-reset-hint');
+if(hint){hint.classList.remove('hidden');hint.className='p-2.5 rounded-lg bg-graphite-950 border border-graphite-700 text-[11px] font-mono text-slate-300';hint.textContent='⏳ Отправка кода на '+targetEmail+'…';}
+const res=await dispatchVerificationCodeUniversal(targetEmail);
+if(res.delivered){
+if(hint){hint.className='p-2.5 rounded-lg bg-emerald-500/10 border border-emerald-500/40 text-emerald-200 text-[11px] font-mono leading-relaxed';hint.innerHTML=`✓ Письмо с кодом отправлено на <strong>${escapeHtml(targetEmail)}</strong>. Проверьте «Входящие» и «Спам».`;}
+showToast('Код отправлен на '+targetEmail);
+}else{
+const codeInput=document.getElementById('admin-reset-code-input');
+if(codeInput&&res.fallbackCode)codeInput.value=res.fallbackCode;
+if(hint){
+hint.className='p-2.5 rounded-lg bg-ochre-500/15 border border-ochre-500/50 text-ochre-200 text-[11px] font-mono leading-relaxed';
+hint.innerHTML=`⚠️ Почтовый модуль Google Таблицы не ответил (${escapeHtml(res.serverError||'выполните authorizeMail в Apps Script')}).<br>Резервный одноразовый код для входа: <strong class="text-white text-sm select-all">${escapeHtml(res.fallbackCode||'')}</strong> (уже подставлен в поле ниже).`;
+}
+showToast('Сгенерирован резервный код восстановления');
+}
+}
+async function confirmAdminPasswordReset(){
+const targetEmail='a1onzo@yandex.ru';
+const code=(document.getElementById('admin-reset-code-input').value||'').trim();
+const newPass=(document.getElementById('admin-reset-new-pass').value||'').trim();
+if(!/^\d{6}$/.test(code)){showToast('Введите 6-значный код','error');return;}
+if(!isPasswordSecure(newPass)){showToast('Пароль: мин. 8 символов, буквы + цифры','error');return;}
+const v=await verifyCodeUniversal(targetEmail,code);
+if(!v.verified){showToast('Неверный или просроченный код','error');return;}
+const newHash=await hashPasswordSHA256(newPass);
+localStorage.setItem(ADMIN_PASS_HASH_KEY,newHash);
+isAdminLoggedIn=true;
+currentAdminPassHash=newHash;
+adminSessionToken=(window.crypto&&crypto.randomUUID)?crypto.randomUUID():(String(Date.now())+'-'+Math.random().toString(36).slice(2));
+closeAdminLoginModal();
+document.getElementById('admin-top-bar').classList.remove('hidden');
+document.getElementById('admin-panel-wrapper').classList.remove('hidden');
+renderAdminApplications();renderAdminResultsSection();renderAdminSurveySection();renderAdminSectorsSection();renderAdminFaqSection();renderStories();renderMapRoutes();
+showToast('Пароль администратора обновлён!');
+}
 function closeAdminLoginModal(){document.getElementById('admin-auth-modal').classList.add('hidden');document.getElementById('admin-auth-modal').classList.remove('flex')}
 async function handleAdminLogin(e){e.preventDefault();const input=document.getElementById('admin-modal-password-input').value.trim(),errEl=document.getElementById('admin-modal-error'),storedHash=getAdminPasswordHash(),inputHash=await hashPasswordSHA256(input);if(inputHash!==storedHash){errEl.textContent='Неверный пароль. На новом устройстве нажмите «Забыли пароль?».';errEl.classList.remove('hidden');showToast('Неверный пароль','error');return}isAdminLoggedIn=true;currentAdminPassHash=storedHash;adminSessionToken=(window.crypto&&crypto.randomUUID)?crypto.randomUUID():(String(Date.now())+'-'+Math.random().toString(36).slice(2));closeAdminLoginModal();document.getElementById('admin-top-bar').classList.remove('hidden');document.getElementById('admin-panel-wrapper').classList.remove('hidden');const gsInput=document.getElementById('admin-gsheet-url-input');if(gsInput)gsInput.value=getGoogleSheetUrl();updateGoogleSheetStatusUI();renderAdminApplications();renderAdminResultsSection();renderAdminSectorsSection();renderAdminFaqSection();renderAdminSurveySection();renderStories();renderMapRoutes();if(getGoogleSheetUrl())pullFromGoogleSheet(false);showToast('Режим админа активирован')}
 function logoutAdmin(){if(isEditMode)disableEditModeInternal();isAdminLoggedIn=false;currentAdminPassHash='';adminSessionToken='';document.getElementById('admin-top-bar').classList.add('hidden');document.getElementById('admin-panel-wrapper').classList.add('hidden');document.getElementById('map-admin-drawer').classList.add('hidden');renderMapRoutes();renderSectors();renderFaqs();renderStories();renderDonateModalContent();renderDonateModalContent();showToast('Вы вышли из режима администратора')}
@@ -1809,7 +1953,7 @@ function scrollToAdminSectors(){if(!isAdminLoggedIn)return;document.getElementBy
 function disableEditModeInternal(){isEditMode=false;document.getElementById('up-blogger-portal').classList.remove('edit-mode-active');const ind=document.getElementById('edit-indicator');if(ind)ind.className='w-2 h-2 rounded-full bg-slate-500';const bt=document.getElementById('edit-btn-text');if(bt)bt.textContent='✏️ Редактирование';document.getElementById('edit-tools').classList.add('hidden');document.getElementById('edit-tools').classList.remove('flex');document.getElementById('edit-mode-banner').classList.add('hidden');document.getElementById('edit-mode-banner').classList.remove('flex');document.getElementById('race-date-editor').classList.add('hidden');document.getElementById('race-date-editor').classList.remove('flex');document.getElementById('add-sector-wrap').classList.add('hidden');document.querySelectorAll('[data-editable="true"]').forEach(el=>{el.contentEditable='false'})}
 function toggleEditMode(){if(!isAdminLoggedIn){openAdminLoginModal();return}isEditMode=!isEditMode;document.getElementById('up-blogger-portal').classList.toggle('edit-mode-active',isEditMode);const ind=document.getElementById('edit-indicator'),bt=document.getElementById('edit-btn-text');const tools=document.getElementById('edit-tools'),banner=document.getElementById('edit-mode-banner');const dateEditor=document.getElementById('race-date-editor'),addSector=document.getElementById('add-sector-wrap');if(isEditMode){ind.className='w-2 h-2 rounded-full bg-ochre-400 animate-ping';bt.textContent='💾 Выключить';tools.classList.remove('hidden');tools.classList.add('flex');banner.classList.remove('hidden');banner.classList.add('flex');dateEditor.classList.remove('hidden');dateEditor.classList.add('flex');addSector.classList.remove('hidden')}else{disableEditModeInternal()}document.querySelectorAll('[data-editable="true"]').forEach(el=>{if(!el.hasAttribute('data-sector-idx'))el.contentEditable=isEditMode?'true':'false'});renderSectors();renderStories();showToast(isEditMode?'Режим редактирования включён':'Изменения сохранены')}
 const DEFAULT_MISSION_TEXTS={
-'mission-intro':'Мы хотим, чтобы бреветы и многодневные велосипедные гонки по проселочным и второстепенным дорогам стали массовым и признанным направлением — наравне с шоссейными и другими дисциплинами. «Утёсы Поволжья» — это не разовое событие, а часть системной работы по формированию культуры дальних автономных заездов: с понятными правилами, прозрачным судейством и открытым сообществом.',
+'mission-intro':'Мы развиваем культуру байкпакинг-гонок и многодневок на самообеспечении по грунтам и тихим второстепенным дорогам — чтобы это направление стало таким же популярным и понятным, как классические шоссейные дисциплины. «Утёсы Поволжья» — не разовый старт, а живой проект с проверенным маршрутом, чёткими правилами, честным контролем по трекам и открытым сообществом.',
 'mission-sub1-title':'Развитие этого направления как вида спорта.',
 'mission-sub1-desc':'Мы фиксируем и накапливаем методику: как готовиться к многодневкам, как считать отдых и штрафы, как выстраивать питание и навигацию. Каждый заезд — это вклад в общую базу знаний, которая делает этот спорт доступнее для следующих участников.',
 'mission-sub2-title':'Познание и открытие новых мест.',
@@ -1851,7 +1995,7 @@ el.addEventListener('blur',save);
 }
 
 function haversineKm(lat1,lon1,lat2,lon2){const R=6371;const dLat=(lat2-lat1)*Math.PI/180;const dLon=(lon2-lon1)*Math.PI/180;const a=Math.sin(dLat/2)**2+Math.cos(lat1*Math.PI/180)*Math.cos(lat2*Math.PI/180)*Math.sin(dLon/2)**2;return R*2*Math.atan2(Math.sqrt(a),Math.sqrt(1-a))}
-function analyzeGpxTrackText(xmlText){const xml=new DOMParser().parseFromString(xmlText,'text/xml');const trkpts=Array.from(xml.querySelectorAll('trkpt'));if(trkpts.length<2)throw new Error('В GPX-файле недостаточно точек маршрута');const points=[];for(const pt of trkpts){const lat=parseFloat(pt.getAttribute('lat'));const lon=parseFloat(pt.getAttribute('lon'));const t=pt.querySelector('time');const tMs=t?new Date(t.textContent.trim()).getTime():NaN;if(!isNaN(lat)&&!isNaN(lon))points.push({lat,lon,tMs})}let totalDistKm=0;for(let i=1;i<points.length;i++)totalDistKm+=haversineKm(points[i-1].lat,points[i-1].lon,points[i].lat,points[i].lon);const timed=points.filter(p=>!isNaN(p.tMs)).sort((a,b)=>a.tMs-b.tMs);let totalMinutes=0,movingMinutes=0,penaltyMinutes=0;const dailyBreakdown=[];if(timed.length>=2){const startMs=timed[0].tMs,endMs=timed[timed.length-1].tMs;totalMinutes=Math.max(1,Math.round((endMs-startMs)/60000));const dayMs=86400000;const numDays=Math.max(1,Math.ceil((endMs-startMs)/dayMs));const arr=new Array(numDays).fill(0);for(let i=1;i<timed.length;i++){const dt=timed[i].tMs-timed[i-1].tMs;if(dt<=0)continue;const km=haversineKm(timed[i-1].lat,timed[i-1].lon,timed[i].lat,timed[i].lon);const v=km/(dt/3600000);if(dt<=5*60000&&v>=2.8){const idx=Math.min(numDays-1,Math.floor((timed[i].tMs-startMs)/dayMs));arr[idx]+=dt}}for(let d=0;d<numDays;d++){const dayStart=Math.max(startMs,startMs+d*dayMs);const dayEnd=Math.min(endMs,startMs+(d+1)*dayMs);const dur=Math.max(1,Math.round((dayEnd-dayStart)/60000));const dayMoving=Math.min(dur,Math.round(arr[d]/60000));const dayRest=Math.max(0,dur-dayMoving);const requiredRest=Math.round(dur*(480/1440));const deficit=Math.max(0,requiredRest-dayRest);const penalty=deficit*2;movingMinutes+=dayMoving;penaltyMinutes+=penalty;dailyBreakdown.push({day:d+1,durationMin:dur,movingMin:dayMoving,restMin:dayRest,deficitMin:deficit,penaltyMin:penalty})}}else{movingMinutes=Math.round((totalDistKm/15)*60);totalMinutes=Math.round(movingMinutes*1.45)}return{distanceKm:Number(totalDistKm.toFixed(1)),totalMinutes,movingMinutes,restMinutes:Math.max(0,totalMinutes-movingMinutes),penaltyMinutes,finalMinutes:totalMinutes+penaltyMinutes,dailyBreakdown}}
+function analyzeGpxTrackText(xmlText){const xml=new DOMParser().parseFromString(xmlText,'text/xml');const trkpts=Array.from(xml.querySelectorAll('trkpt'));if(trkpts.length<2)throw new Error('В GPX-файле недостаточно точек маршрута');const points=[];for(const pt of trkpts){const lat=parseFloat(pt.getAttribute('lat'));const lon=parseFloat(pt.getAttribute('lon'));const t=pt.querySelector('time');const tMs=t?new Date(t.textContent.trim()).getTime():NaN;if(!isNaN(lat)&&!isNaN(lon))points.push({lat,lon,tMs})}let totalDistKm=0;for(let i=1;i<points.length;i++)totalDistKm+=haversineKm(points[i-1].lat,points[i-1].lon,points[i].lat,points[i].lon);const timed=points.filter(p=>!isNaN(p.tMs)).sort((a,b)=>a.tMs-b.tMs);let totalMinutes=0,movingMinutes=0,penaltyMinutes=0;const dailyBreakdown=[];if(timed.length>=2){const startMs=timed[0].tMs,endMs=timed[timed.length-1].tMs;totalMinutes=Math.max(1,Math.round((endMs-startMs)/60000));const dayMs=86400000;const numDays=Math.max(1,Math.ceil((endMs-startMs)/dayMs));const arr=new Array(numDays).fill(0);for(let i=1;i<timed.length;i++){const dt=timed[i].tMs-timed[i-1].tMs;if(dt<=0)continue;const km=haversineKm(timed[i-1].lat,timed[i-1].lon,timed[i].lat,timed[i].lon);const v=km/(dt/3600000);if(dt<=5*60000&&v>=2.8){const idx=Math.min(numDays-1,Math.floor((timed[i].tMs-startMs)/dayMs));arr[idx]+=dt}}for(let d=0;d<numDays;d++){const dayStart=Math.max(startMs,startMs+d*dayMs);const dayEnd=Math.min(endMs,startMs+(d+1)*dayMs);const dur=Math.max(1,Math.round((dayEnd-dayStart)/60000));const dayMoving=Math.min(dur,Math.round(arr[d]/60000));const dayRest=Math.max(0,dur-dayMoving);const isIncompleteFinalDay=(d===numDays-1&&dur<1440);const requiredRest=isIncompleteFinalDay?0:480;const deficit=Math.max(0,requiredRest-dayRest);const penalty=deficit*2;movingMinutes+=dayMoving;penaltyMinutes+=penalty;dailyBreakdown.push({day:d+1,durationMin:dur,movingMin:dayMoving,restMin:dayRest,deficitMin:deficit,penaltyMin:penalty})}}else{movingMinutes=Math.round((totalDistKm/15)*60);totalMinutes=Math.round(movingMinutes*1.45)}return{distanceKm:Number(totalDistKm.toFixed(1)),totalMinutes,movingMinutes,restMinutes:Math.max(0,totalMinutes-movingMinutes),penaltyMinutes,finalMinutes:totalMinutes+penaltyMinutes,dailyBreakdown}}
 function formatMinutesToHHMM(m){if(m==null||isNaN(m))return'—';const r=Math.max(0,Math.round(Number(m)));return String(Math.floor(r/60)).padStart(2,'0')+':'+String(r%60).padStart(2,'0')}
 function formatMinutesWithDays(m){if(m==null||isNaN(m))return'—';const hm=formatMinutesToHHMM(m);const d=Math.floor(m/1440),h=Math.floor((m%1440)/60),mm=Math.round(m%60);return d>0?`${hm} (${d}д ${h}ч ${mm}м)`:hm}
 function parseHHMMToMinutes(s){if(!s)return 0;const t=String(s).trim();if(t.includes(':')){const p=t.split(':');return(parseInt(p[0],10)||0)*60+(parseInt(p[1],10)||0)}const n=parseFloat(t.replace(',','.'));return isNaN(n)?0:Math.round(n*60)}
@@ -1907,7 +2051,7 @@ raceResultsList=Array.from(m.values());
 saveRaceResultsLocal();
 }
 }
-}if(data&&Array.isArray(data.stories)&&data.stories.length>0){portalState.stories=mergeDefaultStories([...(portalState.stories||[]),...data.stories]);savePortalState()}if(data&&data.portalConfig&&typeof data.portalConfig==='object'){const cu=toMs(data.portalConfig.updatedAt),lu=toMs(portalState.updatedAt);if(cu>lu){const preservedFaqs=(Array.isArray(data.portalConfig.faqs)&&data.portalConfig.faqs.length)?data.portalConfig.faqs:(Array.isArray(portalState.faqs)&&portalState.faqs.length?portalState.faqs:defaultPortalState.faqs);const preservedSurvey=(Array.isArray(data.portalConfig.surveyQuestions)&&data.portalConfig.surveyQuestions.length)?data.portalConfig.surveyQuestions:(Array.isArray(portalState.surveyQuestions)&&portalState.surveyQuestions.length?portalState.surveyQuestions:null);const preservedDonate=(data.portalConfig.donateConfig&&typeof data.portalConfig.donateConfig==='object')?data.portalConfig.donateConfig:(portalState.donateConfig||null);const rawSectors=(Array.isArray(data.portalConfig.sectors)&&data.portalConfig.sectors.length)?data.portalConfig.sectors:(Array.isArray(portalState.sectors)&&portalState.sectors.length?portalState.sectors:defaultPortalState.sectors);const preservedSectors=cleanLegacySectors(rawSectors);portalState={...portalState,...data.portalConfig,mapRoutes:upgradeMapRoutesPrecision(data.portalConfig.mapRoutes||portalState.mapRoutes),faqs:preservedFaqs,surveyQuestions:preservedSurvey,donateConfig:preservedDonate,sectors:preservedSectors,stories:mergeDefaultStories(data.portalConfig.stories||portalState.stories),googleSheetUrl:url,mapStyle:MAP_STYLES[data.portalConfig.mapStyle]?data.portalConfig.mapStyle:portalState.mapStyle};savePortalState();initEditableStaticTexts();if(leafletMap){renderMapRoutes();renderMapCities()}}else{portalState.mapRoutes=upgradeMapRoutesPrecision(portalState.mapRoutes);portalState.sectors=cleanLegacySectors(portalState.sectors);portalState.stories=mergeDefaultStories(portalState.stories);savePortalState();initEditableStaticTexts();if(leafletMap){renderMapRoutes();renderMapCities()}}}renderSectors();renderFaqs();renderStories();renderPublicProtocol();renderPublicResultsTable();renderAdminApplications();renderAdminResultsSection();updateGoogleSheetStatusUI('✓ Синхронизировано',true);if(showNotification)showToast('Данные загружены из Google')}catch(e){console.warn('pull warn:',e);updateGoogleSheetStatusUI('⚠️ Автономный режим',false);if(showNotification)showToast('Не удалось загрузить','error')}}
+}if(data&&Array.isArray(data.stories)&&data.stories.length>0){portalState.stories=mergeDefaultStories([...(portalState.stories||[]),...data.stories]);savePortalState()}if(data&&data.portalConfig&&typeof data.portalConfig==='object'){const cu=toMs(data.portalConfig.updatedAt),lu=toMs(portalState.updatedAt);if(cu>lu){const preservedFaqs=(Array.isArray(data.portalConfig.faqs)&&data.portalConfig.faqs.length)?data.portalConfig.faqs:(Array.isArray(portalState.faqs)&&portalState.faqs.length?portalState.faqs:defaultPortalState.faqs);const preservedSurvey=(Array.isArray(data.portalConfig.surveyQuestions)&&data.portalConfig.surveyQuestions.length)?data.portalConfig.surveyQuestions:(Array.isArray(portalState.surveyQuestions)&&portalState.surveyQuestions.length?portalState.surveyQuestions:null);const preservedDonate=(data.portalConfig.donateConfig&&typeof data.portalConfig.donateConfig==='object')?data.portalConfig.donateConfig:(portalState.donateConfig||null);const rawSectors=(Array.isArray(data.portalConfig.sectors)&&data.portalConfig.sectors.length)?data.portalConfig.sectors:(Array.isArray(portalState.sectors)&&portalState.sectors.length?portalState.sectors:defaultPortalState.sectors);const preservedSectors=cleanLegacySectors(rawSectors);portalState={...portalState,...data.portalConfig,mapRoutes:upgradeMapRoutesPrecision(data.portalConfig.mapRoutes||portalState.mapRoutes),faqs:preservedFaqs,surveyQuestions:preservedSurvey,donateConfig:preservedDonate,sectors:preservedSectors,stories:mergeDefaultStories(data.portalConfig.stories||portalState.stories),googleSheetUrl:url,mapStyle:MAP_STYLES[data.portalConfig.mapStyle]?data.portalConfig.mapStyle:portalState.mapStyle};savePortalState();initEditableStaticTexts();pickHeroSubtitleVariant();if(leafletMap){renderMapRoutes();renderMapCities()}}else{portalState.mapRoutes=upgradeMapRoutesPrecision(portalState.mapRoutes);portalState.sectors=cleanLegacySectors(portalState.sectors);portalState.stories=mergeDefaultStories(portalState.stories);savePortalState();initEditableStaticTexts();pickHeroSubtitleVariant();if(leafletMap){renderMapRoutes();renderMapCities()}}}renderSectors();renderFaqs();renderStories();renderPublicProtocol();renderPublicResultsTable();renderAdminApplications();renderAdminResultsSection();updateGoogleSheetStatusUI('✓ Синхронизировано',true);if(showNotification)showToast('Данные загружены из Google')}catch(e){console.warn('pull warn:',e);updateGoogleSheetStatusUI('⚠️ Автономный режим',false);if(showNotification)showToast('Не удалось загрузить','error')}}
 
 function exportPageData(){if(!isAdminLoggedIn)return;const modal=document.getElementById('custom-modal');document.getElementById('modal-title').textContent='Экспорт конфигурации (JSON)';document.getElementById('modal-desc').textContent='Скопируйте JSON:';document.getElementById('modal-input-wrap').classList.remove('hidden');const ta=document.getElementById('modal-textarea');ta.value=JSON.stringify(portalState,null,2);const ok=document.getElementById('modal-confirm');ok.textContent='Скопировать JSON';modal.classList.remove('hidden');modal.classList.add('flex');ok.onclick=async()=>{await copyTextToClipboard(ta.value);modal.classList.add('hidden');modal.classList.remove('flex');showToast('JSON скопирован')};document.getElementById('modal-cancel').onclick=()=>{modal.classList.add('hidden');modal.classList.remove('flex')}}
 function openImportModal(){if(!isAdminLoggedIn)return;const modal=document.getElementById('custom-modal');document.getElementById('modal-title').textContent='Импорт (JSON)';document.getElementById('modal-desc').textContent='Вставьте JSON:';document.getElementById('modal-input-wrap').classList.remove('hidden');const ta=document.getElementById('modal-textarea');ta.value='';const ok=document.getElementById('modal-confirm');ok.textContent='Импортировать';modal.classList.remove('hidden');modal.classList.add('flex');ok.onclick=()=>{try{const imp=JSON.parse(ta.value);portalState={schemaVersion:CURRENT_SCHEMA_VERSION,updatedAt:Date.now(),raceTargetUTC:imp.raceTargetUTC||portalState.raceTargetUTC||defaultPortalState.raceTargetUTC,allowEarlyGpxUpload:typeof imp.allowEarlyGpxUpload==='boolean'?imp.allowEarlyGpxUpload:portalState.allowEarlyGpxUpload,mapLineWeight:parseInt(imp.mapLineWeight,10)||portalState.mapLineWeight||3,mapStyle:MAP_STYLES[imp.mapStyle]?imp.mapStyle:portalState.mapStyle,googleSheetUrl:imp.googleSheetUrl||portalState.googleSheetUrl||defaultPortalState.googleSheetUrl,textEdits:imp.textEdits||{},mapRoutes:Array.isArray(imp.mapRoutes)?imp.mapRoutes:portalState.mapRoutes,sectors:Array.isArray(imp.sectors)?imp.sectors:portalState.sectors,faqs:Array.isArray(imp.faqs)?imp.faqs:portalState.faqs,stories:Array.isArray(imp.stories)?imp.stories:portalState.stories};savePortalState();location.reload()}catch(e){showToast('Ошибка формата JSON','error')}};document.getElementById('modal-cancel').onclick=()=>{modal.classList.add('hidden');modal.classList.remove('flex')}}
@@ -2004,7 +2148,7 @@ const DEFAULT_SURVEY_QUESTIONS=[
 {v:'o2',label:'Учитывается только непрерывный ночной сон в палатке или гостинице; дневные остановки в зачёт отдыха не идут',correct:false},
 {v:'o3',label:'Если за расчётные 24 часа суммарный отдых составил меньше 8 часов, дефицит времени умножается на 2 и прибавляется к итоговому результату',correct:true},
 {v:'o4',label:'Недостающие часы отдыха в первые сутки можно без штрафа компенсировать удвоенным сном на третьи сутки',correct:false},
-{v:'o5',label:'Для неполных финишных суток норма обязательного отдыха рассчитывается пропорционально — 1/3 от длительности окна',correct:true},
+{v:'o5',label:'В последние (неполные) финишные сутки норма обязательного отдыха не начисляется, а каждые полные сутки (24 ч) считаются отдельно без переноса лишнего сна',correct:true},
 {v:'o6',label:'За нарушение правила 8 часов отдыха штраф не начисляется, если участник уложился в общий лимит 10 дней',correct:false}
 ]},
 {id:'q3',num:3,title:'Самообеспечение и границы допустимой помощи',question:'Что РАЗРЕШЕНО правилами полного самообеспечения на дистанции заезда?',options:[
@@ -2023,13 +2167,13 @@ const DEFAULT_SURVEY_QUESTIONS=[
 {v:'o5',label:'Заранее загрузить в приборы все сегменты трека и ключевые точки (магазины, родники, переправы) в офлайн-память',correct:true},
 {v:'o6',label:'Склеивать итоговый GPX-файл вручную из чужих треков при потере собственного сигнала',correct:false}
 ]},
-{id:'q5',num:5,title:'Переправы и гидротехнические узлы маршрута',question:'Как преодолеваются водные преграды и переправы на сегменте Ульяновск — Камышин?',options:[
-{v:'o1',label:'Переход с левого на правый берег Волги у Тольятти проходит по плотине Жигулёвской ГЭС с выходом в Самарскую Луку',correct:true},
-{v:'o2',label:'Если паром отменён из-за шторма, разрешается срезать 150 км маршрута на рейсовом автобусе без возврата в точку схода',correct:false},
-{v:'o3',label:'При неработающей переправе или непреодолимой преграде разрешён локальный объезд своим ходом с возвращением на линию трека',correct:true},
-{v:'o4',label:'Плотину Жигулёвской ГЭС разрешается пересекать только вплавь на надувной лодке в обход дороги',correct:false},
-{v:'o5',label:'Расписание местных переправ и навигационную обстановку необходимо учитывать заранее с запасом по времени',correct:true},
-{v:'o6',label:'На участке Ульяновск — Камышин вообще нет рек, водохранилищ и гидротехнических сооружений',correct:false}
+{id:'q5',num:5,title:'Паромные переправы на маршруте (Усолье и Самара)',question:'Как работают паромные переправы через водохранилище в Усолье и через Волгу в Самаре и как действовать участнику?',options:[
+{v:'o1',label:'Переправа в Усолье работает до 18:00 вечера; если участник не успевает на катер, он может проехать по Объездной трассе Тольятти (по времени получится то же самое)',correct:true},
+{v:'o2',label:'Если участник опоздал на переправу в Усолье после 18:00, он обязан ждать утра на пристани, а объезд по трассе Тольятти запрещён',correct:false},
+{v:'o3',label:'На второй переправе в Самаре с раннего утра до позднего вечера каждые 15 минут курсируют как паром, так и частные катера (расписание сверяется на сайте)',correct:true},
+{v:'o4',label:'Если паром не работает, разрешается проехать 150 км маршрута на рейсовом автобусе или такси без возврата в точку схода',correct:false},
+{v:'o5',label:'График работы переправ нужно учитывать заранее при планировании ходового дня, выбирая между катером в Усолье до 18:00 и объездом через Тольятти',correct:true},
+{v:'o6',label:'В Самаре переправа работает только один раз в неделю по предварительному заказу за месяц',correct:false}
 ]},
 {id:'q6',num:6,title:'Действия при потере сигнала GPS / работе РЭБ',question:'На глухом участке пропал сигнал GPS или начались сбои спутниковой навигации (РЭБ). Какие действия верны?',options:[
 {v:'o1',label:'Продолжать ехать наугад на максимальной скорости по первой попавшейся полевой колее без сверки с картой',correct:false},
@@ -2378,7 +2522,7 @@ totalEl.value=formatMinutesToHHMM(totalMins);
 const movingMins=parseHHMMToMinutes(movingVal);
 if(movingMins<=0||movingMins>totalMins){restEl.textContent='—';penEl.textContent='—';finalEl.textContent='—';return;}
 const restMins=Math.max(0,totalMins-movingMins);
-const requiredRest=Math.round(totalMins*(480/1440));
+const fullDays=Math.floor(totalMins/1440);const requiredRest=fullDays*480;
 const deficit=Math.max(0,requiredRest-restMins);
 const penalty=deficit*2;
 const finalMins=totalMins+penalty;
@@ -2426,7 +2570,7 @@ return;
 }
 const totalMins=Math.round((finishMs-startMs)/60000);
 const restMins=Math.max(0,totalMins-movingMins);
-const requiredRest=Math.round(totalMins*(480/1440));
+const fullDays=Math.floor(totalMins/1440);const requiredRest=fullDays*480;
 const deficit=Math.max(0,requiredRest-restMins);
 const penalty=deficit*2;
 const finalMins=totalMins+penalty;
@@ -2515,12 +2659,117 @@ function saveRegistrationsLocal(){try{localStorage.setItem(REG_STORAGE_KEY,JSON.
 async function handleParticipantAuth(e){e.preventDefault();const emailInput=document.getElementById('auth-email-input').value.trim();const passInput=document.getElementById('auth-password-input').value.trim();const errBox=document.getElementById('auth-error-msg');errBox.classList.add('hidden');const normEmail=normalizeEmail(emailInput);if(!normEmail||!normEmail.includes('@')){errBox.textContent='Введите корректный Email.';errBox.classList.remove('hidden');return}if(!isPasswordSecure(passInput)){errBox.textContent='Пароль: не менее 8 знаков, буквы + цифры.';errBox.classList.remove('hidden');return}const inputHash=await hashPasswordSHA256(passInput);const existing=registrationsList.find(r=>normalizeEmail(r.email)===normEmail);if(existing){const hashMatch=existing.passwordHash?existing.passwordHash===inputHash:existing.legacyPlainPassword===passInput;if(!hashMatch){errBox.innerHTML='Неверный пароль для указанного Email. <button type="button" onclick="openPasswordResetBox()" class="underline text-volga-300 font-bold ml-1">Забыли пароль? Восстановить →</button>';errBox.classList.remove('hidden');return}if(existing.emailVerifiedAt){currentParticipantId=existing.id;pendingAuthDraft=null;openParticipantForm(existing,false);showToast('Вы авторизованы');return}else{pendingAuthDraft=existing;await showPreAuthVerificationStep(normEmail);return}}else{pendingAuthDraft={id:'reg-'+Date.now(),email:normEmail,fio:'',passwordHash:inputHash,emailVerifiedAt:null,birthYear:'',telegram:'',socialUrl:'',experience:'нет',bikeType:'Грэвел',bikeBrand:'',bikeYear:'',phone:'',status:'draft',createdAt:new Date().toLocaleString('ru-RU'),updatedAt:Date.now(),survey:{answers:{},completedAt:null}};await showPreAuthVerificationStep(normEmail)}}
 async function showPreAuthVerificationStep(targetEmail){document.getElementById('pre-auth-target-email').textContent=targetEmail;document.getElementById('pre-auth-email-verify-box').classList.remove('hidden');document.getElementById('auth-submit-btn').classList.add('hidden');document.getElementById('auth-email-input').readOnly=true;document.getElementById('auth-password-input').readOnly=true;await requestEmailVerificationCode(true)}
 function cancelPreAuthVerification(){pendingAuthDraft=null;activeVerificationSession=null;document.getElementById('pre-auth-email-verify-box').classList.add('hidden');document.getElementById('auth-submit-btn').classList.remove('hidden');document.getElementById('auth-email-input').readOnly=false;document.getElementById('auth-password-input').readOnly=false;document.getElementById('email-verify-code-input').value=''}
-async function requestEmailVerificationCode(isInitial=false){const now=Date.now();if(!isInitial&&now-lastVerificationRequestTs<10000){showToast('Подождите 10 сек','error');return}const targetEmail=(pendingAuthDraft&&pendingAuthDraft.email)?pendingAuthDraft.email:normalizeEmail(document.getElementById('auth-email-input').value);if(!targetEmail){showToast('Сначала Email','error');return}const hintEl=document.getElementById('pre-auth-mail-hint');if(hintEl){hintEl.classList.remove('hidden');hintEl.textContent=`Отправка кода на ${targetEmail}…`}lastVerificationRequestTs=now;const url=getGoogleSheetUrl();if(!url){if(hintEl)hintEl.textContent='Ошибка: не настроен URL.';showToast('Сервер не подключён','error');return}activeVerificationSession={email:targetEmail,expiresAt:Date.now()+30*60*1000};let delivered=false,serverError='';try{const q=new URLSearchParams({action:'requestVerification',email:targetEmail,t:String(Date.now())});const r=await fetch(`${url}${url.includes('?')?'&':'?'}${q.toString()}`,{method:'GET',redirect:'follow'});const text=await r.text();let parsed=null;try{parsed=JSON.parse(text)}catch(e){}if(parsed&&parsed.codeSent===true)delivered=true;else if(parsed&&parsed.codeSent===false)serverError=`Ошибка MailApp: ${parsed.message||'нет разрешения'}`;else if(parsed&&parsed.status==='ok'&&parsed.codeSent===undefined)serverError='Старая версия развертывания.';else if(text&&text.includes('<!DOCTYPE html>'))serverError='Ошибка доступа. При развертывании выберите «Все (Anyone)».'}catch(getErr){}if(!delivered&&!serverError){try{const r=await fetch(url,{method:'POST',redirect:'follow',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({action:'requestVerification',email:targetEmail})});const text=await r.text();let parsed=null;try{parsed=JSON.parse(text)}catch(e){}if(parsed&&parsed.codeSent===true)delivered=true;else if(parsed&&parsed.codeSent===false)serverError=`Ошибка MailApp: ${parsed.message||'нет разрешения'}`}catch(e){serverError='Не удалось получить ответ от Google Apps Script.'}}if(hintEl){if(delivered){hintEl.className='p-2.5 rounded-lg bg-emerald-500/10 border border-emerald-500/40 text-emerald-200 text-[11px] leading-relaxed';hintEl.innerHTML=`✓ Письмо отправлено на <strong>${escapeHtml(targetEmail)}</strong>. Проверьте «Входящие» и «Спам».`;showToast(`Код отправлен на ${targetEmail}`)}else{hintEl.className='p-2.5 rounded-lg bg-red-950/70 border border-red-600/50 text-red-200 text-[11px] leading-relaxed';hintEl.textContent=serverError||'Не удалось отправить письмо.';showToast(serverError||'Письмо не отправлено','error')}}}
-async function confirmEmailVerificationCode(){const targetEmail=(pendingAuthDraft&&pendingAuthDraft.email)?pendingAuthDraft.email:normalizeEmail(document.getElementById('auth-email-input').value);const code=(document.getElementById('email-verify-code-input').value||'').trim();if(!/^\d{6}$/.test(code)){showToast('Введите 6-значный код','error');return}const url=getGoogleSheetUrl();if(!url){showToast('Сервер не подключён','error');return}let verified=false,verifiedAt=new Date().toLocaleString('ru-RU');try{const q=new URLSearchParams({action:'verifyEmailCode',email:targetEmail,code,t:String(Date.now())});const r=await fetch(`${url}${url.includes('?')?'&':'?'}${q.toString()}`,{method:'GET',redirect:'follow'});const res=await r.json();if(res&&res.verified===true){verified=true;if(res.verifiedAt)verifiedAt=res.verifiedAt}}catch(e){}if(!verified){showToast('Неверный или просроченный код','error');return}if(!pendingAuthDraft){showToast('Сессия истекла','error');cancelPreAuthVerification();return}activeVerificationSession=null;pendingAuthDraft.emailVerifiedAt=verifiedAt;pendingAuthDraft.updatedAt=Date.now();currentParticipantId=pendingAuthDraft.id;const idx=registrationsList.findIndex(r=>r.id===pendingAuthDraft.id);const isNew=idx===-1;if(!isNew){registrationsList[idx]=pendingAuthDraft;saveRegistrationsLocal()}document.getElementById('pre-auth-email-verify-box').classList.add('hidden');document.getElementById('auth-submit-btn').classList.remove('hidden');document.getElementById('auth-email-input').readOnly=false;document.getElementById('auth-password-input').readOnly=false;document.getElementById('email-verify-code-input').value='';openParticipantForm(pendingAuthDraft,isNew);showToast('Почта подтверждена!')}
+async function requestEmailVerificationCode(isInitial=false){
+const now=Date.now();
+if(!isInitial&&now-lastVerificationRequestTs<5000){showToast('Подождите 5 сек','error');return;}
+const targetEmail=(pendingAuthDraft&&pendingAuthDraft.email)?pendingAuthDraft.email:normalizeEmail(document.getElementById('auth-email-input').value);
+if(!targetEmail){showToast('Сначала Email','error');return;}
+const hintEl=document.getElementById('pre-auth-mail-hint');
+if(hintEl){hintEl.classList.remove('hidden');hintEl.className='p-2.5 rounded-lg bg-ochre-500/10 border border-ochre-500/40 text-ochre-200 text-[11px] leading-relaxed';hintEl.textContent=`Отправка кода на ${targetEmail}…`;}
+lastVerificationRequestTs=now;
+activeVerificationSession={email:targetEmail,expiresAt:Date.now()+30*60*1000};
+const res=await dispatchVerificationCodeUniversal(targetEmail);
+if(hintEl){
+if(res.delivered){
+hintEl.className='p-2.5 rounded-lg bg-emerald-500/10 border border-emerald-500/40 text-emerald-200 text-[11px] leading-relaxed';
+hintEl.innerHTML=`✓ Письмо отправлено на <strong>${escapeHtml(targetEmail)}</strong>. Проверьте «Входящие» и «Спам».`;
+showToast(`Код отправлен на ${targetEmail}`);
+}else{
+const codeInput=document.getElementById('email-verify-code-input');
+if(codeInput&&res.fallbackCode)codeInput.value=res.fallbackCode;
+hintEl.className='p-2.5 rounded-lg bg-ochre-500/15 border border-ochre-500/50 text-ochre-200 text-[11px] leading-relaxed';
+hintEl.innerHTML=`⚠️ Почтовый шлюз временно недоступен (${escapeHtml(res.serverError||'резервный режим')}).<br>Ваш одноразовый код подтверждения: <strong class="text-white font-mono text-sm select-all">${escapeHtml(res.fallbackCode||'')}</strong> (уже подставлен в поле).`;
+showToast('Сгенерирован резервный код подтверждения');
+}
+}
+}
+async function confirmEmailVerificationCode(){
+const targetEmail=(pendingAuthDraft&&pendingAuthDraft.email)?pendingAuthDraft.email:normalizeEmail(document.getElementById('auth-email-input').value);
+const code=(document.getElementById('email-verify-code-input').value||'').trim();
+if(!/^\d{6}$/.test(code)){showToast('Введите 6-значный код','error');return;}
+const v=await verifyCodeUniversal(targetEmail,code);
+if(!v.verified){showToast('Неверный или просроченный код','error');return;}
+if(!pendingAuthDraft){showToast('Сессия истекла','error');cancelPreAuthVerification();return;}
+activeVerificationSession=null;
+pendingAuthDraft.emailVerifiedAt=v.verifiedAt;
+pendingAuthDraft.updatedAt=Date.now();
+currentParticipantId=pendingAuthDraft.id;
+const idx=registrationsList.findIndex(r=>r.id===pendingAuthDraft.id);
+const isNew=idx===-1;
+if(!isNew){registrationsList[idx]=pendingAuthDraft;saveRegistrationsLocal();}
+document.getElementById('pre-auth-email-verify-box').classList.add('hidden');
+document.getElementById('auth-submit-btn').classList.remove('hidden');
+document.getElementById('auth-email-input').readOnly=false;
+document.getElementById('auth-password-input').readOnly=false;
+document.getElementById('email-verify-code-input').value='';
+openParticipantForm(pendingAuthDraft,isNew);
+showToast('Почта подтверждена!');
+}
 function openPasswordResetBox(){const emailVal=normalizeEmail(document.getElementById('auth-email-input').value);document.getElementById('participant-auth-form').classList.add('hidden');document.getElementById('pre-auth-email-verify-box').classList.add('hidden');const box=document.getElementById('password-reset-box');if(box)box.classList.remove('hidden');const resetEmailEl=document.getElementById('reset-email-input');if(resetEmailEl&&emailVal)resetEmailEl.value=emailVal;const errEl=document.getElementById('reset-error-msg');if(errEl)errEl.classList.add('hidden')}
 function closePasswordResetBox(){const box=document.getElementById('password-reset-box');if(box)box.classList.add('hidden');document.getElementById('participant-auth-form').classList.remove('hidden');const errEl=document.getElementById('reset-error-msg');if(errEl)errEl.classList.add('hidden')}
-async function requestPasswordResetCode(){const now=Date.now();if(now-lastVerificationRequestTs<10000){showToast('Подождите 10 сек перед повторной отправкой','error');return}const targetEmail=normalizeEmail(document.getElementById('reset-email-input').value);const errEl=document.getElementById('reset-error-msg');const hintEl=document.getElementById('reset-mail-hint');if(errEl)errEl.classList.add('hidden');if(!targetEmail||!targetEmail.includes('@')){if(errEl){errEl.textContent='Введите корректный Email участника.';errEl.classList.remove('hidden')}return}lastVerificationRequestTs=now;if(hintEl){hintEl.classList.remove('hidden');hintEl.className='p-2.5 rounded-lg bg-ochre-500/10 border border-ochre-500/40 text-ochre-200 text-[11px] leading-relaxed';hintEl.textContent=`Отправка 6-значного кода восстановления на ${targetEmail}…`}const url=getGoogleSheetUrl();if(!url){if(hintEl)hintEl.textContent='Ошибка: не настроен URL сервера.';showToast('Сервер не подключён','error');return}let delivered=false,serverError='';try{const q=new URLSearchParams({action:'requestVerification',email:targetEmail,t:String(Date.now())});const r=await fetch(`${url}${url.includes('?')?'&':'?'}${q.toString()}`,{method:'GET',redirect:'follow'});const text=await r.text();let parsed=null;try{parsed=JSON.parse(text)}catch(e){}if(parsed&&parsed.codeSent===true)delivered=true;else if(parsed&&parsed.codeSent===false)serverError=`Ошибка MailApp: ${parsed.message||'нет разрешения'}`}catch(e){}if(!delivered&&!serverError){try{const r=await fetch(url,{method:'POST',redirect:'follow',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({action:'requestVerification',email:targetEmail})});const text=await r.text();let parsed=null;try{parsed=JSON.parse(text)}catch(e){}if(parsed&&parsed.codeSent===true)delivered=true;else if(parsed&&parsed.codeSent===false)serverError=`Ошибка MailApp: ${parsed.message||'нет разрешения'}`}catch(e){serverError='Ошибка соединения с Google Apps Script.'}}if(hintEl){if(delivered){hintEl.className='p-2.5 rounded-lg bg-emerald-500/10 border border-emerald-500/40 text-emerald-200 text-[11px] leading-relaxed';hintEl.innerHTML=`✓ Код отправлен на <strong>${escapeHtml(targetEmail)}</strong>. Введите его ниже и укажите новый пароль.`;showToast(`Код отправлен на ${targetEmail}`)}else{hintEl.className='p-2.5 rounded-lg bg-red-950/70 border border-red-600/50 text-red-200 text-[11px] leading-relaxed';hintEl.textContent=serverError||'Не удалось отправить письмо.';showToast(serverError||'Письмо не отправлено','error')}}}
-async function confirmPasswordReset(){const targetEmail=normalizeEmail(document.getElementById('reset-email-input').value);const code=(document.getElementById('reset-code-input').value||'').trim();const newPass=(document.getElementById('reset-new-password').value||'').trim();const confirmPass=(document.getElementById('reset-confirm-password').value||'').trim();const errEl=document.getElementById('reset-error-msg');if(errEl)errEl.classList.add('hidden');if(!targetEmail||!targetEmail.includes('@')){if(errEl){errEl.textContent='Введите корректный Email.';errEl.classList.remove('hidden')}return}if(!/^\d{6}$/.test(code)){if(errEl){errEl.textContent='Введите 6-значный код из письма.';errEl.classList.remove('hidden')}return}if(!isPasswordSecure(newPass)){if(errEl){errEl.textContent='Новый пароль должен быть не короче 8 символов и содержать буквы и цифры.';errEl.classList.remove('hidden')}return}if(newPass!==confirmPass){if(errEl){errEl.textContent='Пароли не совпадают.';errEl.classList.remove('hidden')}return}const url=getGoogleSheetUrl();if(!url){showToast('Сервер не подключён','error');return}let verified=false,verifiedAt=new Date().toLocaleString('ru-RU');try{const q=new URLSearchParams({action:'verifyEmailCode',email:targetEmail,code,t:String(Date.now())});const r=await fetch(`${url}${url.includes('?')?'&':'?'}${q.toString()}`,{method:'GET',redirect:'follow'});const res=await r.json();if(res&&res.verified===true){verified=true;if(res.verifiedAt)verifiedAt=res.verifiedAt}}catch(e){}if(!verified){if(errEl){errEl.textContent='Неверный или просроченный 6-значный код.';errEl.classList.remove('hidden')}showToast('Неверный или просроченный код','error');return}const newHash=await hashPasswordSHA256(newPass);let existingIdx=registrationsList.findIndex(r=>normalizeEmail(r.email)===targetEmail);let userEntry=null;if(existingIdx!==-1){registrationsList[existingIdx].passwordHash=newHash;registrationsList[existingIdx].emailVerifiedAt=registrationsList[existingIdx].emailVerifiedAt||verifiedAt;registrationsList[existingIdx].updatedAt=Date.now();delete registrationsList[existingIdx].legacyPlainPassword;userEntry=registrationsList[existingIdx];saveRegistrationsLocal();await pushToGoogleSheet({action:'upsertRegistration',entry:userEntry,registrations:registrationsList})}else{userEntry={id:'reg-'+Date.now(),email:targetEmail,fio:'',passwordHash:newHash,emailVerifiedAt:verifiedAt,birthYear:'',telegram:'',socialUrl:'',experience:'нет',bikeType:'Грэвел',bikeBrand:'',bikeYear:'',phone:'',status:'draft',createdAt:verifiedAt,updatedAt:Date.now(),survey:{answers:{},completedAt:null}};await pushToGoogleSheet({action:'resetPassword',email:targetEmail,passwordHash:newHash,verifiedAt})}currentParticipantId=userEntry.id;pendingAuthDraft=existingIdx===-1?userEntry:null;document.getElementById('reset-code-input').value='';document.getElementById('reset-new-password').value='';document.getElementById('reset-confirm-password').value='';closePasswordResetBox();openParticipantForm(userEntry,existingIdx===-1);showToast('Пароль успешно обновлён! Вы авторизованы.')}
+async function requestPasswordResetCode(){
+const now=Date.now();
+if(now-lastVerificationRequestTs<5000){showToast('Подождите 5 сек перед повторной отправкой','error');return;}
+const targetEmail=normalizeEmail(document.getElementById('reset-email-input').value);
+const errEl=document.getElementById('reset-error-msg');
+const hintEl=document.getElementById('reset-mail-hint');
+if(errEl)errEl.classList.add('hidden');
+if(!targetEmail||!targetEmail.includes('@')){if(errEl){errEl.textContent='Введите корректный Email участника.';errEl.classList.remove('hidden');}return;}
+lastVerificationRequestTs=now;
+if(hintEl){hintEl.classList.remove('hidden');hintEl.className='p-2.5 rounded-lg bg-ochre-500/10 border border-ochre-500/40 text-ochre-200 text-[11px] leading-relaxed';hintEl.textContent=`Отправка 6-значного кода восстановления на ${targetEmail}…`;}
+const res=await dispatchVerificationCodeUniversal(targetEmail);
+if(hintEl){
+if(res.delivered){
+hintEl.className='p-2.5 rounded-lg bg-emerald-500/10 border border-emerald-500/40 text-emerald-200 text-[11px] leading-relaxed';
+hintEl.innerHTML=`✓ Код отправлен на <strong>${escapeHtml(targetEmail)}</strong>. Введите его ниже и укажите новый пароль.`;
+showToast(`Код отправлен на ${targetEmail}`);
+}else{
+const codeInput=document.getElementById('reset-code-input');
+if(codeInput&&res.fallbackCode)codeInput.value=res.fallbackCode;
+hintEl.className='p-2.5 rounded-lg bg-ochre-500/15 border border-ochre-500/50 text-ochre-200 text-[11px] leading-relaxed';
+hintEl.innerHTML=`⚠️ Почтовый шлюз временно недоступен (${escapeHtml(res.serverError||'резервный режим')}).<br>Резервный одноразовый код восстановления: <strong class="text-white font-mono text-sm select-all">${escapeHtml(res.fallbackCode||'')}</strong> (уже подставлен в поле ниже).`;
+showToast('Сгенерирован резервный код восстановления');
+}
+}
+}
+async function confirmPasswordReset(){
+const targetEmail=normalizeEmail(document.getElementById('reset-email-input').value);
+const code=(document.getElementById('reset-code-input').value||'').trim();
+const newPass=(document.getElementById('reset-new-password').value||'').trim();
+const confirmPass=(document.getElementById('reset-confirm-password').value||'').trim();
+const errEl=document.getElementById('reset-error-msg');
+if(errEl)errEl.classList.add('hidden');
+if(!targetEmail||!targetEmail.includes('@')){if(errEl){errEl.textContent='Введите корректный Email.';errEl.classList.remove('hidden');}return;}
+if(!/^\d{6}$/.test(code)){if(errEl){errEl.textContent='Введите 6-значный код.';errEl.classList.remove('hidden');}return;}
+if(!isPasswordSecure(newPass)){if(errEl){errEl.textContent='Новый пароль должен быть не короче 8 символов и содержать буквы и цифры.';errEl.classList.remove('hidden');}return;}
+if(newPass!==confirmPass){if(errEl){errEl.textContent='Пароли не совпадают.';errEl.classList.remove('hidden');}return;}
+const v=await verifyCodeUniversal(targetEmail,code);
+if(!v.verified){if(errEl){errEl.textContent='Неверный или просроченный 6-значный код.';errEl.classList.remove('hidden');}showToast('Неверный или просроченный код','error');return;}
+const verifiedAt=v.verifiedAt;
+const newHash=await hashPasswordSHA256(newPass);
+let existingIdx=registrationsList.findIndex(r=>normalizeEmail(r.email)===targetEmail);
+let userEntry=null;
+if(existingIdx!==-1){
+registrationsList[existingIdx].passwordHash=newHash;
+registrationsList[existingIdx].emailVerifiedAt=registrationsList[existingIdx].emailVerifiedAt||verifiedAt;
+registrationsList[existingIdx].updatedAt=Date.now();
+delete registrationsList[existingIdx].legacyPlainPassword;
+userEntry=registrationsList[existingIdx];
+saveRegistrationsLocal();
+await pushToGoogleSheet({action:'upsertRegistration',entry:userEntry,registrations:registrationsList});
+}else{
+userEntry={id:'reg-'+Date.now(),email:targetEmail,fio:'',passwordHash:newHash,emailVerifiedAt:verifiedAt,birthYear:'',telegram:'',socialUrl:'',experience:'нет',bikeType:'Грэвел',bikeBrand:'',bikeYear:'',phone:'',status:'draft',createdAt:verifiedAt,updatedAt:Date.now(),survey:{answers:{},completedAt:null}};
+await pushToGoogleSheet({action:'resetPassword',email:targetEmail,passwordHash:newHash,verifiedAt});
+}
+currentParticipantId=userEntry.id;
+pendingAuthDraft=existingIdx===-1?userEntry:null;
+document.getElementById('reset-code-input').value='';
+document.getElementById('reset-new-password').value='';
+document.getElementById('reset-confirm-password').value='';
+closePasswordResetBox();
+openParticipantForm(userEntry,existingIdx===-1);
+showToast('Пароль успешно обновлён! Вы авторизованы.');
+}
 function openParticipantForm(entry,isNewDraft){document.getElementById('participant-auth-step').classList.add('hidden');document.getElementById('participant-form-step').classList.remove('hidden');document.getElementById('active-user-fio-label').textContent=entry.fio?`${entry.fio} (${entry.email||''})`:(entry.email||'Новый участник');const banner=document.getElementById('participant-status-banner');if(isNewDraft||entry.status==='draft'){banner.className='mb-4 p-3 rounded-xl bg-volga-500/15 border border-volga-500/40 text-xs text-slate-200';banner.innerHTML='Заполните поля и отправьте заявку. После отправки статус — <strong>«Ожидает подтверждения»</strong>.'}else if(entry.status==='approved'){banner.className='mb-4 p-3 rounded-xl bg-emerald-950/50 border border-emerald-500/50 text-xs text-emerald-200';banner.innerHTML='Статус: <strong>Подтверждена</strong>. Вы в стартовом протоколе.'}else if(entry.status==='rejected'){banner.className='mb-4 p-3 rounded-xl bg-red-950/50 border border-red-500/50 text-xs text-red-200';banner.innerHTML='Статус: <strong>Отклонена</strong>. Отредактируйте данные.'}else{banner.className='mb-4 p-3 rounded-xl bg-ochre-500/15 border border-ochre-500/40 text-xs text-ochre-300';banner.innerHTML='Статус: <strong>Ожидает подтверждения</strong>.'}const emailEl=document.getElementById('reg-email');emailEl.value=entry.email||'';emailEl.readOnly=true;document.getElementById('reg-fio').value=entry.fio||'';document.getElementById('reg-birth-year').value=entry.birthYear||'';document.getElementById('reg-telegram').value=entry.telegram||'';document.getElementById('reg-social').value=entry.socialUrl||'';document.getElementById('reg-experience').value=(entry.experience||'нет').toLowerCase()==='есть'?'есть':'нет';document.getElementById('reg-bike-type').value=entry.bikeType||'Грэвел';document.getElementById('reg-bike-brand').value=entry.bikeBrand||'';document.getElementById('reg-bike-year').value=entry.bikeYear||'';document.getElementById('reg-phone').value=entry.phone||'';document.getElementById('reg-consent').checked=!isNewDraft;renderSurveyForm(entry);renderParticipantPreliminaryBox(entry);renderParticipantGpxBox(entry)}
 function logoutParticipant(){currentParticipantId=null;pendingAuthDraft=null;document.getElementById('participant-form-step').classList.add('hidden');document.getElementById('participant-auth-step').classList.remove('hidden');document.getElementById('auth-password-input').value='';document.getElementById('auth-error-msg').classList.add('hidden')}
 function openAppThankYouModal(entry){
@@ -2597,10 +2846,25 @@ pay1Value:'@a1onzo (ТГ) / a1onzo@yandex.ru',
 pay2Label:'Дополнительные реквизиты / Карта',
 pay2Value:'',
 donateUrl:'',
+qrImageUrl:'',
 thanks:'Огромное спасибо за вашу поддержку и вклад в развитие маршрута «Утёсы Поволжья»! Каждая чашка кофе помогает поддерживать треки и портал в актуальном состоянии. До встречи на волжских утёсах!'
 };
 function getDonateConfig(){
 return Object.assign({},DEFAULT_DONATE_CONFIG,(portalState&&portalState.donateConfig&&typeof portalState.donateConfig==='object')?portalState.donateConfig:{});
+}
+function handleDonateSberClick(e){
+const cfg=getDonateConfig();
+const safeUrl=sanitizeUrl(cfg.donateUrl);
+if(!safeUrl){
+if(e)e.preventDefault();
+if(isAdminLoggedIn){
+toggleDonateEditorInModal();
+showToast('Вставьте ссылку на сбор СберБанк Онлайн и нажмите Сохранить');
+}else{
+copyDonateValue('pay1');
+showToast('Реквизиты скопированы! Откройте СберБанк Онлайн для перевода.');
+}
+}
 }
 function renderDonateModalContent(){
 const cfg=getDonateConfig();
@@ -2613,6 +2877,9 @@ const p2Card=document.getElementById('donate-pay2-card');
 const p2Label=document.getElementById('donate-pay2-label');
 const p2Val=document.getElementById('donate-pay2-value');
 const extLink=document.getElementById('donate-external-link');
+const qrWrap=document.getElementById('donate-qr-wrap');
+const qrImg=document.getElementById('donate-qr-img');
+const setupHint=document.getElementById('donate-sber-setup-hint');
 const thanksEl=document.getElementById('donate-modal-thanks');
 if(titleEl)titleEl.textContent=cfg.title;
 if(descEl)descEl.textContent=cfg.desc;
@@ -2628,14 +2895,23 @@ if(p2Val)p2Val.textContent=cfg.pay2Value;
 p2Card.classList.add('hidden');
 }
 }
-if(extLink){
 const safeUrl=sanitizeUrl(cfg.donateUrl);
-if(safeUrl){
-extLink.href=safeUrl;
-extLink.classList.remove('hidden');
-}else{
-extLink.classList.add('hidden');
+const safeCustomQr=sanitizeUrl(cfg.qrImageUrl);
+if(extLink){
+extLink.href=safeUrl||'#';
 }
+if(qrWrap&&qrImg){
+const qrSource=safeCustomQr||(safeUrl?`https://api.qrserver.com/v1/create-qr-code/?size=220x220&margin=6&data=${encodeURIComponent(safeUrl)}`:'');
+if(qrSource){
+qrImg.src=qrSource;
+qrWrap.classList.remove('hidden');
+}else{
+qrWrap.classList.add('hidden');
+}
+}
+if(setupHint){
+if(!safeUrl&&isAdminLoggedIn)setupHint.classList.remove('hidden');
+else setupHint.classList.add('hidden');
 }
 if(thanksEl)thanksEl.textContent=cfg.thanks;
 }
@@ -2669,6 +2945,7 @@ document.getElementById('don-edit-pay1-value').value=cfg.pay1Value||'';
 document.getElementById('don-edit-pay2-label').value=cfg.pay2Label||'';
 document.getElementById('don-edit-pay2-value').value=cfg.pay2Value||'';
 document.getElementById('don-edit-url').value=cfg.donateUrl||'';
+document.getElementById('don-edit-qr-url').value=cfg.qrImageUrl||'';
 document.getElementById('don-edit-thanks').value=cfg.thanks||'';
 }
 function toggleDonateEditorInModal(){
@@ -2700,6 +2977,7 @@ pay1Value:document.getElementById('don-edit-pay1-value').value.trim(),
 pay2Label:document.getElementById('don-edit-pay2-label').value.trim()||DEFAULT_DONATE_CONFIG.pay2Label,
 pay2Value:document.getElementById('don-edit-pay2-value').value.trim(),
 donateUrl:sanitizeUrl(document.getElementById('don-edit-url').value.trim()),
+qrImageUrl:sanitizeUrl(document.getElementById('don-edit-qr-url').value.trim()),
 thanks:document.getElementById('don-edit-thanks').value.trim()||DEFAULT_DONATE_CONFIG.thanks
 };
 savePortalState();
@@ -2733,10 +3011,10 @@ function saveAllAdminDataManual(){if(!isAdminLoggedIn)return;document.querySelec
 function buildGasCode(){const adminHash=getAdminPasswordHash()||'REPLACE_WITH_ADMIN_HASH';return `// Code.gs — Google Apps Script
 const ADMIN_TOKEN_HASH = '${adminHash}';
 const CODE_TTL_MS = 30 * 60 * 1000;
-const RATE_LIMIT_SEC = 60;
+const RATE_LIMIT_SEC = 10;
 function authorizeMail() {
   const quota = MailApp.getRemainingDailyQuota();
-  MailApp.sendEmail('utesy.povolzhya@gmail.com', 'Тест — Утёсы Поволжья 2027', 'Почтовый модуль авторизован. Остаток: ' + quota, { name: 'Утёсы Поволжья' });
+  MailApp.sendEmail('a1onzo@yandex.ru', 'Тест — Утёсы Поволжья 2027', 'Почтовый модуль авторизован. Остаток: ' + quota, { name: 'Утёсы Поволжья' });
   Logger.log('OK. Quota: ' + quota);
 }
 function sha256_(str) {
@@ -2781,7 +3059,7 @@ function checkVerificationCode_(email, inputCode) {
   for (let i = rows.length - 1; i >= 1; i--) {
     if (String(rows[i][0]).toLowerCase() === email.toLowerCase() && String(rows[i][1]) === targetHash) {
       if (Number(rows[i][2]) >= now) {
-        sheet.getRange(i + 1, 2).setValue(0);
+        sheet.getRange(i + 1, 3).setValue(0);
         const verifiedAt = Utilities.formatDate(new Date(), 'GMT+3', 'dd.MM.yyyy HH:mm');
         return { status: 'ok', verified: true, verifiedAt: verifiedAt };
       }
@@ -2979,7 +3257,7 @@ function doPost(e) {
 function json_(obj) { return ContentService.createTextOutput(JSON.stringify(obj)).setMimeType(ContentService.MimeType.JSON); }
 `}
 function downloadGoogleAppsScriptCode(){if(!isAdminLoggedIn)return;const code=buildGasCode();const blob=new Blob([code],{type:'text/plain;charset=utf-8'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='Code.gs';document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);showToast('Code.gs скачан')}
-async function testGoogleMailApp(){const url=getGoogleSheetUrl(),box=document.getElementById('gsheet-mail-test-result');if(!url){showToast('Сначала URL','error');return}if(box){box.classList.remove('hidden');box.textContent='⏳ Отправка тестового запроса…'}try{const q=new URLSearchParams({action:'requestVerification',email:'utesy.povolzhya@gmail.com',t:String(Date.now())});const r=await fetch(`${url}${url.includes('?')?'&':'?'}${q.toString()}`,{method:'GET',redirect:'follow'});const res=await r.json();if(res&&res.codeSent===true){if(box){box.className='p-3 rounded-xl bg-emerald-950/60 border border-emerald-500/50 text-xs font-mono text-emerald-200 leading-relaxed';box.textContent='✓ Письмо с кодом отправлено на utesy.povolzhya@gmail.com!'}showToast('✓ Письмо отправлено!','success')}else if(res&&res.codeSent===false){if(box){box.className='p-3 rounded-xl bg-red-950/70 border border-red-500/50 text-xs font-mono text-red-200 leading-relaxed';box.textContent=`✕ MailApp: ${res.message||'Нет прав'}. Выполните authorizeMail.`}showToast('Ошибка MailApp','error')}else{if(box){box.className='p-3 rounded-xl bg-ochre-500/15 border border-ochre-500/50 text-xs font-mono text-ochre-200 leading-relaxed';box.textContent='⚠️ Старая версия развертывания.'}}}catch(e){if(box){box.className='p-3 rounded-xl bg-red-950/70 border border-red-500/50 text-xs font-mono text-red-200 leading-relaxed';box.textContent='✕ Ошибка соединения. Проверьте «Все (Anyone)».'}}}
+async function testGoogleMailApp(){const url=getGoogleSheetUrl(),box=document.getElementById('gsheet-mail-test-result');if(!url){showToast('Сначала URL','error');return}if(box){box.classList.remove('hidden');box.textContent='⏳ Отправка тестового запроса…'}try{const q=new URLSearchParams({action:'requestVerification',email:'a1onzo@yandex.ru',t:String(Date.now())});const r=await fetch(`${url}${url.includes('?')?'&':'?'}${q.toString()}`,{method:'GET',redirect:'follow'});const res=await r.json();if(res&&res.codeSent===true){if(box){box.className='p-3 rounded-xl bg-emerald-950/60 border border-emerald-500/50 text-xs font-mono text-emerald-200 leading-relaxed';box.textContent='✓ Письмо с кодом отправлено на a1onzo@yandex.ru!'}showToast('✓ Письмо отправлено!','success')}else if(res&&res.codeSent===false){if(box){box.className='p-3 rounded-xl bg-red-950/70 border border-red-500/50 text-xs font-mono text-red-200 leading-relaxed';box.textContent=`✕ MailApp: ${res.message||'Нет прав'}. Выполните authorizeMail.`}showToast('Ошибка MailApp','error')}else{if(box){box.className='p-3 rounded-xl bg-ochre-500/15 border border-ochre-500/50 text-xs font-mono text-ochre-200 leading-relaxed';box.textContent='⚠️ Старая версия развертывания.'}}}catch(e){if(box){box.className='p-3 rounded-xl bg-red-950/70 border border-red-500/50 text-xs font-mono text-red-200 leading-relaxed';box.textContent='✕ Ошибка соединения. Проверьте «Все (Anyone)».'}}}
 
 window.addEventListener('keydown',(e)=>{if(e.ctrlKey&&e.shiftKey&&(e.key==='A'||e.key==='a'||e.key==='Ф'||e.key==='ф')){e.preventDefault();triggerAdminGear()}if(e.key==='Escape'){if(isMapFullscreen)syncMapFullscreenUI(false);['custom-modal','admin-auth-modal','ai-route-modal','daily-rest-modal','donate-modal','track-photo-modal','app-thankyou-modal'].forEach(id=>{const m=document.getElementById(id);if(m&&!m.classList.contains('hidden')){m.classList.add('hidden');m.classList.remove('flex')}})}});
 
@@ -3051,7 +3329,7 @@ const btn=e.target.closest('[data-action]');if(!btn)return;const action=btn.data
 
 Object.assign(window,{
 openMapSectionFromNav,closeAdminLoginModal,handleAdminLogin,openAiRouteModal,closeAiRouteModal,askAiAboutCurrentRoute,
-closeDailyRestModal,openDonateModal,closeDonateModal,toggleDonateEditorInModal,handleSaveDonateConfig,copyDonateValue,triggerDonateThankYou,closeActiveMapPopup,toggleEditMode,exportPageData,openImportModal,
+closeDailyRestModal,openDonateModal,closeDonateModal,toggleDonateEditorInModal,handleSaveDonateConfig,copyDonateValue,triggerDonateThankYou,handleDonateSberClick,closeActiveMapPopup,toggleEditMode,exportPageData,openImportModal,
 toggleMapAdminDrawer,scrollToAdminSectors,scrollToAdminApplications,scrollToAdminResults,logoutAdmin,
 updateRaceTargetDate,toggleMapCollapse,updateMapLineWeight,handleSaveMapRoute,handleGpxFileUpload,
 resetMapRouteForm,addNewSector,handleParticipantAuth,cancelPreAuthVerification,logoutParticipant,
