@@ -77,9 +77,9 @@ img,video{max-width:100%;height:auto}
 #up-blogger-portal .leaflet-container a.leaflet-popup-close-button{top:4px!important;right:4px!important;width:24px!important;height:24px!important;font:bold 12px/22px 'Press Start 2P',monospace!important;color:#1a1208!important;background:#c19a6b!important;border:2px solid #3d2914!important;border-radius:0!important;display:flex!important;align-items:center!important;justify-content:center!important;box-shadow:inset -2px -2px 0 rgba(0,0,0,0.3),inset 2px 2px 0 rgba(255,255,255,0.3)!important;z-index:20!important}
 #up-blogger-portal .leaflet-container a.leaflet-popup-close-button:hover{background:#e74c3c!important;color:#fff!important}
 #up-blogger-portal .leaflet-popup-content .mc-popup-title{font-family:'Press Start 2P',monospace!important;font-size:10px!important;color:#1a1208!important;margin-bottom:6px;line-height:1.5;word-break:break-word}
-#up-blogger-portal .leaflet-popup-content .mc-popup-desc{font-family:'JetBrains Mono',monospace!important;font-size:10px!important;color:#2a1a08!important;line-height:1.5;margin-bottom:8px}
+#up-blogger-portal .leaflet-popup-content .mc-popup-desc{font-family:'JetBrains Mono',monospace!important;font-size:12px!important;color:#2a1a08!important;line-height:1.5;margin-bottom:8px}
 #up-blogger-portal .leaflet-popup-content .mc-popup-badge{display:inline-block;background:#3d2914;color:#f5d76e;padding:2px 6px;font-size:8px;margin-bottom:8px;border:1px solid #1a1208}
-#up-blogger-portal .leaflet-popup-content .mc-popup-btn{display:block;width:100%;text-align:center;padding:6px 8px;margin-top:4px;background:#4a7c3a;color:#fff!important;border:2px solid #1a1208;text-decoration:none!important;font-family:'Press Start 2P',monospace!important;font-size:8px!important;box-shadow:inset -2px -2px 0 rgba(0,0,0,0.3),inset 2px 2px 0 rgba(255,255,255,0.25);cursor:pointer}
+#up-blogger-portal .leaflet-popup-content .mc-popup-btn{display:block;width:100%;text-align:center;padding:6px 8px;margin-top:4px;background:#4a7c3a;color:#fff!important;border:2px solid #1a1208;text-decoration:none!important;font-family:'JetBrains Mono',monospace!important;font-size:11px!important;font-weight:700;box-shadow:inset -2px -2px 0 rgba(0,0,0,0.3),inset 2px 2px 0 rgba(255,255,255,0.25);cursor:pointer}
 #up-blogger-portal .leaflet-popup-content .mc-popup-btn:hover{background:#5d9b48;transform:translate(1px,1px)}
 #up-blogger-portal .leaflet-popup-content .mc-popup-btn.cyan{background:#2d7a9e}
 #up-blogger-portal .leaflet-popup-content .mc-popup-btn.cyan:hover{background:#3a92bd}
@@ -116,10 +116,12 @@ img,video{max-width:100%;height:auto}
 #up-blogger-portal .mc-photo-pin:hover{transform:scale(1.25)!important;border-color:#22d3ee;box-shadow:0 0 0 2px #090c10,0 0 16px rgba(34,211,238,0.85);z-index:2000}
 #up-blogger-portal .mc-photo-pin img{width:100%;height:100%;object-fit:cover;display:block}
 #up-blogger-portal .mc-photo-num{position:absolute;bottom:0;right:0;background:rgba(9,12,16,0.92);color:#fbbf24;font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;padding:1px 4px;border-top-left-radius:6px;line-height:1.1}
-.no-scrollbar::-webkit-scrollbar{display:none}.no-scrollbar{-ms-overflow-style:none;scrollbar-width:none}</style>
-<style id="up-blogger-wide-style">
-.post-body,.blog-posts,.main-inner{max-width:100%!important;width:100%!important;padding:0!important;margin:0!important}
-.post-header,.post-title,.breadcrumbs{display:none!important}
+.no-scrollbar::-webkit-scrollbar{display:none}.no-scrollbar{-ms-overflow-style:none;scrollbar-width:none}
+#track-photo-modal{z-index:10050!important}
+#map-card-container.map-is-fullscreen #track-photo-modal,#map-card-container:fullscreen #track-photo-modal,#map-card-container:-webkit-full-screen #track-photo-modal{position:fixed!important;inset:0!important;padding:12px!important;background:rgba(5,7,10,0.94)!important}
+#map-card-container.map-is-fullscreen #track-photo-modal .tp-modal-dialog,#map-card-container:fullscreen #track-photo-modal .tp-modal-dialog,#map-card-container:-webkit-full-screen #track-photo-modal .tp-modal-dialog{max-width:96vw!important;width:96vw!important;max-height:96vh!important;height:96vh!important;display:flex!important;flex-direction:column!important}
+#map-card-container.map-is-fullscreen #track-photo-modal .tp-modal-img-wrap,#map-card-container:fullscreen #track-photo-modal .tp-modal-img-wrap,#map-card-container:-webkit-full-screen #track-photo-modal .tp-modal-img-wrap{flex:1 1 auto!important;max-height:none!important;min-height:0!important}
+#map-card-container.map-is-fullscreen #track-photo-modal #tp-modal-img,#map-card-container:fullscreen #track-photo-modal #tp-modal-img,#map-card-container:-webkit-full-screen #track-photo-modal #tp-modal-img{max-height:100%!important;max-width:100%!important;width:auto!important;height:100%!important;object-fit:contain!important}
 </style>
 </head>
 <body class="antialiased selection:bg-ochre-500 selection:text-graphite-950">
@@ -160,46 +162,12 @@ img,video{max-width:100%;height:auto}
 </div>
 </div>
 
-<div id="ai-route-modal" role="dialog" aria-modal="true" class="fixed inset-0 z-50 items-center justify-center bg-black/80 backdrop-blur-sm p-4 hidden">
-<div class="bg-graphite-900 border border-volga-500/50 rounded-2xl max-w-xl w-full p-6 shadow-2xl space-y-4">
-<div class="flex items-center justify-between border-b border-graphite-800 pb-3"><div class="flex items-center gap-2"><span class="px-2 py-0.5 rounded bg-volga-500/20 text-volga-400 font-mono text-xs font-bold">✨ ИИ-база</span><h3 id="ai-modal-route-title" class="font-display font-bold text-lg text-white uppercase">Маршрут</h3></div><button type="button" onclick="closeAiRouteModal()" class="text-slate-400 hover:text-white text-xs font-mono">Закрыть ✕</button></div>
-<div id="ai-modal-body" class="text-xs sm:text-sm text-slate-200 space-y-3 leading-relaxed bg-graphite-950 p-4 rounded-xl border border-graphite-800"></div>
-<div class="p-3.5 rounded-xl bg-volga-500/10 border border-volga-500/40 space-y-2.5"><div class="text-xs text-slate-300">Полная база знаний ИИ — в <strong>Google NotebookLM</strong>:</div><a href="https://notebook.google.com/notebook/7959d135-4395-4f56-8f7b-4fa29ddd0fd6/preview" target="_blank" rel="noopener noreferrer" class="w-full py-2.5 px-4 rounded-xl bg-volga-500 hover:bg-volga-400 text-graphite-950 font-bold text-xs uppercase tracking-wider transition flex items-center justify-center gap-2 shadow-md"><span>✨ Открыть базу</span><span>↗</span></a></div>
-<div class="space-y-2"><label for="ai-custom-question" class="block text-xs font-mono text-slate-400">Быстрый вопрос:</label><div class="flex gap-2"><input type="text" id="ai-custom-question" placeholder="Например: Где пополнить воду?" class="flex-1 bg-graphite-950 border border-graphite-700 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-volga-400"><button type="button" onclick="askAiAboutCurrentRoute()" class="px-4 py-2 rounded-xl bg-graphite-800 hover:bg-graphite-700 border border-volga-500/40 text-volga-300 font-bold text-xs transition shrink-0">Спросить</button></div></div>
-</div>
-</div>
-
 <div id="daily-rest-modal" role="dialog" aria-modal="true" class="fixed inset-0 z-50 items-center justify-center bg-black/80 backdrop-blur-sm p-4 hidden">
 <div class="bg-graphite-900 border border-ochre-500/50 rounded-2xl max-w-2xl w-full p-6 shadow-2xl space-y-4">
 <div class="flex items-center justify-between border-b border-graphite-800 pb-3"><div><span class="px-2 py-0.5 rounded bg-ochre-500/20 text-ochre-400 font-mono text-xs font-bold">📊 Посуточный расчёт</span><h3 id="daily-modal-rider-name" class="font-display font-bold text-xl text-white uppercase mt-1">Участник</h3></div><button type="button" onclick="closeDailyRestModal()" class="text-slate-400 hover:text-white text-xs font-mono">Закрыть ✕</button></div>
 <div id="daily-modal-content" class="space-y-3 max-h-[65vh] overflow-y-auto pr-1"></div>
 </div>
 </div>
-
-<div id="track-photo-modal" role="dialog" aria-modal="true" class="fixed inset-0 z-50 items-center justify-center bg-black/80 backdrop-blur-sm p-4 hidden">
-<div class="bg-graphite-900 border-2 border-ochre-500/60 rounded-2xl max-w-4xl w-full p-4 sm:p-6 shadow-2xl space-y-3 max-h-[90vh] overflow-y-auto">
-<div class="flex items-center justify-between gap-2 border-b border-graphite-800 pb-2.5">
-<div>
-<span id="tp-modal-badge" class="px-2 py-0.5 rounded bg-ochre-500/20 text-ochre-400 font-mono text-xs font-bold">📷 Фото на треке</span>
-<h3 id="tp-modal-title" class="font-display font-bold text-lg sm:text-xl text-white uppercase mt-1">Точка маршрута</h3>
-</div>
-<button type="button" onclick="closeTrackPhotoModal()" class="text-slate-400 hover:text-white text-sm font-mono px-2">✕</button>
-</div>
-<div class="relative bg-graphite-950 rounded-xl overflow-hidden border border-graphite-800 flex items-center justify-center" style="max-height:62vh">
-<img id="tp-modal-img" src="" alt="Фото с маршрута" class="max-w-full object-contain" style="max-height:62vh">
-</div>
-<p id="tp-modal-desc" class="text-xs sm:text-sm text-slate-300 leading-relaxed"></p>
-<div class="flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-graphite-800 text-xs font-mono">
-<span id="tp-modal-coords" class="text-volga-400"></span>
-<div class="flex items-center gap-2">
-<button type="button" onclick="stepTrackPhoto(-1)" class="px-3 py-1.5 rounded-xl bg-graphite-800 hover:bg-graphite-700 border border-graphite-600 text-slate-200 transition">◀ Пред.</button>
-<button type="button" onclick="stepTrackPhoto(1)" class="px-3 py-1.5 rounded-xl bg-ochre-500 hover:bg-ochre-400 text-graphite-950 font-bold transition">След. ▶</button>
-</div>
-</div>
-</div>
-</div>
-
-
 
 <div id="app-thankyou-modal" role="dialog" aria-modal="true" class="fixed inset-0 z-50 items-center justify-center bg-black/80 backdrop-blur-sm p-4 hidden">
 <div class="bg-graphite-900 border-2 border-emerald-500/60 rounded-2xl max-w-2xl w-full p-5 sm:p-6 shadow-2xl space-y-4 max-h-[90vh] flex flex-col">
@@ -238,7 +206,7 @@ img,video{max-width:100%;height:auto}
 </div>
 </div>
 <div class="flex items-center gap-2 shrink-0">
-<button type="button" onclick="toggleDonateEditorInModal()" title="Редактировать платёжные данные" class="px-2.5 py-1 rounded-lg bg-graphite-800 hover:bg-graphite-700 border border-graphite-700 text-xs font-mono text-ochre-300 transition">✎ Реквизиты</button>
+<button type="button" id="donate-edit-trigger-btn" onclick="toggleDonateEditorInModal()" title="Редактировать платёжные данные" class="hidden px-2.5 py-1 rounded-lg bg-graphite-800 hover:bg-graphite-700 border border-graphite-700 text-xs font-mono text-ochre-300 transition">✎ Реквизиты</button>
 <button type="button" onclick="closeDonateModal()" aria-label="Закрыть" class="text-slate-400 hover:text-white text-sm font-mono px-1.5">✕</button>
 </div>
 </div>
@@ -328,7 +296,7 @@ img,video{max-width:100%;height:auto}
 </div>
 </div>
 
-<div id="admin-top-bar" class="hidden sticky top-0 z-50 bg-graphite-950/95 border-b-2 border-ochre-500 px-4 py-2.5 shadow-2xl backdrop-blur-md">
+<div id="admin-top-bar" class="hidden relative z-50 bg-graphite-950/95 border-b-2 border-ochre-500 px-4 py-2.5 shadow-2xl backdrop-blur-md">
 <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
 <div class="flex items-center gap-2"><span class="px-2.5 py-0.5 rounded bg-ochre-500 text-graphite-950 font-mono font-bold text-xs uppercase">Режим Админа</span><span class="text-xs font-mono text-slate-300">Заявок: <strong id="admin-bar-pending-num" class="text-ochre-400">0</strong></span></div>
 <div class="flex flex-wrap items-center gap-2">
@@ -496,6 +464,28 @@ img,video{max-width:100%;height:auto}
 <div class="sm:col-span-2 lg:col-span-4 flex justify-end gap-2"><button type="button" onclick="resetMapRouteForm()" class="px-3.5 py-2 rounded-xl bg-graphite-800 text-slate-300 font-mono">Очистить</button><button type="submit" class="px-4 py-2 rounded-xl bg-ochre-500 hover:bg-ochre-400 text-graphite-950 font-bold uppercase">Сохранить</button></div>
 </form>
 <div id="map-admin-routes-list" class="pt-3 border-t border-graphite-800 grid grid-cols-1 sm:grid-cols-2 gap-2"></div>
+</div>
+</div>
+<div id="track-photo-modal" role="dialog" aria-modal="true" onclick="if(event.target===this)closeTrackPhotoModal()" class="fixed inset-0 z-50 items-center justify-center bg-black/80 backdrop-blur-sm p-4 hidden">
+<div class="tp-modal-dialog bg-graphite-900 border-2 border-ochre-500/60 rounded-2xl max-w-4xl w-full p-4 sm:p-6 shadow-2xl space-y-3 max-h-[90vh] overflow-y-auto">
+<div class="flex items-center justify-between gap-2 border-b border-graphite-800 pb-2.5">
+<div>
+<span id="tp-modal-badge" class="px-2 py-0.5 rounded bg-ochre-500/20 text-ochre-400 font-mono text-xs font-bold">📷 Фото на треке</span>
+<h3 id="tp-modal-title" class="font-display font-bold text-lg sm:text-xl text-white uppercase mt-1">Точка маршрута</h3>
+</div>
+<button type="button" onclick="closeTrackPhotoModal()" class="text-slate-400 hover:text-white text-sm font-mono px-2">✕</button>
+</div>
+<div class="tp-modal-img-wrap relative bg-graphite-950 rounded-xl overflow-hidden border border-graphite-800 flex items-center justify-center" style="max-height:62vh">
+<img id="tp-modal-img" src="" alt="Фото с маршрута" class="max-w-full object-contain" style="max-height:62vh">
+</div>
+<p id="tp-modal-desc" class="text-xs sm:text-sm text-slate-300 leading-relaxed"></p>
+<div class="flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-graphite-800 text-xs font-mono">
+<span id="tp-modal-coords" class="text-volga-400"></span>
+<div class="flex items-center gap-2">
+<button type="button" onclick="stepTrackPhoto(-1)" class="px-3 py-1.5 rounded-xl bg-graphite-800 hover:bg-graphite-700 border border-graphite-600 text-slate-200 transition">◀ Пред.</button>
+<button type="button" onclick="stepTrackPhoto(1)" class="px-3 py-1.5 rounded-xl bg-ochre-500 hover:bg-ochre-400 text-graphite-950 font-bold transition">След. ▶</button>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -844,7 +834,7 @@ img,video{max-width:100%;height:auto}
 <input type="hidden" id="sec-edit-idx">
 <div><label class="block font-mono text-slate-400 mb-1">Номер *</label><input type="text" id="sec-form-num" required placeholder="Сегмент 01" class="w-full bg-graphite-950 border border-graphite-700 rounded-xl px-3 py-2 text-white"></div>
 <div><label class="block font-mono text-slate-400 mb-1">Название *</label><input type="text" id="sec-form-title" required placeholder="Казань — Ульяновск" class="w-full bg-graphite-950 border border-graphite-700 rounded-xl px-3 py-2 text-white"></div>
-<div><label class="block font-mono text-slate-400 mb-1">Км *</label><input type="text" id="sec-form-km" required placeholder="320 км" class="w-full bg-graphite-950 border border-graphite-700 rounded-xl px-3 py-2 text-white font-mono"></div>
+<div><label class="block font-mono text-slate-400 mb-1">Км *</label><input type="text" id="sec-form-km" required placeholder="290 км" class="w-full bg-graphite-950 border border-graphite-700 rounded-xl px-3 py-2 text-white font-mono"></div>
 <div><label class="block font-mono text-slate-400 mb-1">Плашка</label><input type="text" id="sec-form-badge" placeholder="Средняя Волга" class="w-full bg-graphite-950 border border-graphite-700 rounded-xl px-3 py-2 text-white"></div>
 <div><label class="block font-mono text-slate-400 mb-1">Покрытие</label><input type="text" id="sec-form-surface" placeholder="Утёсы" class="w-full bg-graphite-950 border border-graphite-700 rounded-xl px-3 py-2 text-white"></div>
 <div><label class="block font-mono text-slate-400 mb-1">Nakarte</label><input type="url" id="sec-form-track" placeholder="https://nakarte.me/..." class="w-full bg-graphite-950 border border-graphite-700 rounded-xl px-3 py-2 text-white font-mono"></div>
@@ -1025,7 +1015,7 @@ img,video{max-width:100%;height:auto}
 <script>
 (function(){
 'use strict';
-const STORAGE_KEY='volga_cliffs_portal_v14';
+const STORAGE_KEY='volga_cliffs_portal_v15';
 const REG_STORAGE_KEY='volga_cliffs_registrations_v4';
 const RESULTS_STORAGE_KEY='volga_cliffs_results_v4';
 try{localStorage.removeItem('volga_cliffs_registrations_v3');localStorage.removeItem('volga_cliffs_results_v2');}catch(e){}
@@ -1088,14 +1078,14 @@ const defaultRaceResults=[];
 
 const defaultPortalState={schemaVersion:CURRENT_SCHEMA_VERSION,updatedAt:1830000000000,raceTargetUTC:'2027-05-15T04:00:00.000Z',allowEarlyGpxUpload:false,mapLineWeight:3,mapStyle:'minecraft',googleSheetUrl:CURRENT_GSHEET_URL,textEdits:{},
 mapRoutes:[
-{id:'m-1',name:'1. Казань (Рудник) — Ульяновск («Волжская тропа»)',km:'320 км',color:'#22d3ee',storyUrl:'https://a1onso.blogspot.com/2025/09/320-2308-2408.html',downloadUrl:'https://drive.google.com/uc?export=download&id=16aFTAEIb9rdXktw87hjjR7mra6T5g6-m',driveFolderUrl:'https://drive.google.com/drive/folders/1AxRYJagBNhyGAGYEfgpehYZgf2qNidz6',trackUrl:'https://nakarte.me/#m=5/50.91689/42.51709&l=L&nktl=T0i82H82cylbvQMe2e3nUA',desc:'Правобережный маршрут по высокому берегу Волги через Верхний Услон, Иннополис, Камское Устье (гора Лобач), Тетюши и Ундоры до Ульяновска.',coords:[[55.7883,49.10052],[55.81158,49.10288],[55.79997,49.06836],[55.76467,48.99092],[55.75626,48.98235],[55.7241,48.96115],[55.71684,48.93779],[55.70532,48.92736],[55.69365,48.92854],[55.67959,48.96821],[55.66509,48.95851],[55.6358,48.95313],[55.61996,48.94521],[55.61005,48.95186],[55.60018,48.93791],[55.57563,48.93249],[55.56076,48.9822],[55.55012,48.98568],[55.53218,48.9921],[55.51377,49.02493],[55.49568,49.02776],[55.47424,49.03192],[55.4642,49.02314],[55.44255,48.99795],[55.4282,49.01284],[55.40929,49.02147],[55.38908,49.04265],[55.37223,49.05409],[55.35848,49.07947],[55.34009,49.09007],[55.30198,49.16049],[55.28563,49.17034],[55.28458,49.18865],[55.26765,49.19626],[55.25602,49.19951],[55.23688,49.21347],[55.20096,49.26727],[55.19302,49.30143],[55.18662,49.31005],[55.17283,49.28828],[55.17652,49.23517],[55.14107,49.13859],[55.12496,49.10672],[55.10856,49.1032],[55.09575,49.08771],[55.08112,49.03143],[55.06711,49.00205],[55.06292,48.96517],[55.03981,48.88873],[54.94409,48.83277],[54.94128,48.84136],[54.91538,48.83511],[54.87133,48.79861],[54.85435,48.84009],[54.84311,48.83352],[54.82341,48.81046],[54.79723,48.81191],[54.79189,48.81003],[54.78279,48.80737],[54.77264,48.80132],[54.75782,48.77724],[54.74121,48.73643],[54.74005,48.71227],[54.74958,48.67995],[54.72717,48.64731],[54.7134,48.61369],[54.69793,48.57876],[54.71082,48.52228],[54.62124,48.38519],[54.55517,48.33959],[54.52824,48.36527],[54.48206,48.36828],[54.4673,48.38699],[54.45022,48.38592],[54.43256,48.35302],[54.41327,48.3704],[54.39619,48.37463],[54.35426,48.39338],[54.3442,48.39894],[54.3284,48.40722],[54.316,48.40722],[54.30761,48.39557]]},
+{id:'m-1',name:'1. Казань (Рудник) — Ульяновск («Волжская тропа»)',km:'290 км',color:'#22d3ee',storyUrl:'https://a1onso.blogspot.com/2025/09/320-2308-2408.html',downloadUrl:'https://drive.google.com/uc?export=download&id=16aFTAEIb9rdXktw87hjjR7mra6T5g6-m',driveFolderUrl:'https://drive.google.com/drive/folders/1AxRYJagBNhyGAGYEfgpehYZgf2qNidz6',trackUrl:'https://nakarte.me/#m=5/50.91689/42.51709&l=L&nktl=T0i82H82cylbvQMe2e3nUA',desc:'Правобережный маршрут по высокому берегу Волги через Верхний Услон, Иннополис, Камское Устье (гора Лобач), Тетюши и Ундоры до Ульяновска.',coords:[[55.7883,49.10052],[55.81158,49.10288],[55.79997,49.06836],[55.76467,48.99092],[55.75626,48.98235],[55.7241,48.96115],[55.71684,48.93779],[55.70532,48.92736],[55.69365,48.92854],[55.67959,48.96821],[55.66509,48.95851],[55.6358,48.95313],[55.61996,48.94521],[55.61005,48.95186],[55.60018,48.93791],[55.57563,48.93249],[55.56076,48.9822],[55.55012,48.98568],[55.53218,48.9921],[55.51377,49.02493],[55.49568,49.02776],[55.47424,49.03192],[55.4642,49.02314],[55.44255,48.99795],[55.4282,49.01284],[55.40929,49.02147],[55.38908,49.04265],[55.37223,49.05409],[55.35848,49.07947],[55.34009,49.09007],[55.30198,49.16049],[55.28563,49.17034],[55.28458,49.18865],[55.26765,49.19626],[55.25602,49.19951],[55.23688,49.21347],[55.20096,49.26727],[55.19302,49.30143],[55.18662,49.31005],[55.17283,49.28828],[55.17652,49.23517],[55.14107,49.13859],[55.12496,49.10672],[55.10856,49.1032],[55.09575,49.08771],[55.08112,49.03143],[55.06711,49.00205],[55.06292,48.96517],[55.03981,48.88873],[54.94409,48.83277],[54.94128,48.84136],[54.91538,48.83511],[54.87133,48.79861],[54.85435,48.84009],[54.84311,48.83352],[54.82341,48.81046],[54.79723,48.81191],[54.79189,48.81003],[54.78279,48.80737],[54.77264,48.80132],[54.75782,48.77724],[54.74121,48.73643],[54.74005,48.71227],[54.74958,48.67995],[54.72717,48.64731],[54.7134,48.61369],[54.69793,48.57876],[54.71082,48.52228],[54.62124,48.38519],[54.55517,48.33959],[54.52824,48.36527],[54.48206,48.36828],[54.4673,48.38699],[54.45022,48.38592],[54.43256,48.35302],[54.41327,48.3704],[54.39619,48.37463],[54.35426,48.39338],[54.3442,48.39894],[54.3284,48.40722],[54.316,48.40722],[54.30761,48.39557]]},
 {id:'m-2',name:'2. Ульяновск — Камышин',km:'1 290 км',color:'#f59e0b',storyUrl:'https://a1onso.blogspot.com/2026/07/1000-3-280-0505-18052026.html',storyLinks:[{"title":"Саратов — Ульяновск (1000 км + МГР 280 км)","url":"https://a1onso.blogspot.com/2026/07/1000-3-280-0505-18052026.html","desc":"1000 км вдоль Волги + многодневка «Меловые горы России» (280 км): Хвалынск, Вольск, Самарская Лука, Подвальские террасы и меловые холмы Сенгилея до Ульяновска."},{"title":"Арчеда — Саратов (720 км)","url":"https://a1onso.blogspot.com/2025/05/6-720-1505-20052025.html","desc":"Маршрут «Волга — Дон» от ст. Арчеда (Фролово) к Волге и подъём вдоль утёсов через Камышин, Щербаковскую балку и утёс Степана Разина до Саратова."}],downloadUrl:'https://drive.google.com/uc?export=download&id=1FUhO1C3EOhRxUCZCOXDWNDsBJnydT1sI',driveFolderUrl:'https://drive.google.com/drive/folders/1AxRYJagBNhyGAGYEfgpehYZgf2qNidz6',trackUrl:'https://nakarte.me/#m=10/53.30749/49.73854&l=O&nktl=VQ6ixD5HMwlUliw9EKEEZQ',desc:'Меловые холмы Сенгилея, Подвальские террасы, Самарская Лука, Хвалынск, Вольск, Саратов, утёс Степана Разина, Щербаковская балка и Камышин.',coords:[[54.27158,48.32221],[54.16777,48.36384],[54.11239,48.46864],[54.11093,48.57283],[54.01999,48.67866],[53.9913,48.73583],[53.92678,48.80192],[53.76817,48.83796],[53.70592,48.82567],[53.59543,48.86213],[53.52951,48.89294],[53.41871,48.90195],[53.37877,49.07818],[53.48175,49.60986],[53.46435,49.77931],[53.47141,49.92778],[53.43175,50.07813],[53.41557,50.19716],[53.37062,50.17971],[53.28861,50.21632],[53.20647,50.11139],[53.18319,50.07597],[53.25681,49.73964],[53.17778,49.61662],[53.17799,49.48322],[53.2481,49.30997],[53.25687,49.19757],[53.25833,49.06572],[53.21325,48.93489],[53.16452,48.66418],[53.13984,48.43177],[53.0053,48.44173],[52.94436,48.46542],[52.89937,48.34852],[52.80931,48.24807],[52.70944,48.26661],[52.64859,48.06285],[52.50274,48.10143],[52.45071,48.01822],[52.39872,47.96462],[52.30302,47.82205],[52.22596,47.94093],[52.18041,47.80433],[52.16139,47.65095],[52.09318,47.54156],[52.03604,47.37183],[51.98181,47.19373],[51.96261,46.9908],[51.88654,46.8147],[51.94347,46.67636],[51.91197,46.56931],[51.8603,46.5232],[51.81661,46.40943],[51.79056,46.29712],[51.80425,46.21919],[51.76805,46.1275],[51.69435,46.11694],[51.62216,46.18996],[51.54058,46.06377],[51.49612,45.93886],[51.41501,45.82535],[51.3325,45.74312],[51.24279,45.74767],[51.1566,45.79282],[51.07849,45.83368],[51.02249,45.9109],[50.96464,45.92631],[50.92676,46.01171],[50.84037,45.89112],[50.8048,45.77671],[50.76832,45.69545],[50.71667,45.63923],[50.6626,45.63234],[50.60531,45.64077],[50.54372,45.64124],[50.48973,45.7121],[50.50814,45.76327],[50.40781,45.79537],[50.33747,45.70242],[50.27471,45.65989],[50.28162,45.59419],[50.10626,45.42755],[50.0918,45.41688]]},
 {id:'m-4',name:'3. Камышин — Астрахань',km:'1 262 км',color:'#f43f5e',storyUrl:'https://a1onso.blogspot.com/2026/10/1262-1809-01102026.html',downloadUrl:'https://drive.google.com/uc?export=download&id=14E3o73JuerpHpKpuA6B5KUoNpqqzQ26j',driveFolderUrl:'https://drive.google.com/drive/folders/1AxRYJagBNhyGAGYEfgpehYZgf2qNidz6',trackUrl:'https://nakarte.me/#m=7/48.03769/48.74084&l=Y&nktl=4Upu3sb2u_fd59UFTkrJtw',desc:'Степной и пойменный маршрут через Дубовку, Волгоград, Волго-Ахтубинскую пойму, Ленинск, Ахтубинск, солёное озеро Баскунчак, гору Богдо и Харабали до Астрахани.',coords:[[50.09114,45.41594],[50.00546,45.30371],[49.93059,45.26129],[49.8619,45.1106],[49.79963,45.1857],[49.71642,45.11652],[49.62179,45.03957],[49.53849,44.99992],[49.46723,45.05075],[49.38471,44.98271],[49.37612,44.87836],[49.32993,44.9187],[49.28059,44.94739],[49.24218,44.83918],[49.17077,44.88327],[49.11507,44.8277],[49.05866,44.81864],[49.03295,44.67011],[48.94712,44.51823],[48.76439,44.51733],[48.72113,44.53939],[48.7128,44.526],[48.65328,44.60692],[48.58605,44.65531],[48.54275,44.70603],[48.54346,44.79995],[48.61281,44.77822],[48.69362,44.74363],[48.67218,44.8186],[48.59547,44.92923],[48.51919,44.9481],[48.52327,45.02414],[48.58125,45.07189],[48.63822,45.05371],[48.70055,45.04985],[48.70248,45.11463],[48.64963,45.20733],[48.51312,45.29464],[48.57,45.33893],[48.62474,45.3235],[48.66304,45.3724],[48.61062,45.45304],[48.58805,45.52602],[48.52747,45.40073],[48.53473,45.49447],[48.55369,45.56616],[48.49359,45.57938],[48.49554,45.6756],[48.52554,45.78683],[48.49183,45.89689],[48.44546,45.9956],[48.2829,46.15839],[48.16894,46.24075],[48.05811,46.33995],[48.0168,46.36546],[48.11134,46.62424],[48.21578,46.83717],[48.13862,46.91888],[48.16314,46.70711],[47.90286,46.53654],[47.84083,46.61772],[47.79027,46.71685],[47.69567,46.77794],[47.59516,46.89167],[47.52978,46.9139],[47.4574,46.97602],[47.41644,47.09683],[47.37208,47.19177],[47.40073,47.24712],[47.29391,47.34423],[47.21716,47.35267],[47.13051,47.51669],[46.9336,47.61363],[46.87967,47.69788],[46.77593,47.80023],[46.72348,47.97539],[46.7076,47.97717],[46.65138,47.9217],[46.56281,47.99195],[46.48665,48.05774],[46.44237,48.01609],[46.37718,48.04573],[46.36098,48.05806]]}
 ],
 sectors:[
-{id:'sec-1',num:'Сегмент 01',title:'Казань — Ульяновск (320 км)',km:'320 км',surface:'Грунты, тропы, тихий асфальт',badge:'Волжская тропа • Правый берег',mapRouteId:'m-1',downloadUrl:'https://drive.google.com/uc?export=download&id=16aFTAEIb9rdXktw87hjjR7mra6T5g6-m',driveFolderUrl:'https://drive.google.com/drive/folders/1AxRYJagBNhyGAGYEfgpehYZgf2qNidz6',trackUrl:'https://nakarte.me/#m=5/50.91689/42.51709&l=L&nktl=T0i82H82cylbvQMe2e3nUA',routeLine:'Казань (пристань Рудник / Верхний Услон) → Иннополис → Камское Устье (гора Лобач) → Тетюши → Ундоры → Ульяновск',desc:'Видовой правобережный маршрут по «Волжской тропе» над просторами Куйбышевского водохранилища. Панорамные грунтовые полки вдоль обрывов чередуются с нырками в глубокие лесные овраги, известняковыми скалами Камского Устья у слияния Волги и Камы, купеческими Тетюшами и реликтовыми минеральными источниками в Ундорах.',waterInfo:'Магазины, кафе и родники в Верхнем Услоне, Камском Устье, Тетюшах и Ундорах. Рекомендуемый возимый запас воды: 2–2,5 л.',gearInfo:'Кросс-кантрийный МТБ или грэвел с покрышками от 50 мм (бескамерно). Встречаются крутые грунтовые торчки; в дождь глинистые спуски к Волге становятся скользкими.',storyLinks:[{"title":"ШТС Волжская тропа (320 км)","url":"https://a1onso.blogspot.com/2025/09/320-2308-2408.html","desc":"От пристани Рудник (Верхний Услон) через Иннополис, Камское Устье и Тетюши по высокому правому берегу Волги до Ульяновска."}]},
-{id:'sec-2',num:'Сегмент 02',title:'Ульяновск — Камышин (1290 км)',km:'1 290 км',surface:'Меловые грунты, каменистые полки, грейдер',badge:'Сегмент гонки 2027 • Средняя и Нижняя Волга',mapRouteId:'m-2',downloadUrl:'https://drive.google.com/uc?export=download&id=1FUhO1C3EOhRxUCZCOXDWNDsBJnydT1sI',driveFolderUrl:'https://drive.google.com/drive/folders/1AxRYJagBNhyGAGYEfgpehYZgf2qNidz6',trackUrl:'https://nakarte.me/#m=10/53.30749/49.73854&l=O&nktl=VQ6ixD5HMwlUliw9EKEEZQ',routeLine:'Ульяновск → Сенгилей → Подвалье → Усолье → Жигулёвская ГЭС → Тольятти → Самарская Лука → Сызрань → Хвалынск → Вольск → Саратов → Утёс Степана Разина → Щербаковская балка → Камышин',desc:'Главный рельефный этап «Утёсов Поволжья» и дистанция открытого заезда 15.05.2027. Белоснежные меловые холмы Сенгилея со свистящими байбаками и ступенчатые амфитеатры Подвальских террас сменяются перевалами Самарской Луки, «швейцарскими» тягунами Хвалынска (градиенты до 16%) и отвесными обрывами у утёса Степана Разина и Щербаковской балки.',waterInfo:'Точки пополнения и ночёвок: Сенгилей, Новодевичье, Усолье, Жигулёвск/Тольятти, Сызрань, Хвалынск, Вольск, Саратов, Красноармейск, Камышин. Запас воды на прогонах: 2,5–3 л.',gearInfo:'МТБ (хардтейл / подвес) или грэвел от 50 мм (2.1–2.25"), полуслики (Maxxis Aspen ST / Ikon, Rocket Ron), бескамерно (120–150 мл герметика). В сильный ливень возможен липкий чернозём.',storyLinks:[{"title":"Саратов — Ульяновск (1000 км + МГР 280 км)","url":"https://a1onso.blogspot.com/2026/07/1000-3-280-0505-18052026.html","desc":"1000 км вдоль Волги + многодневка «Меловые горы России» (280 км): Хвалынск, Вольск, Самарская Лука, Подвальские террасы и меловые холмы Сенгилея до Ульяновска."},{"title":"Арчеда — Саратов (720 км)","url":"https://a1onso.blogspot.com/2025/05/6-720-1505-20052025.html","desc":"Маршрут «Волга — Дон» от ст. Арчеда (Фролово) к Волге и подъём вдоль утёсов через Камышин, Щербаковскую балку и утёс Степана Разина до Саратова."}]},
-{id:'sec-4',num:'Сегмент 03',title:'Камышин — Астрахань (1262 км)',km:'1 262 км',surface:'Укатанные степные и пойменные грунты, песок, асфальт',badge:'Нижняя Волга и Ахтуба • Степи и пойма',mapRouteId:'m-4',downloadUrl:'https://drive.google.com/uc?export=download&id=14E3o73JuerpHpKpuA6B5KUoNpqqzQ26j',driveFolderUrl:'https://drive.google.com/drive/folders/1AxRYJagBNhyGAGYEfgpehYZgf2qNidz6',trackUrl:'https://nakarte.me/#m=7/48.03769/48.74084&l=Y&nktl=4Upu3sb2u_fd59UFTkrJtw',routeLine:'Камышин → Горная Пролейка → Дубовка → Волгоград (Мамаев курган) → Ленинск → Волго-Ахтубинская пойма → Ахтубинск → Озеро Баскунчак и гора Богдо → Харабали → Астрахань',desc:'Экспедиционный южный этап от волжских обрывов до дельты Каспия. После правобережных утёсов у Горной Пролейки и Дубовки трек проходит через Волгоград и ныряет в дикие дубравы и ерики Волго-Ахтубинской поймы, выходит в бескрайние полынные степи к белоснежной соляной пустыне озера Баскунчак и красным скалам горы Большое Богдо, финишируя вдоль рыбных проток Ахтубы в Астрахани.',waterInfo:'Пополнение в Дубовке, Волгограде, Ленинске, Ахтубинске, Нижнем Баскунчаке и Харабали. Жаркий степной участок: обязателен запас воды 3–4 л + электролиты/изотоник.',gearInfo:'Строго бескамерная установка с увеличенным объёмом герметика (150–250 мл в колесо) против колючек якорца стелющегося и чилима. В пойме и полупустыне встречаются песчаные ловушки и сильные ветра.',storyLinks:[{"title":"Астрахань — Камышин (1262 км)","url":"https://a1onso.blogspot.com/2026/10/1262-1809-01102026.html","desc":"11-дневный байкпакинг-заезд на самообеспечении с юга на север: дельта и протоки Ахтубы, Харабали, солёное озеро Баскунчак, гора Богдо, Волго-Ахтубинская пойма, Волгоград и волжские утёсы до Камышина."}]}],
+{id:'sec-1',num:'Сегмент 01',title:'Казань — Ульяновск (290 км)',km:'290 км',surface:'Грунты, тропы, тихий асфальт',badge:'Волжская тропа • Правый берег',mapRouteId:'m-1',downloadUrl:'https://drive.google.com/uc?export=download&id=16aFTAEIb9rdXktw87hjjR7mra6T5g6-m',driveFolderUrl:'https://drive.google.com/drive/folders/1AxRYJagBNhyGAGYEfgpehYZgf2qNidz6',trackUrl:'https://nakarte.me/#m=5/50.91689/42.51709&l=L&nktl=T0i82H82cylbvQMe2e3nUA',routeLine:'Казань (пристань Рудник / Верхний Услон) → Иннополис → Камское Устье (гора Лобач) → Тетюши → Ундоры → Ульяновск',desc:'Видовой правобережный маршрут по «Волжской тропе» над просторами Куйбышевского водохранилища. Панорамные грунтовые полки вдоль обрывов чередуются с нырками в глубокие лесные овраги, известняковыми скалами Камского Устья у слияния Волги и Камы, купеческими Тетюшами и реликтовыми минеральными источниками в Ундорах.',waterInfo:'Магазины повсеместно, запас воды от 0,7 л.',gearInfo:'Кросс-кантрийный МТБ или грэвел с покрышками от 50 мм (бескамерно). Встречаются крутые грунтовые торчки; в дождь глинистые спуски к Волге становятся скользкими.',storyLinks:[{"title":"ШТС Волжская тропа (290 км)","url":"https://a1onso.blogspot.com/2025/09/320-2308-2408.html","desc":"От пристани Рудник (Верхний Услон) через Иннополис, Камское Устье и Тетюши по высокому правому берегу Волги до Ульяновска."}]},
+{id:'sec-2',num:'Сегмент 02',title:'Ульяновск — Камышин (1290 км)',km:'1 290 км',surface:'Меловые грунты, каменистые полки, грейдер',badge:'Сегмент гонки 2027 • Средняя и Нижняя Волга',mapRouteId:'m-2',downloadUrl:'https://drive.google.com/uc?export=download&id=1FUhO1C3EOhRxUCZCOXDWNDsBJnydT1sI',driveFolderUrl:'https://drive.google.com/drive/folders/1AxRYJagBNhyGAGYEfgpehYZgf2qNidz6',trackUrl:'https://nakarte.me/#m=10/53.30749/49.73854&l=O&nktl=VQ6ixD5HMwlUliw9EKEEZQ',routeLine:'Ульяновск → Сенгилей → Подвалье → Усолье → Жигулёвская ГЭС → Тольятти → Самарская Лука → Сызрань → Хвалынск → Вольск → Саратов → Утёс Степана Разина → Щербаковская балка → Камышин',desc:'Главный рельефный этап «Утёсов Поволжья» и дистанция открытого заезда 15.05.2027. Белоснежные меловые холмы Сенгилея со свистящими байбаками и ступенчатые амфитеатры Подвальских террас сменяются перевалами Самарской Луки, «швейцарскими» тягунами Хвалынска (градиенты до 16%) и отвесными обрывами у утёса Степана Разина и Щербаковской балки.',waterInfo:'Есть протяжённые участки пути без воды — рекомендуется не менее 1–2 литров. Магазины и кафе повсеместно.',gearInfo:'МТБ (хардтейл / подвес) или грэвел от 50 мм (2.1–2.25"), полуслики (Maxxis Aspen ST / Ikon, Rocket Ron), бескамерно (120–150 мл герметика). В сильный ливень возможен липкий чернозём.',storyLinks:[{"title":"Саратов — Ульяновск (1000 км + МГР 280 км)","url":"https://a1onso.blogspot.com/2026/07/1000-3-280-0505-18052026.html","desc":"1000 км вдоль Волги + многодневка «Меловые горы России» (280 км): Хвалынск, Вольск, Самарская Лука, Подвальские террасы и меловые холмы Сенгилея до Ульяновска."},{"title":"Арчеда — Саратов (720 км)","url":"https://a1onso.blogspot.com/2025/05/6-720-1505-20052025.html","desc":"Маршрут «Волга — Дон» от ст. Арчеда (Фролово) к Волге и подъём вдоль утёсов через Камышин, Щербаковскую балку и утёс Степана Разина до Саратова."}]},
+{id:'sec-4',num:'Сегмент 03',title:'Камышин — Астрахань (1262 км)',km:'1 262 км',surface:'Укатанные степные и пойменные грунты, песок, асфальт',badge:'Нижняя Волга и Ахтуба • Степи и пойма',mapRouteId:'m-4',downloadUrl:'https://drive.google.com/uc?export=download&id=14E3o73JuerpHpKpuA6B5KUoNpqqzQ26j',driveFolderUrl:'https://drive.google.com/drive/folders/1AxRYJagBNhyGAGYEfgpehYZgf2qNidz6',trackUrl:'https://nakarte.me/#m=7/48.03769/48.74084&l=Y&nktl=4Upu3sb2u_fd59UFTkrJtw',routeLine:'Камышин → Горная Пролейка → Дубовка → Волгоград (Мамаев курган) → Ленинск → Волго-Ахтубинская пойма → Ахтубинск → Озеро Баскунчак и гора Богдо → Харабали → Астрахань',desc:'Экспедиционный южный этап от волжских обрывов до дельты Каспия. После правобережных утёсов у Горной Пролейки и Дубовки трек проходит через Волгоград и ныряет в дикие дубравы и ерики Волго-Ахтубинской поймы, выходит в бескрайние полынные степи к белоснежной соляной пустыне озера Баскунчак и красным скалам горы Большое Богдо, финишируя вдоль рыбных проток Ахтубы в Астрахани.',waterInfo:'Есть протяжённые участки без воды и магазинов, жаркая степь. Рекомендуется не менее 1,5 литров воды.',gearInfo:'Строго бескамерная установка с увеличенным объёмом герметика (150–250 мл в колесо) против колючек якорца стелющегося. В пойме и полупустыне встречаются песчаные ловушки.',storyLinks:[{"title":"Астрахань — Камышин (1262 км)","url":"https://a1onso.blogspot.com/2026/10/1262-1809-01102026.html","desc":"11-дневный байкпакинг-заезд на самообеспечении с юга на север: дельта и протоки Ахтубы, Харабали, солёное озеро Баскунчак, гора Богдо, Волго-Ахтубинская пойма, Волгоград и волжские утёсы до Камышина."}]}],
 faqs:[
 {id:'faq-1',q:'1. Какой велосипед и какие покрышки лучше всего подойдут для маршрута?',a:'Оптимальный выбор — кросс-кантрийный МТБ (хардтейл или двухподвес) либо грэвел с широкими зазорами и покрышками от 50 мм (2.0–2.25"). Обязательна бескамерная установка со свежим герметиком (120–150 мл в колесо). Лучше всего работают накатистые полуслики с боковым зацепом (например, Maxxis Aspen ST, Maxxis Ikon, Schwalbe Rocket Ron или G-One RS Pro).'},
 {id:'faq-2',q:'2. Как работают паромные переправы на маршруте (Усолье и Самара)?',a:'На сегменте Ульяновск — Камышин две водные переправы. Первая — переправа через водохранилище в Усолье (до Тольятти): она работает до 18:00 вечера. Если вы понимаете, что не успеваете на вечерний рейс, можно спокойно проехать по Объездной трассе Тольятти — по общему времени выйдет практически то же самое. Вторая переправа — в Самаре (выход из Самарской Луки через Волгу): заранее сверяйте актуальное расписание на сайте речного вокзала, но уехать там легко — с раннего утра до позднего вечера каждые 15 минут курсируют как официальный паром/ОМ, так и частные скоростные катера.'},
@@ -1111,7 +1101,7 @@ stories:[
 {id:'st-1',author:'A1onso',title:'Астрахань — Камышин 1262 км',km:'1 262 км',date:'18.09 – 01.10.2026',url:'https://a1onso.blogspot.com/2026/10/1262-1809-01102026.html',trackUrl:'https://nakarte.me/#m=7/48.03769/48.74084&l=Y&nktl=4Upu3sb2u_fd59UFTkrJtw',imgUrl:'',summary:'Осенний заезд с юга на север. Степи, пойма, Баскунчак, Волгоград и волжские утёсы.'},
 {id:'st-2',author:'A1onso',title:'Саратов — Ульяновск 1000 км + МГР 280 км',km:'1 000 км + 280 км',date:'05.05 – 18.05.2026',url:'https://a1onso.blogspot.com/2026/07/1000-3-280-0505-18052026.html',trackUrl:'https://nakarte.me/#m=10/53.30749/49.73854&l=O&nktl=VQ6ixD5HMwlUliw9EKEEZQ',imgUrl:'',summary:'Многодневка «Меловые горы России» и продолжение до Ульяновска. Хвалынск, Самарская Лука, Сенгилей.'},
 {id:'st-4',author:'A1onso',title:'Волга — Дон: Арчеда — Саратов 720 км',km:'720 км',date:'15.05 – 20.05.2025',url:'https://a1onso.blogspot.com/2025/05/6-720-1505-20052025.html',trackUrl:'https://nakarte.me/#m=10/53.30749/49.73854&l=O&nktl=VQ6ixD5HMwlUliw9EKEEZQ',imgUrl:'',summary:'Весенний маршрут из донских степей от ст. Арчеда (Фролово) к Волге и подъём вдоль утёсов через Камышин, Щербаковскую балку и утёс Степана Разина до Саратова.'},
-{id:'st-3',author:'A1onso',title:'ШТС Волжская тропа 320 км',km:'320 км',date:'23.08 – 24.08.2025',url:'https://a1onso.blogspot.com/2025/09/320-2308-2408.html',trackUrl:'https://nakarte.me/#m=5/50.91689/42.51709&l=L&nktl=T0i82H82cylbvQMe2e3nUA',imgUrl:'',summary:'От пристани Рудник через Иннополис, Камское Устье, Тетюши до Ульяновска.'}
+{id:'st-3',author:'A1onso',title:'ШТС Волжская тропа 290 км',km:'290 км',date:'23.08 – 24.08.2025',url:'https://a1onso.blogspot.com/2025/09/320-2308-2408.html',trackUrl:'https://nakarte.me/#m=5/50.91689/42.51709&l=L&nktl=T0i82H82cylbvQMe2e3nUA',imgUrl:'',summary:'От пристани Рудник через Иннополис, Камское Устье, Тетюши до Ульяновска.'}
 ]};
 
 // ═══════════════════════════════════════════════════════════════
@@ -1315,6 +1305,8 @@ const z=coords.z;
 const styleKey=this._styleKey||'minecraft';
 const BS=z<=5?12:(z===6?16:(z===7?20:24));
 const worldScale=Math.pow(2,z-6);
+const lngLeft=this._map.unproject([originX,originY],z).lng;
+const lngSpan=this._map.unproject([originX+size.x,originY],z).lng-lngLeft;
 for(let y=0;y<size.y;y+=BS){
 const lat=this._map.unproject([originX,originY+y+BS*0.5],z).lat;
 const vLng=approxVolgaLngAtLat(lat);
@@ -1325,7 +1317,7 @@ const wx=Math.floor((originX+x)/(16*worldScale));
 const subX=Math.floor((originX+x)/BS);
 const h=this._hash(wx,wy);
 const hSub=this._hash(subX,subY);
-const lng=this._map.unproject([originX+x+BS*0.5,originY+y+BS*0.5],z).lng;
+const lng=lngLeft+lngSpan*((x+BS*0.5)/size.x);
 const dLng=lng-vLng;
 const isBaskunchak=Math.abs(lat-48.18)<0.14&&Math.abs(lng-46.88)<0.20;
 const isFloodplain=lat>=46.3&&lat<=48.8&&dLng>-0.08&&dLng<0.65;
@@ -1532,15 +1524,13 @@ if(!S||(!S.artUrl&&!S.remoteImgPath))return;
 const isMobileScreen=(typeof window!=='undefined'&&window.innerWidth&&window.innerWidth<=900);
 const targetW=isMobileScreen?1200:1920;
 const candidates=[];
+if(S.artUrl){
+candidates.push(S.artUrl);
+}
 if(S.remoteImgPath){
 candidates.push(`https://wsrv.nl/?url=${S.remoteImgPath}&w=${targetW}&q=78&output=webp`);
 candidates.push(`https://images.weserv.nl/?url=${S.remoteImgPath}&w=${targetW}&q=78&output=webp`);
 candidates.push(`https://i0.wp.com/${S.remoteImgPath}?w=${targetW}&quality=78`);
-}
-if(S.artUrl&&window.location&&/^https?:/i.test(window.location.protocol)){
-candidates.push(S.artUrl);
-}
-if(S.remoteImgPath){
 candidates.push(`https://${S.remoteImgPath}`);
 }
 let idx=0;
@@ -1703,6 +1693,8 @@ iconAnchor:[Math.round(sz/2),Math.round(sz/2)]
 });
 const marker=L.marker([p.lat,p.lng],{icon,interactive:true,zIndexOffset:960}).addTo(mapPhotosLayer);
 marker.bindPopup(`<div class="min-w-[230px] max-w-[280px]"><span class="mc-popup-badge">📷 ФОТО ${p.num} / ${TRACK_GEOTAG_PHOTOS.length} • ${escapeHtml(p.date)}</span><div class="mc-popup-title">${escapeHtml(p.title)}</div><div style="margin:6px 0;border:2px solid #1a1208;background:#090c10;cursor:pointer" onclick="openTrackPhotoModal(${idx})"><img src="${escapeHtml(p.src)}" alt="${escapeHtml(p.title)}" style="width:100%;height:150px;object-fit:cover;display:block"></div><div class="mc-popup-desc">${escapeHtml(p.desc)}</div><div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#1a1208;margin-bottom:6px">📍 ${p.lat.toFixed(5)}, ${p.lng.toFixed(5)}</div><button type="button" onclick="openTrackPhotoModal(${idx})" class="mc-popup-btn cyan">🔍 ОТКРЫТЬ ФОТО НА ВЕСЬ ЭКРАН</button></div>`,{closeButton:true,autoPan:true,className:'mc-popup'});
+marker.on('click',function(ev){const inFs=isMapFullscreen||Boolean(document.fullscreenElement||document.webkitFullscreenElement);if(inFs){if(ev&&ev.originalEvent)ev.originalEvent.stopPropagation();this.closePopup();openTrackPhotoModal(idx);}});
+marker.on('popupopen',function(){if(isMapFullscreen||Boolean(document.fullscreenElement||document.webkitFullscreenElement)){this.closePopup();}});
 });
 }
 
@@ -1830,34 +1822,13 @@ function editMapRoute(id){if(!isAdminLoggedIn)return;const route=portalState.map
 function deleteMapRoute(id){if(!isAdminLoggedIn)return;portalState.mapRoutes=portalState.mapRoutes.filter(r=>r.id!==id);savePortalState();if(styledGridLayer)styledGridLayer.redraw();renderMapRoutes();showToast('Маршрут удалён')}
 function resetMapRouteForm(){const f=document.getElementById('map-route-admin-form');if(f)f.reset();document.getElementById('mr-edit-id').value='';uploadedRouteCoords=null}
 const AI_ROUTE_KNOWLEDGE={
-'m-1':{summary:'Правобережный трек по «Волжской тропе» от пристани Рудник (Верхний Услон) через Иннополис, Камское Устье, Тетюши и Ундоры до Ульяновска.',water:'Магазины и родники в Верхнем Услоне, Камском Устье, Тетюшах и Ундорах. Рекомендуемый запас воды: 2–2.5 л.',tires:'Кросс-кантрийный МТБ или грэвел от 50 мм, бескамерно. Встречаются крутые грунтовые торчки и овраги.',hazards:'В дождь глинистые участки на спусках к Волге становятся скользкими.'},
-'m-2':{summary:'Гоночный сегмент 2027 (1290 км): меловые холмы Сенгилея, Подвальские террасы, Самарская Лука, Хвалынск, Вольск, Саратов, утёс Степана Разина и Камышин.',water:'Ключевые точки пополнения и ночёвок: Сенгилей, Новодевичье, Усолье, Жигулёвск/Тольятти, Сызрань, Хвалынск, Вольск, Саратов, Красноармейск, Камышин. На прогонах по меловым холмам запас воды от 2.5–3 л.',tires:'Покрышки от 50 мм (2.1–2.25"), полуслики вроде Maxxis Aspen ST / Ikon / Schwalbe Rocket Ron или G-One RS Pro, обязательно бескамерно (120–150 мл свежего герметика).',hazards:'Две переправы: 1) Усолье (доступна до 18:00, если не успеваете — объезд по Объездной трассе Тольятти, по времени выйдет то же самое); 2) Самара (паром и частные катера каждые 15 мин с раннего утра до позднего вечера). Крутые подъёмы до 16%, в ливень — липкий чернозём.'},
-'m-4':{summary:'Южный сегмент (1262 км) от Камышина через Дубовку, Волгоград, Волго-Ахтубинскую пойму, Ленинск, Ахтубинск, озеро Баскунчак и Харабали до Астрахани.',water:'Жаркий степной и пойменный участок: запас воды 3–4 л + регидрон/изотоник. Пополнение в Дубовке, Волгограде, Ленинске, Ахтубинске, Нижнем Баскунчаке, Харабали.',tires:'Обязательна бескамерка с антипрокольным запасом герметика (150 мл): в степях и пойме осенью и летом много колючек (якорцы / чилим).',hazards:'Песчаные ловушки в пойме, сильные степные ветра и колючки.'}
+'m-1':{summary:'Правобережный трек по «Волжской тропе» от пристани Рудник (Верхний Услон) через Иннополис, Камское Устье, Тетюши и Ундоры до Ульяновска.',water:'Магазины повсеместно, запас воды от 0,7 л.',tires:'Кросс-кантрийный МТБ или грэвел от 50 мм, бескамерно. Встречаются крутые грунтовые торчки и овраги.',hazards:'В дождь глинистые участки на спусках к Волге становятся скользкими.'},
+'m-2':{summary:'Гоночный сегмент 2027 (1290 км): меловые холмы Сенгилея, Подвальские террасы, Самарская Лука, Хвалынск, Вольск, Саратов, утёс Степана Разина и Камышин.',water:'Есть протяжённые участки пути без воды — рекомендуется не менее 1–2 литров. Магазины и кафе повсеместно.',tires:'Покрышки от 50 мм (2.1–2.25"), полуслики вроде Maxxis Aspen ST / Ikon / Schwalbe Rocket Ron или G-One RS Pro, обязательно бескамерно (120–150 мл свежего герметика).',hazards:'Две переправы: 1) Усолье (доступна до 18:00, если не успеваете — объезд по Объездной трассе Тольятти, по времени выйдет то же самое); 2) Самара (паром и частные катера каждые 15 мин с раннего утра до позднего вечера). Крутые подъёмы до 16%, в ливень — липкий чернозём.'},
+'m-4':{summary:'Южный сегмент (1262 км) от Камышина через Дубовку, Волгоград, Волго-Ахтубинскую пойму, Ленинск, Ахтубинск, озеро Баскунчак и Харабали до Астрахани.',water:'Есть протяжённые участки без воды и магазинов, жаркая степь. Рекомендуется не менее 1,5 литров воды.',tires:'Обязательна бескамерка с антипрокольным запасом герметика (150 мл): в степях и пойме осенью и летом много колючек (якорцы / чилим).',hazards:'Песчаные ловушки в пойме, сильные степные ветра и колючки.'}
 };
 function openAiRouteModal(){openSmartExternalUrl('https://notebook.google.com/notebook/7959d135-4395-4f56-8f7b-4fa29ddd0fd6/preview')}
-function closeAiRouteModal(){document.getElementById('ai-route-modal').classList.add('hidden');document.getElementById('ai-route-modal').classList.remove('flex')}
-function askAiAboutCurrentRoute(){const qInput=document.getElementById('ai-custom-question'),bodyEl=document.getElementById('ai-modal-body');if(!qInput||!bodyEl)return;const question=qInput.value.trim();if(!question)return;const route=portalState.mapRoutes.find(r=>r.id===activeAiRouteId)||portalState.mapRoutes[0];const kb=AI_ROUTE_KNOWLEDGE[activeAiRouteId]||AI_ROUTE_KNOWLEDGE['m-2'];const qLow=question.toLowerCase();let answer=`По базе отчётов участка: ${kb.summary} ${kb.water} ${kb.tires}`;if(qLow.includes('вод')||qLow.includes('магаз')||qLow.includes('еда')||qLow.includes('кафе'))answer=kb.water;else if(qLow.includes('покр')||qLow.includes('резин')||qLow.includes('велос')||qLow.includes('гермет'))answer=kb.tires;else if(qLow.includes('паром')||qLow.includes('дожд')||qLow.includes('черноз')||qLow.includes('опас')||qLow.includes('сложн'))answer=kb.hazards;bodyEl.innerHTML=`<div class="text-xs font-mono text-volga-400">Вопрос по «${escapeHtml(route?route.name:'маршруту')}»:</div><div class="font-semibold text-white">${escapeHtml(question)}</div><div class="text-xs text-slate-200 pt-2 border-t border-graphite-800 leading-relaxed">${escapeHtml(answer)}</div><div class="text-[11px] text-slate-400 pt-1">Для глубокого поиска по всем отчётам откройте полную базу в Google NotebookLM по кнопке ниже.</div>`;qInput.value=''}
-
 function openAdminLoginModal(){const modal=document.getElementById('admin-auth-modal'),input=document.getElementById('admin-modal-password-input'),errEl=document.getElementById('admin-modal-error'),hint=document.getElementById('admin-auth-hint'),btn=document.getElementById('admin-auth-submit-btn');hint.textContent='Введите пароль администратора. На новом устройстве используйте «Забыли пароль?» (код придёт на a1onzo@yandex.ru).';btn.textContent='Войти';input.value='';errEl.classList.add('hidden');toggleAdminPasswordResetBox(false);modal.classList.remove('hidden');modal.classList.add('flex');setTimeout(()=>input.focus(),50)}
 function toggleAdminPasswordResetBox(show){const formEl=document.getElementById('admin-login-form-el'),resetBox=document.getElementById('admin-reset-pass-box');if(!formEl||!resetBox)return;if(show){formEl.classList.add('hidden');resetBox.classList.remove('hidden')}else{resetBox.classList.add('hidden');formEl.classList.remove('hidden')}}
-let localFallbackCodes={};
-function issueLocalFallbackCode(email){
-const norm=normalizeEmail(email);
-const code=String(Math.floor(100000+Math.random()*900000));
-localFallbackCodes[norm]={code,expiresAt:Date.now()+30*60*1000};
-return code;
-}
-function checkLocalFallbackCode(email,inputCode){
-const norm=normalizeEmail(email);
-const entry=localFallbackCodes[norm];
-if(!entry)return false;
-if(Date.now()>entry.expiresAt){delete localFallbackCodes[norm];return false;}
-if(String(entry.code)===String(inputCode).trim()){
-delete localFallbackCodes[norm];
-return true;
-}
-return false;
-}
 async function dispatchVerificationCodeUniversal(targetEmail){
 const url=getGoogleSheetUrl();
 let delivered=false,serverError='';
@@ -1883,23 +1854,9 @@ else if(parsed&&parsed.codeSent===false)serverError=parsed.message||'MailApp н�
 }else{
 serverError='Не указан URL Google Apps Script';
 }
-if(!delivered){
-try{
-const fd=new FormData();
-fd.append('_subject','Запрос кода восстановления — Утёсы Поволжья');
-fd.append('email',targetEmail);
-fd.append('message',`Запрос кода подтверждения/восстановления для ${targetEmail} (${new Date().toLocaleString('ru-RU')})`);
-fd.append('_captcha','false');
-fetch(`https://formsubmit.co/ajax/${encodeURIComponent(targetEmail)}`,{method:'POST',body:fd}).catch(()=>{});
-}catch(e){}
-}
-const fallbackCode=delivered?null:issueLocalFallbackCode(targetEmail);
-return{delivered,serverError,fallbackCode};
+return{delivered,serverError};
 }
 async function verifyCodeUniversal(targetEmail,code){
-if(checkLocalFallbackCode(targetEmail,code)){
-return{verified:true,verifiedAt:new Date().toLocaleString('ru-RU')};
-}
 const url=getGoogleSheetUrl();
 if(!url)return{verified:false};
 try{
@@ -1924,13 +1881,8 @@ if(res.delivered){
 if(hint){hint.className='p-2.5 rounded-lg bg-emerald-500/10 border border-emerald-500/40 text-emerald-200 text-[11px] font-mono leading-relaxed';hint.innerHTML=`✓ Письмо с кодом отправлено на <strong>${escapeHtml(targetEmail)}</strong>. Проверьте «Входящие» и «Спам».`;}
 showToast('Код отправлен на '+targetEmail);
 }else{
-const codeInput=document.getElementById('admin-reset-code-input');
-if(codeInput&&res.fallbackCode)codeInput.value=res.fallbackCode;
-if(hint){
-hint.className='p-2.5 rounded-lg bg-ochre-500/15 border border-ochre-500/50 text-ochre-200 text-[11px] font-mono leading-relaxed';
-hint.innerHTML=`⚠️ Почтовый модуль Google Таблицы не ответил (${escapeHtml(res.serverError||'выполните authorizeMail в Apps Script')}).<br>Резервный одноразовый код для входа: <strong class="text-white text-sm select-all">${escapeHtml(res.fallbackCode||'')}</strong> (уже подставлен в поле ниже).`;
-}
-showToast('Сгенерирован резервный код восстановления');
+if(hint){hint.className='p-2.5 rounded-lg bg-red-950/70 border border-red-600/50 text-red-200 text-[11px] font-mono leading-relaxed';hint.textContent='Ошибка отправки письма: '+(res.serverError||'проверьте Google Apps Script и authorizeMail');}
+showToast('Не удалось отправить код на почту','error');
 }
 }
 async function confirmAdminPasswordReset(){
@@ -1954,7 +1906,7 @@ showToast('Пароль администратора обновлён!');
 }
 function closeAdminLoginModal(){document.getElementById('admin-auth-modal').classList.add('hidden');document.getElementById('admin-auth-modal').classList.remove('flex')}
 async function handleAdminLogin(e){e.preventDefault();const input=document.getElementById('admin-modal-password-input').value.trim(),errEl=document.getElementById('admin-modal-error'),storedHash=getAdminPasswordHash(),inputHash=await hashPasswordSHA256(input);if(inputHash!==storedHash){errEl.textContent='Неверный пароль. На новом устройстве нажмите «Забыли пароль?».';errEl.classList.remove('hidden');showToast('Неверный пароль','error');return}isAdminLoggedIn=true;currentAdminPassHash=storedHash;adminSessionToken=(window.crypto&&crypto.randomUUID)?crypto.randomUUID():(String(Date.now())+'-'+Math.random().toString(36).slice(2));closeAdminLoginModal();document.getElementById('admin-top-bar').classList.remove('hidden');document.getElementById('admin-panel-wrapper').classList.remove('hidden');const gsInput=document.getElementById('admin-gsheet-url-input');if(gsInput)gsInput.value=getGoogleSheetUrl();updateGoogleSheetStatusUI();renderAdminApplications();renderAdminResultsSection();renderAdminSectorsSection();renderAdminFaqSection();renderAdminSurveySection();renderStories();renderMapRoutes();if(getGoogleSheetUrl())pullFromGoogleSheet(false);showToast('Режим админа активирован')}
-function logoutAdmin(){if(isEditMode)disableEditModeInternal();isAdminLoggedIn=false;currentAdminPassHash='';adminSessionToken='';document.getElementById('admin-top-bar').classList.add('hidden');document.getElementById('admin-panel-wrapper').classList.add('hidden');document.getElementById('map-admin-drawer').classList.add('hidden');renderMapRoutes();renderSectors();renderFaqs();renderStories();renderDonateModalContent();renderDonateModalContent();showToast('Вы вышли из режима администратора')}
+function logoutAdmin(){if(isEditMode)disableEditModeInternal();isAdminLoggedIn=false;currentAdminPassHash='';adminSessionToken='';document.getElementById('admin-top-bar').classList.add('hidden');document.getElementById('admin-panel-wrapper').classList.add('hidden');document.getElementById('map-admin-drawer').classList.add('hidden');renderMapRoutes();renderSectors();renderFaqs();renderStories();renderDonateModalContent();showToast('Вы вышли из режима администратора')}
 function triggerAdminGear(){if(isAdminLoggedIn)scrollToAdminApplications();else openAdminLoginModal()}
 function scrollToAdminApplications(){if(!isAdminLoggedIn)return;const p=document.getElementById('admin-panel-wrapper');if(!p)return;p.classList.remove('hidden');const sp=document.getElementById('admin-applications-spoiler');if(sp)sp.open=true;(sp||p).scrollIntoView({behavior:'smooth',block:'start'})}
 function scrollToAdminResults(){if(!isAdminLoggedIn)return;document.getElementById('admin-panel-wrapper').classList.remove('hidden');const r=document.getElementById('admin-results-manager');if(r){r.open=true;r.scrollIntoView({behavior:'smooth',block:'start'})}}
@@ -2004,7 +1956,7 @@ el.addEventListener('blur',save);
 }
 
 function haversineKm(lat1,lon1,lat2,lon2){const R=6371;const dLat=(lat2-lat1)*Math.PI/180;const dLon=(lon2-lon1)*Math.PI/180;const a=Math.sin(dLat/2)**2+Math.cos(lat1*Math.PI/180)*Math.cos(lat2*Math.PI/180)*Math.sin(dLon/2)**2;return R*2*Math.atan2(Math.sqrt(a),Math.sqrt(1-a))}
-function analyzeGpxTrackText(xmlText){const xml=new DOMParser().parseFromString(xmlText,'text/xml');const trkpts=Array.from(xml.querySelectorAll('trkpt'));if(trkpts.length<2)throw new Error('В GPX-файле недостаточно точек маршрута');const points=[];for(const pt of trkpts){const lat=parseFloat(pt.getAttribute('lat'));const lon=parseFloat(pt.getAttribute('lon'));const t=pt.querySelector('time');const tMs=t?new Date(t.textContent.trim()).getTime():NaN;if(!isNaN(lat)&&!isNaN(lon))points.push({lat,lon,tMs})}let totalDistKm=0;for(let i=1;i<points.length;i++)totalDistKm+=haversineKm(points[i-1].lat,points[i-1].lon,points[i].lat,points[i].lon);const timed=points.filter(p=>!isNaN(p.tMs)).sort((a,b)=>a.tMs-b.tMs);let totalMinutes=0,movingMinutes=0,penaltyMinutes=0;const dailyBreakdown=[];if(timed.length>=2){const startMs=timed[0].tMs,endMs=timed[timed.length-1].tMs;totalMinutes=Math.max(1,Math.round((endMs-startMs)/60000));const dayMs=86400000;const numDays=Math.max(1,Math.ceil((endMs-startMs)/dayMs));const arr=new Array(numDays).fill(0);for(let i=1;i<timed.length;i++){const dt=timed[i].tMs-timed[i-1].tMs;if(dt<=0)continue;const km=haversineKm(timed[i-1].lat,timed[i-1].lon,timed[i].lat,timed[i].lon);const v=km/(dt/3600000);if(dt<=5*60000&&v>=2.8){const idx=Math.min(numDays-1,Math.floor((timed[i].tMs-startMs)/dayMs));arr[idx]+=dt}}for(let d=0;d<numDays;d++){const dayStart=Math.max(startMs,startMs+d*dayMs);const dayEnd=Math.min(endMs,startMs+(d+1)*dayMs);const dur=Math.max(1,Math.round((dayEnd-dayStart)/60000));const dayMoving=Math.min(dur,Math.round(arr[d]/60000));const dayRest=Math.max(0,dur-dayMoving);const isIncompleteFinalDay=(d===numDays-1&&dur<1440);const requiredRest=isIncompleteFinalDay?0:480;const deficit=Math.max(0,requiredRest-dayRest);const penalty=deficit*2;movingMinutes+=dayMoving;penaltyMinutes+=penalty;dailyBreakdown.push({day:d+1,durationMin:dur,movingMin:dayMoving,restMin:dayRest,deficitMin:deficit,penaltyMin:penalty})}}else{movingMinutes=Math.round((totalDistKm/15)*60);totalMinutes=Math.round(movingMinutes*1.45)}return{distanceKm:Number(totalDistKm.toFixed(1)),totalMinutes,movingMinutes,restMinutes:Math.max(0,totalMinutes-movingMinutes),penaltyMinutes,finalMinutes:totalMinutes+penaltyMinutes,dailyBreakdown}}
+function analyzeGpxTrackText(xmlText){const xml=new DOMParser().parseFromString(xmlText,'text/xml');const trkpts=Array.from(xml.querySelectorAll('trkpt'));if(trkpts.length<2)throw new Error('В GPX-файле недостаточно точек маршрута');const points=[];for(const pt of trkpts){const lat=parseFloat(pt.getAttribute('lat'));const lon=parseFloat(pt.getAttribute('lon'));const t=pt.querySelector('time');const tMs=t?new Date(t.textContent.trim()).getTime():NaN;if(!isNaN(lat)&&!isNaN(lon))points.push({lat,lon,tMs})}let totalDistKm=0;for(let i=1;i<points.length;i++)totalDistKm+=haversineKm(points[i-1].lat,points[i-1].lon,points[i].lat,points[i].lon);const timed=points.filter(p=>!isNaN(p.tMs)).sort((a,b)=>a.tMs-b.tMs);let totalMinutes=0,movingMinutes=0,penaltyMinutes=0;const dailyBreakdown=[];if(timed.length>=2){const startMs=timed[0].tMs,endMs=timed[timed.length-1].tMs;totalMinutes=Math.max(1,Math.round((endMs-startMs)/60000));const dayMs=86400000;const numDays=Math.max(1,Math.ceil((endMs-startMs)/dayMs));const arr=new Array(numDays).fill(0);for(let i=1;i<timed.length;i++){const dt=timed[i].tMs-timed[i-1].tMs;if(dt<=0)continue;const km=haversineKm(timed[i-1].lat,timed[i-1].lon,timed[i].lat,timed[i].lon);const v=km/(dt/3600000);if(dt<=5*60000&&v>=1.8){const idx=Math.min(numDays-1,Math.floor((timed[i].tMs-startMs)/dayMs));arr[idx]+=dt}}for(let d=0;d<numDays;d++){const dayStart=Math.max(startMs,startMs+d*dayMs);const dayEnd=Math.min(endMs,startMs+(d+1)*dayMs);const dur=Math.max(1,Math.round((dayEnd-dayStart)/60000));const dayMoving=Math.min(dur,Math.round(arr[d]/60000));const dayRest=Math.max(0,dur-dayMoving);const isIncompleteFinalDay=(d===numDays-1&&dur<1440);const requiredRest=isIncompleteFinalDay?0:480;const deficit=Math.max(0,requiredRest-dayRest);const penalty=deficit*2;movingMinutes+=dayMoving;penaltyMinutes+=penalty;dailyBreakdown.push({day:d+1,durationMin:dur,movingMin:dayMoving,restMin:dayRest,deficitMin:deficit,penaltyMin:penalty})}}else{throw new Error('В GPX-файле отсутствуют метки времени (<time>)')}return{distanceKm:Number(totalDistKm.toFixed(1)),totalMinutes,movingMinutes,restMinutes:Math.max(0,totalMinutes-movingMinutes),penaltyMinutes,finalMinutes:totalMinutes+penaltyMinutes,dailyBreakdown}}
 function formatMinutesToHHMM(m){if(m==null||isNaN(m))return'—';const r=Math.max(0,Math.round(Number(m)));return String(Math.floor(r/60)).padStart(2,'0')+':'+String(r%60).padStart(2,'0')}
 function formatMinutesWithDays(m){if(m==null||isNaN(m))return'—';const hm=formatMinutesToHHMM(m);const d=Math.floor(m/1440),h=Math.floor((m%1440)/60),mm=Math.round(m%60);return d>0?`${hm} (${d}д ${h}ч ${mm}м)`:hm}
 function parseHHMMToMinutes(s){if(!s)return 0;const t=String(s).trim();if(t.includes(':')){const p=t.split(':');return(parseInt(p[0],10)||0)*60+(parseInt(p[1],10)||0)}const n=parseFloat(t.replace(',','.'));return isNaN(n)?0:Math.round(n*60)}
@@ -2023,24 +1975,7 @@ async function pushToGoogleSheet(payload={}){const url=getGoogleSheetUrl();if(!u
 async function pushAllToGoogleSheet(){if(!isAdminLoggedIn)return;if(!getGoogleSheetUrl()){showToast('Сначала URL Google Apps Script','error');return}await pushToGoogleSheet({action:'adminSync',registrations:registrationsList,results:raceResultsList,stories:portalState.stories,portalConfig:stripHeavyCoordsForStorage(portalState)});showToast('Всё выгружено')}
 function mergeRegistrationItems(localItem,cloudItem){if(!localItem)return cloudItem;if(!cloudItem)return localItem;const lt=toMs(localItem.updatedAt),ct=toMs(cloudItem.updatedAt);const primary=ct>=lt?cloudItem:localItem,secondary=ct>=lt?localItem:cloudItem;const merged={...secondary,...primary};['email','fio','passwordHash','emailVerifiedAt','birthYear','telegram','socialUrl','experience','bikeType','bikeBrand','bikeYear','phone','status','createdAt','survey','surveyScore'].forEach(f=>{const pv=primary[f],sv=secondary[f];if((pv===undefined||pv===null||String(pv).trim()==='')&&(sv!==undefined&&sv!==null&&String(sv).trim()!==''))merged[f]=sv});return merged}
 function mergeResultItem(localItem,cloudItem){if(!localItem)return cloudItem;if(!cloudItem)return localItem;const lt=toMs(localItem.updatedAt),ct=toMs(cloudItem.updatedAt);return ct>=lt?{...localItem,...cloudItem}:{...cloudItem,...localItem}}
-async function pullFromGoogleSheet(showNotification=false){const url=getGoogleSheetUrl();if(!url){if(showNotification)showToast('Сначала URL','error');return}try{updateGoogleSheetStatusUI('🔄 Загрузка…',true);const q=new URLSearchParams({action:'getAll',t:String(Date.now())});if(isAdminLoggedIn&&currentAdminPassHash)q.set('adminTokenHash',currentAdminPassHash);const res=await fetch(`${url}${url.includes('?')?'&':'?'}${q.toString()}`,{method:'GET',redirect:'follow'});const data=await res.json();const needInitialPurge=!localStorage.getItem('volga_cliffs_cloud_purged_v14');
-if(needInitialPurge){
-try{localStorage.setItem('volga_cliffs_cloud_purged_v14','1');}catch(e){}
-const admHash=getAdminPasswordHash();
-if(data&&Array.isArray(data.registrations)){
-for(const c of data.registrations){
-if(c&&c.id){try{fetch(url,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({action:'deleteRegistration',id:c.id,adminTokenHash:admHash})});}catch(e){}}
-}
-}
-if(data&&Array.isArray(data.results)){
-for(const c of data.results){
-if(c&&c.id){try{fetch(url,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({action:'deleteResult',id:c.id,adminTokenHash:admHash})});}catch(e){}}
-}
-}
-registrationsList=[];saveRegistrationsLocal();
-raceResultsList=[];saveRaceResultsLocal();
-}else{
-if(data&&Array.isArray(data.registrations)){
+async function pullFromGoogleSheet(showNotification=false){const url=getGoogleSheetUrl();if(!url){if(showNotification)showToast('Сначала URL','error');return}try{updateGoogleSheetStatusUI('🔄 Загрузка…',true);const q=new URLSearchParams({action:'getAll',t:String(Date.now())});if(isAdminLoggedIn&&currentAdminPassHash)q.set('adminTokenHash',currentAdminPassHash);const res=await fetch(`${url}${url.includes('?')?'&':'?'}${q.toString()}`,{method:'GET',redirect:'follow'});const data=await res.json();if(data&&Array.isArray(data.registrations)){
 const validCloudRegs=data.registrations.filter(c=>c&&c.id&&c.id!=='reg-a1onso'&&(String(c.fio||'').trim().length>0||String(c.email||'').trim().length>0));
 if(validCloudRegs.length>0){
 const m=new Map();
@@ -2058,7 +1993,6 @@ raceResultsList.forEach(it=>{if(it&&it.id&&it.id!=='res-a1onso-2026')m.set(it.id
 validCloudRes.forEach(cloud=>{m.set(cloud.id,mergeResultItem(m.get(cloud.id),cloud))});
 raceResultsList=Array.from(m.values());
 saveRaceResultsLocal();
-}
 }
 }if(data&&Array.isArray(data.stories)&&data.stories.length>0){portalState.stories=mergeDefaultStories([...(portalState.stories||[]),...data.stories]);savePortalState()}if(data&&data.portalConfig&&typeof data.portalConfig==='object'){const cu=toMs(data.portalConfig.updatedAt),lu=toMs(portalState.updatedAt);if(cu>lu){const preservedFaqs=(Array.isArray(data.portalConfig.faqs)&&data.portalConfig.faqs.length)?data.portalConfig.faqs:(Array.isArray(portalState.faqs)&&portalState.faqs.length?portalState.faqs:defaultPortalState.faqs);const preservedSurvey=(Array.isArray(data.portalConfig.surveyQuestions)&&data.portalConfig.surveyQuestions.length)?data.portalConfig.surveyQuestions:(Array.isArray(portalState.surveyQuestions)&&portalState.surveyQuestions.length?portalState.surveyQuestions:null);const preservedDonate=(data.portalConfig.donateConfig&&typeof data.portalConfig.donateConfig==='object')?data.portalConfig.donateConfig:(portalState.donateConfig||null);const rawSectors=(Array.isArray(data.portalConfig.sectors)&&data.portalConfig.sectors.length)?data.portalConfig.sectors:(Array.isArray(portalState.sectors)&&portalState.sectors.length?portalState.sectors:defaultPortalState.sectors);const preservedSectors=cleanLegacySectors(rawSectors);portalState={...portalState,...data.portalConfig,mapRoutes:upgradeMapRoutesPrecision(data.portalConfig.mapRoutes||portalState.mapRoutes),faqs:preservedFaqs,surveyQuestions:preservedSurvey,donateConfig:preservedDonate,sectors:preservedSectors,stories:mergeDefaultStories(data.portalConfig.stories||portalState.stories),googleSheetUrl:url,mapStyle:MAP_STYLES[data.portalConfig.mapStyle]?data.portalConfig.mapStyle:portalState.mapStyle};savePortalState();initEditableStaticTexts();pickHeroSubtitleVariant();if(leafletMap){renderMapRoutes();renderMapCities()}}else{portalState.mapRoutes=upgradeMapRoutesPrecision(portalState.mapRoutes);portalState.sectors=cleanLegacySectors(portalState.sectors);portalState.stories=mergeDefaultStories(portalState.stories);savePortalState();initEditableStaticTexts();pickHeroSubtitleVariant();if(leafletMap){renderMapRoutes();renderMapCities()}}}renderSectors();renderFaqs();renderStories();renderPublicProtocol();renderPublicResultsTable();renderAdminApplications();renderAdminResultsSection();updateGoogleSheetStatusUI('✓ Синхронизировано',true);if(showNotification)showToast('Данные загружены из Google')}catch(e){console.warn('pull warn:',e);updateGoogleSheetStatusUI('⚠️ Автономный режим',false);if(showNotification)showToast('Не удалось загрузить','error')}}
 
@@ -2217,7 +2151,7 @@ const DEFAULT_SURVEY_QUESTIONS=[
 {v:'o6',label:'Оренбург, Уфа и Магнитогорск',correct:false}
 ]},
 {id:'q10',num:10,title:'Действия при серьёзной технической поломке вдали от города',question:'За 80 км до крупного города произошла поломка, которую невозможно устранить мультитулом в поле. Что допускается правилами?',options:[
-{v:'o1',label:'Обратиться к местными жителям за общедоступной помощью (инструмент, мастерская в селе) или добраться до города для ремонта',correct:true},
+{v:'o1',label:'Обратиться к местным жителям за общедоступной помощью (инструмент, мастерская в селе) или добраться до города для ремонта',correct:true},
 {v:'o2',label:'Доехать на попутном грузовике 80 км вперёд по маршруту до города, починить велосипед и продолжить гонку прямо из города без возврата в точку поломки',correct:false},
 {v:'o3',label:'Если для ремонта пришлось уехать с трека на транспорте, после починки необходимо вернуться в точку схода с трека и продолжить маршрут оттуда',correct:true},
 {v:'o4',label:'Взять у друга, специально приехавшего из дома на автомобиле сопровождения, его запасной велосипед',correct:false},
@@ -2328,8 +2262,7 @@ const questionsWrong=Math.max(0,totalQuestions-questionsExactCorrect);
 const hasScore=Boolean(survey.completedAt)&&activeQuestions.length>0;
 const isAutoRejected=hasScore&&(
 chosenWrongOptions>chosenCorrectOptions||
-(totalWrongOptions>0&&chosenWrongOptions>(totalWrongOptions/2))||
-(questionsWrong>(totalQuestions/2))
+(totalWrongOptions>0&&chosenWrongOptions>(totalWrongOptions/2))
 );
 return{
 hasScore,
@@ -2748,11 +2681,9 @@ hintEl.className='p-2.5 rounded-lg bg-emerald-500/10 border border-emerald-500/4
 hintEl.innerHTML=`✓ Письмо отправлено на <strong>${escapeHtml(targetEmail)}</strong>. Проверьте «Входящие» и «Спам».`;
 showToast(`Код отправлен на ${targetEmail}`);
 }else{
-const codeInput=document.getElementById('email-verify-code-input');
-if(codeInput&&res.fallbackCode)codeInput.value=res.fallbackCode;
-hintEl.className='p-2.5 rounded-lg bg-ochre-500/15 border border-ochre-500/50 text-ochre-200 text-[11px] leading-relaxed';
-hintEl.innerHTML=`⚠️ Почтовый шлюз временно недоступен (${escapeHtml(res.serverError||'резервный режим')}).<br>Ваш одноразовый код подтверждения: <strong class="text-white font-mono text-sm select-all">${escapeHtml(res.fallbackCode||'')}</strong> (уже подставлен в поле).`;
-showToast('Сгенерирован резервный код подтверждения');
+hintEl.className='p-2.5 rounded-lg bg-red-950/70 border border-red-600/50 text-red-200 text-[11px] leading-relaxed';
+hintEl.textContent='Не удалось отправить письмо ('+(res.serverError||'попробуйте позже')+').';
+showToast('Ошибка отправки кода подтверждения','error');
 }
 }
 }
@@ -2797,11 +2728,9 @@ hintEl.className='p-2.5 rounded-lg bg-emerald-500/10 border border-emerald-500/4
 hintEl.innerHTML=`✓ Код отправлен на <strong>${escapeHtml(targetEmail)}</strong>. Введите его ниже и укажите новый пароль.`;
 showToast(`Код отправлен на ${targetEmail}`);
 }else{
-const codeInput=document.getElementById('reset-code-input');
-if(codeInput&&res.fallbackCode)codeInput.value=res.fallbackCode;
-hintEl.className='p-2.5 rounded-lg bg-ochre-500/15 border border-ochre-500/50 text-ochre-200 text-[11px] leading-relaxed';
-hintEl.innerHTML=`⚠️ Почтовый шлюз временно недоступен (${escapeHtml(res.serverError||'резервный режим')}).<br>Резервный одноразовый код восстановления: <strong class="text-white font-mono text-sm select-all">${escapeHtml(res.fallbackCode||'')}</strong> (уже подставлен в поле ниже).`;
-showToast('Сгенерирован резервный код восстановления');
+hintEl.className='p-2.5 rounded-lg bg-red-950/70 border border-red-600/50 text-red-200 text-[11px] leading-relaxed';
+hintEl.textContent='Не удалось отправить письмо ('+(res.serverError||'попробуйте позже')+').';
+showToast('Ошибка отправки кода восстановления','error');
 }
 }
 }
@@ -3100,6 +3029,7 @@ showToast('Реквизиты скопированы! Откройте Сбер�
 }
 function renderDonateModalContent(){
 const cfg=getDonateConfig();
+const editBtn=document.getElementById('donate-edit-trigger-btn');if(editBtn)editBtn.classList.toggle('hidden',!isAdminLoggedIn);
 const titleEl=document.getElementById('donate-modal-title');
 const descEl=document.getElementById('donate-modal-desc');
 const p1Label=document.getElementById('donate-pay1-label');
@@ -3472,7 +3402,7 @@ function doPost(e) {
       body.registrations.forEach(r => { if (r && r.id) map.set(String(r.id), r); });
       const merged = Array.from(map.values());
       sheet.clearContents(); sheet.getRange(1, 1, 1, regHeaders.length).setValues([regHeaders]);
-      const rows = merged.map(r => [r.id||'', r.status||'', r.email||'', r.fio||'', r.birthYear||'', r.telegram||'', r.socialUrl||'', r.experience||'', r.bikeType||'', r.bikeBrand||'', r.bikeYear||'', r.phone||'', r.emailVerifiedAt||'', JSON.stringify(r)]);
+      const rows = merged.map(r => [r.id||'', r.status||'', r.email||'', r.fio||'', r.birthYear||'', r.telegram||'', r.socialUrl||'', r.experience||'', r.bikeType||'', r.bikeBrand||'', r.bikeYear||'', r.phone||'', r.emailVerifiedAt||'', JSON.stringify(r), (r.surveyScore && r.surveyScore.total) ? (r.surveyScore.correct + ' / ' + r.surveyScore.total) : '']);
       if (rows.length > 0) sheet.getRange(2, 1, rows.length, regHeaders.length).setValues(rows);
     } finally { lock.releaseLock(); }
   }
@@ -3525,7 +3455,7 @@ function json_(obj) { return ContentService.createTextOutput(JSON.stringify(obj)
 function downloadGoogleAppsScriptCode(){if(!isAdminLoggedIn)return;const code=buildGasCode();const blob=new Blob([code],{type:'text/plain;charset=utf-8'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='Code.gs';document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);showToast('Code.gs скачан')}
 async function testGoogleMailApp(){const url=getGoogleSheetUrl(),box=document.getElementById('gsheet-mail-test-result');if(!url){showToast('Сначала URL','error');return}if(box){box.classList.remove('hidden');box.textContent='⏳ Отправка тестового запроса…'}try{const q=new URLSearchParams({action:'requestVerification',email:'a1onzo@yandex.ru',t:String(Date.now())});const r=await fetch(`${url}${url.includes('?')?'&':'?'}${q.toString()}`,{method:'GET',redirect:'follow'});const res=await r.json();if(res&&res.codeSent===true){if(box){box.className='p-3 rounded-xl bg-emerald-950/60 border border-emerald-500/50 text-xs font-mono text-emerald-200 leading-relaxed';box.textContent='✓ Письмо с кодом отправлено на a1onzo@yandex.ru!'}showToast('✓ Письмо отправлено!','success')}else if(res&&res.codeSent===false){if(box){box.className='p-3 rounded-xl bg-red-950/70 border border-red-500/50 text-xs font-mono text-red-200 leading-relaxed';box.textContent=`✕ MailApp: ${res.message||'Нет прав'}. Выполните authorizeMail.`}showToast('Ошибка MailApp','error')}else{if(box){box.className='p-3 rounded-xl bg-ochre-500/15 border border-ochre-500/50 text-xs font-mono text-ochre-200 leading-relaxed';box.textContent='⚠️ Старая версия развертывания.'}}}catch(e){if(box){box.className='p-3 rounded-xl bg-red-950/70 border border-red-500/50 text-xs font-mono text-red-200 leading-relaxed';box.textContent='✕ Ошибка соединения. Проверьте «Все (Anyone)».'}}}
 
-window.addEventListener('keydown',(e)=>{if(e.ctrlKey&&e.shiftKey&&(e.key==='A'||e.key==='a'||e.key==='Ф'||e.key==='ф')){e.preventDefault();triggerAdminGear()}if(e.key==='Escape'){if(isMapFullscreen)syncMapFullscreenUI(false);['custom-modal','admin-auth-modal','ai-route-modal','daily-rest-modal','donate-modal','track-photo-modal','app-thankyou-modal'].forEach(id=>{const m=document.getElementById(id);if(m&&!m.classList.contains('hidden')){m.classList.add('hidden');m.classList.remove('flex')}})}});
+window.addEventListener('keydown',(e)=>{if(e.ctrlKey&&e.shiftKey&&(e.key==='A'||e.key==='a'||e.key==='Ф'||e.key==='ф')){e.preventDefault();triggerAdminGear()}const tpOpen=document.getElementById('track-photo-modal');if(tpOpen&&!tpOpen.classList.contains('hidden')){if(e.key==='Escape'){closeTrackPhotoModal();return;}if(e.key==='ArrowLeft'){stepTrackPhoto(-1);return;}if(e.key==='ArrowRight'){stepTrackPhoto(1);return;}}if(e.key==='Escape'){if(isMapFullscreen)syncMapFullscreenUI(false);['custom-modal','admin-auth-modal','daily-rest-modal','donate-modal','track-photo-modal','app-thankyou-modal'].forEach(id=>{const m=document.getElementById(id);if(m&&!m.classList.contains('hidden')){m.classList.add('hidden');m.classList.remove('flex')}})}});
 
 function isMobileOrTouchEnv(){
 const ua=navigator.userAgent||'';
@@ -3594,7 +3524,7 @@ e.stopPropagation();
 const btn=e.target.closest('[data-action]');if(!btn)return;const action=btn.dataset.action;const id=btn.dataset.id,idx=btn.dataset.idx;if(action==='edit-route')editMapRoute(id);else if(action==='del-route')deleteMapRoute(id);else if(action==='focus-route')focusRouteOnMap(id);else if(action==='open-ai')openAiRouteModal(id);else if(action==='del-sector')deleteSector(parseInt(idx,10));else if(action==='edit-sector')editAdminSector(parseInt(idx,10));else if(action==='edit-faq')editAdminFaq(parseInt(idx,10));else if(action==='del-faq')deleteAdminFaq(parseInt(idx,10));else if(action==='edit-sq')editAdminSurveyQuestion(parseInt(idx,10));else if(action==='del-sq')deleteAdminSurveyQuestion(parseInt(idx,10));else if(action==='del-story')deleteStory(id);else if(action==='story-approve')setStoryStatusAdmin(id,'approved');else if(action==='story-pending')setStoryStatusAdmin(id,'pending');else if(action==='app-approve')setApplicationStatus(id,'approved');else if(action==='app-pending')setApplicationStatus(id,'pending');else if(action==='app-reject')setApplicationStatus(id,'rejected');else if(action==='app-edit')loadParticipantIntoEditorFromAdmin(id);else if(action==='app-del')deleteApplicationAdmin(id);else if(action==='res-edit')editResultAdmin(id);else if(action==='res-del')deleteResultAdmin(id);else if(action==='open-daily')openDailyRestModal(id)});
 
 Object.assign(window,{
-openMapSectionFromNav,closeAdminLoginModal,handleAdminLogin,openAiRouteModal,closeAiRouteModal,askAiAboutCurrentRoute,
+openMapSectionFromNav,closeAdminLoginModal,handleAdminLogin,openAiRouteModal,
 closeDailyRestModal,openDonateModal,closeDonateModal,toggleDonateEditorInModal,handleSaveDonateConfig,copyDonateValue,triggerDonateThankYou,handleDonateSberClick,closeActiveMapPopup,toggleEditMode,exportPageData,openImportModal,
 toggleMapAdminDrawer,scrollToAdminSectors,scrollToAdminApplications,scrollToAdminResults,logoutAdmin,
 updateRaceTargetDate,toggleMapCollapse,updateMapLineWeight,handleSaveMapRoute,handleGpxFileUpload,
