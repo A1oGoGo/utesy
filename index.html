@@ -155,6 +155,26 @@ img,video{max-width:100%;height:auto}
 .vk-cta-tg:hover{background:rgba(6,182,212,0.28);color:#ffffff}
 .vk-donate-btn{display:inline-flex;align-items:center;gap:0.35rem;padding:0.25rem 0.65rem;border-radius:0.5rem;background:rgba(22,27,34,0.85);border:1px solid rgba(245,158,11,0.45);color:#fcd34d;font-size:12px;font-weight:600;transition:all 0.15s ease}
 .vk-donate-btn:hover{background:#161b22;border-color:#fbbf24;color:#ffffff}
+.vk-hero-more{margin-top:0.25rem}
+.vk-hero-more-toggle{display:inline-flex;align-items:center;gap:0.4rem;cursor:pointer;font-size:0.8125rem;font-weight:600;color:#fcd34d;padding:0.25rem 0.65rem;border-radius:0.5rem;background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.3);transition:all 0.15s ease;user-select:none}
+.vk-hero-more-toggle:hover{background:rgba(245,158,11,0.2);border-color:rgba(245,158,11,0.55);color:#ffffff}
+.vk-hero-more .vk-more-close-label{display:none}
+.vk-hero-more[open] .vk-more-open-label{display:none}
+.vk-hero-more[open] .vk-more-close-label{display:inline}
+.vk-hero-more[open] .vk-more-arrow{transform:rotate(180deg)}
+.vk-more-arrow{display:inline-block;transition:transform 0.18s ease}
+.vk-hero-more-body{margin-top:0.85rem;padding-left:0.9rem;border-left:2px solid rgba(245,158,11,0.45)}
+.vk-photo-inline-link{color:#fde68a;border-bottom:1.5px dashed rgba(251,191,36,0.75);padding-bottom:1px;transition:color 0.15s ease,border-color 0.15s ease,background-color 0.15s ease;cursor:pointer;border-radius:3px}
+.vk-photo-inline-link:hover,.vk-photo-inline-link:focus-visible{color:#fbbf24;border-bottom-color:#fbbf24;background:rgba(245,158,11,0.14);outline:none}
+.vk-photo-inline-icon{font-size:0.78em;margin-left:3px;opacity:0.8;vertical-align:baseline}
+#inline-photo-preview{position:fixed;left:0;top:0;z-index:9000;width:248px;max-width:calc(100vw - 24px);padding:8px;border-radius:14px;background:rgba(13,17,23,0.97);border:1.5px solid rgba(245,158,11,0.65);box-shadow:0 16px 36px rgba(0,0,0,0.72),0 0 0 1px rgba(9,12,16,0.9);pointer-events:none;opacity:0;transform:translateY(6px) scale(0.98);transition:opacity 0.16s ease,transform 0.16s ease;visibility:hidden}
+#inline-photo-preview.is-visible{opacity:1;transform:translateY(0) scale(1);visibility:visible}
+#inline-photo-preview .ipp-thumb-wrap{width:100%;height:152px;border-radius:9px;overflow:hidden;background:#090c10;border:1px solid #21262d;display:flex;align-items:center;justify-content:center}
+#inline-photo-preview .ipp-thumb-wrap img{width:100%;height:100%;object-fit:cover;display:block}
+#inline-photo-preview .ipp-caption{margin-top:7px;padding:0 2px;display:flex;align-items:center;justify-content:space-between;gap:6px}
+#inline-photo-preview .ipp-title{font-size:12px;font-weight:700;color:#ffffff;line-height:1.25;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#inline-photo-preview .ipp-hint{font-family:'JetBrains Mono',monospace;font-size:10px;color:#fbbf24;white-space:nowrap;flex-shrink:0}
+#inline-photo-preview .ipp-empty{font-size:11px;color:#94a3b8;text-align:center;padding:12px;line-height:1.4}
 
 /* === Clean TOPO Mode Theme (OpenTopoMap look) === */
 #up-blogger-portal #leaflet-map.map-mode-topo{background:#e8e4d8!important;font-family:'Inter',sans-serif!important;cursor:grab!important}
@@ -187,6 +207,11 @@ img,video{max-width:100%;height:auto}
 <div id="up-blogger-portal" class="up-root">
 
 <div id="toast-container" aria-live="polite" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 pointer-events-none"></div>
+
+<div id="inline-photo-preview" role="tooltip" aria-hidden="true">
+<div class="ipp-thumb-wrap"><img id="ipp-img" src="" alt=""><div id="ipp-empty" class="ipp-empty hidden">Фото загружается…</div></div>
+<div class="ipp-caption"><span id="ipp-title" class="ipp-title"></span><span class="ipp-hint">клик ↗</span></div>
+</div>
 
 <div id="custom-modal" role="dialog" aria-modal="true" class="fixed inset-0 z-50 items-center justify-center bg-black/75 backdrop-blur-sm p-4 hidden">
 <div class="bg-graphite-800 border border-graphite-600 rounded-2xl max-w-lg w-full p-6 shadow-2xl">
@@ -273,33 +298,22 @@ img,video{max-width:100%;height:auto}
 
 <div class="space-y-3">
 <div id="donate-sber-card" class="p-4 rounded-2xl bg-emerald-950/30 border-2 border-emerald-500/50 space-y-3">
-<a id="donate-external-link" href="#" target="_blank" rel="noopener noreferrer" onclick="handleDonateSberClick(event)" class="w-full py-3.5 px-4 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-graphite-950 font-bold text-xs sm:text-sm uppercase tracking-wider transition flex items-center justify-center gap-2.5 shadow-lg">
-<span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-graphite-950 text-emerald-400 font-bold text-xs">✓</span>
-<span id="donate-sber-btn-text">Перевести через СберБанк Онлайн</span>
+<a id="donate-external-link" href="https://pay.cloudtips.ru/p/c6e967f8" target="_blank" rel="noopener noreferrer" onclick="handleDonateSberClick(event)" class="w-full py-3.5 px-4 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-graphite-950 font-bold text-xs sm:text-sm uppercase tracking-wider transition flex items-center justify-center gap-2.5 shadow-lg">
+<span class="inline-flex items-center justify-center rounded-full bg-graphite-950 text-emerald-400 font-bold text-xs shrink-0" style="width:20px;height:20px">✓</span>
+<span id="donate-sber-btn-text">Перевести через CloudTips (СБП / карта)</span>
 <span>↗</span>
 </a>
-<div id="donate-qr-wrap" class="hidden pt-2 border-t border-emerald-500/30 flex flex-col sm:flex-row items-center gap-3.5">
-<div class="p-2 rounded-xl bg-white shrink-0 shadow-md">
-<img id="donate-qr-img" src="" alt="QR-код СберБанк Онлайн / СБП" class="w-32 h-32 object-contain block">
+<div id="donate-qr-wrap" class="pt-2 border-t border-emerald-500/30 flex flex-col sm:flex-row items-center gap-3.5">
+<div class="p-2 rounded-xl shrink-0 shadow-md" style="background:#ffffff">
+<img id="donate-qr-img" src="data:image/png;base64,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" alt="QR-код CloudTips (СБП / карта)" width="144" height="144" class="block" style="width:144px;height:144px;object-fit:contain">
 </div>
 <div class="text-xs text-slate-200 space-y-1 text-center sm:text-left">
 <div class="font-bold text-emerald-300 uppercase font-mono">📱 Оплата по QR-коду с ПК</div>
-<p class="text-slate-300 leading-relaxed">Наведите камеру смартфона или сканер в приложении <strong>СберБанк Онлайн</strong> на QR-код, чтобы открыть страницу перевода.</p>
+<p class="text-slate-300 leading-relaxed">Наведите камеру смартфона или сканер в приложении любого банка (<strong>СБП</strong>) на QR-код, чтобы открыть страницу <strong>CloudTips</strong>.</p>
 </div>
 </div>
 <div id="donate-sber-setup-hint" class="hidden text-[11px] font-mono text-ochre-300 text-center">
-⚠️ Ссылка на сбор Сбера ещё не указана. Нажмите <strong>«✎ Реквизиты»</strong> вверху окна, чтобы вставить ссылку из СберБанк Онлайн.
-</div>
-</div>
-
-<div id="donate-pay1-card" class="p-4 rounded-xl bg-graphite-950 border border-ochre-500/40 space-y-2">
-<div class="flex items-center justify-between gap-2">
-<span id="donate-pay1-label" class="text-xs font-mono uppercase text-ochre-400 font-bold">СБП / Перевод по номеру или карте</span>
-<span id="donate-pay1-note" class="text-[11px] font-mono text-slate-400">Андрей П. (A1onso)</span>
-</div>
-<div class="flex items-center justify-between gap-2 bg-graphite-900 border border-graphite-800 rounded-xl px-3.5 py-2.5">
-<span id="donate-pay1-value" class="font-mono font-bold text-sm sm:text-base text-white select-all break-all">@a1onzo (ТГ) / a1onzo@yandex.ru</span>
-<button type="button" onclick="copyDonateValue('pay1')" class="px-3 py-1.5 rounded-lg bg-ochre-500 hover:bg-ochre-400 text-graphite-950 font-mono font-bold text-xs transition shrink-0">📋 Копировать</button>
+⚠️ Ссылка на CloudTips ещё не указана. Нажмите <strong>«✎ Реквизиты»</strong> вверху окна, чтобы вставить ссылку.
 </div>
 </div>
 
@@ -333,17 +347,12 @@ img,video{max-width:100%;height:auto}
 <div><label class="block font-mono text-slate-400 mb-1">Заголовок окна</label><input type="text" id="don-edit-title" required class="w-full bg-graphite-950 border border-graphite-700 rounded-xl px-3 py-2 text-white"></div>
 <div><label class="block font-mono text-slate-400 mb-1">Текст обращения</label><textarea id="don-edit-desc" rows="3" required class="w-full bg-graphite-950 border border-graphite-700 rounded-xl p-2.5 text-white"></textarea></div>
 <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
-<div><label class="block font-mono text-ochre-400 mb-1">Способ 1 (название: СБП / Банк)</label><input type="text" id="don-edit-pay1-label" placeholder="СБП (Т-Банк / Сбер)" class="w-full bg-graphite-950 border border-graphite-700 rounded-xl px-3 py-2 text-white"></div>
-<div><label class="block font-mono text-ochre-400 mb-1">Получатель / банк</label><input type="text" id="don-edit-pay1-note" placeholder="Андрей П. (A1onso)" class="w-full bg-graphite-950 border border-graphite-700 rounded-xl px-3 py-2 text-white"></div>
-</div>
-<div><label class="block font-mono text-ochre-400 mb-1">Реквизиты 1 (телефон или номер карты для копирования)</label><input type="text" id="don-edit-pay1-value" placeholder="@a1onzo (ТГ) / a1onzo@yandex.ru" class="w-full bg-graphite-950 border border-graphite-700 rounded-xl px-3 py-2 text-white font-mono"></div>
-<div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
 <div><label class="block font-mono text-volga-400 mb-1">Способ 2 (опционально, заголовок)</label><input type="text" id="don-edit-pay2-label" placeholder="Номер карты / Другой банк" class="w-full bg-graphite-950 border border-graphite-700 rounded-xl px-3 py-2 text-white"></div>
 <div><label class="block font-mono text-volga-400 mb-1">Реквизиты 2 (опционально)</label><input type="text" id="don-edit-pay2-value" placeholder="2200 0000 0000 0000 (оставьте пустым, чтобы скрыть)" class="w-full bg-graphite-950 border border-graphite-700 rounded-xl px-3 py-2 text-white font-mono"></div>
 </div>
 <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
-<div><label class="block font-mono text-emerald-400 mb-1">Ссылка на СберБанк Онлайн / Сбор Сбера *</label><input type="url" id="don-edit-url" placeholder="https://www.sberbank.com/sms/pbpn?requisiteNumber=..." class="w-full bg-graphite-950 border border-emerald-500/50 rounded-xl px-3 py-2 text-white font-mono"></div>
-<div><label class="block font-mono text-slate-400 mb-1">Своя картинка QR-кода (необязательно — иначе создастся сам)</label><input type="url" id="don-edit-qr-url" placeholder="Автогенерация из ссылки Сбера" class="w-full bg-graphite-950 border border-graphite-700 rounded-xl px-3 py-2 text-white font-mono"></div>
+<div><label class="block font-mono text-emerald-400 mb-1">Ссылка на CloudTips / страницу доната *</label><input type="url" id="don-edit-url" placeholder="https://pay.cloudtips.ru/p/c6e967f8" class="w-full bg-graphite-950 border border-emerald-500/50 rounded-xl px-3 py-2 text-white font-mono"></div>
+<div><label class="block font-mono text-slate-400 mb-1">Своя картинка QR-кода (опционально — иначе встроенный QR)</label><input type="text" id="don-edit-qr-url" placeholder="По умолчанию встроенный QR CloudTips" class="w-full bg-graphite-950 border border-graphite-700 rounded-xl px-3 py-2 text-white font-mono"></div>
 </div>
 <div><label class="block font-mono text-emerald-400 mb-1">Текст благодарности</label><textarea id="don-edit-thanks" rows="2" required class="w-full bg-graphite-950 border border-graphite-700 rounded-xl p-2.5 text-white"></textarea></div>
 <div class="flex justify-end gap-2 pt-1">
@@ -418,7 +427,21 @@ img,video{max-width:100%;height:auto}
 <span id="hero-badge" data-editable="true" contenteditable="false">Открытый байкпакинг-маршрут вдоль Волги и Ахтубы</span>
 </div>
 <h1 id="hero-title" data-editable="true" class="font-display font-bold text-3xl sm:text-5xl uppercase tracking-tight text-white leading-tight" contenteditable="false">УТЁСЫ ПОВОЛЖЬЯ: <span class="text-ochre-400">КАЗАНЬ — АСТРАХАНЬ</span></h1>
-<p id="hero-subtitle" data-editable="true" class="text-slate-200 text-sm sm:text-base leading-relaxed whitespace-pre-line" contenteditable="false">2850 км проверенного веломаршрута без тупиков и «буреломинга»: от «Волжской тропы» и меловых холмов Сенгилея через Самарскую Луку и Хвалынск к волжским утёсам Камышина, солёному озеру Баскунчак и дельте Астрахани.</p>
+<div class="space-y-2.5">
+<p id="hero-subtitle" data-editable="true" class="text-slate-200 text-sm sm:text-base leading-relaxed whitespace-pre-line" contenteditable="false">2850 километров вдоль великой Волги. От древней Казани до южной Астрахани.
+
+Это не просто веломаршрут, а большое путешествие через целый мир, который скрывается вдоль главной реки страны. За несколько недель дороги проведут вас через леса и горы, утёсы и степи, заповедные поймы и соляные пустыни, показывая Волгу такой, какой её знают лишь немногие.</p>
+<details id="hero-story-spoiler" class="vk-hero-more">
+<summary class="vk-hero-more-toggle"><span class="vk-more-open-label">Читать подробнее</span><span class="vk-more-close-label">Свернуть описание</span><span class="vk-more-arrow" aria-hidden="true">▾</span></summary>
+<p id="hero-subtitle-more" class="vk-hero-more-body text-slate-300 text-sm sm:text-base leading-relaxed whitespace-pre-line">Маршрут полностью разведан и готов к прохождению. Вас ждут тенистые тропы Самарской Луки, белоснежные меловые склоны <a href="#interactive-map-section" class="vk-photo-inline-link" data-inline-photo="sengiley">Сенгилеевских гор<span class="vk-photo-inline-icon" aria-hidden="true">📷</span></a> под свист байбаков, грандиозные амфитеатры <a href="#interactive-map-section" class="vk-photo-inline-link" data-inline-photo="podvalye">Подвальских террас<span class="vk-photo-inline-icon" aria-hidden="true">📷</span></a> и живописные подъёмы Хвалынска, которые не зря называют волжской Швейцарией. Дальше пейзажи становятся всё масштабнее: могучие утёсы над Волгой сменяются бескрайними степными горизонтами, бахчевыми полями Заволжья, ослепительными просторами <a href="#interactive-map-section" class="vk-photo-inline-link" data-inline-photo="baskunchak">Баскунчака<span class="vk-photo-inline-icon" aria-hidden="true">📷</span></a> и дикими лабиринтами Волго-Ахтубинской поймы.
+
+Каждый день здесь не похож на предыдущий. Каждая сотня километров открывает новую сторону России. Это маршрут, на котором невозможно проехать всё за один взгляд в окно или за один отпуск. Его нужно прожить.
+
+Трек доступен каждому. Можно отправиться в путешествие через всё Поволжье от начала до конца или выбрать любой участок для выходных, отпуска или первого большого велоприключения.
+
+Собирайте велосипед. Волга уже показывает дорогу.</p>
+</details>
+</div>
 <div class="flex flex-wrap items-center gap-3 pt-1">
 <a href="#interactive-map-section" onclick="openMapSectionFromNav()" class="vk-cta-primary shadow-lg">🗺️ Смотреть карту</a>
 <a href="#route-sectors" class="vk-cta-secondary">📥 Участки и GPX-треки</a>
@@ -1177,6 +1200,8 @@ async function hashPasswordSHA256(plainText){const input=String(plainText||'')+'
 function sanitizeUrl(rawUrl){
 const s=String(rawUrl||'').trim();
 if(!s)return'';
+if(/^data:image\/(?:png|jpeg|jpg|webp|svg\+xml);base64,[A-Za-z0-9+/=]+$/i.test(s))return s;
+if(/^\.\/[\w.\-/]+$/.test(s))return s;
 if(/^https?:\/\//i.test(s)||/^tg:\/\//i.test(s))return s;
 try{
 const base=(window.location&&window.location.origin&&window.location.origin!=='null'&&/^https?:/i.test(window.location.protocol))?window.location.origin:'https://utesy-povolzhya.ru';
@@ -1211,7 +1236,8 @@ faqs:[
 {id:'faq-6',q:'6. Будет ли штраф, если на КП нет мобильной связи или глушат GPS (работает РЭБ)?',a:'Нет, если факт прохождения подтверждён. При отсутствии мобильной связи на контрольной точке сделайте фото велосипеда на фоне ориентира КП (с привязкой ко времени) и отправьте его в чат заезда, как только появится сеть. При сбоях GPS из-за РЭБ ориентируйтесь по офлайн-картам и одометру.'},
 {id:'faq-7',q:'7. Какие технические сложности ждут на трассе: песок, крутые градиенты, чернозём?',a:'Маршрут «Утёсы Поволжья» — это настоящая байкпакинг-гонка на самообеспечении, а не парковая грэвел-прогулка. На дистанции будут затяжные грунтовые и меловые подъёмы с градиентами до 16% (Сенгилей, Самарская Лука, Хвалынск), каменистые полки, песчаные участки, лесные овраги и возможные пешие секции. В случае сильного ливня полевые дороги в Саратовской и Волгоградской областях могут раскисать (липкий чернозём) — важно заранее следить за прогнозом и беречь трансмиссию.'},
 {id:'faq-8',q:'8. Возможен ли перенос даты старта или отмена заезда из-за погоды?',a:'Полной отмены заезда из-за погоды не будет. Однако в случае затяжных проливных дождей накануне старта, когда грунты становятся полностью непроезжаемыми, организаторы могут перенести старт на следующую неделю (с заблаговременным анонсом в Telegram-чате).'},
-{id:'faq-9',q:'9. Что будет, если я не уложусь в контрольный лимит 10 дней?',a:'Лимит 10 дней (240 часов) — ориентир для основного зачёта. Если вы финишируете позже лимита своим ходом и по правилам, мы всё равно обязательно зафиксируем ваш финиш и включим результат в итоговый протокол с соответствующей пометкой.'}
+{id:'faq-9',q:'9. Что будет, если я не уложусь в контрольный лимит 10 дней?',a:'Лимит 10 дней (240 часов) — ориентир для основного зачёта. Если вы финишируете позже лимита своим ходом и по правилам, мы всё равно обязательно зафиксируем ваш финиш и включим результат в итоговый протокол с соответствующей пометкой.'},
+{id:'faq-10',q:'10. Я ранее не участвовал в подобных соревнованиях и не знаю, с чего подступиться, но у меня есть спортивный опыт в других дисциплинах — стоит ли пробовать?',a:'Определённо стоит. Если у вас уже есть опыт в других спортивных дисциплинах (шоссе, кросс-кантри, бег, лыжи, триатлон, туризм), самое главное — аэробная база, умение распределять силы и работать в долгую — у вас уже есть.\n\nНа Западе в подобных байкпакинг-гонках на самообеспечении регулярно участвуют спортсмены из шоссейного Протура, кросс-кантри, марафонов, триатлона и других дисциплин. Для многих это свежий вызов без командной суеты, но с настоящим азартом, тактикой и свободой выбора собственного ритма.\n\nВ «Утёсах Поволжья» вход максимально понятный: маршрут на 100% разведан, действует обязательное правило отдыха (не менее 8 часов в сутки — не нужно жертвовать сном), а по пути есть магазины, кафе и гостиницы. Чтобы быстро разобраться, как перенести ваш текущий спортивный опыт на многодневный байкпакинг, откройте готовый промпт ниже и отправьте его любому ИИ — он составит подробный план подготовки, снаряжения и тактики именно под вас.\n\nБудем рады увидеть вас на старте!',aiPromptId:'newcomer-prep'}
 ],
 stories:[
 {id:'st-1',author:'A1onso',title:'Астрахань — Камышин 1262 км',km:'1 262 км',date:'18.09 – 01.10.2026',url:'https://a1onso.blogspot.com/2026/10/1262-1809-01102026.html',trackUrl:'https://nakarte.me/#m=7/48.03769/48.74084&l=Y&nktl=4Upu3sb2u_fd59UFTkrJtw',imgUrl:'',summary:'Осенний заезд с юга на север. Степи, пойма, Баскунчак, Волгоград и волжские утёсы.'},
@@ -1292,9 +1318,45 @@ if(desc.includes('гоночн')||desc.includes('сегмент гонки'))ret
 if(id!=='m-1'&&(color==='#3b82f6'||color==='#2563eb'||color==='#0ea5e9'||color==='#06b6d4'||color==='#22d3ee'||color==='#1d4ed8'||color==='#60a5fa'))return true;
 return false;
 }
-function upgradeMapRoutesPrecision(routes){
+let externalRoutesCoordsCache=null;
+let externalRoutesFetchPromise=null;
+function applyExternalRoutesCache(routes){
+if(!externalRoutesCoordsCache||!Array.isArray(routes))return false;
+let changed=false;
+routes.forEach(rt=>{
+if(!rt||!rt.id)return;
+const ext=externalRoutesCoordsCache[rt.id];
+if(Array.isArray(ext)&&ext.length>(Array.isArray(rt.coords)?rt.coords.length:0)){
+rt.coords=ext;
+changed=true;
+}
+});
+return changed;
+}
+function upgradeMapRoutesPrecision(routes,existingRoutes){
 const coreIds=new Set(defaultPortalState.mapRoutes.map(d=>d.id));
 const coreRoutes=JSON.parse(JSON.stringify(defaultPortalState.mapRoutes));
+const byId=new Map();
+if(Array.isArray(existingRoutes)){
+existingRoutes.forEach(r=>{if(r&&r.id&&Array.isArray(r.coords))byId.set(r.id,r.coords)});
+}
+if(Array.isArray(routes)){
+routes.forEach(r=>{
+if(r&&r.id&&Array.isArray(r.coords)){
+const prev=byId.get(r.id);
+if(!prev||r.coords.length>prev.length)byId.set(r.id,r.coords);
+}
+});
+}
+coreRoutes.forEach(cr=>{
+const ext=externalRoutesCoordsCache&&Array.isArray(externalRoutesCoordsCache[cr.id])?externalRoutesCoordsCache[cr.id]:null;
+const kept=byId.get(cr.id)||null;
+const candidates=[cr.coords,kept,ext].filter(c=>Array.isArray(c)&&c.length>1);
+if(candidates.length){
+candidates.sort((a,b)=>b.length-a.length);
+cr.coords=candidates[0];
+}
+});
 if(!Array.isArray(routes)||routes.length===0)return coreRoutes;
 const extraRoutes=routes.filter(r=>r&&r.id&&!coreIds.has(r.id)&&!isLegacyRaceRoute(r));
 return[...coreRoutes,...extraRoutes];
@@ -1314,9 +1376,61 @@ stories.forEach(cst=>{if(cst&&cst.id&&String(cst.title||'').trim()){if(sm.has(cs
 }
 return Array.from(sm.values());
 }
-function loadPortalState(){try{const raw=localStorage.getItem(STORAGE_KEY);if(!raw)return JSON.parse(JSON.stringify(defaultPortalState));const parsed=JSON.parse(raw);const savedUrl=typeof parsed.googleSheetUrl==='string'?parsed.googleSheetUrl.trim():'';const resolvedUrl=(!savedUrl||LEGACY_GSHEET_URLS.includes(savedUrl))?defaultPortalState.googleSheetUrl:savedUrl;return{schemaVersion:CURRENT_SCHEMA_VERSION,updatedAt:Math.max(toMs(parsed.updatedAt)||0,defaultPortalState.updatedAt),raceTargetUTC:parsed.raceTargetUTC||defaultPortalState.raceTargetUTC,allowEarlyGpxUpload:Boolean(parsed.allowEarlyGpxUpload),mapLineWeight:parseInt(parsed.mapLineWeight,10)||3,mapStyle:MAP_STYLES[parsed.mapStyle]?parsed.mapStyle:'minecraft',googleSheetUrl:resolvedUrl,textEdits:parsed.textEdits||{},mapRoutes:upgradeMapRoutesPrecision(parsed.mapRoutes),sectors:cleanLegacySectors(parsed.sectors),faqs:Array.isArray(parsed.faqs)&&parsed.faqs.length>0?parsed.faqs:defaultPortalState.faqs,surveyQuestions:Array.isArray(parsed.surveyQuestions)&&parsed.surveyQuestions.length>0?parsed.surveyQuestions:null,donateConfig:(parsed.donateConfig&&typeof parsed.donateConfig==='object')?parsed.donateConfig:null,stories:mergeDefaultStories(parsed.stories)}}catch(e){return JSON.parse(JSON.stringify(defaultPortalState))}}
+function mergeDefaultFaqs(faqs){
+const fm=new Map();
+if(Array.isArray(faqs)){
+faqs.forEach(item=>{if(item&&item.id)fm.set(item.id,{...item})});
+}
+defaultPortalState.faqs.forEach(def=>{
+if(!fm.has(def.id)){
+fm.set(def.id,JSON.parse(JSON.stringify(def)));
+}else if(def.aiPromptId&&!fm.get(def.id).aiPromptId){
+fm.get(def.id).aiPromptId=def.aiPromptId;
+}
+});
+return Array.from(fm.values());
+}
+function loadPortalState(){try{const raw=localStorage.getItem(STORAGE_KEY);if(!raw)return JSON.parse(JSON.stringify(defaultPortalState));const parsed=JSON.parse(raw);const savedUrl=typeof parsed.googleSheetUrl==='string'?parsed.googleSheetUrl.trim():'';const resolvedUrl=(!savedUrl||LEGACY_GSHEET_URLS.includes(savedUrl))?defaultPortalState.googleSheetUrl:savedUrl;return{schemaVersion:CURRENT_SCHEMA_VERSION,updatedAt:Math.max(toMs(parsed.updatedAt)||0,defaultPortalState.updatedAt),raceTargetUTC:parsed.raceTargetUTC||defaultPortalState.raceTargetUTC,allowEarlyGpxUpload:Boolean(parsed.allowEarlyGpxUpload),mapLineWeight:parseInt(parsed.mapLineWeight,10)||3,mapStyle:MAP_STYLES[parsed.mapStyle]?parsed.mapStyle:'minecraft',googleSheetUrl:resolvedUrl,textEdits:parsed.textEdits||{},mapRoutes:upgradeMapRoutesPrecision(parsed.mapRoutes),sectors:cleanLegacySectors(parsed.sectors),faqs:mergeDefaultFaqs(parsed.faqs),surveyQuestions:Array.isArray(parsed.surveyQuestions)&&parsed.surveyQuestions.length>0?parsed.surveyQuestions:null,donateConfig:(parsed.donateConfig&&typeof parsed.donateConfig==='object')?parsed.donateConfig:null,stories:mergeDefaultStories(parsed.stories)}}catch(e){return JSON.parse(JSON.stringify(defaultPortalState))}}
 function stripHeavyCoordsForStorage(st){const c=JSON.parse(JSON.stringify(st)),core=new Set(['m-1','m-2','m-4']);if(Array.isArray(c.mapRoutes)){c.mapRoutes=c.mapRoutes.map(r=>{if(r&&core.has(r.id)){const{coords,...rest}=r;return rest}return r})}return c}
-async function loadExternalRoutesJson(){try{const r=await fetch('./routes.json');if(!r.ok)return;const ext=await r.json();if(ext&&typeof ext==='object'){portalState.mapRoutes.forEach(rt=>{if(Array.isArray(ext[rt.id])&&ext[rt.id].length>1)rt.coords=ext[rt.id]});if(leafletMap)renderMapRoutes()}}catch(e){}}
+async function loadExternalRoutesJson(){
+if(externalRoutesCoordsCache){
+if(applyExternalRoutesCache(portalState.mapRoutes)&&leafletMap)renderMapRoutes();
+return externalRoutesCoordsCache;
+}
+if(!externalRoutesFetchPromise){
+externalRoutesFetchPromise=(async()=>{
+try{
+const r=await fetch('./routes.json');
+if(!r.ok)return null;
+const raw=await r.json();
+const normalized={};
+if(Array.isArray(raw)){
+raw.forEach(item=>{if(item&&item.id&&Array.isArray(item.coords)&&item.coords.length>1)normalized[item.id]=item.coords});
+}else if(raw&&typeof raw==='object'){
+Object.keys(raw).forEach(k=>{
+const v=raw[k];
+if(Array.isArray(v)&&v.length>1)normalized[k]=v;
+else if(v&&Array.isArray(v.coords)&&v.coords.length>1)normalized[k]=v.coords;
+});
+}
+if(Object.keys(normalized).length>0){
+externalRoutesCoordsCache=normalized;
+return normalized;
+}
+return null;
+}catch(e){
+return null;
+}finally{
+if(!externalRoutesCoordsCache)externalRoutesFetchPromise=null;
+}
+})();
+}
+const ext=await externalRoutesFetchPromise;
+if(ext&&applyExternalRoutesCache(portalState.mapRoutes)&&leafletMap){
+renderMapRoutes();
+}
+return ext;
+}
 function savePortalState(){try{portalState.updatedAt=Date.now();localStorage.setItem(STORAGE_KEY,JSON.stringify(stripHeavyCoordsForStorage(portalState)))}catch(e){showToast('Не удалось сохранить в localStorage','error')}}
 let portalState=loadPortalState();
 const DEFAULT_ADMIN_PASS_HASH='684fb990ea9917672938cfcf5d644f069a867c045265cde0ff50e56ebd213b4d';
@@ -1760,6 +1874,7 @@ if(Array.isArray(data)){
 TRACK_GEOTAG_PHOTOS=data;
 isTrackPhotosLoaded=true;
 renderHeroPhotoStrip();
+if(activeInlinePhotoEl)showInlinePhotoPreview(activeInlinePhotoEl);
 if(leafletMap){
 renderMapPhotos();
 if(fitAfterLoad&&TRACK_GEOTAG_PHOTOS.length>0){
@@ -1854,6 +1969,155 @@ if(auth)auth.classList.add('hidden');
 if(teaser)teaser.classList.remove('hidden');
 }
 
+const HERO_INLINE_PHOTOS={
+sengiley:{
+title:'Сенгилеевские горы',
+keywords:['сенгил','арбуг','байбак','мелов'],
+lat:53.953,lng:48.795,
+customSrc:''
+},
+podvalye:{
+title:'Подвальские террасы',
+keywords:['подвал','террас'],
+lat:53.681,lng:48.875,
+customSrc:''
+},
+baskunchak:{
+title:'Озеро Баскунчак',
+keywords:['баскунчак','богдо','солён','солен'],
+lat:48.180,lng:46.880,
+customSrc:''
+}
+};
+let activeInlinePhotoEl=null;
+function resolveInlinePhotoData(key,linkEl){
+const cfg=HERO_INLINE_PHOTOS[key];
+if(!cfg)return null;
+const manualSrc=(linkEl&&linkEl.dataset&&linkEl.dataset.photoSrc)||cfg.customSrc||'';
+if(manualSrc){
+return{idx:-1,src:sanitizeUrl(manualSrc)||manualSrc,title:cfg.title,desc:''};
+}
+if(!Array.isArray(TRACK_GEOTAG_PHOTOS)||TRACK_GEOTAG_PHOTOS.length===0){
+return{idx:-1,src:'',title:cfg.title,desc:''};
+}
+let bestIdx=-1;
+for(const kw of (cfg.keywords||[])){
+const low=kw.toLowerCase();
+const titleHit=TRACK_GEOTAG_PHOTOS.findIndex(p=>String(p.title||'').toLowerCase().includes(low));
+if(titleHit!==-1){bestIdx=titleHit;break;}
+const descHit=TRACK_GEOTAG_PHOTOS.findIndex(p=>String(p.desc||'').toLowerCase().includes(low));
+if(descHit!==-1){bestIdx=descHit;break;}
+}
+if(bestIdx===-1&&typeof cfg.lat==='number'&&typeof cfg.lng==='number'){
+let minDist=Infinity;
+TRACK_GEOTAG_PHOTOS.forEach((p,idx)=>{
+if(typeof p.lat==='number'&&typeof p.lng==='number'){
+const d=haversineKm(p.lat,p.lng,cfg.lat,cfg.lng);
+if(d<minDist){minDist=d;bestIdx=idx;}
+}
+});
+}
+if(bestIdx!==-1){
+const p=TRACK_GEOTAG_PHOTOS[bestIdx];
+return{idx:bestIdx,src:p.src||'',title:p.title||cfg.title,desc:p.desc||''};
+}
+return{idx:-1,src:'',title:cfg.title,desc:''};
+}
+function positionInlinePhotoPreview(linkEl){
+const box=document.getElementById('inline-photo-preview');
+if(!box||!linkEl)return;
+const rect=(linkEl.getClientRects&&linkEl.getClientRects()[0])||linkEl.getBoundingClientRect();
+const boxW=Math.min(248,window.innerWidth-24);
+const boxH=box.offsetHeight||198;
+let left=rect.left+(rect.width/2)-(boxW/2);
+left=Math.max(12,Math.min(left,window.innerWidth-boxW-12));
+let top=rect.top-boxH-10;
+if(top<12)top=rect.bottom+10;
+if(top+boxH>window.innerHeight-12)top=Math.max(12,window.innerHeight-boxH-12);
+box.style.left=Math.round(left)+'px';
+box.style.top=Math.round(top)+'px';
+}
+function showInlinePhotoPreview(linkEl){
+const key=linkEl&&linkEl.dataset?linkEl.dataset.inlinePhoto:'';
+const box=document.getElementById('inline-photo-preview');
+const img=document.getElementById('ipp-img');
+const empty=document.getElementById('ipp-empty');
+const titleEl=document.getElementById('ipp-title');
+if(!key||!box||!img||!titleEl)return;
+activeInlinePhotoEl=linkEl;
+const data=resolveInlinePhotoData(key,linkEl);
+if(!data)return;
+titleEl.textContent=data.title||'';
+if(data.src){
+img.src=data.src;
+img.alt=data.title||'Фото маршрута';
+img.classList.remove('hidden');
+if(empty)empty.classList.add('hidden');
+}else{
+img.src='';
+img.classList.add('hidden');
+if(empty){
+empty.textContent=isTrackPhotosLoaded?'Фото не найдено в photos.json':'Загрузка фото…';
+empty.classList.remove('hidden');
+}
+if(!isTrackPhotosLoaded){
+ensureTrackPhotosLoaded(false).then(()=>{
+if(activeInlinePhotoEl===linkEl)showInlinePhotoPreview(linkEl);
+});
+}
+}
+positionInlinePhotoPreview(linkEl);
+box.setAttribute('aria-hidden','false');
+box.classList.add('is-visible');
+}
+function hideInlinePhotoPreview(){
+const box=document.getElementById('inline-photo-preview');
+activeInlinePhotoEl=null;
+if(box){
+box.classList.remove('is-visible');
+box.setAttribute('aria-hidden','true');
+}
+}
+function openInlinePhotoFull(linkEl,evt){
+if(evt){evt.preventDefault();evt.stopPropagation();}
+const key=linkEl&&linkEl.dataset?linkEl.dataset.inlinePhoto:'';
+if(!key)return;
+hideInlinePhotoPreview();
+const openNow=()=>{
+const data=resolveInlinePhotoData(key,linkEl);
+if(data&&data.idx>=0){
+openTrackPhotoModal(data.idx);
+}else if(data&&data.src){
+document.getElementById('tp-modal-badge').textContent='📷 Фото на маршруте';
+document.getElementById('tp-modal-title').textContent=data.title||'Фото маршрута';
+document.getElementById('tp-modal-img').src=data.src;
+document.getElementById('tp-modal-desc').textContent=data.desc||'';
+document.getElementById('tp-modal-coords').textContent='';
+const m=document.getElementById('track-photo-modal');
+if(m){m.classList.remove('hidden');m.classList.add('flex');}
+}else{
+openPhotosLayerOnMap();
+}
+};
+if(!isTrackPhotosLoaded){
+ensureTrackPhotosLoaded(false).then(openNow);
+}else{
+openNow();
+}
+}
+function initInlineHeroPhotoLinks(){
+const links=document.querySelectorAll('[data-inline-photo]');
+links.forEach(linkEl=>{
+linkEl.addEventListener('mouseenter',()=>showInlinePhotoPreview(linkEl));
+linkEl.addEventListener('focus',()=>showInlinePhotoPreview(linkEl));
+linkEl.addEventListener('mouseleave',hideInlinePhotoPreview);
+linkEl.addEventListener('blur',hideInlinePhotoPreview);
+linkEl.addEventListener('click',(ev)=>openInlinePhotoFull(linkEl,ev));
+});
+window.addEventListener('scroll',hideInlinePhotoPreview,{passive:true});
+window.addEventListener('resize',hideInlinePhotoPreview,{passive:true});
+}
+
 function openTrackPhotoModal(idx){
 activePhotoIdx=(idx+TRACK_GEOTAG_PHOTOS.length)%TRACK_GEOTAG_PHOTOS.length;
 const p=TRACK_GEOTAG_PHOTOS[activePhotoIdx];
@@ -1919,7 +2183,7 @@ if(item.id==='m-2'||item.mapRouteId==='m-2')return 'https://drive.google.com/uc?
 if(item.id==='m-4'||item.mapRouteId==='m-4')return 'https://drive.google.com/uc?export=download&id=14E3o73JuerpHpKpuA6B5KUoNpqqzQ26j';
 return DEFAULT_DRIVE_TRACKS_FOLDER;
 }
-function renderMapRoutes(){if(!leafletMap)return;Object.values(mapPolylines).forEach(p=>leafletMap.removeLayer(p));Object.values(mapRouteOutlines).forEach(p=>leafletMap.removeLayer(p));Object.values(mapRouteGlows).forEach(p=>leafletMap.removeLayer(p));mapPolylines={};mapRouteOutlines={};mapRouteGlows={};const S=MAP_STYLES[currentMapStyle]||MAP_STYLES.minecraft;const adminRoutesList=document.getElementById('map-admin-routes-list');if(adminRoutesList)adminRoutesList.innerHTML='';portalState.mapRoutes.forEach(route=>{if(!Array.isArray(route.coords)||!route.coords.length)return;const isTopoMode=(currentMapStyle==='osm'||currentMapStyle==='topo_photos');const outline=L.polyline(route.coords,{color:isTopoMode?'#0f172a':(S.routeOutline||'#090c10'),weight:isTopoMode?(currentLineWeight+2):(currentLineWeight+6),opacity:isTopoMode?0.55:0.92,lineCap:'round',lineJoin:'round',interactive:false}).addTo(leafletMap);const glow=L.polyline(route.coords,{color:route.color||'#f59e0b',weight:isTopoMode?currentLineWeight:(currentLineWeight+3),opacity:isTopoMode?0:0.45,lineCap:'round',lineJoin:'round',interactive:false}).addTo(leafletMap);const poly=L.polyline(route.coords,{color:route.color||'#f59e0b',weight:isTopoMode?currentLineWeight:(currentLineWeight+1),opacity:isTopoMode?0.92:1,lineCap:'round',lineJoin:'round',interactive:true}).addTo(leafletMap);const sStory=sanitizeUrl(route.storyUrl),sDownload=resolveTrackDownloadUrl(route),sFolder=sanitizeUrl(route.driveFolderUrl)||DEFAULT_DRIVE_TRACKS_FOLDER;const multiStoriesHtml=(Array.isArray(route.storyLinks)&&route.storyLinks.length>0)?route.storyLinks.map(st=>{const u=sanitizeUrl(st.url);if(!u)return'';return`<div class="mc-popup-story-card" style="margin-top:6px;padding:6px;background:rgba(26,18,8,0.18);border:1px solid #3d2914"><div class="mc-popup-story-desc" style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#1a1208;margin-bottom:4px;line-height:1.35">${escapeHtml(st.desc||'')}</div><a href="${escapeHtml(u)}" target="_blank" rel="noopener noreferrer" class="mc-popup-btn">📖 ${escapeHtml(st.title||'РАССКАЗ')} ↗</a></div>`}).join(''):(sStory?`<a href="${escapeHtml(sStory)}" target="_blank" rel="noopener noreferrer" class="mc-popup-btn">📖 РАССКАЗ ↗</a>`:'');poly.bindPopup(`<div class="min-w-[230px] max-w-[300px]"><span class="mc-popup-badge">${escapeHtml(route.km)}</span><div class="mc-popup-title">${escapeHtml(route.name)}</div><div class="mc-popup-desc">${escapeHtml(route.desc)}</div>${multiStoriesHtml}<a href="${escapeHtml(sDownload)}" target="_blank" rel="noopener noreferrer" download class="mc-popup-btn cyan">📥 СКАЧАТЬ ТРЕК (.GPX) ↗</a><a href="https://notebook.google.com/notebook/7959d135-4395-4f56-8f7b-4fa29ddd0fd6/preview" target="_blank" rel="noopener noreferrer" class="mc-popup-btn cyan">✨ ИИ-БАЗА МАРШРУТА ↗</a><button type="button" onclick="closeActiveMapPopup()" class="mc-popup-btn dark">✕ ЗАКРЫТЬ</button></div>`,{closeButton:true,autoPan:true,className:'mc-popup'});mapRouteOutlines[route.id]=outline;mapRouteGlows[route.id]=glow;mapPolylines[route.id]=poly;if(isAdminLoggedIn&&adminRoutesList){const item=document.createElement('div');item.className='p-2.5 rounded-xl bg-graphite-900 border border-graphite-800 flex items-center justify-between gap-2 text-xs';item.innerHTML=`<span class="inline-flex items-center gap-1.5 font-semibold text-white truncate"><span class="w-2.5 h-2.5 shrink-0" style="background:${escapeHtml(route.color)};border-radius:0"></span>${escapeHtml(route.name)} (${escapeHtml(route.km)})</span><div class="flex items-center gap-2 shrink-0"><button type="button" data-action="edit-route" data-id="${escapeHtml(route.id)}" class="font-mono text-volga-400 hover:underline">Изменить</button><button type="button" data-action="del-route" data-id="${escapeHtml(route.id)}" class="font-mono text-red-400 hover:underline">Удалить</button></div>`;adminRoutesList.appendChild(item)}});renderRouteDecorations()}
+function renderMapRoutes(){if(!leafletMap)return;Object.values(mapPolylines).forEach(p=>leafletMap.removeLayer(p));Object.values(mapRouteOutlines).forEach(p=>leafletMap.removeLayer(p));Object.values(mapRouteGlows).forEach(p=>leafletMap.removeLayer(p));mapPolylines={};mapRouteOutlines={};mapRouteGlows={};const S=MAP_STYLES[currentMapStyle]||MAP_STYLES.minecraft;const adminRoutesList=document.getElementById('map-admin-routes-list');if(adminRoutesList)adminRoutesList.innerHTML='';portalState.mapRoutes.forEach(route=>{if(!Array.isArray(route.coords)||!route.coords.length)return;const isTopoMode=(currentMapStyle==='osm'||currentMapStyle==='topo_photos');const outline=L.polyline(route.coords,{color:isTopoMode?'#0f172a':(S.routeOutline||'#090c10'),weight:isTopoMode?(currentLineWeight+2):(currentLineWeight+6),opacity:isTopoMode?0.55:0.92,lineCap:'round',lineJoin:'round',smoothFactor:0.35,interactive:false}).addTo(leafletMap);const glow=L.polyline(route.coords,{color:route.color||'#f59e0b',weight:isTopoMode?currentLineWeight:(currentLineWeight+3),opacity:isTopoMode?0:0.45,lineCap:'round',lineJoin:'round',smoothFactor:0.35,interactive:false}).addTo(leafletMap);const poly=L.polyline(route.coords,{color:route.color||'#f59e0b',weight:isTopoMode?currentLineWeight:(currentLineWeight+1),opacity:isTopoMode?0.92:1,lineCap:'round',lineJoin:'round',smoothFactor:0.35,interactive:true}).addTo(leafletMap);const sStory=sanitizeUrl(route.storyUrl),sDownload=resolveTrackDownloadUrl(route),sFolder=sanitizeUrl(route.driveFolderUrl)||DEFAULT_DRIVE_TRACKS_FOLDER;const multiStoriesHtml=(Array.isArray(route.storyLinks)&&route.storyLinks.length>0)?route.storyLinks.map(st=>{const u=sanitizeUrl(st.url);if(!u)return'';return`<div class="mc-popup-story-card" style="margin-top:6px;padding:6px;background:rgba(26,18,8,0.18);border:1px solid #3d2914"><div class="mc-popup-story-desc" style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#1a1208;margin-bottom:4px;line-height:1.35">${escapeHtml(st.desc||'')}</div><a href="${escapeHtml(u)}" target="_blank" rel="noopener noreferrer" class="mc-popup-btn">📖 ${escapeHtml(st.title||'РАССКАЗ')} ↗</a></div>`}).join(''):(sStory?`<a href="${escapeHtml(sStory)}" target="_blank" rel="noopener noreferrer" class="mc-popup-btn">📖 РАССКАЗ ↗</a>`:'');poly.bindPopup(`<div class="min-w-[230px] max-w-[300px]"><span class="mc-popup-badge">${escapeHtml(route.km)}</span><div class="mc-popup-title">${escapeHtml(route.name)}</div><div class="mc-popup-desc">${escapeHtml(route.desc)}</div>${multiStoriesHtml}<a href="${escapeHtml(sDownload)}" target="_blank" rel="noopener noreferrer" download class="mc-popup-btn cyan">📥 СКАЧАТЬ ТРЕК (.GPX) ↗</a><a href="https://notebook.google.com/notebook/7959d135-4395-4f56-8f7b-4fa29ddd0fd6/preview" target="_blank" rel="noopener noreferrer" class="mc-popup-btn cyan">✨ ИИ-БАЗА МАРШРУТА ↗</a><button type="button" onclick="closeActiveMapPopup()" class="mc-popup-btn dark">✕ ЗАКРЫТЬ</button></div>`,{closeButton:true,autoPan:true,className:'mc-popup'});mapRouteOutlines[route.id]=outline;mapRouteGlows[route.id]=glow;mapPolylines[route.id]=poly;if(isAdminLoggedIn&&adminRoutesList){const item=document.createElement('div');item.className='p-2.5 rounded-xl bg-graphite-900 border border-graphite-800 flex items-center justify-between gap-2 text-xs';item.innerHTML=`<span class="inline-flex items-center gap-1.5 font-semibold text-white truncate"><span class="w-2.5 h-2.5 shrink-0" style="background:${escapeHtml(route.color)};border-radius:0"></span>${escapeHtml(route.name)} (${escapeHtml(route.km)})</span><div class="flex items-center gap-2 shrink-0"><button type="button" data-action="edit-route" data-id="${escapeHtml(route.id)}" class="font-mono text-volga-400 hover:underline">Изменить</button><button type="button" data-action="del-route" data-id="${escapeHtml(route.id)}" class="font-mono text-red-400 hover:underline">Удалить</button></div>`;adminRoutesList.appendChild(item)}});renderRouteDecorations()}
 
 function updateMapLineWeight(val){currentLineWeight=Math.min(5,Math.max(2,parseInt(val,10)||3));localStorage.setItem(LINE_WEIGHT_KEY,String(currentLineWeight));portalState.mapLineWeight=currentLineWeight;savePortalState();const lbl=document.getElementById('line-width-label');if(lbl)lbl.textContent=currentLineWeight+'px';const isTopoMode=(currentMapStyle==='osm'||currentMapStyle==='topo_photos');Object.values(mapRouteOutlines).forEach(p=>p.setStyle({weight:isTopoMode?(currentLineWeight+2):(currentLineWeight+6)}));Object.values(mapRouteGlows).forEach(p=>p.setStyle({weight:isTopoMode?currentLineWeight:(currentLineWeight+3)}));Object.values(mapPolylines).forEach(p=>p.setStyle({weight:isTopoMode?currentLineWeight:(currentLineWeight+1)}))}
 function toggleMapCollapse(){const body=document.getElementById('map-collapsible-body'),sliders=document.getElementById('map-sliders-wrap'),icon=document.getElementById('map-collapse-icon'),textEl=document.getElementById('map-collapse-text');if(!body)return;body.classList.toggle('hidden');const hidden=body.classList.contains('hidden');if(sliders){sliders.classList.toggle('hidden',hidden);sliders.classList.toggle('flex',!hidden);}if(icon)icon.textContent=hidden?'▶':'▼';if(textEl)textEl.textContent=hidden?'Развернуть карту':'Свернуть карту';if(!hidden){if(!leafletMap)initLeafletMap();loadExternalRoutesJson();const fitAll=()=>{leafletMap.invalidateSize();const layers=Object.values(mapPolylines);if(layers.length)leafletMap.fitBounds(L.featureGroup(layers).getBounds(),{padding:[25,25]})};setTimeout(fitAll,80);setTimeout(fitAll,300)}}
@@ -1979,7 +2243,7 @@ function openMapSectionFromNav(){const b=document.getElementById('map-collapsibl
 function focusRouteOnMap(routeId){const b=document.getElementById('map-collapsible-body');if(b&&b.classList.contains('hidden'))toggleMapCollapse();document.getElementById('interactive-map-section').scrollIntoView({behavior:'smooth',block:'center'});setTimeout(()=>{if(!leafletMap)initLeafletMap();loadExternalRoutesJson();const p=mapPolylines[routeId];if(p&&leafletMap){leafletMap.invalidateSize();leafletMap.fitBounds(p.getBounds(),{padding:[30,30]});p.openPopup()}},250)}
 function closeActiveMapPopup(){if(leafletMap)leafletMap.closePopup()}
 function toggleMapAdminDrawer(){if(!isAdminLoggedIn){openAdminLoginModal();return}const body=document.getElementById('map-collapsible-body');if(body&&body.classList.contains('hidden'))toggleMapCollapse();const drawer=document.getElementById('map-admin-drawer');if(drawer){drawer.classList.toggle('hidden');if(!drawer.classList.contains('hidden'))drawer.scrollIntoView({behavior:'smooth',block:'center'})}}
-function handleGpxFileUpload(e){const file=e.target.files[0];if(!file)return;const reader=new FileReader();reader.onload=function(evt){const text=evt.target.result;try{if(file.name.endsWith('.json')||file.name.endsWith('.geojson')){const geo=JSON.parse(text);const coords=[];const extract=(arr)=>{if(!Array.isArray(arr))return;if(typeof arr[0]==='number'&&typeof arr[1]==='number')coords.push([arr[1],arr[0]]);else arr.forEach(extract)};if(geo.features)geo.features.forEach(f=>f.geometry&&extract(f.geometry.coordinates));else if(geo.coordinates)extract(geo.coordinates);uploadedRouteCoords=coords}else{const xml=new DOMParser().parseFromString(text,'text/xml');const pts=Array.from(xml.querySelectorAll('trkpt, rtept'));const step=pts.length>3500?Math.ceil(pts.length/3500):1;uploadedRouteCoords=[];for(let i=0;i<pts.length;i+=step){const lat=parseFloat(pts[i].getAttribute('lat')),lon=parseFloat(pts[i].getAttribute('lon'));if(!isNaN(lat)&&!isNaN(lon))uploadedRouteCoords.push([lat,lon])}}showToast(`Загружено точек: ${uploadedRouteCoords?uploadedRouteCoords.length:0}`)}catch(err){showToast('Не удалось прочитать файл','error')}};reader.readAsText(file)}
+function handleGpxFileUpload(e){const file=e.target.files[0];if(!file)return;const reader=new FileReader();reader.onload=function(evt){const text=evt.target.result;try{if(file.name.endsWith('.json')||file.name.endsWith('.geojson')){const geo=JSON.parse(text);const coords=[];const extract=(arr)=>{if(!Array.isArray(arr))return;if(typeof arr[0]==='number'&&typeof arr[1]==='number')coords.push([arr[1],arr[0]]);else arr.forEach(extract)};if(geo.features)geo.features.forEach(f=>f.geometry&&extract(f.geometry.coordinates));else if(geo.coordinates)extract(geo.coordinates);uploadedRouteCoords=coords}else{const xml=new DOMParser().parseFromString(text,'text/xml');const pts=Array.from(xml.querySelectorAll('trkpt, rtept'));const step=pts.length>8000?Math.ceil(pts.length/8000):1;uploadedRouteCoords=[];for(let i=0;i<pts.length;i+=step){const lat=parseFloat(pts[i].getAttribute('lat')),lon=parseFloat(pts[i].getAttribute('lon'));if(!isNaN(lat)&&!isNaN(lon))uploadedRouteCoords.push([lat,lon])}}showToast(`Загружено точек: ${uploadedRouteCoords?uploadedRouteCoords.length:0}`)}catch(err){showToast('Не удалось прочитать файл','error')}};reader.readAsText(file)}
 function handleSaveMapRoute(e){e.preventDefault();if(!isAdminLoggedIn)return;const editId=document.getElementById('mr-edit-id').value;const name=document.getElementById('mr-name').value.trim();const km=document.getElementById('mr-km').value.trim();const color=document.getElementById('mr-color').value||'#f59e0b';const storyUrl=sanitizeUrl(document.getElementById('mr-story-url').value.trim());const trackUrl=sanitizeUrl(document.getElementById('mr-track-url').value.trim());const desc=document.getElementById('mr-desc').value.trim();if(editId){const idx=portalState.mapRoutes.findIndex(r=>r.id===editId);if(idx!==-1)portalState.mapRoutes[idx]={...portalState.mapRoutes[idx],name,km,color,storyUrl,trackUrl,desc,coords:uploadedRouteCoords&&uploadedRouteCoords.length>1?uploadedRouteCoords:portalState.mapRoutes[idx].coords}}else{portalState.mapRoutes.push({id:'m-'+Date.now(),name,km,color,storyUrl,trackUrl,desc,coords:uploadedRouteCoords&&uploadedRouteCoords.length>1?uploadedRouteCoords:[[54.314,48.403],[51.533,46.034]]})}uploadedRouteCoords=null;savePortalState();if(styledGridLayer)styledGridLayer.redraw();renderMapRoutes();resetMapRouteForm();showToast('Маршрут сохранён')}
 function editMapRoute(id){if(!isAdminLoggedIn)return;const route=portalState.mapRoutes.find(r=>r.id===id);if(!route)return;document.getElementById('mr-edit-id').value=route.id;document.getElementById('mr-name').value=route.name||'';document.getElementById('mr-km').value=route.km||'';document.getElementById('mr-color').value=route.color||'#f59e0b';document.getElementById('mr-story-url').value=route.storyUrl||'';document.getElementById('mr-track-url').value=route.trackUrl||'';document.getElementById('mr-desc').value=route.desc||'';uploadedRouteCoords=null}
 function deleteMapRoute(id){if(!isAdminLoggedIn)return;portalState.mapRoutes=portalState.mapRoutes.filter(r=>r.id!==id);savePortalState();if(styledGridLayer)styledGridLayer.redraw();renderMapRoutes();showToast('Маршрут удалён')}
@@ -2089,6 +2353,7 @@ function initEditableStaticTexts(){
 if(!portalState.textEdits)portalState.textEdits={};
 if(portalState.textEdits['metric-1-desc']&&!String(portalState.textEdits['metric-1-desc']).includes('Продолжение')){delete portalState.textEdits['metric-1-desc'];}
 if(portalState.textEdits['sectors-heading']&&String(portalState.textEdits['sectors-heading']).includes('КЛЮЧЕВЫЕ')){delete portalState.textEdits['sectors-heading'];const sh=document.getElementById('sectors-heading');if(sh)sh.textContent='УЧАСТКИ МАРШРУТА';}
+if(portalState.textEdits['hero-subtitle']&&(String(portalState.textEdits['hero-subtitle']).includes('буреломинга')||String(portalState.textEdits['hero-subtitle']).includes('Общедоступный велосипедный маршрут'))){delete portalState.textEdits['hero-subtitle'];}
 Object.keys(DEFAULT_MISSION_TEXTS).forEach(id=>{
 if(!portalState.textEdits[id]||!String(portalState.textEdits[id]).trim()){
 delete portalState.textEdits[id];
@@ -2157,7 +2422,7 @@ validCloudRes.forEach(cloud=>{m.set(cloud.id,mergeResultItem(m.get(cloud.id),clo
 raceResultsList=Array.from(m.values());
 saveRaceResultsLocal();
 }
-}if(data&&Array.isArray(data.stories)&&data.stories.length>0){portalState.stories=mergeDefaultStories([...(portalState.stories||[]),...data.stories]);savePortalState()}if(data&&data.portalConfig&&typeof data.portalConfig==='object'){const cu=toMs(data.portalConfig.updatedAt),lu=toMs(portalState.updatedAt);if(cu>lu){const preservedFaqs=(Array.isArray(data.portalConfig.faqs)&&data.portalConfig.faqs.length)?data.portalConfig.faqs:(Array.isArray(portalState.faqs)&&portalState.faqs.length?portalState.faqs:defaultPortalState.faqs);const preservedSurvey=(Array.isArray(data.portalConfig.surveyQuestions)&&data.portalConfig.surveyQuestions.length)?data.portalConfig.surveyQuestions:(Array.isArray(portalState.surveyQuestions)&&portalState.surveyQuestions.length?portalState.surveyQuestions:null);const preservedDonate=(data.portalConfig.donateConfig&&typeof data.portalConfig.donateConfig==='object')?data.portalConfig.donateConfig:(portalState.donateConfig||null);const rawSectors=(Array.isArray(data.portalConfig.sectors)&&data.portalConfig.sectors.length)?data.portalConfig.sectors:(Array.isArray(portalState.sectors)&&portalState.sectors.length?portalState.sectors:defaultPortalState.sectors);const preservedSectors=cleanLegacySectors(rawSectors);portalState={...portalState,...data.portalConfig,mapRoutes:upgradeMapRoutesPrecision(data.portalConfig.mapRoutes||portalState.mapRoutes),faqs:preservedFaqs,surveyQuestions:preservedSurvey,donateConfig:preservedDonate,sectors:preservedSectors,stories:mergeDefaultStories(data.portalConfig.stories||portalState.stories),googleSheetUrl:url,mapStyle:MAP_STYLES[data.portalConfig.mapStyle]?data.portalConfig.mapStyle:portalState.mapStyle};savePortalState();initEditableStaticTexts();pickHeroSubtitleVariant();if(leafletMap){renderMapRoutes();renderMapCities()}}else{portalState.mapRoutes=upgradeMapRoutesPrecision(portalState.mapRoutes);portalState.sectors=cleanLegacySectors(portalState.sectors);portalState.stories=mergeDefaultStories(portalState.stories);savePortalState();initEditableStaticTexts();pickHeroSubtitleVariant();if(leafletMap){renderMapRoutes();renderMapCities()}}}renderSectors();renderFaqs();renderStories();renderPublicProtocol();renderPublicResultsTable();renderAdminApplications();renderAdminResultsSection();updateGoogleSheetStatusUI('✓ Синхронизировано',true);if(showNotification)showToast('Данные загружены из Google')}catch(e){console.warn('pull warn:',e);updateGoogleSheetStatusUI('⚠️ Автономный режим',false);if(showNotification)showToast('Не удалось загрузить','error')}}
+}if(data&&Array.isArray(data.stories)&&data.stories.length>0){portalState.stories=mergeDefaultStories([...(portalState.stories||[]),...data.stories]);savePortalState()}if(data&&data.portalConfig&&typeof data.portalConfig==='object'){const cu=toMs(data.portalConfig.updatedAt),lu=toMs(portalState.updatedAt);if(cu>lu){const preservedFaqs=mergeDefaultFaqs((Array.isArray(data.portalConfig.faqs)&&data.portalConfig.faqs.length)?data.portalConfig.faqs:portalState.faqs);const preservedSurvey=(Array.isArray(data.portalConfig.surveyQuestions)&&data.portalConfig.surveyQuestions.length)?data.portalConfig.surveyQuestions:(Array.isArray(portalState.surveyQuestions)&&portalState.surveyQuestions.length?portalState.surveyQuestions:null);const preservedDonate=(data.portalConfig.donateConfig&&typeof data.portalConfig.donateConfig==='object')?data.portalConfig.donateConfig:(portalState.donateConfig||null);const rawSectors=(Array.isArray(data.portalConfig.sectors)&&data.portalConfig.sectors.length)?data.portalConfig.sectors:(Array.isArray(portalState.sectors)&&portalState.sectors.length?portalState.sectors:defaultPortalState.sectors);const preservedSectors=cleanLegacySectors(rawSectors);portalState={...portalState,...data.portalConfig,mapRoutes:upgradeMapRoutesPrecision(data.portalConfig.mapRoutes||portalState.mapRoutes,portalState.mapRoutes),faqs:preservedFaqs,surveyQuestions:preservedSurvey,donateConfig:preservedDonate,sectors:preservedSectors,stories:mergeDefaultStories(data.portalConfig.stories||portalState.stories),googleSheetUrl:url,mapStyle:MAP_STYLES[data.portalConfig.mapStyle]?data.portalConfig.mapStyle:portalState.mapStyle};savePortalState();initEditableStaticTexts();pickHeroSubtitleVariant();if(leafletMap){renderMapRoutes();renderMapCities()}}else{portalState.mapRoutes=upgradeMapRoutesPrecision(portalState.mapRoutes,portalState.mapRoutes);portalState.sectors=cleanLegacySectors(portalState.sectors);portalState.stories=mergeDefaultStories(portalState.stories);savePortalState();initEditableStaticTexts();pickHeroSubtitleVariant();if(leafletMap){renderMapRoutes();renderMapCities()}}}renderSectors();renderFaqs();renderStories();renderPublicProtocol();renderPublicResultsTable();renderAdminApplications();renderAdminResultsSection();updateGoogleSheetStatusUI('✓ Синхронизировано',true);if(showNotification)showToast('Данные загружены из Google')}catch(e){console.warn('pull warn:',e);updateGoogleSheetStatusUI('⚠️ Автономный режим',false);if(showNotification)showToast('Не удалось загрузить','error')}}
 
 function exportPageData(){if(!isAdminLoggedIn)return;const modal=document.getElementById('custom-modal');document.getElementById('modal-title').textContent='Экспорт конфигурации (JSON)';document.getElementById('modal-desc').textContent='Скопируйте JSON:';document.getElementById('modal-input-wrap').classList.remove('hidden');const ta=document.getElementById('modal-textarea');ta.value=JSON.stringify(portalState,null,2);const ok=document.getElementById('modal-confirm');ok.textContent='Скопировать JSON';modal.classList.remove('hidden');modal.classList.add('flex');ok.onclick=async()=>{await copyTextToClipboard(ta.value);modal.classList.add('hidden');modal.classList.remove('flex');showToast('JSON скопирован')};document.getElementById('modal-cancel').onclick=()=>{modal.classList.add('hidden');modal.classList.remove('flex')}}
 function openImportModal(){if(!isAdminLoggedIn)return;const modal=document.getElementById('custom-modal');document.getElementById('modal-title').textContent='Импорт (JSON)';document.getElementById('modal-desc').textContent='Вставьте JSON:';document.getElementById('modal-input-wrap').classList.remove('hidden');const ta=document.getElementById('modal-textarea');ta.value='';const ok=document.getElementById('modal-confirm');ok.textContent='Импортировать';modal.classList.remove('hidden');modal.classList.add('flex');ok.onclick=()=>{try{const imp=JSON.parse(ta.value);portalState={schemaVersion:CURRENT_SCHEMA_VERSION,updatedAt:Date.now(),raceTargetUTC:imp.raceTargetUTC||portalState.raceTargetUTC||defaultPortalState.raceTargetUTC,allowEarlyGpxUpload:typeof imp.allowEarlyGpxUpload==='boolean'?imp.allowEarlyGpxUpload:portalState.allowEarlyGpxUpload,mapLineWeight:parseInt(imp.mapLineWeight,10)||portalState.mapLineWeight||3,mapStyle:MAP_STYLES[imp.mapStyle]?imp.mapStyle:portalState.mapStyle,googleSheetUrl:imp.googleSheetUrl||portalState.googleSheetUrl||defaultPortalState.googleSheetUrl,textEdits:imp.textEdits||{},mapRoutes:Array.isArray(imp.mapRoutes)?imp.mapRoutes:portalState.mapRoutes,sectors:Array.isArray(imp.sectors)?imp.sectors:portalState.sectors,faqs:Array.isArray(imp.faqs)?imp.faqs:portalState.faqs,stories:Array.isArray(imp.stories)?imp.stories:portalState.stories};savePortalState();location.reload()}catch(e){showToast('Ошибка формата JSON','error')}};document.getElementById('modal-cancel').onclick=()=>{modal.classList.add('hidden');modal.classList.remove('flex')}}
@@ -2170,7 +2435,64 @@ function handleAdminSaveSector(e){e.preventDefault();if(!isAdminLoggedIn)return;
 function editAdminSector(idx){if(!isAdminLoggedIn)return;const sec=portalState.sectors[idx];if(!sec)return;document.getElementById('sec-edit-idx').value=String(idx);document.getElementById('sec-form-num').value=sec.num||'';document.getElementById('sec-form-title').value=sec.title||'';document.getElementById('sec-form-km').value=sec.km||'';document.getElementById('sec-form-badge').value=sec.badge||'';document.getElementById('sec-form-surface').value=sec.surface||'';document.getElementById('sec-form-track').value=sec.trackUrl||'';document.getElementById('sec-form-desc').value=sec.desc||''}
 function resetAdminSectorForm(){const f=document.getElementById('admin-sector-form');if(f)f.reset();document.getElementById('sec-edit-idx').value=''}
 
-function renderFaqs(){const container=document.getElementById('faq-items-container');if(!container)return;const faqs=Array.isArray(portalState.faqs)&&portalState.faqs.length>0?portalState.faqs:defaultPortalState.faqs;container.innerHTML='';faqs.forEach((item,idx)=>{const details=document.createElement('details');details.className='group/faq bg-graphite-950 border border-graphite-800 rounded-xl overflow-hidden';if(idx===0)details.open=true;details.innerHTML=`<summary class="cursor-pointer px-4 py-3.5 text-sm font-bold text-white hover:text-ochre-400 transition flex items-center justify-between gap-3"><span>${escapeHtml(item.q)}</span><span class="text-xs font-mono text-ochre-400 group-open/faq:rotate-180 transition-transform">▼</span></summary><div class="px-4 pb-4 pt-2 text-xs sm:text-sm text-slate-300 leading-relaxed border-t border-graphite-800/80">${escapeHtml(item.a)}</div>`;container.appendChild(details)})}
+const NEWCOMER_AI_PROMPT_TEXT=`Ты — опытный тренер и практик ультра-байкпакинга (самообеспечение, грунтовые и смешанные многодневки).
+
+Я хочу подготовиться к моему первому байкпакинг-заезду «Утёсы Поволжья» (Ульяновск — Камышин):
+• Дистанция: 1290 км по правому берегу Волги (грунты, меловые подъёмы с градиентами до 16%, лесные тропы, грейдер, тихий асфальт).
+• Контрольный лимит: 10 дней (ориентир 130–160 км в сутки).
+• Формат: полное самообеспечение без машин сопровождения, но разрешены попутные магазины, кафе, гостиницы и веломастерские.
+• Ключевое правило безопасности: в каждые полные сутки (24 ч) нужно быть не в движении минимум 8 часов (сон + остановки).
+• Покрышки: от 50 мм (2.0–2.25"), бескамерно.
+
+Мои вводные (заполните или исправьте перед отправкой):
+• Мой спортивный опыт: [например: бег/марафоны, шоссе, кросс-кантри, лыжи, триатлон]
+• Текущий объём тренировок в неделю: [например: 5–8 часов]
+• Какой у меня велосипед: [например: хардтейл / грэвел / пока выбираю]
+• Опыт ночёвок на природе / с сумками: [нет / небольшой]
+• Сколько месяцев осталось до старта: [например: 6 месяцев]
+
+Дай мне понятный, практичный и структурированный план без лишней воды:
+1. Как правильно перенести мою базу из другого вида спорта на 8–10 дней в седле (на что сделать упор: посадка, каденс, спина/шея/кисти, длинные заезды подряд).
+2. Минимальный и достаточный список снаряжения и сумок (байкпакинг), без лишнего веса и переплат.
+3. Тактика по дням с учётом правила 8 часов отдыха: как делить день, когда спать в гостинице, а когда в палатке/биви.
+4. Питание и вода на ультрадистанции (сколько углеводов в час, электролиты, как не словить «бонк»).
+5. Главные 5 ошибок новичков из других циклических видов спорта в первой многодневке и как их избежать.
+6. План 2–3 тестовых выездов на выходные (с ночёвкой) перед основным стартом.`;
+
+function openFaqAiPromptModal(e){
+if(e)e.preventDefault();
+const modal=document.getElementById('custom-modal');
+if(!modal)return;
+document.getElementById('modal-title').textContent='✨ Промпт для любого ИИ — подготовка новичка';
+document.getElementById('modal-desc').textContent='Скопируйте этот текст и вставьте в любой ИИ (ChatGPT, Gemini, Claude, DeepSeek и др.), предварительно заполнив блок «Мои вводные»:';
+document.getElementById('modal-input-wrap').classList.remove('hidden');
+const ta=document.getElementById('modal-textarea');
+ta.rows=12;
+ta.value=NEWCOMER_AI_PROMPT_TEXT;
+const ok=document.getElementById('modal-confirm');
+ok.textContent='📋 Скопировать промпт';
+modal.classList.remove('hidden');
+modal.classList.add('flex');
+ok.onclick=async()=>{
+await copyTextToClipboard(ta.value);
+modal.classList.add('hidden');
+modal.classList.remove('flex');
+ta.rows=6;
+showToast('Промпт скопирован! Вставьте его в любой ИИ.');
+};
+document.getElementById('modal-cancel').onclick=()=>{
+modal.classList.add('hidden');
+modal.classList.remove('flex');
+ta.rows=6;
+};
+}
+async function copyFaqAiPromptDirect(e){
+if(e)e.preventDefault();
+await copyTextToClipboard(NEWCOMER_AI_PROMPT_TEXT);
+showToast('Промпт для ИИ скопирован в буфер!');
+}
+
+function renderFaqs(){const container=document.getElementById('faq-items-container');if(!container)return;const faqs=Array.isArray(portalState.faqs)&&portalState.faqs.length>0?portalState.faqs:defaultPortalState.faqs;container.innerHTML='';faqs.forEach((item,idx)=>{const details=document.createElement('details');details.className='group/faq bg-graphite-950 border border-graphite-800 rounded-xl overflow-hidden';if(idx===0)details.open=true;const hasAiPrompt=(item.aiPromptId==='newcomer-prep'||item.id==='faq-10');const promptActionsHtml=hasAiPrompt?`<div class="mt-3.5 pt-3 border-t border-graphite-800/80 flex flex-wrap items-center gap-2.5"><a href="#ai-prep-prompt" onclick="openFaqAiPromptModal(event)" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-ochre-500/15 hover:bg-ochre-500/25 border border-ochre-500/50 text-ochre-300 hover:text-white font-semibold text-xs transition">✨ Открыть готовый промпт для любого ИИ →</a><button type="button" onclick="copyFaqAiPromptDirect(event)" class="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-graphite-800 hover:bg-graphite-700 border border-graphite-700 text-volga-300 hover:text-white font-mono text-xs transition">📋 Скопировать сразу</button></div>`:'';details.innerHTML=`<summary class="cursor-pointer px-4 py-3.5 text-sm font-bold text-white hover:text-ochre-400 transition flex items-center justify-between gap-3"><span>${escapeHtml(item.q)}</span><span class="text-xs font-mono text-ochre-400 group-open/faq:rotate-180 transition-transform">▼</span></summary><div class="px-4 pb-4 pt-2.5 text-xs sm:text-sm text-slate-300 leading-relaxed border-t border-graphite-800/80"><div class="whitespace-pre-line">${escapeHtml(item.a)}</div>${promptActionsHtml}</div>`;container.appendChild(details)})}
 function renderAdminFaqSection(){if(!isAdminLoggedIn)return;const listEl=document.getElementById('admin-faq-list');if(!listEl)return;listEl.innerHTML='';(portalState.faqs||[]).forEach((f,idx)=>{const row=document.createElement('div');row.className='p-3 rounded-xl bg-graphite-900 border border-graphite-800 flex flex-wrap items-center justify-between gap-2 text-xs';row.innerHTML=`<strong class="text-white truncate max-w-xl">${escapeHtml(f.q)}</strong><div class="flex items-center gap-2"><button type="button" data-action="edit-faq" data-idx="${idx}" class="px-2.5 py-1 rounded bg-graphite-800 hover:bg-graphite-700 text-volga-400 font-mono">Изменить</button><button type="button" data-action="del-faq" data-idx="${idx}" class="px-2.5 py-1 rounded bg-red-950/60 hover:bg-red-900/70 text-red-300 font-mono">Удалить</button></div>`;listEl.appendChild(row)})}
 function handleAdminSaveFaq(e){e.preventDefault();if(!isAdminLoggedIn)return;const editIdx=document.getElementById('faq-edit-idx').value;const q=document.getElementById('faq-form-q').value.trim();const a=document.getElementById('faq-form-a').value.trim();if(editIdx!==''&&portalState.faqs[Number(editIdx)])portalState.faqs[Number(editIdx)]={...portalState.faqs[Number(editIdx)],q,a};else portalState.faqs.push({id:'faq-'+Date.now(),q,a});savePortalState();renderFaqs();renderAdminFaqSection();resetAdminFaqForm();showToast('FAQ сохранён')}
 function editAdminFaq(idx){if(!isAdminLoggedIn)return;const item=portalState.faqs[idx];if(!item)return;document.getElementById('faq-edit-idx').value=String(idx);document.getElementById('faq-form-q').value=item.q||'';document.getElementById('faq-form-a').value=item.a||''}
@@ -3161,20 +3483,23 @@ function setResultsFilter(filterVal){currentResultsFilter=filterVal;['all','2027
 function renderPublicResultsTable(){const secEl=document.getElementById('results-archive'),navEl=document.getElementById('nav-archive-link');const showArchive=raceResultsList.length>0||isAdminLoggedIn;if(secEl)secEl.classList.toggle('hidden',!showArchive);if(navEl){navEl.classList.toggle('hidden',!showArchive);navEl.classList.toggle('flex',showArchive);}const tbody=document.getElementById('public-results-tbody');if(!tbody)return;tbody.innerHTML='';const filtered=raceResultsList.filter(r=>currentResultsFilter==='all'?true:r.edition===currentResultsFilter);const classified=filtered.filter(r=>r.statusType!=='dnf').sort((a,b)=>(a.finalMinutes||a.totalMinutes||0)-(b.finalMinutes||b.totalMinutes||0));const dnf=filtered.filter(r=>r.statusType==='dnf');const sorted=[...classified,...dnf];const leader=classified.length>0?(classified[0].finalMinutes||classified[0].totalMinutes||1):null;const prelim=raceResultsList.filter(r=>r.statusType==='preliminary').length;const verif=raceResultsList.filter(r=>r.statusType==='verified').length;document.getElementById('pub-res-total').textContent=raceResultsList.length;document.getElementById('pub-res-prelim').textContent=prelim;document.getElementById('pub-res-verified').textContent=verif;const navBadge=document.getElementById('nav-res-count');if(navBadge)navBadge.textContent=raceResultsList.length;if(sorted.length===0){tbody.innerHTML='<tr><td colspan="10" class="py-8 px-4 text-center text-slate-400">Нет результатов.</td></tr>';return}sorted.forEach((r,idx)=>{const isDnf=r.statusType==='dnf',isPrelim=r.statusType==='preliminary';const rankLabel=isDnf?'DNF':String(idx+1);const rankClass=!isDnf&&idx===0?'bg-ochre-500 text-graphite-950 font-bold':(!isDnf&&idx<=2?'bg-graphite-800 text-ochre-300 border border-ochre-500/40 font-bold':'bg-graphite-800 text-slate-300');let statusBadge='';if(isDnf)statusBadge='<span class="inline-flex items-center px-2 py-0.5 rounded bg-red-500/20 text-red-300 border border-red-500/30 font-mono text-[11px]">✕ DNF</span>';else if(isPrelim)statusBadge='<span class="inline-flex items-center px-2 py-0.5 rounded bg-ochre-500/20 text-ochre-300 border border-ochre-500/40 font-mono text-[11px]">⏳ Промежуточный</span>';else statusBadge='<span class="inline-flex items-center px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 font-mono text-[11px]">✓ GPX</span>';const finalMins=r.finalMinutes||r.totalMinutes||0;let gapHtml='—';if(!isDnf&&leader&&leader>0){if(idx===0)gapHtml='<span class="font-mono text-emerald-400 font-bold">Лидер (0.0%)</span>';else{const diffMins=Math.max(0,finalMins-leader);const pct=((diffMins/leader)*100).toFixed(1);gapHtml=`<div class="font-mono font-bold text-ochre-300">+${pct}%</div><div class="text-[10px] font-mono text-slate-400">(+${formatMinutesToHHMM(diffMins)})</div>`}}const movingHtml=isPrelim?'<span class="text-slate-500 font-mono text-[11px]">Ожидает GPX</span>':`<span class="font-mono text-slate-200">${formatMinutesToHHMM(r.movingMinutes)}</span>`;const penMins=r.penaltyMinutes||0;const restPenHtml=isPrelim?'<span class="text-slate-500 font-mono text-[11px]">После GPX</span>':`<div class="font-mono text-slate-300">Отдых: ${formatMinutesToHHMM(r.restMinutes||Math.max(0,(r.totalMinutes||0)-(r.movingMinutes||0)))}</div><div class="font-mono text-[11px] ${penMins>0?'text-red-400 font-bold':'text-emerald-400'}">Штраф ×2: ${penMins>0?'+'+formatMinutesToHHMM(penMins):'00:00'}</div>`;const hasDaily=Array.isArray(r.dailyBreakdown)&&r.dailyBreakdown.length>0;const tr=document.createElement('tr');tr.className='hover:bg-graphite-800/40 transition';tr.innerHTML=`<td class="py-3.5 px-3"><span class="inline-flex items-center justify-center w-7 h-7 rounded-lg font-mono text-xs ${rankClass}">${rankLabel}</span></td><td class="py-3.5 px-3"><div class="font-bold text-white">${escapeHtml(r.fio)}</div><div class="text-[11px] font-mono text-slate-400">${escapeHtml(r.bike||'')} • <span class="text-volga-400">${escapeHtml(r.editionLabel||'')}</span></div></td><td class="py-3.5 px-3">${statusBadge}</td><td class="py-3.5 px-3 font-mono font-bold text-slate-200">${escapeHtml(r.distanceKm)} км</td><td class="py-3.5 px-3 font-mono text-white">${isDnf?'—':formatMinutesWithDays(r.totalMinutes)}</td><td class="py-3.5 px-3">${isDnf?'—':movingHtml}</td><td class="py-3.5 px-3">${isDnf?'—':restPenHtml}</td><td class="py-3.5 px-3 font-mono font-bold text-sm ${isPrelim?'text-ochre-300':'text-emerald-300'}">${isDnf?'DNF':formatMinutesWithDays(finalMins)}</td><td class="py-3.5 px-3">${gapHtml}</td><td class="py-3.5 px-3 text-right"><div class="flex flex-wrap items-center justify-end gap-1.5">${hasDaily?`<button type="button" data-action="open-daily" data-id="${escapeHtml(r.id)}" class="px-2 py-1 rounded bg-graphite-800 hover:bg-graphite-700 border border-graphite-600 text-ochre-300 font-mono text-[11px] transition">📊 По суткам</button>`:'<span class="text-slate-600 font-mono text-[11px]">—</span>'}</div></td>`;tbody.appendChild(tr)})}
 function openDailyRestModal(resultId){const res=raceResultsList.find(r=>r.id===resultId);if(!res)return;document.getElementById('daily-modal-rider-name').textContent=`${res.fio} — По суткам`;const container=document.getElementById('daily-modal-content');container.innerHTML='';const days=Array.isArray(res.dailyBreakdown)?res.dailyBreakdown:[];if(days.length===0)container.innerHTML='<div class="text-xs text-slate-400">Разбивка отсутствует.</div>';else days.forEach(d=>{const dur=d.durationMin||1440;const row=document.createElement('div');row.className='p-3 rounded-xl bg-graphite-950 border border-graphite-800 flex flex-wrap items-center justify-between gap-2 text-xs font-mono';row.innerHTML=`<span class="text-ochre-400 font-bold">Сутки ${escapeHtml(d.day)} (${formatMinutesToHHMM(dur)})</span><span class="text-slate-200">Движение: <strong>${formatMinutesToHHMM(d.movingMin)}</strong></span><span class="text-volga-300">Отдых: <strong>${formatMinutesToHHMM(d.restMin)}</strong></span><span class="${d.penaltyMin>0?'text-red-400 font-bold':'text-emerald-400'}">Штраф ×2: ${d.penaltyMin>0?'+'+formatMinutesToHHMM(d.penaltyMin):'00:00 (норма)'}</span>`;container.appendChild(row)});document.getElementById('daily-rest-modal').classList.remove('hidden');document.getElementById('daily-rest-modal').classList.add('flex')}
 function closeDailyRestModal(){document.getElementById('daily-rest-modal').classList.add('hidden');document.getElementById('daily-rest-modal').classList.remove('flex')}
+const CLOUDTIPS_DEFAULT_URL='https://pay.cloudtips.ru/p/c6e967f8';
+const CLOUDTIPS_QR_DATA_URI='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAzQAAAM0CAAAAABIGTirAAAXcUlEQVR42u3deZBU9YHA8d8bhgGGAUERUFCQQwXxAEUFubyNmmjinQieSWmym9RuUpXapGo3qa39Y2uT2k1lrXjFg0PRINGNMWoUFZfEqPEYjlFBlPsGlRlABubtH5pNmOmGHvr162M+n7+wp/u917/ur7/Xx3sdxQFojypDAKIB0YBoQDQgGkA0IBoQDYgGRAOIBkQDogHRgGhANIBoQDQgGhANiAYQDYgGRAOiAdGAaADRgGhANCAaEA0gGhANiAZEA6IB0QCiAdGAaEA0IBpANCAaEA2IBkQDogFEA6IB0YBoQDSAaEA0IBoQDYgGRAOIBkQDogHRgGgA0YBoQDQgGhANiAYQDYgGRAOiAdEAogHRQBqqk15gVEJ3Lk5h+8pxHfksL66Q54GZBuyegWhANCAaQDQgGhANiAZEA4gGRAOiAdGAaEA0gGhANCAaKEPVaawkTmEdUQrbF+Wx3nyOy49KaHlRHuNX6s8DMw2IBkQDogHRAKIB0YBoQDQgGhANIBoQDYgGRAOiAUQDogHRQImrLtaK0zimP+ltiVO4H1EK9zcuoSdgVIb3w0wDogHRgGhANCAaQDQgGhANiAZEA4gGRAOiAdGAaEA0gGhANFAk1YYgszjh6+UjSnj7ohK/v2YaEA2IBhANiAZEA6IB0QCiAdGAaEA0IBoQDSAaEA2IBkQDogEyco6Adsj1N+/jPG6bj7jEl2emAdEAogHRgGhANCAaQDQgGhANiAZEA6IBRAOiAdGAaEA0gGggL0U7R0BcQuuNcrws6duGhNebz5hGRXqMyvE8BGYaEA2IBkQDogHRAKIB0YBoQDQgGkA0IBoQDYgGRAOiAUQDooEiSeUcAVEJ3eF8jsHPVRrH9Bfr/iZ9/gMzDdg9A0QDogHRgGhANCAaQDQgGhANiAZEA4gGRAOiAdGAaEA0QM6iuKPd4Ryvl/R5A5IWp3B/c11eR3sOmWlANCAaEA2IBkQDiAZEA6IB0YBoANGAaEA0IBoQDYgGEA2IBoqkOo2VJH1cfpzwOvKR9Dbnc9/SWF4o0rYk/RiZacDuGYgGRAOiAUQDogHRgGhANIBoQDQgGhANiAZEA4gGRAOigTIUJX38dBrH6id9DH4+9yPksS1JLy/pMUh6XJJ+HoQU7q+ZBkQDogHRgGhANIBoQDQgGhANiAYQDYgGRAOiAdGAaADRgGighFSnsZI0jsuP8rhenMc257MtuR7Tn8Zx/nGFPL5mGrB7BqIB0QCiAdGAaEA0IBpANCAaEA2IBkQDogFEA6IB0YBooIJFcalvYIbLinX8ftLbV+rH/pfjNqcxBmYaEA2IBkQDogHRAKIB0YBoQDQgGkA0IBoQDYgGRAOiAUQDooEiidI4hjyTNI7zT3q9+Wxfsc4bUKzHMunbxiU0VmYaEA2IBkQDogHRAKIB0YBoQDQgGkA0IBoQDYgGRAOiAUQDooEiqU56gWkco53P8fZRCutI+raldMx8XEJP3mKNgZkGRAOiAdGAaEA0gGggIdWGoHjiQl4vMr6i6QC2vLl804YN69ft3b22JYTQuUf3Pn27HTV8WP+j+hicEhLFlXznUpgFEvoEesOydWs2bdv48Y4dO5qaWvY2xSGEqprO3Wqre/TuVXtI/yOOHjyg9mDufNK/zhAnPPZxCuuNRVNx0XzStH3r668uXfLJfq4z+KTRxx1zRM/aLqIRjWjCx88teL2+KWpp2d/Nqqo67R049rzThh4iGtF08GhWvvX2kuVrt+zM6cqHDug1cMJ5x4qmyNF4I6CIdqx/98+vvrEm5+tv3RpCw4oJQwbVGTtvBHTMmabxjdnPLG//lvW+eOq4nmYau2cdLZo4Ci3P/M8rqz7aexCbdmifE8750tEhxJFoRNOBZpqmxW/9bv7Wg9660yaOHzPETCOaDhRN3PL89Cc/zuu+Db1h2iDRiKbjRLPmP55b0Zjffavqc/TtN+9vF0005RNN0k/UNJZXoGP64yyvZta8Pu+xNQk8buOuOuvEbuUeQ7GeB6Ipo2hC2DT3ofnJjHWvq68/q0o0qUfjc5q0rbr7oeUJLeqj+zZ/cokRTZ1oUjZv7tPLE1vYnhcal1450KCKppI1Lb7ryR0J7hNve/a96CsDHTqTLq9p0nxNs2fej+qbEh7w/lf+oH+U/2PkNY2ZpiS1zHjgrZ1JL3T9403/OMrY2j2rTDtenDm/AItd/ciATiOMboqcWCM9S/5tQWFi/MX0JqNrpqk4cRTm/Xf9p4VZ+Ja50T/1iL0dYKapLFFY/ZunGwu19Pcee3q7ZkRTaTbP/P3Owi192b3PGWK7ZxVm9RP3vl/Axbf8vq7H5M6GWTSV5M2Z7xf0G+Xx/N4n9TXMds8qyNJnXinwj4htfmbBJ8ZZNJVj748fLPg6Nv7LSwZaNBXjk9++1ljwlexe+NQiQ+01TaVYfP/aNFbzwhFDag22maYiNL/+eGMa63n32VWx0RZNRXhuXkorWvrL5Ua7UnbPcv2qdz5fHc9HlPBt992+5mcXpPRgbpl7xtDWG5bGV/4Pblzyv20aJ9Ew0xTD3hV/2pTWqt7/41ID7o2A8rdu5uoU9wQHDTfiZpqyt+LX69Nb2aKXNxpx0ZS77fX1zck/al2619V1r8mwg9bwmu8F2D0rd88/WYCF9h41tK551+L6XW3fC3huZE+DLpqy1jw/+SOcT5l40pGH1bQ0b1726h8/bB3NS9cdY9RFU872rFrczs81O3fr2q1r56oQwqfNzU1NbY/1rDn52quO+vzfrwx8umHPPn/d/c6y0Q4REE0521nf3pcYQ0edMGr4Ed2iKP5g7fpX3li6rfUVLv7G2V3/8u/TR4793sp9/7zr5SFnGnfRlLGmF3M/03kUh+5jppw2sOehvapCCOGEY3aM2bbuD/MW/e1Vqi6/aUrXv74h0HPS9/9r349m4rfOEI1oytnmBbm/3xxXDRl3/rlH/rWIurq+IYwa8Ez95v+/StfxX5+0zw8F9LvuD60+z2x4z7CLpoztXdnQjvebh/3d1f3aXHjCsIl3PLfhL/913t9PafVGc+/Jy/60zwUfv/9pFyNfUD6nKaT17+3J/cpTf3ZVvwwXdxnzox9MiUIIUQjX3D6pzYczY89odcGqec6CJprytbI+5+8Pdv/STRf1z/h1wy7DRvcNIYS49oIbJ3dt8+fhx7a6YNMrjUbe7lnZ+vDNXH+9uerMfx0ZsnzXuOWdz94hm/wPkzN8CaD74a0u2Nqwy8iLpmytXdKS4zWv/+ZxmR+KONpx5+w34xDCddMyNRNCXeto6kUjmrK1e/3u3K7Y9bJpZ2RJJtr45Kz6PSHUnjNtUsZmwketL9jwkaH3mqZcLduSYzPjv39O5r9E4dMn7nhjTwjRxO+cnfkEABvaHHmwe7WpRjTlauOO3K735Z+MyHzgZBx2//zON0II4drvTs7yRvLGNp8EtSxZY+ztnpWpDz7O6SH42rRTshxsHG14/OH6EELXi2+Y0Dnz7lv43zZnIIjX2z8rr2jihK+Xeafl4NeRz7HmUfu2L277xbFMr+PHfWtstr9tf/KuN0MINZO/eVbXLGva+tLbbTZ9a2P7Bzjp8ziU+nPITFOilucy01z442HZ/rT37plvhRDC5d+YnO1x2jz9rTaXtWzxQY1oytX2HN48u3Xq8Z2y/GnT7FkLQwjVV914VnWWfbOVc+9te9ameMt2Yy+aMrXtgO9i9Zx087hsf9vyxH1vxyHUTr51fLZ9sw1zZza0/TGCeJNoRFOu1h/wS2CT/z3rvlnL9AffDiGEi741OdtUtHXWfYsz7Nl/9poG0ZSjxgN9xfkbNw3P9gBsvX/mwhBCmDptQrZmVj52V+bTnEV+SlA0FRpNjy9MzXy8WByFDU/MWNgSQt3ZN46ryXLzNY9Nfy/jD0XFjT7cFE252v+PbHae+KPjQpYXK82P3Pd2CCGc+52JWaei2dPrs73ravdMNJXpxtuGVmWZaLbfMfvtEEK4YVrWZlY/cpdT0IqmY+l+5dQxWZKJ1j7x8OIQQt0F08Zne695xZwHNSOaDtbMpO+NyrZv1jT3nvoQQqezvz2+c5arbP7VzIUF/eFbRFNyrvpe1jOV7/zZ7IUhhHD9jVnfN1s76+5lxfsWiWgMQeH0acryVkDNTdefkGXfLKx5bPaSEELtZdPO7JTlKh88dv/7+3+PwdiLpkz12pM5mkMm3XZKtn2zbU/cuzCE0O3c286syXKVDXNmNex/38zpaERTrlqyPLEv+ech2W6y+xcPLwohhCu+PjHbJ5TrH/zl0v3um0W1ohFNuTp8Z6avOXe+7avDsx37t27Ww0tCCN2uvuHMKMu+2fI59+5/3yxEfXoYe9GUqSMyHe7cbfxXs543dsPcBxeFEGom3Jx132zNnFnLDvC+WdSjm7EXTZnq90GGC0d9c2TWfbMHZiwOIYRJN52V7X2zjTMeePdA75tFtTXGXjTlGk33tpcN/+IFdVmuvumehxaHEKIv3HpRtmaWP3r3BwdcbXT0YcZeNGWqb4bdpJPPqMvyYmX1r2c1hBC6jbv5nGy7VysenfXBgT/TrBp8uLEv+2iS/o36XG+b9G/Zt9dRGV6QjxiWZXU7Zz+wJIQQxt96WbYHZeNDMxpyuAdVAw5t//2IEn48oiKtI+nnlZkmZWOeanvZsCzvNm/7+SNLQgjh0psvzfaYfPjw3R/mtN5D64y93bMyNbB328t6Zd43Wzl39rshhG4Tbjk727ma3n90em7NdBl0iLEXTbnqU9PcetegKuNuxsdzftkQQug68ZaLs73XvP6Rh97J7Tua/Y4w8qIpWwNOqG/9swEZT7q5/T8fbQghRJfceGm2Ra2ccc+K3PbODz3RFwIKy2lpC6l/24/+t+xo+yp1xZ2PvPtZGVl/bHDZjAdW5LjSfmd0N/KiKVuDR7d5g+ftRW12vDbNvf+dlhBCiBt+99TaTJPJjvoZs5fl+mZRn9Nqjbzds/KNZkJN6/MFPj3w9NZF3PHIO5//s/E3Dbdfekybxeya/x+vbc/5ndPDRvgWjWjK2OEj3mp1RpoVrzQcv8+UsWr65/tmIYTQvPSnr1wwdt/fENj1/DML3sv9VBk9j+1n3EVTxnqcumZt6/2zB288/m/+c/WvZr7zN/+5Z8WWVX8eNbhXzx49Qoh3NX7SuHnZHxZsascqR59s2EVTzmrHvdo6mtV39qke3OnzuaR5/T1z3tn3740vv1xz9ElDjhkUhb2bVi1fsXBr+1Z5+kmGvcBSOTlD0l93yOenMfL5CY12ikNo2fjtX7VZ26GnXnLFgBBCCE2/vWfR5gy/ml7drUuXmhBC8+7dn+5s51rv/FpdUvet1L/i4ms0Famq/4g+m1s/hFte2PzucX2r9+5qXP3aCxl/yXbP9oM9hXmnocN9h8buWZk7ccyzbS5rfuONrgNrd2/bmPw03++yocZcNGVu9JnPZrp414dR3FKAXeMjpx5pzAu+/2AICmvoaQMz7nrvad7TkvzaDhl7nNM3iabsjTi7d3orG3+eI51FU/76Tz0qvZWdc6EBF035qzt9bFpnVKo5+UTf1RRNJTjkCxPSWtMVxxnuFCT+7lk+HyjmetukP8iMCzsGl2ya35TKg9n/qkEHfd+ihB/zkPA4F/mDajNNyrqcclEqe03DLz/aj23aPasQx08dnMZqzr7WgTSiqZhXNV+cVPgzkVUPOm+koRZN5Yzyd68t/Auan5xvoEVTQYaed2aB13DYhZN7GWfRVJLRXyvsy5pOU67RjGgqy1FXXzukkM1cfsv5vnQmmgrT99aLC3i+i6HTphhi0VSYOAz98oUFOzzs2CumdPNbz6lxPE06ohDO6bnxz58W5k2Ar/ywe/C5ppmmAo384VkFWW7t7dN8T9NMU5lqL9qw57WdiS924PnXjDC4qe42FPjLip/v0Od2vZDjbZNeb4HGoO1i98z7UX3S393sf+UP+kfpPW4hhcey5B9f0aQYTWha/NMndyQ66IO/c8XAKIhGNBUbTQjzHn++Ibn11Z16+VUDUn3cROM1TerOGXnUve8ltbDOZ91wnSH1mqbSZ5oQtsyZ9XIy6+l1zVfHdU75cTPTmGlSF0eHXdr/lFlbE3iaT/rShJN8d6YIRJP21B7CgAGnNs7f0Jjfcjoffvwt10Uh9plmBeyeldLUWrLLi/c+/8Ds/Mb0tOuvGHiw+4hJnxQ96XBj0Ygmg6ZFr87/45qD3pIRl0w+ZWAQjWg6UDRxFFpeemrB6k27DuLG3fqMmHLNkHCAXTPRiKbCZpoQQmhe9+icP7X/ZrWjr7twWM4bKxrRVFI0Iaz7cMnTL25uzy2qTzp17CmDDuskGtF00GhC2P3Ci29+vGFdbntpvQ8/+tgTR4/s0Z6NFY1oKi2aEPauXfzy/PodVXv3+3M1VVVV8cAxZ5w7pr0bKxrRVF40oWVn47aVyxa/uWh/Pxl4zHEjJg3t0b1nF9GIRjSf2bjqgzXrNzVt/2jbrt1Nu5t3hxBC5+5xTV1t99raPn16H3HkgJHVB7OxohFNpUYTQghh2YZVS5dt3b7uk6bGOIRQ12/vIUf269ev78kH8/NmohFNR4imEIMumuQ5RwC0ky9sluYEURL/x8dMA6IB0YBoQDQgGkMAooGCKtrnNEl/S6BYpyBK+ralfkqtUKTHI43TgJlpwO4ZiAZEA6IBRAOiAdGAaEA0IBpANCAaEA2IBkQDiAZEA6KBEldS53KO8rhePsepp3H8eZTCuCS9vGKdvb/Uz1NtpgHRgGhANCAaEA0gGhANiAZEA6IBRAOiAdGAaEA0IBpANCAaKJKoWL9bn8/ykpb0cf5xkcavlLYv6fsRF+n+mmlANCAaEA2IBkQDiAZEA6IB0YBoANGAaEA0IBoQDYgGEA2IBkpIlMZvxadx3oA0jlMPKaw3jW0JKSwvLtYTOoVtMdOAaEA0IBoQDYgGEA2IBkQDogHRAKIB0YBoQDQgGhANIBoQDRRJddILTOMY7VzXG4q03rhI10v6fADFejziEo/GTAOiAdGAaEA0IBpANCAaEA2IBkQDiAZEA6IB0YBoQDSAaEA0UCSJnyMgjeO781lH0ucwiFNYRz5jUErbkuv2Fes8E2YaEA2IBkQDogFEA6IB0YBoQDQgGkA0IBoQDYgGRAOIBkQDooESl/g5AqISunNpHAsf5XG9pNeRz2MUJ/xY5rPNcYk/r8w0IBoQDYgGRAOiAUQDogHRgGhANIBoQDQgGhANiAZEA4gGRANFUp3GStL4Dfikj8HPdR1xwuMSJXx/83k8kj7XQSjSWJlpwO4ZiAZEA4gGRAOiAdGAaEA0gGhANCAaEA2IBhANiAZEA6KBClFdrBWncYx7Pust1nkN4jJ8EkVFGpdinTfATAOiAdGAaEA0IBpANCAaEA2IBkQDiAZEA6IB0YBoQDSAaEA0UCTVHe0OJ31ceT7Hs+ezjqTvb5zH8kKR7ltUpOeQmQZEA6IB0YBoQDSAaEA0IBoQDYgGEA2IBkQDogHRgGgA0YBooEg63DkC0jgfQK7ryOd4+2LdNkp4eSHh+5HGeQPMNCAaEA2IBkQDogFEA6IB0YBoQDSAaEA0IBoQDYgGRAOIBkQDRVK0cwTEJTQIuR5rnvQ2RyncNp/7FpX4k7dY5ysw04BoQDQgGhANiAYQDYgGRAOiAdEAogHRgGhANCAaEA0gGhANFEkq5wgopWPN8zkWPtdj0vNZR9K3LdbjW8nbYqYB0YBoQDQgGhANIBoQDYgGRAOiAUQDogHRgGhANCAaQDQgGiiSKDYGYKYB0YBoQDQgGkA0IBoQDYgGRAOiMQQgGhANiAZEA6IBRAOiAdGAaEA0gGhANCAaEA2IBkQDiAZEA6IB0YBoANGAaEA0IBoQDYgGEA2IBkQDogHRAKIB0YBoQDQgGhANIBoQDYgGRAOiAUQDogHRgGhANCAaQDQgGhANiAZEA4gGRAOiAdGAaEA0gGhANCAaEA2IBhANiAZEA6Xn/wD8L8vxHZBEyQAAAABJRU5ErkJggg==';
 const DEFAULT_DONATE_CONFIG={
 title:'Угостить автора чашкой кофе',
 desc:'Маршрут «Утёсы Поволжья» (~2850 км), разведка и актуализация GPX-треков, база знаний и проведение заезда создаются на чистом энтузиазме без стартовых взносов. Если проект и треки оказались вам полезны — вы можете угостить автора чашкой кофе или гелем на дистанцию!',
-pay1Label:'СБП / Перевод по номеру или карте',
-pay1Note:'Андрей П. (A1onso)',
-pay1Value:'@a1onzo (ТГ) / a1onzo@yandex.ru',
 pay2Label:'Дополнительные реквизиты / Карта',
 pay2Value:'',
-donateUrl:'',
-qrImageUrl:'',
+donateUrl:CLOUDTIPS_DEFAULT_URL,
+qrImageUrl:CLOUDTIPS_QR_DATA_URI,
 thanks:'Огромное спасибо за вашу поддержку и вклад в развитие маршрута «Утёсы Поволжья»! Каждая чашка кофе помогает поддерживать треки и портал в актуальном состоянии. До встречи на волжских утёсах!'
 };
 function getDonateConfig(){
-return Object.assign({},DEFAULT_DONATE_CONFIG,(portalState&&portalState.donateConfig&&typeof portalState.donateConfig==='object')?portalState.donateConfig:{});
+const saved=(portalState&&portalState.donateConfig&&typeof portalState.donateConfig==='object')?portalState.donateConfig:{};
+const cfg=Object.assign({},DEFAULT_DONATE_CONFIG,saved);
+if(!String(cfg.donateUrl||'').trim())cfg.donateUrl=CLOUDTIPS_DEFAULT_URL;
+if(!String(cfg.qrImageUrl||'').trim()&&cfg.donateUrl===CLOUDTIPS_DEFAULT_URL)cfg.qrImageUrl=CLOUDTIPS_QR_DATA_URI;
+return cfg;
 }
 function handleDonateSberClick(e){
 const cfg=getDonateConfig();
@@ -3183,10 +3508,9 @@ if(!safeUrl){
 if(e)e.preventDefault();
 if(isAdminLoggedIn){
 toggleDonateEditorInModal();
-showToast('Вставьте ссылку на сбор СберБанк Онлайн и нажмите Сохранить');
+showToast('Вставьте ссылку на CloudTips и нажмите Сохранить');
 }else{
-copyDonateValue('pay1');
-showToast('Реквизиты скопированы! Откройте СберБанк Онлайн для перевода.');
+showToast('Ссылка на оплату временно недоступна','error');
 }
 }
 }
@@ -3195,9 +3519,6 @@ const cfg=getDonateConfig();
 const editBtn=document.getElementById('donate-edit-trigger-btn');if(editBtn)editBtn.classList.toggle('hidden',!isAdminLoggedIn);
 const titleEl=document.getElementById('donate-modal-title');
 const descEl=document.getElementById('donate-modal-desc');
-const p1Label=document.getElementById('donate-pay1-label');
-const p1Note=document.getElementById('donate-pay1-note');
-const p1Val=document.getElementById('donate-pay1-value');
 const p2Card=document.getElementById('donate-pay2-card');
 const p2Label=document.getElementById('donate-pay2-label');
 const p2Val=document.getElementById('donate-pay2-value');
@@ -3208,9 +3529,6 @@ const setupHint=document.getElementById('donate-sber-setup-hint');
 const thanksEl=document.getElementById('donate-modal-thanks');
 if(titleEl)titleEl.textContent=cfg.title;
 if(descEl)descEl.textContent=cfg.desc;
-if(p1Label)p1Label.textContent=cfg.pay1Label||'СБП / Перевод';
-if(p1Note)p1Note.textContent=cfg.pay1Note||'';
-if(p1Val)p1Val.textContent=cfg.pay1Value||'—';
 if(p2Card){
 if(cfg.pay2Value&&String(cfg.pay2Value).trim()!==''){
 p2Card.classList.remove('hidden');
@@ -3226,7 +3544,7 @@ if(extLink){
 extLink.href=safeUrl||'#';
 }
 if(qrWrap&&qrImg){
-const qrSource=safeCustomQr||(safeUrl?`https://api.qrserver.com/v1/create-qr-code/?size=220x220&margin=6&data=${encodeURIComponent(safeUrl)}`:'');
+const qrSource=safeCustomQr||(safeUrl===CLOUDTIPS_DEFAULT_URL?CLOUDTIPS_QR_DATA_URI:(safeUrl?`https://api.qrserver.com/v1/create-qr-code/?size=220x220&margin=6&data=${encodeURIComponent(safeUrl)}`:''));
 if(qrSource){
 qrImg.src=qrSource;
 qrWrap.classList.remove('hidden');
@@ -3262,16 +3580,14 @@ if(modal){modal.classList.add('hidden');modal.classList.remove('flex');}
 }
 function populateDonateEditorFields(){
 const cfg=getDonateConfig();
-document.getElementById('don-edit-title').value=cfg.title||'';
-document.getElementById('don-edit-desc').value=cfg.desc||'';
-document.getElementById('don-edit-pay1-label').value=cfg.pay1Label||'';
-document.getElementById('don-edit-pay1-note').value=cfg.pay1Note||'';
-document.getElementById('don-edit-pay1-value').value=cfg.pay1Value||'';
-document.getElementById('don-edit-pay2-label').value=cfg.pay2Label||'';
-document.getElementById('don-edit-pay2-value').value=cfg.pay2Value||'';
-document.getElementById('don-edit-url').value=cfg.donateUrl||'';
-document.getElementById('don-edit-qr-url').value=cfg.qrImageUrl||'';
-document.getElementById('don-edit-thanks').value=cfg.thanks||'';
+const setVal=(id,v)=>{const el=document.getElementById(id);if(el)el.value=v||'';};
+setVal('don-edit-title',cfg.title);
+setVal('don-edit-desc',cfg.desc);
+setVal('don-edit-pay2-label',cfg.pay2Label);
+setVal('don-edit-pay2-value',cfg.pay2Value);
+setVal('don-edit-url',cfg.donateUrl);
+setVal('don-edit-qr-url',(cfg.qrImageUrl&&cfg.qrImageUrl!==CLOUDTIPS_QR_DATA_URI)?cfg.qrImageUrl:'');
+setVal('don-edit-thanks',cfg.thanks);
 }
 function toggleDonateEditorInModal(){
 if(!isAdminLoggedIn){
@@ -3293,17 +3609,18 @@ editor.classList.add('hidden');
 function handleSaveDonateConfig(e){
 e.preventDefault();
 if(!isAdminLoggedIn){openAdminLoginModal();return;}
+const getVal=(id)=>{const el=document.getElementById(id);return el?el.value.trim():'';};
+const savedUrl=sanitizeUrl(getVal('don-edit-url'))||CLOUDTIPS_DEFAULT_URL;
+const rawQr=getVal('don-edit-qr-url');
+const savedQr=rawQr?sanitizeUrl(rawQr):'';
 portalState.donateConfig={
-title:document.getElementById('don-edit-title').value.trim()||DEFAULT_DONATE_CONFIG.title,
-desc:document.getElementById('don-edit-desc').value.trim()||DEFAULT_DONATE_CONFIG.desc,
-pay1Label:document.getElementById('don-edit-pay1-label').value.trim()||DEFAULT_DONATE_CONFIG.pay1Label,
-pay1Note:document.getElementById('don-edit-pay1-note').value.trim(),
-pay1Value:document.getElementById('don-edit-pay1-value').value.trim(),
-pay2Label:document.getElementById('don-edit-pay2-label').value.trim()||DEFAULT_DONATE_CONFIG.pay2Label,
-pay2Value:document.getElementById('don-edit-pay2-value').value.trim(),
-donateUrl:sanitizeUrl(document.getElementById('don-edit-url').value.trim()),
-qrImageUrl:sanitizeUrl(document.getElementById('don-edit-qr-url').value.trim()),
-thanks:document.getElementById('don-edit-thanks').value.trim()||DEFAULT_DONATE_CONFIG.thanks
+title:getVal('don-edit-title')||DEFAULT_DONATE_CONFIG.title,
+desc:getVal('don-edit-desc')||DEFAULT_DONATE_CONFIG.desc,
+pay2Label:getVal('don-edit-pay2-label')||DEFAULT_DONATE_CONFIG.pay2Label,
+pay2Value:getVal('don-edit-pay2-value'),
+donateUrl:savedUrl,
+qrImageUrl:savedQr,
+thanks:getVal('don-edit-thanks')||DEFAULT_DONATE_CONFIG.thanks
 };
 savePortalState();
 pushToGoogleSheet({action:'adminSync',portalConfig:stripHeavyCoordsForStorage(portalState)});
@@ -3313,7 +3630,7 @@ showToast('Платёжные реквизиты и текст сохранен�
 }
 async function copyDonateValue(which){
 const cfg=getDonateConfig();
-const val=which==='pay2'?(cfg.pay2Value||''):(cfg.pay1Value||'');
+const val=which==='pay2'?(cfg.pay2Value||''):(cfg.donateUrl||'');
 if(!val)return;
 await copyTextToClipboard(val);
 showToast('Скопировано в буфер: '+val);
@@ -3618,7 +3935,7 @@ function json_(obj) { return ContentService.createTextOutput(JSON.stringify(obj)
 function downloadGoogleAppsScriptCode(){if(!isAdminLoggedIn)return;const code=buildGasCode();const blob=new Blob([code],{type:'text/plain;charset=utf-8'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='Code.gs';document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);showToast('Code.gs скачан')}
 async function testGoogleMailApp(){const url=getGoogleSheetUrl(),box=document.getElementById('gsheet-mail-test-result');if(!url){showToast('Сначала URL','error');return}if(box){box.classList.remove('hidden');box.textContent='⏳ Отправка тестового запроса…'}try{const q=new URLSearchParams({action:'requestVerification',email:'a1onzo@yandex.ru',t:String(Date.now())});const r=await fetch(`${url}${url.includes('?')?'&':'?'}${q.toString()}`,{method:'GET',redirect:'follow'});const res=await r.json();if(res&&res.codeSent===true){if(box){box.className='p-3 rounded-xl bg-emerald-950/60 border border-emerald-500/50 text-xs font-mono text-emerald-200 leading-relaxed';box.textContent='✓ Письмо с кодом отправлено на a1onzo@yandex.ru!'}showToast('✓ Письмо отправлено!','success')}else if(res&&res.codeSent===false){if(box){box.className='p-3 rounded-xl bg-red-950/70 border border-red-500/50 text-xs font-mono text-red-200 leading-relaxed';box.textContent=`✕ MailApp: ${res.message||'Нет прав'}. Выполните authorizeMail.`}showToast('Ошибка MailApp','error')}else{if(box){box.className='p-3 rounded-xl bg-ochre-500/15 border border-ochre-500/50 text-xs font-mono text-ochre-200 leading-relaxed';box.textContent='⚠️ Старая версия развертывания.'}}}catch(e){if(box){box.className='p-3 rounded-xl bg-red-950/70 border border-red-500/50 text-xs font-mono text-red-200 leading-relaxed';box.textContent='✕ Ошибка соединения. Проверьте «Все (Anyone)».'}}}
 
-window.addEventListener('keydown',(e)=>{if(e.ctrlKey&&e.shiftKey&&(e.key==='A'||e.key==='a'||e.key==='Ф'||e.key==='ф')){e.preventDefault();triggerAdminGear()}const tpOpen=document.getElementById('track-photo-modal');if(tpOpen&&!tpOpen.classList.contains('hidden')){if(e.key==='Escape'){closeTrackPhotoModal();return;}if(e.key==='ArrowLeft'){stepTrackPhoto(-1);return;}if(e.key==='ArrowRight'){stepTrackPhoto(1);return;}}if(e.key==='Escape'){if(isMapFullscreen)syncMapFullscreenUI(false);['custom-modal','admin-auth-modal','daily-rest-modal','donate-modal','track-photo-modal','app-thankyou-modal'].forEach(id=>{const m=document.getElementById(id);if(m&&!m.classList.contains('hidden')){m.classList.add('hidden');m.classList.remove('flex')}})}});
+window.addEventListener('keydown',(e)=>{if(e.ctrlKey&&e.shiftKey&&(e.key==='A'||e.key==='a'||e.key==='Ф'||e.key==='ф')){e.preventDefault();triggerAdminGear()}const tpOpen=document.getElementById('track-photo-modal');if(tpOpen&&!tpOpen.classList.contains('hidden')){if(e.key==='Escape'){closeTrackPhotoModal();return;}if(e.key==='ArrowLeft'){stepTrackPhoto(-1);return;}if(e.key==='ArrowRight'){stepTrackPhoto(1);return;}}if(e.key==='Escape'){hideInlinePhotoPreview();if(isMapFullscreen)syncMapFullscreenUI(false);['custom-modal','admin-auth-modal','daily-rest-modal','donate-modal','track-photo-modal','app-thankyou-modal'].forEach(id=>{const m=document.getElementById(id);if(m&&!m.classList.contains('hidden')){m.classList.add('hidden');m.classList.remove('flex')}})}});
 
 function isMobileOrTouchEnv(){
 const ua=navigator.userAgent||'';
@@ -3704,7 +4021,7 @@ toggleAdminPasswordResetBox,requestAdminPasswordResetCode,confirmAdminPasswordRe
 setResultsFilter,toggleStoryForm,handleAddStory,triggerAdminGear,
 clearSurveyAnswers,handleSurveySubmit,computeSurveyScoreStats,
 recalcParticipantPreliminary,handleParticipantPreliminarySubmit,
-setMapStyle,updateMapBgOpacity,toggleMapFullscreen,openTrackPhotoModal,closeTrackPhotoModal,stepTrackPhoto,openPhotosLayerOnMap,openParticipantAuthBox,closeParticipantAuthBox,openAppThankYouModal,closeAppThankYouModal,scrollToAdminStories,renderAdminStoriesSection,setStoryStatusAdmin
+setMapStyle,updateMapBgOpacity,toggleMapFullscreen,openTrackPhotoModal,closeTrackPhotoModal,stepTrackPhoto,openPhotosLayerOnMap,openParticipantAuthBox,closeParticipantAuthBox,openAppThankYouModal,closeAppThankYouModal,scrollToAdminStories,renderAdminStoriesSection,setStoryStatusAdmin,openFaqAiPromptModal,copyFaqAiPromptDirect
 });
 
 window.addEventListener('DOMContentLoaded',()=>{
@@ -3722,7 +4039,7 @@ initEditableStaticTexts();
 pickHeroSubtitleVariant();
 const bgColors={minecraft:'#3d6b2f',heroes:'#7ba83a',diablo:'#0a0806',osm:'#161b22'};
 const mapEl=document.getElementById('leaflet-map');if(mapEl)mapEl.style.background=bgColors[currentMapStyle]||'#3d6b2f';
-const bootMap=()=>{const mapBodyEl=document.getElementById('map-collapsible-body');if(mapBodyEl&&!mapBodyEl.classList.contains('hidden')){if(typeof L!=='undefined'){initLeafletMap();loadExternalRoutesJson();setTimeout(()=>{if(leafletMap){leafletMap.invalidateSize();const layers=Object.values(mapPolylines);if(layers.length)leafletMap.fitBounds(L.featureGroup(layers).getBounds(),{padding:[25,25]});}},200);}else{setTimeout(bootMap,120);}}};bootMap();ensureTrackPhotosLoaded(false);
+const bootMap=()=>{const mapBodyEl=document.getElementById('map-collapsible-body');if(mapBodyEl&&!mapBodyEl.classList.contains('hidden')){if(typeof L!=='undefined'){initLeafletMap();loadExternalRoutesJson();setTimeout(()=>{if(leafletMap){leafletMap.invalidateSize();const layers=Object.values(mapPolylines);if(layers.length)leafletMap.fitBounds(L.featureGroup(layers).getBounds(),{padding:[25,25]});}},200);}else{setTimeout(bootMap,120);}}};bootMap();ensureTrackPhotosLoaded(false);initInlineHeroPhotoLinks();
 renderSectors();renderFaqs();renderStories();
 renderPublicProtocol();renderPublicResultsTable();
 renderAdminResultsSection();
