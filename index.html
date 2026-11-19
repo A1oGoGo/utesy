@@ -11,9 +11,8 @@
 <meta property="og:image" content="https://wsrv.nl/?url=i.redd.it/7vxpfew4isb31.png&w=1200&h=630&fit=cover&output=webp">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23090c10'/%3E%3Cpath d='M4 24L12 10L18 19L22 14L28 24H4Z' fill='%23f59e0b'/%3E%3Cpath d='M4 26H28' stroke='%2322d3ee' stroke-width='2.5' stroke-linecap='round'/%3E%3C/svg%3E">
-<link rel="preload" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" as="style" onload="this.onload=null;this.rel='stylesheet'" crossorigin="">
-<noscript><link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin=""></noscript>
-<script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" onerror="this.onerror=null;this.href='https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css'">
+<script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin="anonymous" onerror="var s=document.createElement('script');s.src='https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js';s.crossOrigin='anonymous';document.head.appendChild(s);"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;700&family=Oswald:wght@600;700&family=Press+Start+2P&display=swap" rel="stylesheet">
@@ -200,6 +199,20 @@ img,video{max-width:100%;height:auto}
 #up-blogger-portal #leaflet-map.map-mode-topo .mc-popup-story-card{background:#161b22!important;border:1px solid #30363d!important;border-radius:8px!important}
 #up-blogger-portal #leaflet-map.map-mode-topo .mc-popup-story-desc{color:#cbd5e1!important;font-family:'Inter',sans-serif!important;font-size:11px!important}
 #up-blogger-portal #leaflet-map.map-mode-topo .mc-popup-coords{color:#67e8f9!important}
+#up-blogger-portal .leaflet-tile{max-width:none!important;max-height:none!important}
+.vk-footer-icon-btn{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:10px;border:1px solid #21262d;background:#0d1117;color:#cbd5e1;transition:transform 0.15s ease,border-color 0.15s ease,background-color 0.15s ease,color 0.15s ease;flex-shrink:0}
+.vk-footer-icon-btn:hover{transform:translateY(-1px);color:#ffffff}
+.vk-footer-icon-btn svg{width:17px;height:17px;display:block}
+.vk-fb-tgchat{background:rgba(6,182,212,0.14);border-color:rgba(6,182,212,0.42);color:#22d3ee}
+.vk-fb-tgchat:hover{background:rgba(6,182,212,0.26);border-color:#22d3ee}
+.vk-fb-tgdm{background:#0d1117;border-color:#30363d;color:#38bdf8}
+.vk-fb-tgdm:hover{background:#161b22;border-color:#38bdf8}
+.vk-fb-blog{background:#0d1117;border-color:#30363d;color:#fbbf24}
+.vk-fb-blog:hover{background:#161b22;border-color:#fbbf24}
+.vk-fb-strava{background:rgba(252,76,2,0.14);border-color:rgba(252,76,2,0.48);color:#fc4c02}
+.vk-fb-strava:hover{background:rgba(252,76,2,0.28);border-color:#fc4c02;color:#ff6b2c}
+.vk-fb-coffee{background:rgba(245,158,11,0.14);border-color:rgba(245,158,11,0.42);color:#fcd34d}
+.vk-fb-coffee:hover{background:rgba(245,158,11,0.26);border-color:#fbbf24}
 </style>
 </head>
 <body class="antialiased selection:bg-ochre-500 selection:text-graphite-950">
@@ -1135,11 +1148,22 @@ img,video{max-width:100%;height:auto}
 <p id="footer-desc" data-editable="true" class="text-xs sm:text-sm text-slate-400 max-w-xl leading-relaxed" contenteditable="false">Общедоступный велосипедный маршрут Казань — Астрахань (~2850 км). Треки и рассказы — A1onso.</p>
 </div>
 <div class="md:col-span-6 flex flex-col md:items-end justify-center space-y-2.5">
-<div class="flex flex-wrap gap-2">
-<a href="https://t.me/+ZZ2k8XJap30wNzli" target="_blank" rel="noopener noreferrer" class="px-3.5 py-2 rounded-xl bg-volga-500/15 hover:bg-volga-500/25 border border-volga-500/40 text-xs font-semibold text-volga-400 transition">Чат в ТГ</a>
-<a href="https://a1onso.blogspot.com/" target="_blank" rel="noopener noreferrer" class="px-3.5 py-2 rounded-xl bg-graphite-900 hover:bg-graphite-800 border border-graphite-700 text-xs font-medium text-ochre-400 transition">Блог</a>
-<a href="https://t.me/a1onzo" target="_blank" rel="noopener noreferrer" class="px-3.5 py-2 rounded-xl bg-graphite-900 hover:bg-graphite-800 border border-graphite-700 text-xs font-medium text-slate-200 transition">TG: @a1onzo</a>
-<button type="button" onclick="openDonateModal()" class="px-3.5 py-2 rounded-xl bg-ochre-500/15 hover:bg-ochre-500/25 border border-ochre-500/40 text-xs font-semibold text-ochre-300 transition">☕ Поддержать</button>
+<div class="flex flex-wrap items-center gap-2">
+<a href="https://t.me/+ZZ2k8XJap30wNzli" target="_blank" rel="noopener noreferrer" title="Чат маршрута в Telegram" aria-label="Чат маршрута в Telegram" class="vk-footer-icon-btn vk-fb-tgchat">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+</a>
+<a href="https://t.me/a1onzo" target="_blank" rel="noopener noreferrer" title="Telegram: @a1onzo" aria-label="Telegram: @a1onzo" class="vk-footer-icon-btn vk-fb-tgdm">
+<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.9 4.6c.2-.9-.6-1.6-1.5-1.3L2.8 10.1c-.9.3-.9 1.6 0 1.9l4.5 1.5 1.7 5.3c.2.7 1.1.9 1.6.4l2.5-2.4 4.6 3.4c.7.5 1.7.1 1.9-.7l2.3-14.9zm-4.1 3.2-7.4 6.6-.3 3-1.2-3.8 8.9-5.8z"/></svg>
+</a>
+<a href="https://a1onso.blogspot.com/" target="_blank" rel="noopener noreferrer" data-open-new-tab="true" title="Блог A1onso" aria-label="Блог A1onso" class="vk-footer-icon-btn vk-fb-blog">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/><line x1="8" y1="7" x2="16" y2="7"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+</a>
+<a href="https://www.strava.com/athletes/a1onzo" target="_blank" rel="noopener noreferrer" data-open-new-tab="true" title="Strava — Andrey (A1onso)" aria-label="Strava — Andrey (A1onso)" class="vk-footer-icon-btn vk-fb-strava">
+<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M15.387 17.944l-2.089-4.116h-3.065L15.387 24l5.15-10.172h-3.066l-2.084 4.116zm-7.008-5.599l2.836 5.598h4.172L10.463 0l-7 13.828h4.169l.747-1.483z"/></svg>
+</a>
+<button type="button" onclick="openDonateModal()" title="Поддержать проект" aria-label="Поддержать проект" class="vk-footer-icon-btn vk-fb-coffee">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+</button>
 </div>
 </div>
 </div>
@@ -1814,28 +1838,52 @@ L.DomEvent.disableScrollPropagation(pickerEl);
 leafletMap=L.map('leaflet-map',{center:[51.2,47.5],zoom:6,minZoom:5,maxZoom:17,scrollWheelZoom:true,zoomControl:true,attributionControl:false,zoomAnimation:true,updateWhenZooming:false,keepBuffer:2,maxBounds:L.latLngBounds([[41.5,32.0],[59.0,63.0]]),maxBoundsViscosity:0.7});
 L.control.scale({imperial:false,metric:true,position:'bottomleft'}).addTo(leafletMap);
 ensureStyledGridLayerClass();styledGridLayer=new StyledGridLayer({tileSize:256,styleKey:(currentMapStyle==='osm'||currentMapStyle==='topo_photos')?'minecraft':currentMapStyle,updateWhenZooming:false,keepBuffer:2});
-osmTileLayer=L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png',{subdomains:['a','b','c'],maxNativeZoom:17,maxZoom:17,detectRetina:false,crossOrigin:false});
-osmTileLayer.on('tileerror',function(err){
-if(!err||!err.tile||!err.coords)return;
-const t=err.tile,c=err.coords;
-const step=Number(t.dataset.fbStep||'0');
-if(step===0){
-t.dataset.fbStep='1';
-const sub=['b','c','a'][(c.x+c.y)%3];
-t.src=`https://${sub}.tile.opentopomap.org/${c.z}/${c.x}/${c.y}.png`;
-}else if(step===1){
-t.dataset.fbStep='2';
-const sub=['a','b','c'][(c.x+c.y)%3];
-t.src=`https://wsrv.nl/?url=${sub}.tile.opentopomap.org/${c.z}/${c.x}/${c.y}.png`;
-}else if(step===2){
-t.dataset.fbStep='3';
-const sub=['a','b','c'][(c.x+c.y)%3];
-t.src=`https://${sub}.tile-cyclosm.openstreetmap.fr/cyclosm/${c.z}/${c.x}/${c.y}.png`;
-}else if(step===3){
-t.dataset.fbStep='4';
-t.src=`https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/${c.z}/${c.y}/${c.x}`;
+const TOPO_TILE_PROVIDERS=[
+{name:'OpenTopoMap',timeoutMs:3500,url:(c)=>`https://${['a','b','c'][Math.abs(c.x+c.y)%3]}.tile.opentopomap.org/${c.z}/${c.x}/${c.y}.png`},
+{name:'Esri World Topo',timeoutMs:5000,url:(c)=>`https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/${c.z}/${c.y}/${c.x}`},
+{name:'OpenStreetMap',timeoutMs:5000,url:(c)=>`https://tile.openstreetmap.org/${c.z}/${c.x}/${c.y}.png`},
+{name:'Carto Voyager',timeoutMs:6000,url:(c)=>`https://${['a','b','c','d'][Math.abs(c.x+c.y)%4]}.basemaps.cartocdn.com/rastertiles/voyager/${c.z}/${c.x}/${c.y}.png`}
+];
+let activeTopoProviderIdx=0;
+const topoProviderFails=TOPO_TILE_PROVIDERS.map(()=>0);
+const ResilientTopoLayer=L.GridLayer.extend({
+createTile:function(coords,done){
+const tile=document.createElement('img');
+tile.alt='';
+tile.setAttribute('role','presentation');
+tile.decoding='async';
+tile.referrerPolicy='origin-when-cross-origin';
+let finished=false,timer=null,idx=activeTopoProviderIdx,tried=0;
+const cleanup=()=>{if(timer){clearTimeout(timer);timer=null;}tile.onload=null;tile.onerror=null;};
+const finish=(err)=>{if(finished)return;finished=true;cleanup();done(err,tile);};
+tile._cancelTopoLoad=()=>{finished=true;cleanup();};
+const advance=(curIdx)=>{
+if(finished)return;
+topoProviderFails[curIdx]=(topoProviderFails[curIdx]||0)+1;
+if(curIdx===activeTopoProviderIdx&&topoProviderFails[curIdx]>=2){
+activeTopoProviderIdx=(curIdx+1)%TOPO_TILE_PROVIDERS.length;
+}
+idx=curIdx+1;
+tryNext();
+};
+const tryNext=()=>{
+if(finished)return;
+if(tried>=TOPO_TILE_PROVIDERS.length){finish(new Error('Topo tiles unavailable'));return;}
+const curIdx=idx%TOPO_TILE_PROVIDERS.length;
+const prov=TOPO_TILE_PROVIDERS[curIdx];
+tried++;
+if(timer)clearTimeout(timer);
+timer=setTimeout(()=>advance(curIdx),prov.timeoutMs||4500);
+tile.onload=()=>{if(tile.naturalWidth>0){topoProviderFails[curIdx]=0;finish(null);}else{advance(curIdx);}};
+tile.onerror=()=>advance(curIdx);
+tile.src=prov.url(coords);
+};
+tryNext();
+return tile;
 }
 });
+osmTileLayer=new ResilientTopoLayer({tileSize:256,maxNativeZoom:17,maxZoom:17,keepBuffer:2,updateWhenZooming:false});
+osmTileLayer.on('tileunload',function(e){if(e&&e.tile&&e.tile._cancelTopoLoad)e.tile._cancelTopoLoad();});
 const isTopoStyle=(currentMapStyle==='osm'||currentMapStyle==='topo_photos');
 if(isTopoStyle){osmTileLayer.addTo(leafletMap)}else{styledGridLayer.addTo(leafletMap);applyGameArtOverlay(currentMapStyle)}
 mapRiverOverlay=L.layerGroup().addTo(leafletMap);
@@ -2137,7 +2185,7 @@ function stepTrackPhoto(dir){
 openTrackPhotoModal(activePhotoIdx+dir);
 }
 
-function setMapStyle(key){if(!MAP_STYLES[key])return;currentMapStyle=key;localStorage.setItem(MAP_STYLE_KEY,key);portalState.mapStyle=key;savePortalState();if(leafletMap){if(key==='osm'||key==='topo_photos'){_artOverlayReqId++;if(gameArtOverlay&&leafletMap.hasLayer(gameArtOverlay)){leafletMap.removeLayer(gameArtOverlay);gameArtOverlay=null}if(styledGridLayer&&leafletMap.hasLayer(styledGridLayer))leafletMap.removeLayer(styledGridLayer);if(osmTileLayer&&!leafletMap.hasLayer(osmTileLayer))osmTileLayer.addTo(leafletMap);if(osmTileLayer&&osmTileLayer.redraw)osmTileLayer.redraw()}else{if(osmTileLayer&&leafletMap.hasLayer(osmTileLayer))leafletMap.removeLayer(osmTileLayer);if(styledGridLayer){styledGridLayer.setStyleKey(key);if(!leafletMap.hasLayer(styledGridLayer))styledGridLayer.addTo(leafletMap)}applyGameArtOverlay(key)}leafletMap.invalidateSize();renderRiverVectorOverlay();renderMapRoutes();renderMapCities();renderMapPhotos();if(key==='topo_photos'){if(isTrackPhotosLoaded&&TRACK_GEOTAG_PHOTOS.length>0){const bounds=L.latLngBounds(TRACK_GEOTAG_PHOTOS.map(p=>[p.lat,p.lng]));leafletMap.fitBounds(bounds,{padding:[45,45],maxZoom:10});}else{ensureTrackPhotosLoaded(true);}}}updateMapStyleButtons();syncMapTopoModeUI();updateMapBadge();const bgColors={minecraft:'#3d6b2f',heroes:'#5d8a2c',diablo:'#1e1712',osm:'#e8e4d8',topo_photos:'#e8e4d8'};const mapEl=document.getElementById('leaflet-map');if(mapEl)mapEl.style.background=bgColors[key]||'#3d6b2f';showToast('Стиль карты: '+MAP_STYLES[key].name)}
+function setMapStyle(key){if(!MAP_STYLES[key])return;currentMapStyle=key;localStorage.setItem(MAP_STYLE_KEY,key);portalState.mapStyle=key;savePortalState();updateMapStyleButtons();syncMapTopoModeUI();updateMapBadge();const bgColors={minecraft:'#3d6b2f',heroes:'#5d8a2c',diablo:'#1e1712',osm:'#e8e4d8',topo_photos:'#e8e4d8'};const mapEl=document.getElementById('leaflet-map');if(mapEl)mapEl.style.background=bgColors[key]||'#3d6b2f';if(leafletMap){if(key==='osm'||key==='topo_photos'){_artOverlayReqId++;if(gameArtOverlay&&leafletMap.hasLayer(gameArtOverlay)){leafletMap.removeLayer(gameArtOverlay);gameArtOverlay=null}if(styledGridLayer&&leafletMap.hasLayer(styledGridLayer))leafletMap.removeLayer(styledGridLayer);if(osmTileLayer){if(!leafletMap.hasLayer(osmTileLayer))osmTileLayer.addTo(leafletMap);else if(osmTileLayer.redraw)osmTileLayer.redraw()}}else{if(osmTileLayer&&leafletMap.hasLayer(osmTileLayer))leafletMap.removeLayer(osmTileLayer);if(styledGridLayer){styledGridLayer.setStyleKey(key);if(!leafletMap.hasLayer(styledGridLayer))styledGridLayer.addTo(leafletMap)}applyGameArtOverlay(key)}leafletMap.invalidateSize();setTimeout(()=>{if(leafletMap)leafletMap.invalidateSize();},160);renderRiverVectorOverlay();renderMapRoutes();renderMapCities();renderMapPhotos();if(key==='topo_photos'){if(isTrackPhotosLoaded&&TRACK_GEOTAG_PHOTOS.length>0){const bounds=L.latLngBounds(TRACK_GEOTAG_PHOTOS.map(p=>[p.lat,p.lng]));leafletMap.fitBounds(bounds,{padding:[45,45],maxZoom:10});}else{ensureTrackPhotosLoaded(true);}}}showToast('Стиль карты: '+MAP_STYLES[key].name)}
 
 function syncMapTopoModeUI(){
 const isTopo=(currentMapStyle==='osm'||currentMapStyle==='topo_photos');
@@ -4039,7 +4087,7 @@ document.getElementById('race-datetime-input').value=utcIsoToMskLocalInput(porta
 document.querySelectorAll('[data-editable="true"]').forEach(el=>{el.contentEditable='false'});
 initEditableStaticTexts();
 pickHeroSubtitleVariant();
-const bgColors={minecraft:'#3d6b2f',heroes:'#7ba83a',diablo:'#0a0806',osm:'#161b22'};
+const bgColors={minecraft:'#3d6b2f',heroes:'#7ba83a',diablo:'#0a0806',osm:'#e8e4d8',topo_photos:'#e8e4d8'};
 const mapEl=document.getElementById('leaflet-map');if(mapEl)mapEl.style.background=bgColors[currentMapStyle]||'#3d6b2f';
 const bootMap=()=>{const mapBodyEl=document.getElementById('map-collapsible-body');if(mapBodyEl&&!mapBodyEl.classList.contains('hidden')){if(typeof L!=='undefined'){initLeafletMap();loadExternalRoutesJson();setTimeout(()=>{if(leafletMap){leafletMap.invalidateSize();const layers=Object.values(mapPolylines);if(layers.length)leafletMap.fitBounds(L.featureGroup(layers).getBounds(),{padding:[25,25]});}},200);}else{setTimeout(bootMap,120);}}};bootMap();ensureTrackPhotosLoaded(false);initInlineHeroPhotoLinks();
 renderSectors();renderFaqs();renderStories();
