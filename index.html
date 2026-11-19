@@ -122,6 +122,39 @@ img,video{max-width:100%;height:auto}
 #map-card-container.map-is-fullscreen #track-photo-modal .tp-modal-dialog,#map-card-container:fullscreen #track-photo-modal .tp-modal-dialog,#map-card-container:-webkit-full-screen #track-photo-modal .tp-modal-dialog{max-width:96vw!important;width:96vw!important;max-height:96vh!important;height:96vh!important;display:flex!important;flex-direction:column!important}
 #map-card-container.map-is-fullscreen #track-photo-modal .tp-modal-img-wrap,#map-card-container:fullscreen #track-photo-modal .tp-modal-img-wrap,#map-card-container:-webkit-full-screen #track-photo-modal .tp-modal-img-wrap{flex:1 1 auto!important;max-height:none!important;min-height:0!important}
 #map-card-container.map-is-fullscreen #track-photo-modal #tp-modal-img,#map-card-container:fullscreen #track-photo-modal #tp-modal-img,#map-card-container:-webkit-full-screen #track-photo-modal #tp-modal-img{max-height:100%!important;max-width:100%!important;width:auto!important;height:100%!important;object-fit:contain!important}
+
+/* === Visitka Demo Layout Styles === */
+.vk-hero-shell{position:relative;overflow:hidden;border-bottom:1px solid #161b22;background:radial-gradient(ellipse at 75% 15%,rgba(245,158,11,0.14) 0%,transparent 55%),radial-gradient(ellipse at 15% 85%,rgba(6,182,212,0.12) 0%,transparent 55%),#090c10}
+.vk-hero-bg-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 0.7s ease;pointer-events:none;z-index:0}
+.vk-hero-bg-img.loaded{opacity:0.24}
+.vk-hero-scrim{position:absolute;inset:0;background:linear-gradient(180deg,rgba(9,12,16,0.58) 0%,rgba(9,12,16,0.82) 55%,#090c10 100%);pointer-events:none;z-index:1}
+.vk-hero-content{position:relative;z-index:2}
+.vk-stats-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0.75rem}
+@media (min-width:640px){.vk-stats-grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.vk-stat-card{background:rgba(13,17,23,0.82);border:1px solid #21262d;border-radius:0.875rem;padding:0.875rem 1rem;backdrop-filter:blur(6px)}
+.vk-photo-strip{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0.75rem}
+@media (min-width:640px){.vk-photo-strip{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (min-width:1024px){.vk-photo-strip{grid-template-columns:repeat(6,minmax(0,1fr))}}
+.vk-photo-tile{position:relative;aspect-ratio:4/3;border-radius:0.875rem;overflow:hidden;border:1px solid #21262d;background:#0d1117;cursor:pointer;transition:transform 0.2s ease,border-color 0.2s ease}
+.vk-photo-tile:hover{transform:translateY(-2px);border-color:rgba(245,158,11,0.75)}
+.vk-photo-tile img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.3s ease}
+.vk-photo-tile:hover img{transform:scale(1.06)}
+.vk-photo-caption{position:absolute;left:0;right:0;bottom:0;padding:0.45rem 0.55rem;background:linear-gradient(to top,rgba(9,12,16,0.92),rgba(9,12,16,0));font-size:11px;line-height:1.25;color:#f8fafc;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.vk-brand-link{display:inline-flex;align-items:center;gap:0.55rem;flex-shrink:0;text-decoration:none}
+.vk-brand-title{font-family:'Oswald',sans-serif;font-weight:700;font-size:1rem;letter-spacing:0.04em;text-transform:uppercase;color:#ffffff;line-height:1}
+@media (max-width:480px){.vk-brand-title{font-size:0.9rem}}
+.vk-sectors-grid{display:grid;grid-template-columns:repeat(1,minmax(0,1fr));gap:1.25rem}
+@media (min-width:1024px){.vk-sectors-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.vk-stories-grid{display:grid;grid-template-columns:repeat(1,minmax(0,1fr));gap:1.25rem}
+@media (min-width:768px){.vk-stories-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.vk-cta-primary{display:inline-flex;align-items:center;justify-content:center;gap:0.5rem;padding:0.75rem 1.25rem;border-radius:0.875rem;background:#f59e0b;color:#090c10;font-weight:700;font-size:0.875rem;transition:background-color 0.15s ease}
+.vk-cta-primary:hover{background:#fbbf24}
+.vk-cta-secondary{display:inline-flex;align-items:center;justify-content:center;gap:0.5rem;padding:0.75rem 1.25rem;border-radius:0.875rem;background:rgba(22,27,34,0.9);border:1px solid #30363d;color:#e2e8f0;font-weight:600;font-size:0.875rem;transition:all 0.15s ease}
+.vk-cta-secondary:hover{background:#21262d;border-color:#f59e0b;color:#ffffff}
+.vk-cta-tg{display:inline-flex;align-items:center;justify-content:center;gap:0.5rem;padding:0.75rem 1.15rem;border-radius:0.875rem;background:rgba(6,182,212,0.16);border:1px solid rgba(6,182,212,0.45);color:#67e8f9;font-weight:600;font-size:0.875rem;transition:all 0.15s ease}
+.vk-cta-tg:hover{background:rgba(6,182,212,0.28);color:#ffffff}
+.vk-donate-btn{display:inline-flex;align-items:center;gap:0.35rem;padding:0.25rem 0.65rem;border-radius:0.5rem;background:rgba(22,27,34,0.85);border:1px solid rgba(245,158,11,0.45);color:#fcd34d;font-size:12px;font-weight:600;transition:all 0.15s ease}
+.vk-donate-btn:hover{background:#161b22;border-color:#fbbf24;color:#ffffff}
 </style>
 </head>
 <body class="antialiased selection:bg-ochre-500 selection:text-graphite-950">
@@ -313,19 +346,25 @@ img,video{max-width:100%;height:auto}
 </div>
 </div>
 
-<div class="pt-4"></div>
 <header class="sticky top-0 z-40 bg-graphite-950/90 backdrop-blur-md border-b border-graphite-800">
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-<div class="flex items-center justify-between sm:justify-end py-2 gap-2 overflow-hidden">
+<div class="flex items-center justify-between py-2.5 gap-3 overflow-hidden">
+<a href="#hero" class="vk-brand-link" aria-label="Утёсы Поволжья — наверх">
+<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 32 32" class="shrink-0">
+<rect width="32" height="32" rx="7" fill="#161b22" stroke="#30363d" stroke-width="1.5"/>
+<path d="M4 23L12 9L18 18L22 13L28 23H4Z" fill="#f59e0b"/>
+<path d="M4 26H28" stroke="#22d3ee" stroke-width="2.5" stroke-linecap="round"/>
+</svg>
+<span class="vk-brand-title">Утёсы Поволжья</span>
+</a>
 <nav class="flex items-center gap-1 bg-graphite-900 p-1 rounded-xl border border-graphite-700 overflow-x-auto whitespace-nowrap max-w-full no-scrollbar">
-<a href="#mission-spoiler" onclick="const sp=document.getElementById('mission-spoiler');if(sp)sp.open=true;" class="px-3 py-1.5 rounded-lg text-xs font-semibold text-ochre-400 hover:text-white hover:bg-graphite-800 transition">Миссия</a>
 <a href="#interactive-map-section" onclick="openMapSectionFromNav()" class="px-3 py-1.5 rounded-lg text-xs font-medium text-slate-300 hover:text-white hover:bg-graphite-800 transition">Карта</a>
-<a href="#regulations" onclick="const sp=document.getElementById('regulations-spoiler');if(sp)sp.open=true;" class="px-3 py-1.5 rounded-lg text-xs font-medium text-slate-300 hover:text-white hover:bg-graphite-800 transition">Правила</a>
-<a href="#registration" class="px-3 py-1.5 rounded-lg text-xs font-semibold text-emerald-400 hover:bg-graphite-800 transition flex items-center gap-1.5"><span>Регистрация</span><span id="nav-reg-count" class="px-1.5 py-0.2 rounded bg-emerald-500/20 text-emerald-300 font-mono text-[10px]">0</span></a>
-<a href="#results-archive" onclick="const sp=document.getElementById('results-archive-spoiler');if(sp)sp.open=true;" class="px-3 py-1.5 rounded-lg text-xs font-semibold text-ochre-400 hover:bg-graphite-800 transition flex items-center gap-1.5"><span>🏆 Архив</span><span id="nav-res-count" class="px-1.5 py-0.2 rounded bg-ochre-500/20 text-ochre-300 font-mono text-[10px]">0</span></a>
-<a href="#faq-section" class="px-3 py-1.5 rounded-lg text-xs font-medium text-slate-300 hover:text-white hover:bg-graphite-800 transition">FAQ</a>
+<a href="#route-sectors" class="px-3 py-1.5 rounded-lg text-xs font-medium text-slate-300 hover:text-white hover:bg-graphite-800 transition">Участки</a>
+<a href="#race-event-section" class="px-3 py-1.5 rounded-lg text-xs font-semibold text-emerald-400 hover:bg-graphite-800 transition flex items-center gap-1.5"><span>Заезд 2027</span><span id="nav-reg-count" class="px-1.5 py-0.2 rounded bg-emerald-500/20 text-emerald-300 font-mono text-[10px]">0</span></a>
+<a id="nav-archive-link" href="#results-archive" onclick="const sp=document.getElementById('results-archive-spoiler');if(sp)sp.open=true;" class="hidden px-3 py-1.5 rounded-lg text-xs font-semibold text-ochre-400 hover:bg-graphite-800 transition items-center gap-1.5"><span>🏆 Архив</span><span id="nav-res-count" class="px-1.5 py-0.2 rounded bg-ochre-500/20 text-ochre-300 font-mono text-[10px]">0</span></a>
 <a href="#stories" onclick="const sp=document.getElementById('stories-spoiler');if(sp)sp.open=true;" class="px-3 py-1.5 rounded-lg text-xs font-medium text-slate-300 hover:text-white hover:bg-graphite-800 transition">Рассказы</a>
-<button type="button" onclick="openDonateModal()" title="Угостить автора кофе / Поддержать проект" aria-label="Угостить автора кофе" class="group px-2.5 py-1 rounded-lg bg-graphite-800/80 hover:bg-graphite-800 border border-ochre-500/40 hover:border-ochre-400 transition flex items-center justify-center"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="24" viewBox="0 0 28 30" fill="none" class="block overflow-visible group-hover:scale-110 transition-transform">
+<a href="#faq-section" class="px-3 py-1.5 rounded-lg text-xs font-medium text-slate-300 hover:text-white hover:bg-graphite-800 transition">FAQ</a>
+<button type="button" onclick="openDonateModal()" title="Угостить автора кофе / Поддержать проект" aria-label="Поддержать проект" class="vk-donate-btn group"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="20" viewBox="0 0 28 30" fill="none" class="block overflow-visible group-hover:scale-110 transition-transform">
 <path d="M10 7.5C9.2 6 10.8 4.5 10 3" stroke="#fcd34d" stroke-width="1.6" stroke-linecap="round" class="mccafe-steam-1"/>
 <path d="M14 7C13.2 5.2 14.8 3.6 14 1.8" stroke="#ffffff" stroke-width="1.6" stroke-linecap="round" class="mccafe-steam-2"/>
 <path d="M18 7.5C17.2 6 18.8 4.5 18 3" stroke="#fcd34d" stroke-width="1.6" stroke-linecap="round" class="mccafe-steam-3"/>
@@ -334,7 +373,7 @@ img,video{max-width:100%;height:auto}
 <path d="M6.6 13.4H21.4L19.6 28.2C19.5 28.8 19 29.2 18.4 29.2H9.6C9 29.2 8.5 28.8 8.4 28.2L6.6 13.4Z" fill="#da291c" stroke="#1e293b" stroke-width="0.9"/>
 <path d="M7.2 18.2H20.8L20.1 24.2H7.9L7.2 18.2Z" fill="#b91c1c" opacity="0.55"/>
 <path d="M10.3 24V19.6C10.3 17.5 11.4 16.5 12.2 16.5C13 16.5 13.8 17.4 14 19.2C14.2 17.4 15 16.5 15.8 16.5C16.6 16.5 17.7 17.5 17.7 19.6V24" stroke="#ffc72c" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
-</svg></button>
+</svg><span>Кофе</span></button>
 </nav>
 </div>
 <div id="edit-mode-banner" class="py-2 px-3 mb-2 rounded-xl bg-ochre-500/10 border border-ochre-500/40 text-ochre-300 text-xs flex-wrap items-center justify-between gap-2 hidden">
@@ -344,52 +383,59 @@ img,video{max-width:100%;height:auto}
 </header>
 
 <main class="topo-bg min-h-screen pb-16">
-<section id="hero" class="relative pt-6 pb-10 border-b border-graphite-800">
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-<div id="race-countdown" class="mb-7 rounded-2xl bg-graphite-900/95 border border-ochre-500/50 p-3.5 sm:px-5 sm:py-3.5 shadow-lg">
-<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-3">
-<div class="flex flex-wrap items-center gap-3">
-<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-ochre-500 text-graphite-950 font-mono font-bold text-xs uppercase"><span class="w-2 h-2 rounded-full bg-graphite-950 animate-pulse"></span>Старт 15.05.2027</span>
-<div>
-<div id="race-main-heading" data-editable="true" class="font-display font-bold text-base sm:text-lg text-white uppercase tracking-wide" contenteditable="false">Сегмент гонки: Ульяновск — Камышин (1290 км)</div>
-<p id="race-location-sub" data-editable="true" class="text-xs text-slate-400" contenteditable="false">Старт: 15.05.2027 (07:00 МСК) • Окончание через 10 дней (25.05.2027)</p>
-</div>
-</div>
-<div class="flex flex-wrap items-center gap-2">
-<div class="flex items-center gap-1.5 bg-graphite-950 border border-graphite-700 rounded-xl px-3 py-1.5">
-<span id="countdown-status-badge" class="text-[11px] font-mono text-slate-400 mr-1">До старта:</span>
-<div class="font-mono font-bold text-sm text-ochre-400"><span id="cd-days">--</span><span class="text-[10px] text-slate-400 font-normal ml-0.5">д</span></div>
-<span class="text-slate-600 font-mono">:</span>
-<div class="font-mono font-bold text-sm text-white"><span id="cd-hours">--</span><span class="text-[10px] text-slate-400 font-normal ml-0.5">ч</span></div>
-<span class="text-slate-600 font-mono">:</span>
-<div class="font-mono font-bold text-sm text-white"><span id="cd-minutes">--</span><span class="text-[10px] text-slate-400 font-normal ml-0.5">м</span></div>
-<span class="text-slate-600 font-mono">:</span>
-<div class="font-mono font-bold text-sm text-volga-400"><span id="cd-seconds">--</span><span class="text-[10px] text-slate-400 font-normal ml-0.5">с</span></div>
-</div>
-<a href="#registration" class="px-3 py-2 rounded-xl bg-ochre-500 hover:bg-ochre-400 text-graphite-950 font-bold text-xs transition">Регистрация</a>
-<a href="https://t.me/+ZZ2k8XJap30wNzli" target="_blank" rel="noopener noreferrer" class="px-3 py-2 rounded-xl bg-volga-500 hover:bg-volga-400 text-graphite-950 font-bold text-xs transition">Чат в ТГ</a>
-</div>
-</div>
-<div id="race-date-editor" class="mt-3 pt-3 border-t border-graphite-800 flex-col sm:flex-row items-start sm:items-center justify-between gap-2 text-xs hidden">
-<label for="race-datetime-input" class="text-ochre-300 font-medium">Изменить дату/время старта (МСК):</label>
-<input type="datetime-local" id="race-datetime-input" onchange="updateRaceTargetDate(this.value)" class="bg-graphite-950 border border-ochre-500/50 rounded-lg px-2.5 py-1 text-white font-mono text-xs focus:outline-none">
-</div>
-</div>
+<section id="hero" class="vk-hero-shell py-10 sm:py-12">
+<img id="hero-bg-photo" src="" alt="" aria-hidden="true" class="vk-hero-bg-img">
+<div class="vk-hero-scrim" aria-hidden="true"></div>
+<div class="vk-hero-content max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
 <div class="max-w-4xl space-y-4">
-<div class="inline-flex flex-wrap items-center gap-2 px-3 py-1 rounded-full bg-graphite-800/90 border border-graphite-600 text-xs text-slate-300">
-<span class="px-2 py-0.5 rounded-full bg-ochre-500/20 text-ochre-400 font-mono font-semibold text-[11px]">Открытый маршрут</span>
-<span id="hero-badge" data-editable="true" contenteditable="false">Общедоступный велосипедный маршрут вдоль Волги и Ахтубы (~2850 км)</span>
+<div class="inline-flex flex-wrap items-center gap-2 px-3 py-1 rounded-full bg-graphite-900/90 border border-graphite-700 text-xs text-slate-300">
+<span class="px-2 py-0.5 rounded-full bg-ochre-500/20 text-ochre-400 font-mono font-semibold text-[11px]">100% разведка</span>
+<span id="hero-badge" data-editable="true" contenteditable="false">Открытый байкпакинг-маршрут вдоль Волги и Ахтубы</span>
 </div>
 <h1 id="hero-title" data-editable="true" class="font-display font-bold text-3xl sm:text-5xl uppercase tracking-tight text-white leading-tight" contenteditable="false">УТЁСЫ ПОВОЛЖЬЯ: <span class="text-ochre-400">КАЗАНЬ — АСТРАХАНЬ</span></h1>
-<p id="hero-subtitle" data-editable="true" class="text-slate-300 text-sm sm:text-base leading-relaxed whitespace-pre-line" contenteditable="false">Велосипедный маршрут (~2850 км) от Казани через Ульяновск, Сенгилей, Самарскую Луку, Хвалынск, Саратов и Камышин, затем через степи и Волго-Ахтубинскую пойму к озеру Баскунчак и Астрахани.</p>
-<details id="mission-spoiler" class="group bg-graphite-900/90 border border-graphite-700 hover:border-ochre-500/50 rounded-2xl overflow-hidden transition shadow-md">
+<p id="hero-subtitle" data-editable="true" class="text-slate-200 text-sm sm:text-base leading-relaxed whitespace-pre-line" contenteditable="false">2850 км проверенного веломаршрута без тупиков и «буреломинга»: от «Волжской тропы» и меловых холмов Сенгилея через Самарскую Луку и Хвалынск к волжским утёсам Камышина, солёному озеру Баскунчак и дельте Астрахани.</p>
+<div class="flex flex-wrap items-center gap-3 pt-1">
+<a href="#interactive-map-section" onclick="openMapSectionFromNav()" class="vk-cta-primary shadow-lg">🗺️ Смотреть карту</a>
+<a href="#route-sectors" class="vk-cta-secondary">📥 Участки и GPX-треки</a>
+<a href="https://t.me/+ZZ2k8XJap30wNzli" target="_blank" rel="noopener noreferrer" class="vk-cta-tg">💬 Чат в Telegram ↗</a>
+</div>
+</div>
+
+<div class="vk-stats-grid">
+<div class="vk-stat-card">
+<div class="font-display font-bold text-2xl sm:text-3xl text-ochre-400 leading-none">~2 850 км</div>
+<div class="text-xs text-slate-400 mt-1">Казань → Астрахань вдоль Волги и Ахтубы</div>
+</div>
+<div class="vk-stat-card">
+<div class="font-display font-bold text-2xl sm:text-3xl text-white leading-none">3 сегмента</div>
+<div class="text-xs text-slate-400 mt-1">Можно пройти целиком или забрать участок на отпуск</div>
+</div>
+<div class="vk-stat-card">
+<div class="font-display font-bold text-2xl sm:text-3xl text-volga-400 leading-none">100% трек</div>
+<div class="text-xs text-slate-400 mt-1">Проверено колёсами без тупиков и буреломинга</div>
+</div>
+<div class="vk-stat-card">
+<div class="font-display font-bold text-2xl sm:text-3xl text-emerald-400 leading-none">Открыто</div>
+<div class="text-xs text-slate-400 mt-1">Бесплатные GPX, база знаний и открытый старт 2027</div>
+</div>
+</div>
+
+<div id="hero-photo-strip-wrap" class="hidden space-y-2.5 pt-1">
+<div class="flex items-center justify-between gap-2">
+<span class="text-xs font-mono uppercase tracking-wider text-ochre-400">📷 Живые кадры с маршрута</span>
+<button type="button" onclick="openPhotosLayerOnMap()" class="text-xs font-mono text-volga-400 hover:underline">Все фото на карте →</button>
+</div>
+<div id="hero-photo-strip" class="vk-photo-strip"></div>
+</div>
+
+<details id="mission-spoiler" class="group bg-graphite-900/80 border border-graphite-700 hover:border-ochre-500/50 rounded-2xl overflow-hidden transition shadow-md">
 <summary class="cursor-pointer px-4 py-3 sm:px-5 sm:py-3.5 bg-graphite-950/70 hover:bg-graphite-900 transition flex items-center justify-between gap-3">
 <div class="flex flex-wrap items-center gap-2.5">
-<span class="px-2 py-0.5 rounded bg-ochre-500/20 text-ochre-400 font-mono text-[11px] font-bold uppercase">Философия проекта</span>
+<span class="px-2 py-0.5 rounded bg-ochre-500/20 text-ochre-400 font-mono text-[11px] font-bold uppercase">О проекте</span>
 <span id="mission-heading" class="font-display font-bold text-sm sm:text-base text-white uppercase tracking-wide">Миссия «Утёсов Поволжья»</span>
 </div>
 <div class="flex items-center gap-2 shrink-0">
-<span class="text-xs font-mono text-slate-400 hidden sm:inline">Нажмите, чтобы развернуть</span>
+<span class="text-xs font-mono text-slate-400 hidden sm:inline">Развернуть</span>
 <span class="px-2.5 py-0.5 rounded-lg bg-graphite-800 border border-graphite-700 text-xs font-mono text-ochre-400 group-open:rotate-180 transition-transform">▼</span>
 </div>
 </summary>
@@ -412,8 +458,6 @@ img,video{max-width:100%;height:auto}
 </div>
 </details>
 </div>
-
-</div>
 </section>
 
 <section id="interactive-map-section" class="py-8 border-b border-graphite-800">
@@ -421,10 +465,11 @@ img,video{max-width:100%;height:auto}
 <div id="map-card-container" class="bg-graphite-900 border border-graphite-700 rounded-2xl overflow-hidden shadow-xl">
 <div class="p-4 sm:px-6 bg-graphite-950/90 border-b border-graphite-800 flex flex-wrap items-center justify-between gap-3">
 <div class="flex flex-wrap items-center gap-2.5">
-<button type="button" onclick="toggleMapCollapse()" class="px-3.5 py-2 rounded-xl bg-ochre-500 hover:bg-ochre-400 text-graphite-950 font-bold text-xs uppercase tracking-wider transition flex items-center gap-2"><span id="map-collapse-icon">▶</span><span id="map-collapse-text">Развернуть карту</span></button>
+<button type="button" onclick="toggleMapCollapse()" class="px-3.5 py-2 rounded-xl bg-ochre-500 hover:bg-ochre-400 text-graphite-950 font-bold text-xs uppercase tracking-wider transition flex items-center gap-2"><span id="map-collapse-icon">▼</span><span id="map-collapse-text">Свернуть карту</span></button>
 <button type="button" onclick="toggleMapFullscreen()" id="map-fs-top-btn" aria-label="Во весь экран" class="p-2 rounded-xl bg-graphite-800 hover:bg-graphite-700 border border-volga-500/40 text-volga-300 font-bold text-base leading-none transition flex items-center justify-center w-9 h-9" title="Открыть карту во весь экран"><span id="map-fs-top-icon">⛶</span></button>
+<span class="text-xs font-mono text-slate-400 hidden sm:inline">Интерактивная карта • выберите стиль или слой 📷 ФОТО справа</span>
 </div>
-<div id="map-sliders-wrap" class="hidden flex-wrap items-center gap-3">
+<div id="map-sliders-wrap" class="flex flex-wrap items-center gap-3">
 <div class="flex items-center gap-2 bg-graphite-900 border border-graphite-700 px-3 py-1.5 rounded-xl text-xs font-mono">
 <span class="text-slate-300">Арт-фон: <strong id="bg-opacity-label" class="text-volga-400">88%</strong></span>
 <input type="range" id="map-bg-opacity" min="35" max="100" value="88" oninput="updateMapBgOpacity(this.value)" class="w-20">
@@ -435,7 +480,7 @@ img,video{max-width:100%;height:auto}
 </div>
 </div>
 </div>
-<div id="map-collapsible-body" class="hidden">
+<div id="map-collapsible-body">
 <div id="map-fullscreen-wrap" class="relative">
 <div id="leaflet-map" class="w-full h-[420px] sm:h-[520px] z-10"></div>
 <details id="map-style-picker" open class="group/picker absolute top-2 right-2 z-[470] rounded-xl p-1" style="background:rgba(13,17,23,0.88);border:1.5px solid #30363d;box-shadow:0 4px 12px rgba(0,0,0,0.55);backdrop-filter:blur(6px)">
@@ -498,11 +543,45 @@ img,video{max-width:100%;height:auto}
 <div><span class="text-xs font-mono uppercase tracking-widest text-ochre-400">Фактические участки (~2850 км)</span><h2 id="sectors-heading" data-editable="true" class="font-display font-bold text-2xl sm:text-3xl text-white uppercase mt-1" contenteditable="false">УЧАСТКИ МАРШРУТА</h2></div>
 <div id="add-sector-wrap" class="hidden"><button type="button" onclick="addNewSector()" class="px-4 py-2 rounded-xl bg-ochre-500 hover:bg-ochre-400 text-graphite-950 font-bold text-xs uppercase transition">+ Добавить участок</button></div>
 </div>
-<div id="sectors-container" class="grid grid-cols-1 md:grid-cols-2 gap-5"></div>
+<div id="sectors-container" class="vk-sectors-grid"></div>
 </div>
 </section>
 
-<section id="regulations" class="py-10 sm:py-12 border-b border-graphite-800">
+<section id="race-event-section" class="pt-10 pb-2">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="mb-4"><span class="text-xs font-mono uppercase tracking-widest text-emerald-400">Совместный старт на самообеспечении</span><h2 class="font-display font-bold text-2xl sm:text-3xl text-white uppercase mt-1">ОТКРЫТЫЙ ЗАЕЗД 2027</h2></div>
+<div id="race-countdown" class="mb-7 rounded-2xl bg-graphite-900/95 border border-ochre-500/50 p-3.5 sm:px-5 sm:py-3.5 shadow-lg">
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-3">
+<div class="flex flex-wrap items-center gap-3">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-ochre-500 text-graphite-950 font-mono font-bold text-xs uppercase"><span class="w-2 h-2 rounded-full bg-graphite-950 animate-pulse"></span>Старт 15.05.2027</span>
+<div>
+<div id="race-main-heading" data-editable="true" class="font-display font-bold text-base sm:text-lg text-white uppercase tracking-wide" contenteditable="false">Сегмент гонки: Ульяновск — Камышин (1290 км)</div>
+<p id="race-location-sub" data-editable="true" class="text-xs text-slate-400" contenteditable="false">Старт: 15.05.2027 (07:00 МСК) • Окончание через 10 дней (25.05.2027)</p>
+</div>
+</div>
+<div class="flex flex-wrap items-center gap-2">
+<div class="flex items-center gap-1.5 bg-graphite-950 border border-graphite-700 rounded-xl px-3 py-1.5">
+<span id="countdown-status-badge" class="text-[11px] font-mono text-slate-400 mr-1">До старта:</span>
+<div class="font-mono font-bold text-sm text-ochre-400"><span id="cd-days">--</span><span class="text-[10px] text-slate-400 font-normal ml-0.5">д</span></div>
+<span class="text-slate-600 font-mono">:</span>
+<div class="font-mono font-bold text-sm text-white"><span id="cd-hours">--</span><span class="text-[10px] text-slate-400 font-normal ml-0.5">ч</span></div>
+<span class="text-slate-600 font-mono">:</span>
+<div class="font-mono font-bold text-sm text-white"><span id="cd-minutes">--</span><span class="text-[10px] text-slate-400 font-normal ml-0.5">м</span></div>
+<span class="text-slate-600 font-mono">:</span>
+<div class="font-mono font-bold text-sm text-volga-400"><span id="cd-seconds">--</span><span class="text-[10px] text-slate-400 font-normal ml-0.5">с</span></div>
+</div>
+<a href="#registration" onclick="openParticipantAuthBox()" class="px-3 py-2 rounded-xl bg-ochre-500 hover:bg-ochre-400 text-graphite-950 font-bold text-xs transition">Регистрация</a>
+<a href="https://t.me/+ZZ2k8XJap30wNzli" target="_blank" rel="noopener noreferrer" class="px-3 py-2 rounded-xl bg-volga-500 hover:bg-volga-400 text-graphite-950 font-bold text-xs transition">Чат в ТГ</a>
+</div>
+</div>
+<div id="race-date-editor" class="mt-3 pt-3 border-t border-graphite-800 flex-col sm:flex-row items-start sm:items-center justify-between gap-2 text-xs hidden">
+<label for="race-datetime-input" class="text-ochre-300 font-medium">Изменить дату/время старта (МСК):</label>
+<input type="datetime-local" id="race-datetime-input" onchange="updateRaceTargetDate(this.value)" class="bg-graphite-950 border border-ochre-500/50 rounded-lg px-2.5 py-1 text-white font-mono text-xs focus:outline-none">
+</div>
+</div>
+</div>
+</section>
+<section id="regulations" class="py-4 sm:py-6 border-b border-graphite-800">
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 <details id="regulations-spoiler" class="group bg-graphite-900 border border-graphite-700 rounded-2xl overflow-hidden shadow-xl">
 <summary class="cursor-pointer p-5 sm:px-6 bg-graphite-950/80 hover:bg-graphite-900 transition flex flex-wrap items-center justify-between gap-4">
@@ -552,8 +631,19 @@ img,video{max-width:100%;height:auto}
 </div>
 <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
 <div class="lg:col-span-5 bg-graphite-900 border border-graphite-700 rounded-2xl p-5 sm:p-6 shadow-xl">
-<div id="participant-auth-step">
-<h3 class="font-display font-bold text-xl text-white uppercase mb-2">ВХОД / РЕГИСТРАЦИЯ</h3>
+<div id="participant-entry-teaser" class="space-y-3.5">
+<div class="flex items-center gap-2"><span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-mono text-[11px] font-bold uppercase">Бесплатное участие</span><span class="text-xs font-mono text-slate-400">Самообеспечение</span></div>
+<h3 class="font-display font-bold text-xl text-white uppercase">ПОДАТЬ ЗАЯВКУ НА ЗАЕЗД</h3>
+<p class="text-xs sm:text-sm text-slate-300 leading-relaxed">Регистрация занимает 3 минуты: подтверждение почты, короткая анкета велосипеда и 5 вопросов по правилам безопасности.</p>
+<div class="flex flex-wrap gap-2 pt-1">
+<button type="button" onclick="openParticipantAuthBox()" class="w-full sm:w-auto flex-1 py-3 px-4 rounded-xl bg-ochre-500 hover:bg-ochre-400 text-graphite-950 font-bold text-xs sm:text-sm uppercase tracking-wider transition shadow-md">Подать заявку / Войти →</button>
+</div>
+</div>
+<div id="participant-auth-step" class="hidden">
+<div class="flex items-center justify-between gap-2 mb-2">
+<h3 class="font-display font-bold text-xl text-white uppercase">ВХОД / РЕГИСТРАЦИЯ</h3>
+<button type="button" onclick="closeParticipantAuthBox()" class="text-xs font-mono text-slate-400 hover:text-white">Свернуть ✕</button>
+</div>
 <p class="text-xs text-slate-300 leading-relaxed mb-4">Введите <strong>Email</strong> и <strong>пароль</strong> (мин. 8 символов, буквы + цифры). При первой авторизации на почту отправляется 6-значный код.</p>
 <form id="participant-auth-form" onsubmit="handleParticipantAuth(event)" class="space-y-3.5">
 <div><label for="auth-email-input" class="block text-xs font-mono text-slate-300 mb-1">Email *</label><input type="email" id="auth-email-input" required placeholder="rider@example.com" class="w-full bg-graphite-950 border border-graphite-600 rounded-xl px-3.5 py-2.5 text-sm text-white font-mono focus:outline-none focus:border-ochre-500"></div>
@@ -703,7 +793,7 @@ img,video{max-width:100%;height:auto}
 </div>
 
 <div class="lg:col-span-7">
-<details class="group bg-graphite-900 border border-graphite-700 rounded-2xl overflow-hidden shadow-xl">
+<details class="group bg-graphite-900 border border-graphite-700 rounded-2xl overflow-hidden shadow-xl" open>
 <summary class="cursor-pointer p-5 sm:px-6 bg-graphite-950/80 hover:bg-graphite-900 transition flex flex-wrap items-center justify-between gap-3">
 <div>
 <div class="flex items-center gap-2.5"><h3 class="font-display font-bold text-xl text-white uppercase">ПУБЛИЧНЫЙ СПИСОК ЗАЯВОК</h3><span class="px-2.5 py-0.5 rounded-lg bg-graphite-800 border border-graphite-700 text-xs font-mono text-ochre-400 group-open:rotate-180 transition-transform">▼</span></div>
@@ -906,7 +996,7 @@ img,video{max-width:100%;height:auto}
 </div>
 </section>
 
-<section id="results-archive" class="py-10 sm:py-12 border-b border-graphite-800">
+<section id="results-archive" class="hidden py-10 sm:py-12 border-b border-graphite-800">
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 <details id="results-archive-spoiler" class="group bg-graphite-900 border border-graphite-700 rounded-2xl overflow-hidden shadow-xl">
 <summary class="cursor-pointer p-5 sm:px-6 bg-graphite-950/80 hover:bg-graphite-900 transition flex flex-wrap items-center justify-between gap-4">
@@ -956,7 +1046,7 @@ img,video{max-width:100%;height:auto}
 
 <section id="stories" class="py-10 sm:py-12">
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-<details id="stories-spoiler" class="group bg-graphite-900 border border-graphite-700 rounded-2xl overflow-hidden shadow-xl">
+<details id="stories-spoiler" class="group bg-graphite-900 border border-graphite-700 rounded-2xl overflow-hidden shadow-xl" open>
 <summary class="cursor-pointer p-5 sm:px-6 bg-graphite-950/80 hover:bg-graphite-900 transition flex flex-wrap items-center justify-between gap-4">
 <div><span class="text-xs font-mono uppercase tracking-widest text-ochre-400">Реальный опыт</span><div class="flex items-center gap-3 mt-1"><h2 id="stories-heading" data-editable="true" class="font-display font-bold text-2xl sm:text-3xl text-white uppercase" contenteditable="false">РАССКАЗЫ</h2><span class="px-3 py-1 rounded-xl bg-graphite-800 border border-graphite-700 text-xs font-mono text-ochre-400 group-open:rotate-180 transition-transform">▼</span></div></div>
 <span class="text-xs font-mono text-slate-400">Нажмите, чтобы развернуть</span>
@@ -982,7 +1072,7 @@ img,video{max-width:100%;height:auto}
 <div class="md:col-span-2 lg:col-span-3 flex justify-end gap-3"><button type="button" onclick="toggleStoryForm()" class="px-4 py-2 rounded-xl bg-graphite-800 text-slate-300 text-xs font-semibold">Отмена</button><button type="submit" class="px-5 py-2 rounded-xl bg-ochre-500 hover:bg-ochre-400 text-graphite-950 font-bold text-xs uppercase tracking-wider transition">Добавить</button></div>
 </form>
 </div>
-<div id="stories-grid" class="grid grid-cols-1 lg:grid-cols-3 gap-6"></div>
+<div id="stories-grid" class="vk-stories-grid"></div>
 </div>
 </details>
 </div>
@@ -1002,6 +1092,7 @@ img,video{max-width:100%;height:auto}
 <a href="https://t.me/+ZZ2k8XJap30wNzli" target="_blank" rel="noopener noreferrer" class="px-3.5 py-2 rounded-xl bg-volga-500/15 hover:bg-volga-500/25 border border-volga-500/40 text-xs font-semibold text-volga-400 transition">Чат в ТГ</a>
 <a href="https://a1onso.blogspot.com/" target="_blank" rel="noopener noreferrer" class="px-3.5 py-2 rounded-xl bg-graphite-900 hover:bg-graphite-800 border border-graphite-700 text-xs font-medium text-ochre-400 transition">Блог</a>
 <a href="https://t.me/a1onzo" target="_blank" rel="noopener noreferrer" class="px-3.5 py-2 rounded-xl bg-graphite-900 hover:bg-graphite-800 border border-graphite-700 text-xs font-medium text-slate-200 transition">TG: @a1onzo</a>
+<button type="button" onclick="openDonateModal()" class="px-3.5 py-2 rounded-xl bg-ochre-500/15 hover:bg-ochre-500/25 border border-ochre-500/40 text-xs font-semibold text-ochre-300 transition">☕ Поддержать</button>
 </div>
 </div>
 </div>
@@ -1090,7 +1181,7 @@ faqs:[
 {id:'faq-1',q:'1. Какой велосипед и какие покрышки лучше всего подойдут для маршрута?',a:'Оптимальный выбор — кросс-кантрийный МТБ (хардтейл или двухподвес) либо грэвел с широкими зазорами и покрышками от 50 мм (2.0–2.25"). Обязательна бескамерная установка со свежим герметиком (120–150 мл в колесо). Лучше всего работают накатистые полуслики с боковым зацепом (например, Maxxis Aspen ST, Maxxis Ikon, Schwalbe Rocket Ron или G-One RS Pro).'},
 {id:'faq-2',q:'2. Как работают паромные переправы на маршруте (Усолье и Самара)?',a:'На сегменте Ульяновск — Камышин две водные переправы. Первая — переправа через водохранилище в Усолье (до Тольятти): она работает до 18:00 вечера. Если вы понимаете, что не успеваете на вечерний рейс, можно спокойно проехать по Объездной трассе Тольятти — по общему времени выйдет практически то же самое. Вторая переправа — в Самаре (выход из Самарской Луки через Волгу): заранее сверяйте актуальное расписание на сайте речного вокзала, но уехать там легко — с раннего утра до позднего вечера каждые 15 минут курсируют как официальный паром/ОМ, так и частные скоростные катера.'},
 {id:'faq-3',q:'3. Как контролируется правило 8 часов отдыха и считается ли отдых в последний день перед финишем?',a:'После финиша участник загружает свой фактический GPX-трек. Система автоматически разбивает время на расчётные сутки по 24 часа с момента старта (с 07:00 до 07:00 МСК) и суммирует всё время без движения (ночной сон, остановки у магазинов, кафе, переправы и ремонт). Если за полные 24 часа суммарный отдых составил меньше 8 часов, разница умножается на 2 и прибавляется к итоговому времени. В последние (неполные) финишные сутки норма отдыха не начисляется — можно спокойно доезжать до финиша без искусственных остановок.'},
-{id:'faq-4',q:'4. Как организованы вода, питание и ночёвки на дистанции?',a:'Заезд проходит на полном самообеспечении: любая персональная сторонняя помощь и машины сопровождения запрещены. При этом разрешено пользоваться всей общедоступной попутной инфраструктурой: магазинами, пекарнями, столовыми, кафе, АЗС, аптеками, веломастерскими и гостиницами. Формат ночёвок — полностью на усмотрение участника (палатка/биви или отели и базы отдыха). На грунтовых прогонах по меловым холмам рекомендуется возить с собой запас воды не менее 2,5–3 литров.'},
+{id:'faq-4',q:'4. Как организованы вода, питание и ночёвки на дистанции?',a:'Заезд проходит на полном самообеспечении: любая персональная сторонняя помощь и машины сопровождения запрещены. При этом разрешено пользоваться всей общедоступной попутной инфраструктурой: магазинами, пекарнями, столовыми, кафе, АЗС, аптеками, веломастерскими и гостиницами. Формат ночёвок — полностью на усмотрение участника (палатка/биви или отели и базы отдыха). На протяжённых грунтовых прогонах рекомендуется возить с собой запас воды не менее 1–2 литров.'},
 {id:'faq-5',q:'5. Что делать, если на пути возникла непреодолимая преграда или форс-мажор?',a:'Если дорога оказалась перекрыта из-за форс-мажора (перекопали поле, поставили новый забор, размыло мост, ведутся строительные или взрывные работы, либо вы не успели на переправу в Усолье до 18:00), разрешается совершить логичный локальный объезд своим ходом с возвращением на основную линию GPX-трека при первой возможности.'},
 {id:'faq-6',q:'6. Будет ли штраф, если на КП нет мобильной связи или глушат GPS (работает РЭБ)?',a:'Нет, если факт прохождения подтверждён. При отсутствии мобильной связи на контрольной точке сделайте фото велосипеда на фоне ориентира КП (с привязкой ко времени) и отправьте его в чат заезда, как только появится сеть. При сбоях GPS из-за РЭБ ориентируйтесь по офлайн-картам и одометру.'},
 {id:'faq-7',q:'7. Какие технические сложности ждут на трассе: песок, крутые градиенты, чернозём?',a:'Маршрут «Утёсы Поволжья» — это настоящая байкпакинг-гонка на самообеспечении, а не парковая грэвел-прогулка. На дистанции будут затяжные грунтовые и меловые подъёмы с градиентами до 16% (Сенгилей, Самарская Лука, Хвалынск), каменистые полки, песчаные участки, лесные овраги и возможные пешие секции. В случае сильного ливня полевые дороги в Саратовской и Волгоградской областях могут раскисать (липкий чернозём) — важно заранее следить за прогнозом и беречь трансмиссию.'},
@@ -1159,21 +1250,8 @@ const MISSION_SUB2_VARIANTS = [
 `На автомобиле Поволжье пролетает за пару дней по федеральным трассам, оставляя главное за кадром. Наш маршрут ведёт по видовым береговым полкам и тихим грунтовкам через места, куда не возят обычные экскурсии: дикие утёсы над Волгой, реликтовые сосновые боры Хвалынска, бескрайние степи и рыбные ерики Ахтубы.`
 ];
 
-function pickHeroSubtitleVariant() {
-    if (isAdminLoggedIn && isEditMode) return;
-    const edits = portalState.textEdits || {};
-    if (!edits['hero-subtitle'] || !edits['hero-subtitle'].trim()) {
-        const el = document.getElementById('hero-subtitle');
-        if (el) el.textContent = HERO_SUBTITLE_VARIANTS[Math.floor(Math.random() * HERO_SUBTITLE_VARIANTS.length)];
-    }
-    if (!edits['mission-intro'] || !edits['mission-intro'].trim() || edits['mission-intro'] === DEFAULT_MISSION_TEXTS['mission-intro']) {
-        const mIntroEl = document.getElementById('mission-intro');
-        if (mIntroEl) mIntroEl.textContent = MISSION_INTRO_VARIANTS[Math.floor(Math.random() * MISSION_INTRO_VARIANTS.length)];
-    }
-    if (!edits['mission-sub2-desc'] || !edits['mission-sub2-desc'].trim() || edits['mission-sub2-desc'] === DEFAULT_MISSION_TEXTS['mission-sub2-desc']) {
-        const mSub2El = document.getElementById('mission-sub2-desc');
-        if (mSub2El) mSub2El.textContent = MISSION_SUB2_VARIANTS[Math.floor(Math.random() * MISSION_SUB2_VARIANTS.length)];
-    }
+function pickHeroSubtitleVariant(){
+// Стабильные тексты для страницы-визитки (без случайной смены при каждом обновлении)
 }
 
 function isLegacyRaceRoute(r){
@@ -1648,6 +1726,7 @@ const data=await r.json();
 if(Array.isArray(data)){
 TRACK_GEOTAG_PHOTOS=data;
 isTrackPhotosLoaded=true;
+renderHeroPhotoStrip();
 if(leafletMap){
 renderMapPhotos();
 if(fitAfterLoad&&TRACK_GEOTAG_PHOTOS.length>0){
@@ -1696,6 +1775,50 @@ marker.bindPopup(`<div class="min-w-[230px] max-w-[280px]"><span class="mc-popup
 marker.on('click',function(ev){const inFs=isMapFullscreen||Boolean(document.fullscreenElement||document.webkitFullscreenElement);if(inFs){if(ev&&ev.originalEvent)ev.originalEvent.stopPropagation();this.closePopup();openTrackPhotoModal(idx);}});
 marker.on('popupopen',function(){if(isMapFullscreen||Boolean(document.fullscreenElement||document.webkitFullscreenElement)){this.closePopup();}});
 });
+}
+
+
+function renderHeroPhotoStrip(){
+const wrap=document.getElementById('hero-photo-strip-wrap');
+const strip=document.getElementById('hero-photo-strip');
+const bgImg=document.getElementById('hero-bg-photo');
+if(!Array.isArray(TRACK_GEOTAG_PHOTOS)||TRACK_GEOTAG_PHOTOS.length===0)return;
+if(bgImg&&!bgImg.src&&TRACK_GEOTAG_PHOTOS[0]&&TRACK_GEOTAG_PHOTOS[0].src){
+bgImg.onload=()=>bgImg.classList.add('loaded');
+bgImg.src=TRACK_GEOTAG_PHOTOS[0].src;
+}
+if(!wrap||!strip)return;
+const step=Math.max(1,Math.floor(TRACK_GEOTAG_PHOTOS.length/6));
+const picked=[];
+for(let i=0;i<TRACK_GEOTAG_PHOTOS.length&&picked.length<6;i+=step){
+picked.push({p:TRACK_GEOTAG_PHOTOS[i],idx:i});
+}
+strip.innerHTML=picked.map(({p,idx})=>`<button type="button" onclick="openTrackPhotoModal(${idx})" class="vk-photo-tile text-left" title="${escapeHtml(p.title)}"><img src="${escapeHtml(p.src)}" alt="${escapeHtml(p.title)}" loading="lazy"><span class="vk-photo-caption">${escapeHtml(p.title)}</span></button>`).join('');
+wrap.classList.remove('hidden');
+}
+function openPhotosLayerOnMap(){
+const b=document.getElementById('map-collapsible-body');
+if(b&&b.classList.contains('hidden'))toggleMapCollapse();
+const sec=document.getElementById('interactive-map-section');
+if(sec)sec.scrollIntoView({behavior:'smooth',block:'start'});
+setTimeout(()=>{
+if(!leafletMap)initLeafletMap();
+setMapStyle('topo_photos');
+},180);
+}
+function openParticipantAuthBox(){
+const teaser=document.getElementById('participant-entry-teaser');
+const auth=document.getElementById('participant-auth-step');
+const form=document.getElementById('participant-form-step');
+if(teaser)teaser.classList.add('hidden');
+if(form&&!form.classList.contains('hidden'))return;
+if(auth)auth.classList.remove('hidden');
+}
+function closeParticipantAuthBox(){
+const teaser=document.getElementById('participant-entry-teaser');
+const auth=document.getElementById('participant-auth-step');
+if(auth)auth.classList.add('hidden');
+if(teaser)teaser.classList.remove('hidden');
 }
 
 function openTrackPhotoModal(idx){
@@ -1905,8 +2028,8 @@ renderAdminApplications();renderAdminResultsSection();renderAdminSurveySection()
 showToast('Пароль администратора обновлён!');
 }
 function closeAdminLoginModal(){document.getElementById('admin-auth-modal').classList.add('hidden');document.getElementById('admin-auth-modal').classList.remove('flex')}
-async function handleAdminLogin(e){e.preventDefault();const input=document.getElementById('admin-modal-password-input').value.trim(),errEl=document.getElementById('admin-modal-error'),storedHash=getAdminPasswordHash(),inputHash=await hashPasswordSHA256(input);if(inputHash!==storedHash){errEl.textContent='Неверный пароль. На новом устройстве нажмите «Забыли пароль?».';errEl.classList.remove('hidden');showToast('Неверный пароль','error');return}isAdminLoggedIn=true;currentAdminPassHash=storedHash;adminSessionToken=(window.crypto&&crypto.randomUUID)?crypto.randomUUID():(String(Date.now())+'-'+Math.random().toString(36).slice(2));closeAdminLoginModal();document.getElementById('admin-top-bar').classList.remove('hidden');document.getElementById('admin-panel-wrapper').classList.remove('hidden');const gsInput=document.getElementById('admin-gsheet-url-input');if(gsInput)gsInput.value=getGoogleSheetUrl();updateGoogleSheetStatusUI();renderAdminApplications();renderAdminResultsSection();renderAdminSectorsSection();renderAdminFaqSection();renderAdminSurveySection();renderStories();renderMapRoutes();if(getGoogleSheetUrl())pullFromGoogleSheet(false);showToast('Режим админа активирован')}
-function logoutAdmin(){if(isEditMode)disableEditModeInternal();isAdminLoggedIn=false;currentAdminPassHash='';adminSessionToken='';document.getElementById('admin-top-bar').classList.add('hidden');document.getElementById('admin-panel-wrapper').classList.add('hidden');document.getElementById('map-admin-drawer').classList.add('hidden');renderMapRoutes();renderSectors();renderFaqs();renderStories();renderDonateModalContent();showToast('Вы вышли из режима администратора')}
+async function handleAdminLogin(e){e.preventDefault();const input=document.getElementById('admin-modal-password-input').value.trim(),errEl=document.getElementById('admin-modal-error'),storedHash=getAdminPasswordHash(),inputHash=await hashPasswordSHA256(input);if(inputHash!==storedHash){errEl.textContent='Неверный пароль. На новом устройстве нажмите «Забыли пароль?».';errEl.classList.remove('hidden');showToast('Неверный пароль','error');return}isAdminLoggedIn=true;currentAdminPassHash=storedHash;adminSessionToken=(window.crypto&&crypto.randomUUID)?crypto.randomUUID():(String(Date.now())+'-'+Math.random().toString(36).slice(2));closeAdminLoginModal();document.getElementById('admin-top-bar').classList.remove('hidden');document.getElementById('admin-panel-wrapper').classList.remove('hidden');const gsInput=document.getElementById('admin-gsheet-url-input');if(gsInput)gsInput.value=getGoogleSheetUrl();updateGoogleSheetStatusUI();renderPublicResultsTable();renderAdminApplications();renderAdminResultsSection();renderAdminSectorsSection();renderAdminFaqSection();renderAdminSurveySection();renderStories();renderMapRoutes();if(getGoogleSheetUrl())pullFromGoogleSheet(false);showToast('Режим админа активирован')}
+function logoutAdmin(){if(isEditMode)disableEditModeInternal();isAdminLoggedIn=false;currentAdminPassHash='';adminSessionToken='';document.getElementById('admin-top-bar').classList.add('hidden');document.getElementById('admin-panel-wrapper').classList.add('hidden');document.getElementById('map-admin-drawer').classList.add('hidden');renderMapRoutes();renderSectors();renderFaqs();renderStories();renderPublicResultsTable();renderDonateModalContent();showToast('Вы вышли из режима администратора')}
 function triggerAdminGear(){if(isAdminLoggedIn)scrollToAdminApplications();else openAdminLoginModal()}
 function scrollToAdminApplications(){if(!isAdminLoggedIn)return;const p=document.getElementById('admin-panel-wrapper');if(!p)return;p.classList.remove('hidden');const sp=document.getElementById('admin-applications-spoiler');if(sp)sp.open=true;(sp||p).scrollIntoView({behavior:'smooth',block:'start'})}
 function scrollToAdminResults(){if(!isAdminLoggedIn)return;document.getElementById('admin-panel-wrapper').classList.remove('hidden');const r=document.getElementById('admin-results-manager');if(r){r.open=true;r.scrollIntoView({behavior:'smooth',block:'start'})}}
@@ -1999,7 +2122,7 @@ saveRaceResultsLocal();
 function exportPageData(){if(!isAdminLoggedIn)return;const modal=document.getElementById('custom-modal');document.getElementById('modal-title').textContent='Экспорт конфигурации (JSON)';document.getElementById('modal-desc').textContent='Скопируйте JSON:';document.getElementById('modal-input-wrap').classList.remove('hidden');const ta=document.getElementById('modal-textarea');ta.value=JSON.stringify(portalState,null,2);const ok=document.getElementById('modal-confirm');ok.textContent='Скопировать JSON';modal.classList.remove('hidden');modal.classList.add('flex');ok.onclick=async()=>{await copyTextToClipboard(ta.value);modal.classList.add('hidden');modal.classList.remove('flex');showToast('JSON скопирован')};document.getElementById('modal-cancel').onclick=()=>{modal.classList.add('hidden');modal.classList.remove('flex')}}
 function openImportModal(){if(!isAdminLoggedIn)return;const modal=document.getElementById('custom-modal');document.getElementById('modal-title').textContent='Импорт (JSON)';document.getElementById('modal-desc').textContent='Вставьте JSON:';document.getElementById('modal-input-wrap').classList.remove('hidden');const ta=document.getElementById('modal-textarea');ta.value='';const ok=document.getElementById('modal-confirm');ok.textContent='Импортировать';modal.classList.remove('hidden');modal.classList.add('flex');ok.onclick=()=>{try{const imp=JSON.parse(ta.value);portalState={schemaVersion:CURRENT_SCHEMA_VERSION,updatedAt:Date.now(),raceTargetUTC:imp.raceTargetUTC||portalState.raceTargetUTC||defaultPortalState.raceTargetUTC,allowEarlyGpxUpload:typeof imp.allowEarlyGpxUpload==='boolean'?imp.allowEarlyGpxUpload:portalState.allowEarlyGpxUpload,mapLineWeight:parseInt(imp.mapLineWeight,10)||portalState.mapLineWeight||3,mapStyle:MAP_STYLES[imp.mapStyle]?imp.mapStyle:portalState.mapStyle,googleSheetUrl:imp.googleSheetUrl||portalState.googleSheetUrl||defaultPortalState.googleSheetUrl,textEdits:imp.textEdits||{},mapRoutes:Array.isArray(imp.mapRoutes)?imp.mapRoutes:portalState.mapRoutes,sectors:Array.isArray(imp.sectors)?imp.sectors:portalState.sectors,faqs:Array.isArray(imp.faqs)?imp.faqs:portalState.faqs,stories:Array.isArray(imp.stories)?imp.stories:portalState.stories};savePortalState();location.reload()}catch(e){showToast('Ошибка формата JSON','error')}};document.getElementById('modal-cancel').onclick=()=>{modal.classList.add('hidden');modal.classList.remove('flex')}}
 
-function renderSectors(){const container=document.getElementById('sectors-container');if(!container)return;container.innerHTML='';portalState.sectors.forEach((sec,idx)=>{const safeTrack=sanitizeUrl(sec.trackUrl);const safeDownload=resolveTrackDownloadUrl(sec);const kb=AI_ROUTE_KNOWLEDGE[sec.mapRouteId]||{};const routeLine=sec.routeLine||'';const waterText=sec.waterInfo||kb.water||'';const gearText=sec.gearInfo||kb.tires||'';const routeLineHtml=routeLine?`<div class="p-3 rounded-xl bg-graphite-950/90 border border-graphite-800 text-xs leading-relaxed"><span class="font-mono text-[11px] uppercase text-ochre-400 font-bold block mb-1">🧭 Нитка маршрута:</span><span class="text-slate-200 font-medium">${escapeHtml(routeLine)}</span></div>`:'';const dbGridHtml=(waterText||gearText)?`<div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-1">${waterText?`<div class="p-3 rounded-xl bg-graphite-950/80 border border-graphite-800 space-y-1"><div class="text-[11px] font-mono uppercase text-volga-400 font-bold">💧 Логистика и вода</div><p class="text-xs text-slate-300 leading-relaxed">${escapeHtml(waterText)}</p></div>`:''}${gearText?`<div class="p-3 rounded-xl bg-graphite-950/80 border border-graphite-800 space-y-1"><div class="text-[11px] font-mono uppercase text-emerald-400 font-bold">🛞 Велосипед и покрытие</div><p class="text-xs text-slate-300 leading-relaxed">${escapeHtml(gearText)}</p></div>`:''}</div>`:'';const storiesHtml=(Array.isArray(sec.storyLinks)&&sec.storyLinks.length>0)?`<div class="pt-3 mt-1 space-y-2 border-t border-graphite-800/80"><div class="text-[11px] font-mono uppercase text-ochre-400">📖 Отчёты и рассказы по сегменту:</div>`+sec.storyLinks.map(st=>{const u=sanitizeUrl(st.url);return`<div class="p-3 rounded-xl bg-graphite-950/90 border border-graphite-800 flex flex-col sm:flex-row sm:items-center justify-between gap-2.5"><div class="space-y-0.5"><div class="text-xs font-bold text-white">${escapeHtml(st.title)}</div><div class="text-xs text-slate-400 leading-relaxed">${escapeHtml(st.desc||'')}</div></div>${u?`<a href="${escapeHtml(u)}" target="_blank" rel="noopener noreferrer" class="px-3 py-1.5 rounded-lg bg-ochre-500/20 hover:bg-ochre-500/30 border border-ochre-500/40 text-ochre-300 font-mono text-xs font-bold shrink-0 transition self-start sm:self-center">Читать ↗</a>`:''}</div>`}).join('')+`</div>`:'';const card=document.createElement('div');card.className='bg-graphite-900/90 border border-graphite-700 hover:border-ochre-500/50 rounded-2xl p-5 flex flex-col justify-between transition shadow-lg';card.innerHTML=`<div class="space-y-3.5"><div class="flex flex-wrap items-center justify-between gap-2"><span class="px-2.5 py-0.5 rounded-lg bg-ochre-500/20 text-ochre-400 font-mono text-xs font-bold uppercase">${escapeHtml(sec.num)}</span><span class="text-xs font-mono text-volga-400">${escapeHtml(sec.badge||'')}</span></div><h3 class="font-display font-bold text-xl sm:text-2xl text-white uppercase tracking-wide">${escapeHtml(sec.title)}</h3>${routeLineHtml}<p class="text-xs sm:text-sm text-slate-300 leading-relaxed">${escapeHtml(sec.desc)}</p>${dbGridHtml}${storiesHtml}</div><div class="pt-4 mt-4 border-t border-graphite-800 flex flex-wrap items-center justify-between gap-2"><div class="text-xs font-mono text-slate-400">Дистанция: <strong class="text-white">${escapeHtml(sec.km)}</strong> • ${escapeHtml(sec.surface||'')}</div><div class="flex flex-wrap items-center gap-2">${sec.mapRouteId?`<button type="button" data-action="focus-route" data-id="${escapeHtml(sec.mapRouteId)}" class="px-3 py-1.5 rounded-xl bg-graphite-800 hover:bg-graphite-700 border border-graphite-600 text-xs font-mono text-ochre-300 transition">📍 На карте</button>`:''}${safeDownload?`<a href="${escapeHtml(safeDownload)}" target="_blank" rel="noopener noreferrer" download class="px-3 py-1.5 rounded-xl bg-emerald-500/15 hover:bg-emerald-500/25 border border-emerald-500/40 text-xs font-mono font-bold text-emerald-300 transition">📥 Скачать GPX ↗</a>`:''}${safeTrack?`<a href="${escapeHtml(safeTrack)}" target="_blank" rel="noopener noreferrer" class="px-3 py-1.5 rounded-xl bg-volga-500/15 hover:bg-volga-500/25 border border-volga-500/40 text-xs font-mono text-volga-300 transition">Трек Nakarte ↗</a>`:''}${sec.mapRouteId?`<a href="https://notebook.google.com/notebook/7959d135-4395-4f56-8f7b-4fa29ddd0fd6/preview" target="_blank" rel="noopener noreferrer" class="px-3 py-1.5 rounded-xl bg-volga-500/15 hover:bg-volga-500/25 border border-volga-500/40 text-xs font-mono text-volga-300 transition">✨ ИИ-база ↗</a>`:''}${isAdminLoggedIn&&isEditMode?`<button type="button" data-action="del-sector" data-idx="${idx}" class="px-2.5 py-1.5 rounded-xl bg-red-950/70 text-red-300 text-xs font-mono">✕</button>`:''}</div></div>`;container.appendChild(card)})}
+function renderSectors(){const container=document.getElementById('sectors-container');if(!container)return;container.innerHTML='';portalState.sectors.forEach((sec,idx)=>{const safeTrack=sanitizeUrl(sec.trackUrl);const safeDownload=resolveTrackDownloadUrl(sec);const kb=AI_ROUTE_KNOWLEDGE[sec.mapRouteId]||{};const routeLine=sec.routeLine||'';const waterText=sec.waterInfo||kb.water||'';const gearText=sec.gearInfo||kb.tires||'';const routeLineHtml=routeLine?`<div class="p-3 rounded-xl bg-graphite-950/90 border border-graphite-800 text-xs leading-relaxed"><span class="font-mono text-[11px] uppercase text-ochre-400 font-bold block mb-1">🧭 Нитка:</span><span class="text-slate-200">${escapeHtml(routeLine)}</span></div>`:'';const dbGridHtml=(waterText||gearText)?`<div class="space-y-2 pt-1">${waterText?`<div class="p-2.5 rounded-xl bg-graphite-950/80 border border-graphite-800 space-y-0.5"><div class="text-[11px] font-mono uppercase text-volga-400 font-bold">💧 Вода и логистика</div><p class="text-xs text-slate-300 leading-relaxed">${escapeHtml(waterText)}</p></div>`:''}${gearText?`<div class="p-2.5 rounded-xl bg-graphite-950/80 border border-graphite-800 space-y-0.5"><div class="text-[11px] font-mono uppercase text-emerald-400 font-bold">🛞 Велосипед и покрытие</div><p class="text-xs text-slate-300 leading-relaxed">${escapeHtml(gearText)}</p></div>`:''}</div>`:'';const storiesHtml=(Array.isArray(sec.storyLinks)&&sec.storyLinks.length>0)?`<details class="group pt-2 mt-1 border-t border-graphite-800/80"><summary class="cursor-pointer flex items-center justify-between text-xs font-mono text-ochre-400 hover:text-ochre-300 py-1"><span>📖 Отчёты по сегменту (${sec.storyLinks.length})</span><span class="group-open:rotate-180 transition-transform text-[10px]">▼</span></summary><div class="space-y-2 pt-2">`+sec.storyLinks.map(st=>{const u=sanitizeUrl(st.url);return`<div class="p-2.5 rounded-xl bg-graphite-950/90 border border-graphite-800 space-y-1.5"><div class="flex items-start justify-between gap-2"><div class="text-xs font-bold text-white leading-snug">${escapeHtml(st.title)}</div>${u?`<a href="${escapeHtml(u)}" target="_blank" rel="noopener noreferrer" class="px-2.5 py-1 rounded-lg bg-ochre-500/20 hover:bg-ochre-500/30 border border-ochre-500/40 text-ochre-300 font-mono text-[11px] font-bold shrink-0 transition">Читать ↗</a>`:''}</div><div class="text-xs text-slate-400 leading-relaxed">${escapeHtml(st.desc||'')}</div></div>`}).join('')+`</div></details>`:'';const card=document.createElement('div');card.className='bg-graphite-900/90 border border-graphite-700 hover:border-ochre-500/50 rounded-2xl p-5 flex flex-col justify-between transition shadow-lg';card.innerHTML=`<div class="space-y-3"><div class="flex items-center justify-between gap-2"><span class="px-2.5 py-0.5 rounded-lg bg-ochre-500/20 text-ochre-400 font-mono text-xs font-bold uppercase">${escapeHtml(sec.num)}</span><span class="font-display font-bold text-lg text-white">${escapeHtml(sec.km)}</span></div><div><h3 class="font-display font-bold text-xl text-white uppercase tracking-wide leading-snug">${escapeHtml(sec.title.replace(/\s*\([^)]*км\)\s*$/i,''))}</h3><div class="text-[11px] font-mono text-volga-400 mt-0.5">${escapeHtml(sec.badge||'')}</div></div><p class="text-xs sm:text-sm text-slate-300 leading-relaxed">${escapeHtml(sec.desc)}</p>${routeLineHtml}${dbGridHtml}${storiesHtml}</div><div class="pt-4 mt-4 border-t border-graphite-800 space-y-2.5"><div class="grid grid-cols-2 gap-2">${sec.mapRouteId?`<button type="button" data-action="focus-route" data-id="${escapeHtml(sec.mapRouteId)}" class="px-3 py-2 rounded-xl bg-graphite-800 hover:bg-graphite-700 border border-graphite-600 text-xs font-mono font-bold text-ochre-300 transition text-center">📍 На карте</button>`:''}${safeDownload?`<a href="${escapeHtml(safeDownload)}" target="_blank" rel="noopener noreferrer" download class="px-3 py-2 rounded-xl bg-emerald-500/15 hover:bg-emerald-500/25 border border-emerald-500/40 text-xs font-mono font-bold text-emerald-300 transition text-center">📥 Скачать GPX</a>`:''}</div><div class="flex flex-wrap items-center justify-between gap-2 text-[11px] font-mono text-slate-400">${safeTrack?`<a href="${escapeHtml(safeTrack)}" target="_blank" rel="noopener noreferrer" class="text-volga-400 hover:underline">Трек Nakarte ↗</a>`:'<span></span>'}${sec.mapRouteId?`<a href="https://notebook.google.com/notebook/7959d135-4395-4f56-8f7b-4fa29ddd0fd6/preview" target="_blank" rel="noopener noreferrer" class="text-volga-300 hover:underline">✨ ИИ-база ↗</a>`:''}${isAdminLoggedIn&&isEditMode?`<button type="button" data-action="del-sector" data-idx="${idx}" class="px-2 py-0.5 rounded bg-red-950/70 text-red-300">✕</button>`:''}</div></div>`;container.appendChild(card)})}
 function addNewSector(){if(!isAdminLoggedIn)return;portalState.sectors.push({id:'sec-'+Date.now(),num:`Сегмент 0${portalState.sectors.length+1}`,title:'Новый участок',km:'300 км',surface:'Грунты',badge:'Поволжье',mapRouteId:'m-1',trackUrl:'',desc:'Описание.'});savePortalState();renderSectors();renderAdminSectorsSection();showToast('Участок добавлен')}
 function deleteSector(index){if(!isAdminLoggedIn)return;portalState.sectors.splice(index,1);savePortalState();renderSectors();renderAdminSectorsSection();showToast('Участок удалён')}
 function renderAdminSectorsSection(){if(!isAdminLoggedIn)return;const listEl=document.getElementById('admin-sectors-list');if(!listEl)return;listEl.innerHTML='';portalState.sectors.forEach((sec,idx)=>{const row=document.createElement('div');row.className='p-3 rounded-xl bg-graphite-900 border border-graphite-800 flex flex-wrap items-center justify-between gap-2 text-xs';row.innerHTML=`<div><span class="font-mono text-ochre-400 font-bold mr-2">${escapeHtml(sec.num)}</span><strong class="text-white">${escapeHtml(sec.title)}</strong><span class="text-slate-400 font-mono ml-2">(${escapeHtml(sec.km)})</span></div><div class="flex items-center gap-2"><button type="button" data-action="edit-sector" data-idx="${idx}" class="px-2.5 py-1 rounded bg-graphite-800 hover:bg-graphite-700 text-volga-400 font-mono">Изменить</button><button type="button" data-action="del-sector" data-idx="${idx}" class="px-2.5 py-1 rounded bg-red-950/60 hover:bg-red-900/70 text-red-300 font-mono">Удалить</button></div>`;listEl.appendChild(row)})}
@@ -2772,7 +2895,7 @@ closePasswordResetBox();
 openParticipantForm(userEntry,existingIdx===-1);
 showToast('Пароль успешно обновлён! Вы авторизованы.');
 }
-function openParticipantForm(entry,isNewDraft){document.getElementById('participant-auth-step').classList.add('hidden');document.getElementById('participant-form-step').classList.remove('hidden');document.getElementById('active-user-fio-label').textContent=entry.fio?`${entry.fio} (${entry.email||''})`:(entry.email||'Новый участник');const banner=document.getElementById('participant-status-banner');if(isNewDraft||entry.status==='draft'){banner.className='mb-4 p-3 rounded-xl bg-volga-500/15 border border-volga-500/40 text-xs text-slate-200';banner.innerHTML='Заполните поля и отправьте заявку. После отправки статус — <strong>«Ожидает подтверждения»</strong>.'}else if(entry.status==='approved'){banner.className='mb-4 p-3 rounded-xl bg-emerald-950/50 border border-emerald-500/50 text-xs text-emerald-200';banner.innerHTML='Статус: <strong>Подтверждена</strong>. Вы в стартовом протоколе.'}else if(entry.status==='rejected'){banner.className='mb-4 p-3 rounded-xl bg-red-950/50 border border-red-500/50 text-xs text-red-200';banner.innerHTML='Статус: <strong>Отклонена</strong>. Отредактируйте данные.'}else{banner.className='mb-4 p-3 rounded-xl bg-ochre-500/15 border border-ochre-500/40 text-xs text-ochre-300';banner.innerHTML='Статус: <strong>Ожидает подтверждения</strong>.'}const emailEl=document.getElementById('reg-email');emailEl.value=entry.email||'';emailEl.readOnly=true;document.getElementById('reg-fio').value=entry.fio||'';document.getElementById('reg-birth-year').value=entry.birthYear||'';document.getElementById('reg-telegram').value=entry.telegram||'';document.getElementById('reg-social').value=entry.socialUrl||'';document.getElementById('reg-experience').value=(entry.experience||'нет').toLowerCase()==='есть'?'есть':'нет';document.getElementById('reg-bike-type').value=entry.bikeType||'Грэвел';document.getElementById('reg-bike-brand').value=entry.bikeBrand||'';document.getElementById('reg-bike-year').value=entry.bikeYear||'';document.getElementById('reg-phone').value=entry.phone||'';document.getElementById('reg-consent').checked=!isNewDraft;const isDraftState=(isNewDraft||entry.status==='draft');
+function openParticipantForm(entry,isNewDraft){const _t=document.getElementById('participant-entry-teaser');if(_t)_t.classList.add('hidden');document.getElementById('participant-auth-step').classList.add('hidden');document.getElementById('participant-form-step').classList.remove('hidden');document.getElementById('active-user-fio-label').textContent=entry.fio?`${entry.fio} (${entry.email||''})`:(entry.email||'Новый участник');const banner=document.getElementById('participant-status-banner');if(isNewDraft||entry.status==='draft'){banner.className='mb-4 p-3 rounded-xl bg-volga-500/15 border border-volga-500/40 text-xs text-slate-200';banner.innerHTML='Заполните поля и отправьте заявку. После отправки статус — <strong>«Ожидает подтверждения»</strong>.'}else if(entry.status==='approved'){banner.className='mb-4 p-3 rounded-xl bg-emerald-950/50 border border-emerald-500/50 text-xs text-emerald-200';banner.innerHTML='Статус: <strong>Подтверждена</strong>. Вы в стартовом протоколе.'}else if(entry.status==='rejected'){banner.className='mb-4 p-3 rounded-xl bg-red-950/50 border border-red-500/50 text-xs text-red-200';banner.innerHTML='Статус: <strong>Отклонена</strong>. Отредактируйте данные.'}else{banner.className='mb-4 p-3 rounded-xl bg-ochre-500/15 border border-ochre-500/40 text-xs text-ochre-300';banner.innerHTML='Статус: <strong>Ожидает подтверждения</strong>.'}const emailEl=document.getElementById('reg-email');emailEl.value=entry.email||'';emailEl.readOnly=true;document.getElementById('reg-fio').value=entry.fio||'';document.getElementById('reg-birth-year').value=entry.birthYear||'';document.getElementById('reg-telegram').value=entry.telegram||'';document.getElementById('reg-social').value=entry.socialUrl||'';document.getElementById('reg-experience').value=(entry.experience||'нет').toLowerCase()==='есть'?'есть':'нет';document.getElementById('reg-bike-type').value=entry.bikeType||'Грэвел';document.getElementById('reg-bike-brand').value=entry.bikeBrand||'';document.getElementById('reg-bike-year').value=entry.bikeYear||'';document.getElementById('reg-phone').value=entry.phone||'';document.getElementById('reg-consent').checked=!isNewDraft;const isDraftState=(isNewDraft||entry.status==='draft');
 const delBtn=document.getElementById('delete-own-application-btn');
 if(delBtn){delBtn.innerHTML=isDraftState?'<span>✕</span><span>Отменить черновик</span>':'<span>🗑</span><span>Удалить мою заявку</span>';}
 const delPanel=document.getElementById('own-app-delete-panel');
@@ -2995,7 +3118,7 @@ function toggleEarlyGpxUpload(checked){if(!isAdminLoggedIn)return;portalState.al
 function renderParticipantGpxBox(entry){const box=document.getElementById('participant-gpx-section');if(!box)return;box.classList.remove('hidden');const notApproved=document.getElementById('gpx-not-approved-msg'),locked=document.getElementById('gpx-locked-until-finish-msg'),noPreliminary=document.getElementById('gpx-no-preliminary-msg'),active=document.getElementById('gpx-upload-active-box');const badge=document.getElementById('gpx-date-gate-badge'),summary=document.getElementById('participant-gpx-summary');notApproved.classList.add('hidden');locked.classList.add('hidden');if(noPreliminary)noPreliminary.classList.add('hidden');active.classList.add('hidden');if(entry.status!=='approved'){notApproved.classList.remove('hidden');badge.textContent='Требуется подтверждение';badge.className='text-[11px] font-mono text-slate-400';return}const existing=raceResultsList.find(r=>r.participantId===entry.id&&r.edition==='2027');const hasPreliminary=existing&&(existing.statusType==='preliminary'||existing.statusType==='verified');if(!hasPreliminary){if(noPreliminary)noPreliminary.classList.remove('hidden');badge.textContent='🔒 Сначала результат';badge.className='text-[11px] font-mono text-ochre-400';return}if(!isGpxUploadWindowOpen()){locked.classList.remove('hidden');badge.textContent='🔒 Откроется 26.05.2027';badge.className='text-[11px] font-mono text-ochre-400';return}active.classList.remove('hidden');badge.textContent=portalState.allowEarlyGpxUpload?'🔓 Открыто (тест)':'✓ Приём открыт';badge.className='text-[11px] font-mono text-emerald-400';if(existing&&summary){summary.classList.remove('hidden');summary.innerHTML=`<div class="font-bold text-white">Ваш результат (${existing.statusType==='verified'?'✓ GPX':'⏳ Предварительный'}):</div><div>Дистанция: <strong>${escapeHtml(existing.distanceKm)} км</strong> • Общее: <strong>${formatMinutesToHHMM(existing.totalMinutes)}</strong></div><div>Движение: <strong>${existing.movingMinutes?formatMinutesToHHMM(existing.movingMinutes):'—'}</strong> • Штраф ×2: <strong>${formatMinutesToHHMM(existing.penaltyMinutes||0)}</strong> • Итог: <strong>${formatMinutesToHHMM(existing.finalMinutes)}</strong></div>`}else if(summary){summary.classList.add('hidden')}}
 function handleParticipantGpxUpload(e){const file=e.target.files[0];if(!file)return;if(!currentParticipantId){showToast('Сначала авторизуйтесь','error');return}const participant=registrationsList.find(r=>r.id===currentParticipantId);if(!participant||participant.status!=='approved'){showToast('Заявка не подтверждена','error');return}if(!isGpxUploadWindowOpen()){showToast('Загрузка GPX — с 26.05.2027','error');return}const prelimCheck=raceResultsList.find(r=>r.participantId===currentParticipantId&&r.edition==='2027');if(!prelimCheck){showToast('Сначала введите предварительный результат (Шаг 3)','error');return}const reader=new FileReader();reader.onload=async function(evt){try{const stats=analyzeGpxTrackText(evt.target.result);const existingIdx=raceResultsList.findIndex(r=>r.participantId===participant.id&&r.edition==='2027');const resultEntry={id:existingIdx!==-1?raceResultsList[existingIdx].id:('res-'+Date.now()),participantId:participant.id,fio:participant.fio,telegram:participant.telegram||'',bike:`${participant.bikeType} • ${participant.bikeBrand}`,edition:'2027',editionLabel:'Гонка 15.05.2027 • Ульяновск — Камышин',statusType:'verified',distanceKm:stats.distanceKm,totalMinutes:stats.totalMinutes,movingMinutes:stats.movingMinutes,restMinutes:stats.restMinutes,penaltyMinutes:stats.penaltyMinutes,finalMinutes:stats.finalMinutes,dailyBreakdown:stats.dailyBreakdown,updatedAt:Date.now()};if(existingIdx!==-1)raceResultsList[existingIdx]=resultEntry;else raceResultsList.push(resultEntry);saveRaceResultsLocal();await pushToGoogleSheet({action:'upsertResult',entry:resultEntry,results:raceResultsList});renderParticipantPreliminaryBox(participant);renderParticipantGpxBox(participant);renderPublicResultsTable();renderAdminResultsSection();showToast('GPX обработан!');document.getElementById('results-archive').scrollIntoView({behavior:'smooth'})}catch(err){showToast(err&&err.message?err.message:'Ошибка GPX','error')}};reader.readAsText(file)}
 function setResultsFilter(filterVal){currentResultsFilter=filterVal;['all','2027','archive'].forEach(key=>{const btn=document.getElementById('res-tab-'+key);if(!btn)return;if(key===filterVal)btn.className='px-3 py-1.5 rounded-lg text-xs font-mono font-bold bg-ochre-500 text-graphite-950 transition';else btn.className='px-3 py-1.5 rounded-lg text-xs font-mono text-slate-300 hover:text-white transition'});renderPublicResultsTable()}
-function renderPublicResultsTable(){const tbody=document.getElementById('public-results-tbody');if(!tbody)return;tbody.innerHTML='';const filtered=raceResultsList.filter(r=>currentResultsFilter==='all'?true:r.edition===currentResultsFilter);const classified=filtered.filter(r=>r.statusType!=='dnf').sort((a,b)=>(a.finalMinutes||a.totalMinutes||0)-(b.finalMinutes||b.totalMinutes||0));const dnf=filtered.filter(r=>r.statusType==='dnf');const sorted=[...classified,...dnf];const leader=classified.length>0?(classified[0].finalMinutes||classified[0].totalMinutes||1):null;const prelim=raceResultsList.filter(r=>r.statusType==='preliminary').length;const verif=raceResultsList.filter(r=>r.statusType==='verified').length;document.getElementById('pub-res-total').textContent=raceResultsList.length;document.getElementById('pub-res-prelim').textContent=prelim;document.getElementById('pub-res-verified').textContent=verif;const navBadge=document.getElementById('nav-res-count');if(navBadge)navBadge.textContent=raceResultsList.length;if(sorted.length===0){tbody.innerHTML='<tr><td colspan="10" class="py-8 px-4 text-center text-slate-400">Нет результатов.</td></tr>';return}sorted.forEach((r,idx)=>{const isDnf=r.statusType==='dnf',isPrelim=r.statusType==='preliminary';const rankLabel=isDnf?'DNF':String(idx+1);const rankClass=!isDnf&&idx===0?'bg-ochre-500 text-graphite-950 font-bold':(!isDnf&&idx<=2?'bg-graphite-800 text-ochre-300 border border-ochre-500/40 font-bold':'bg-graphite-800 text-slate-300');let statusBadge='';if(isDnf)statusBadge='<span class="inline-flex items-center px-2 py-0.5 rounded bg-red-500/20 text-red-300 border border-red-500/30 font-mono text-[11px]">✕ DNF</span>';else if(isPrelim)statusBadge='<span class="inline-flex items-center px-2 py-0.5 rounded bg-ochre-500/20 text-ochre-300 border border-ochre-500/40 font-mono text-[11px]">⏳ Промежуточный</span>';else statusBadge='<span class="inline-flex items-center px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 font-mono text-[11px]">✓ GPX</span>';const finalMins=r.finalMinutes||r.totalMinutes||0;let gapHtml='—';if(!isDnf&&leader&&leader>0){if(idx===0)gapHtml='<span class="font-mono text-emerald-400 font-bold">Лидер (0.0%)</span>';else{const diffMins=Math.max(0,finalMins-leader);const pct=((diffMins/leader)*100).toFixed(1);gapHtml=`<div class="font-mono font-bold text-ochre-300">+${pct}%</div><div class="text-[10px] font-mono text-slate-400">(+${formatMinutesToHHMM(diffMins)})</div>`}}const movingHtml=isPrelim?'<span class="text-slate-500 font-mono text-[11px]">Ожидает GPX</span>':`<span class="font-mono text-slate-200">${formatMinutesToHHMM(r.movingMinutes)}</span>`;const penMins=r.penaltyMinutes||0;const restPenHtml=isPrelim?'<span class="text-slate-500 font-mono text-[11px]">После GPX</span>':`<div class="font-mono text-slate-300">Отдых: ${formatMinutesToHHMM(r.restMinutes||Math.max(0,(r.totalMinutes||0)-(r.movingMinutes||0)))}</div><div class="font-mono text-[11px] ${penMins>0?'text-red-400 font-bold':'text-emerald-400'}">Штраф ×2: ${penMins>0?'+'+formatMinutesToHHMM(penMins):'00:00'}</div>`;const hasDaily=Array.isArray(r.dailyBreakdown)&&r.dailyBreakdown.length>0;const tr=document.createElement('tr');tr.className='hover:bg-graphite-800/40 transition';tr.innerHTML=`<td class="py-3.5 px-3"><span class="inline-flex items-center justify-center w-7 h-7 rounded-lg font-mono text-xs ${rankClass}">${rankLabel}</span></td><td class="py-3.5 px-3"><div class="font-bold text-white">${escapeHtml(r.fio)}</div><div class="text-[11px] font-mono text-slate-400">${escapeHtml(r.bike||'')} • <span class="text-volga-400">${escapeHtml(r.editionLabel||'')}</span></div></td><td class="py-3.5 px-3">${statusBadge}</td><td class="py-3.5 px-3 font-mono font-bold text-slate-200">${escapeHtml(r.distanceKm)} км</td><td class="py-3.5 px-3 font-mono text-white">${isDnf?'—':formatMinutesWithDays(r.totalMinutes)}</td><td class="py-3.5 px-3">${isDnf?'—':movingHtml}</td><td class="py-3.5 px-3">${isDnf?'—':restPenHtml}</td><td class="py-3.5 px-3 font-mono font-bold text-sm ${isPrelim?'text-ochre-300':'text-emerald-300'}">${isDnf?'DNF':formatMinutesWithDays(finalMins)}</td><td class="py-3.5 px-3">${gapHtml}</td><td class="py-3.5 px-3 text-right"><div class="flex flex-wrap items-center justify-end gap-1.5">${hasDaily?`<button type="button" data-action="open-daily" data-id="${escapeHtml(r.id)}" class="px-2 py-1 rounded bg-graphite-800 hover:bg-graphite-700 border border-graphite-600 text-ochre-300 font-mono text-[11px] transition">📊 По суткам</button>`:'<span class="text-slate-600 font-mono text-[11px]">—</span>'}</div></td>`;tbody.appendChild(tr)})}
+function renderPublicResultsTable(){const secEl=document.getElementById('results-archive'),navEl=document.getElementById('nav-archive-link');const showArchive=raceResultsList.length>0||isAdminLoggedIn;if(secEl)secEl.classList.toggle('hidden',!showArchive);if(navEl){navEl.classList.toggle('hidden',!showArchive);navEl.classList.toggle('flex',showArchive);}const tbody=document.getElementById('public-results-tbody');if(!tbody)return;tbody.innerHTML='';const filtered=raceResultsList.filter(r=>currentResultsFilter==='all'?true:r.edition===currentResultsFilter);const classified=filtered.filter(r=>r.statusType!=='dnf').sort((a,b)=>(a.finalMinutes||a.totalMinutes||0)-(b.finalMinutes||b.totalMinutes||0));const dnf=filtered.filter(r=>r.statusType==='dnf');const sorted=[...classified,...dnf];const leader=classified.length>0?(classified[0].finalMinutes||classified[0].totalMinutes||1):null;const prelim=raceResultsList.filter(r=>r.statusType==='preliminary').length;const verif=raceResultsList.filter(r=>r.statusType==='verified').length;document.getElementById('pub-res-total').textContent=raceResultsList.length;document.getElementById('pub-res-prelim').textContent=prelim;document.getElementById('pub-res-verified').textContent=verif;const navBadge=document.getElementById('nav-res-count');if(navBadge)navBadge.textContent=raceResultsList.length;if(sorted.length===0){tbody.innerHTML='<tr><td colspan="10" class="py-8 px-4 text-center text-slate-400">Нет результатов.</td></tr>';return}sorted.forEach((r,idx)=>{const isDnf=r.statusType==='dnf',isPrelim=r.statusType==='preliminary';const rankLabel=isDnf?'DNF':String(idx+1);const rankClass=!isDnf&&idx===0?'bg-ochre-500 text-graphite-950 font-bold':(!isDnf&&idx<=2?'bg-graphite-800 text-ochre-300 border border-ochre-500/40 font-bold':'bg-graphite-800 text-slate-300');let statusBadge='';if(isDnf)statusBadge='<span class="inline-flex items-center px-2 py-0.5 rounded bg-red-500/20 text-red-300 border border-red-500/30 font-mono text-[11px]">✕ DNF</span>';else if(isPrelim)statusBadge='<span class="inline-flex items-center px-2 py-0.5 rounded bg-ochre-500/20 text-ochre-300 border border-ochre-500/40 font-mono text-[11px]">⏳ Промежуточный</span>';else statusBadge='<span class="inline-flex items-center px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 font-mono text-[11px]">✓ GPX</span>';const finalMins=r.finalMinutes||r.totalMinutes||0;let gapHtml='—';if(!isDnf&&leader&&leader>0){if(idx===0)gapHtml='<span class="font-mono text-emerald-400 font-bold">Лидер (0.0%)</span>';else{const diffMins=Math.max(0,finalMins-leader);const pct=((diffMins/leader)*100).toFixed(1);gapHtml=`<div class="font-mono font-bold text-ochre-300">+${pct}%</div><div class="text-[10px] font-mono text-slate-400">(+${formatMinutesToHHMM(diffMins)})</div>`}}const movingHtml=isPrelim?'<span class="text-slate-500 font-mono text-[11px]">Ожидает GPX</span>':`<span class="font-mono text-slate-200">${formatMinutesToHHMM(r.movingMinutes)}</span>`;const penMins=r.penaltyMinutes||0;const restPenHtml=isPrelim?'<span class="text-slate-500 font-mono text-[11px]">После GPX</span>':`<div class="font-mono text-slate-300">Отдых: ${formatMinutesToHHMM(r.restMinutes||Math.max(0,(r.totalMinutes||0)-(r.movingMinutes||0)))}</div><div class="font-mono text-[11px] ${penMins>0?'text-red-400 font-bold':'text-emerald-400'}">Штраф ×2: ${penMins>0?'+'+formatMinutesToHHMM(penMins):'00:00'}</div>`;const hasDaily=Array.isArray(r.dailyBreakdown)&&r.dailyBreakdown.length>0;const tr=document.createElement('tr');tr.className='hover:bg-graphite-800/40 transition';tr.innerHTML=`<td class="py-3.5 px-3"><span class="inline-flex items-center justify-center w-7 h-7 rounded-lg font-mono text-xs ${rankClass}">${rankLabel}</span></td><td class="py-3.5 px-3"><div class="font-bold text-white">${escapeHtml(r.fio)}</div><div class="text-[11px] font-mono text-slate-400">${escapeHtml(r.bike||'')} • <span class="text-volga-400">${escapeHtml(r.editionLabel||'')}</span></div></td><td class="py-3.5 px-3">${statusBadge}</td><td class="py-3.5 px-3 font-mono font-bold text-slate-200">${escapeHtml(r.distanceKm)} км</td><td class="py-3.5 px-3 font-mono text-white">${isDnf?'—':formatMinutesWithDays(r.totalMinutes)}</td><td class="py-3.5 px-3">${isDnf?'—':movingHtml}</td><td class="py-3.5 px-3">${isDnf?'—':restPenHtml}</td><td class="py-3.5 px-3 font-mono font-bold text-sm ${isPrelim?'text-ochre-300':'text-emerald-300'}">${isDnf?'DNF':formatMinutesWithDays(finalMins)}</td><td class="py-3.5 px-3">${gapHtml}</td><td class="py-3.5 px-3 text-right"><div class="flex flex-wrap items-center justify-end gap-1.5">${hasDaily?`<button type="button" data-action="open-daily" data-id="${escapeHtml(r.id)}" class="px-2 py-1 rounded bg-graphite-800 hover:bg-graphite-700 border border-graphite-600 text-ochre-300 font-mono text-[11px] transition">📊 По суткам</button>`:'<span class="text-slate-600 font-mono text-[11px]">—</span>'}</div></td>`;tbody.appendChild(tr)})}
 function openDailyRestModal(resultId){const res=raceResultsList.find(r=>r.id===resultId);if(!res)return;document.getElementById('daily-modal-rider-name').textContent=`${res.fio} — По суткам`;const container=document.getElementById('daily-modal-content');container.innerHTML='';const days=Array.isArray(res.dailyBreakdown)?res.dailyBreakdown:[];if(days.length===0)container.innerHTML='<div class="text-xs text-slate-400">Разбивка отсутствует.</div>';else days.forEach(d=>{const dur=d.durationMin||1440;const row=document.createElement('div');row.className='p-3 rounded-xl bg-graphite-950 border border-graphite-800 flex flex-wrap items-center justify-between gap-2 text-xs font-mono';row.innerHTML=`<span class="text-ochre-400 font-bold">Сутки ${escapeHtml(d.day)} (${formatMinutesToHHMM(dur)})</span><span class="text-slate-200">Движение: <strong>${formatMinutesToHHMM(d.movingMin)}</strong></span><span class="text-volga-300">Отдых: <strong>${formatMinutesToHHMM(d.restMin)}</strong></span><span class="${d.penaltyMin>0?'text-red-400 font-bold':'text-emerald-400'}">Штраф ×2: ${d.penaltyMin>0?'+'+formatMinutesToHHMM(d.penaltyMin):'00:00 (норма)'}</span>`;container.appendChild(row)});document.getElementById('daily-rest-modal').classList.remove('hidden');document.getElementById('daily-rest-modal').classList.add('flex')}
 function closeDailyRestModal(){document.getElementById('daily-rest-modal').classList.add('hidden');document.getElementById('daily-rest-modal').classList.remove('flex')}
 const DEFAULT_DONATE_CONFIG={
@@ -3541,7 +3664,7 @@ toggleAdminPasswordResetBox,requestAdminPasswordResetCode,confirmAdminPasswordRe
 setResultsFilter,toggleStoryForm,handleAddStory,triggerAdminGear,
 clearSurveyAnswers,handleSurveySubmit,computeSurveyScoreStats,
 recalcParticipantPreliminary,handleParticipantPreliminarySubmit,
-setMapStyle,updateMapBgOpacity,toggleMapFullscreen,openTrackPhotoModal,closeTrackPhotoModal,stepTrackPhoto,openAppThankYouModal,closeAppThankYouModal,scrollToAdminStories,renderAdminStoriesSection,setStoryStatusAdmin
+setMapStyle,updateMapBgOpacity,toggleMapFullscreen,openTrackPhotoModal,closeTrackPhotoModal,stepTrackPhoto,openPhotosLayerOnMap,openParticipantAuthBox,closeParticipantAuthBox,openAppThankYouModal,closeAppThankYouModal,scrollToAdminStories,renderAdminStoriesSection,setStoryStatusAdmin
 });
 
 window.addEventListener('DOMContentLoaded',()=>{
@@ -3559,7 +3682,7 @@ initEditableStaticTexts();
 pickHeroSubtitleVariant();
 const bgColors={minecraft:'#3d6b2f',heroes:'#7ba83a',diablo:'#0a0806',osm:'#161b22'};
 const mapEl=document.getElementById('leaflet-map');if(mapEl)mapEl.style.background=bgColors[currentMapStyle]||'#3d6b2f';
-const mapBodyEl=document.getElementById('map-collapsible-body');if(mapBodyEl&&!mapBodyEl.classList.contains('hidden')){initLeafletMap();loadExternalRoutesJson();}
+const bootMap=()=>{const mapBodyEl=document.getElementById('map-collapsible-body');if(mapBodyEl&&!mapBodyEl.classList.contains('hidden')){if(typeof L!=='undefined'){initLeafletMap();loadExternalRoutesJson();setTimeout(()=>{if(leafletMap){leafletMap.invalidateSize();const layers=Object.values(mapPolylines);if(layers.length)leafletMap.fitBounds(L.featureGroup(layers).getBounds(),{padding:[25,25]});}},200);}else{setTimeout(bootMap,120);}}};bootMap();ensureTrackPhotosLoaded(false);
 renderSectors();renderFaqs();renderStories();
 renderPublicProtocol();renderPublicResultsTable();
 renderAdminResultsSection();
