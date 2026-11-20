@@ -222,6 +222,9 @@ img,video{max-width:100%;height:auto}
 .vk-code-row input{flex:1 1 0%;width:auto;min-width:0}
 .vk-code-row button{width:auto}
 }
+.vk-visit-pill{display:inline-flex;align-items:center;gap:0.4rem;padding:0.3rem 0.65rem;border-radius:10px;border:1px solid #21262d;background:#0d1117;color:#94a3b8;font-family:'JetBrains Mono',monospace;font-size:11px;line-height:1.2}
+.vk-visit-pill svg{width:14px;height:14px;color:#fbbf24;flex-shrink:0}
+.vk-visit-pill strong{color:#e2e8f0;font-weight:700}
 </style>
 </head>
 <body class="antialiased selection:bg-ochre-500 selection:text-graphite-950">
@@ -1175,8 +1178,13 @@ img,video{max-width:100%;height:auto}
 </div>
 </div>
 </div>
-<div class="pt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-2">
+<div class="pt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-3">
 <div class="flex items-center gap-2"><span>© A1onso • «Утёсы Поволжья»</span><button type="button" onclick="triggerAdminGear()" title="Управление (Ctrl+Shift+A)" class="opacity-25 hover:opacity-100 transition-opacity duration-200 text-slate-400 hover:text-ochre-400 p-1 rounded focus:outline-none">⚙️</button></div>
+<div id="site-visit-counter" class="vk-visit-pill" title="Общее количество посещений сайта">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+<span>Посещений:</span>
+<strong id="site-visit-count">—</strong>
+</div>
 </div>
 </div>
 </footer>
@@ -2467,7 +2475,61 @@ async function pushToGoogleSheet(payload={}){const url=getGoogleSheetUrl();if(!u
 async function pushAllToGoogleSheet(){if(!isAdminLoggedIn)return;if(!getGoogleSheetUrl()){showToast('Сначала URL Google Apps Script','error');return}await pushToGoogleSheet({action:'adminSync',registrations:registrationsList,results:raceResultsList,stories:portalState.stories,portalConfig:stripHeavyCoordsForStorage(portalState)});showToast('Всё выгружено')}
 function mergeRegistrationItems(localItem,cloudItem){if(!localItem)return cloudItem;if(!cloudItem)return localItem;const lt=toMs(localItem.updatedAt),ct=toMs(cloudItem.updatedAt);const primary=ct>=lt?cloudItem:localItem,secondary=ct>=lt?localItem:cloudItem;const merged={...secondary,...primary};['email','fio','passwordHash','emailVerifiedAt','birthYear','telegram','socialUrl','experience','bikeType','bikeBrand','bikeYear','phone','status','createdAt','survey','surveyScore'].forEach(f=>{const pv=primary[f],sv=secondary[f];if((pv===undefined||pv===null||String(pv).trim()==='')&&(sv!==undefined&&sv!==null&&String(sv).trim()!==''))merged[f]=sv});return merged}
 function mergeResultItem(localItem,cloudItem){if(!localItem)return cloudItem;if(!cloudItem)return localItem;const lt=toMs(localItem.updatedAt),ct=toMs(cloudItem.updatedAt);return ct>=lt?{...localItem,...cloudItem}:{...cloudItem,...localItem}}
-async function pullFromGoogleSheet(showNotification=false){const url=getGoogleSheetUrl();if(!url){if(showNotification)showToast('Сначала URL','error');return}try{updateGoogleSheetStatusUI('🔄 Загрузка…',true);const q=new URLSearchParams({action:'getAll',t:String(Date.now())});if(isAdminLoggedIn&&currentAdminPassHash)q.set('adminTokenHash',currentAdminPassHash);const res=await fetch(`${url}${url.includes('?')?'&':'?'}${q.toString()}`,{method:'GET',redirect:'follow'});const data=await res.json();if(data&&Array.isArray(data.registrations)){
+const VISIT_COUNT_CACHE_KEY='volga_cliffs_visit_count_v1';
+const VISIT_SESSION_FLAG_KEY='volga_cliffs_visit_counted_v1';
+let visitCounterLoadedFromGas=false,visitCounterFallbackDone=false;
+function getVisitSessionFlag(){try{return sessionStorage.getItem(VISIT_SESSION_FLAG_KEY)==='1'}catch(e){return false}}
+function setVisitSessionFlag(){try{sessionStorage.setItem(VISIT_SESSION_FLAG_KEY,'1')}catch(e){}}
+function renderSiteVisitCounter(val){
+const el=document.getElementById('site-visit-count');
+const num=parseInt(val,10);
+if(!el||isNaN(num)||num<=0)return;
+el.textContent=num.toLocaleString('ru-RU');
+try{localStorage.setItem(VISIT_COUNT_CACHE_KEY,String(num));}catch(e){}
+}
+function initCachedVisitCounter(){
+try{
+const cached=parseInt(localStorage.getItem(VISIT_COUNT_CACHE_KEY)||'0',10);
+if(cached>0)renderSiteVisitCounter(cached);
+}catch(e){}
+}
+async function fetchJsonWithTimeout(url,ms=4500){
+const ctrl=typeof AbortController!=='undefined'?new AbortController():null;
+const t=ctrl?setTimeout(()=>ctrl.abort(),ms):null;
+try{
+const r=await fetch(url,ctrl?{signal:ctrl.signal}:undefined);
+if(!r.ok)return null;
+return await r.json();
+}catch(e){
+return null;
+}finally{
+if(t)clearTimeout(t);
+}
+}
+async function loadPublicVisitCounter(shouldIncrement){
+if(visitCounterLoadedFromGas||visitCounterFallbackDone)return;
+visitCounterFallbackDone=true;
+const endpoints=[
+{url:shouldIncrement?'https://api.counterapi.dev/v1/utesy-povolzhya/site-visits/up':'https://api.counterapi.dev/v1/utesy-povolzhya/site-visits',field:'count'},
+{url:shouldIncrement?'https://abacus.jasoncameron.dev/hit/utesy-povolzhya/site-visits':'https://abacus.jasoncameron.dev/get/utesy-povolzhya/site-visits',field:'value'}
+];
+for(const ep of endpoints){
+const d=await fetchJsonWithTimeout(ep.url,4500);
+const v=d&&typeof d[ep.field]==='number'?d[ep.field]:NaN;
+if(!isNaN(v)&&v>0){
+if(shouldIncrement)setVisitSessionFlag();
+renderSiteVisitCounter(v);
+return;
+}
+}
+try{
+const prev=parseInt(localStorage.getItem(VISIT_COUNT_CACHE_KEY)||'0',10)||0;
+const next=shouldIncrement?(prev+1):Math.max(1,prev);
+if(shouldIncrement)setVisitSessionFlag();
+renderSiteVisitCounter(next);
+}catch(e){}
+}
+async function pullFromGoogleSheet(showNotification=false){const url=getGoogleSheetUrl();const needVisitHit=!getVisitSessionFlag();if(!url){loadPublicVisitCounter(needVisitHit);if(showNotification)showToast('Сначала URL','error');return}try{updateGoogleSheetStatusUI('🔄 Загрузка…',true);const q=new URLSearchParams({action:'getAll',visit:needVisitHit?'1':'0',t:String(Date.now())});if(isAdminLoggedIn&&currentAdminPassHash)q.set('adminTokenHash',currentAdminPassHash);const res=await fetch(`${url}${url.includes('?')?'&':'?'}${q.toString()}`,{method:'GET',redirect:'follow'});const data=await res.json();if(data&&typeof data.visits==='number'&&data.visits>0){visitCounterLoadedFromGas=true;if(needVisitHit)setVisitSessionFlag();renderSiteVisitCounter(data.visits);}else{loadPublicVisitCounter(needVisitHit);}if(data&&Array.isArray(data.registrations)){
 const validCloudRegs=data.registrations.filter(c=>c&&c.id&&c.id!=='reg-a1onso'&&(String(c.fio||'').trim().length>0||String(c.email||'').trim().length>0));
 if(validCloudRegs.length>0){
 const m=new Map();
@@ -2486,7 +2548,7 @@ validCloudRes.forEach(cloud=>{m.set(cloud.id,mergeResultItem(m.get(cloud.id),clo
 raceResultsList=Array.from(m.values());
 saveRaceResultsLocal();
 }
-}if(data&&Array.isArray(data.stories)&&data.stories.length>0){portalState.stories=mergeDefaultStories([...(portalState.stories||[]),...data.stories]);savePortalState()}if(data&&data.portalConfig&&typeof data.portalConfig==='object'){const cu=toMs(data.portalConfig.updatedAt),lu=toMs(portalState.updatedAt);if(cu>lu){const preservedFaqs=mergeDefaultFaqs((Array.isArray(data.portalConfig.faqs)&&data.portalConfig.faqs.length)?data.portalConfig.faqs:portalState.faqs);const preservedSurvey=(Array.isArray(data.portalConfig.surveyQuestions)&&data.portalConfig.surveyQuestions.length)?data.portalConfig.surveyQuestions:(Array.isArray(portalState.surveyQuestions)&&portalState.surveyQuestions.length?portalState.surveyQuestions:null);const preservedDonate=(data.portalConfig.donateConfig&&typeof data.portalConfig.donateConfig==='object')?data.portalConfig.donateConfig:(portalState.donateConfig||null);const rawSectors=(Array.isArray(data.portalConfig.sectors)&&data.portalConfig.sectors.length)?data.portalConfig.sectors:(Array.isArray(portalState.sectors)&&portalState.sectors.length?portalState.sectors:defaultPortalState.sectors);const preservedSectors=cleanLegacySectors(rawSectors);portalState={...portalState,...data.portalConfig,mapRoutes:upgradeMapRoutesPrecision(data.portalConfig.mapRoutes||portalState.mapRoutes,portalState.mapRoutes),faqs:preservedFaqs,surveyQuestions:preservedSurvey,donateConfig:preservedDonate,sectors:preservedSectors,stories:mergeDefaultStories(data.portalConfig.stories||portalState.stories),googleSheetUrl:url,mapStyle:MAP_STYLES[data.portalConfig.mapStyle]?data.portalConfig.mapStyle:portalState.mapStyle};savePortalState();initEditableStaticTexts();pickHeroSubtitleVariant();if(leafletMap){renderMapRoutes();renderMapCities()}}else{portalState.mapRoutes=upgradeMapRoutesPrecision(portalState.mapRoutes,portalState.mapRoutes);portalState.sectors=cleanLegacySectors(portalState.sectors);portalState.stories=mergeDefaultStories(portalState.stories);savePortalState();initEditableStaticTexts();pickHeroSubtitleVariant();if(leafletMap){renderMapRoutes();renderMapCities()}}}renderSectors();renderFaqs();renderStories();renderPublicProtocol();renderPublicResultsTable();renderAdminApplications();renderAdminResultsSection();updateGoogleSheetStatusUI('✓ Синхронизировано',true);if(showNotification)showToast('Данные загружены из Google')}catch(e){console.warn('pull warn:',e);updateGoogleSheetStatusUI('⚠️ Автономный режим',false);if(showNotification)showToast('Не удалось загрузить','error')}}
+}if(data&&Array.isArray(data.stories)&&data.stories.length>0){portalState.stories=mergeDefaultStories([...(portalState.stories||[]),...data.stories]);savePortalState()}if(data&&data.portalConfig&&typeof data.portalConfig==='object'){const cu=toMs(data.portalConfig.updatedAt),lu=toMs(portalState.updatedAt);if(cu>lu){const preservedFaqs=mergeDefaultFaqs((Array.isArray(data.portalConfig.faqs)&&data.portalConfig.faqs.length)?data.portalConfig.faqs:portalState.faqs);const preservedSurvey=(Array.isArray(data.portalConfig.surveyQuestions)&&data.portalConfig.surveyQuestions.length)?data.portalConfig.surveyQuestions:(Array.isArray(portalState.surveyQuestions)&&portalState.surveyQuestions.length?portalState.surveyQuestions:null);const preservedDonate=(data.portalConfig.donateConfig&&typeof data.portalConfig.donateConfig==='object')?data.portalConfig.donateConfig:(portalState.donateConfig||null);const rawSectors=(Array.isArray(data.portalConfig.sectors)&&data.portalConfig.sectors.length)?data.portalConfig.sectors:(Array.isArray(portalState.sectors)&&portalState.sectors.length?portalState.sectors:defaultPortalState.sectors);const preservedSectors=cleanLegacySectors(rawSectors);portalState={...portalState,...data.portalConfig,mapRoutes:upgradeMapRoutesPrecision(data.portalConfig.mapRoutes||portalState.mapRoutes,portalState.mapRoutes),faqs:preservedFaqs,surveyQuestions:preservedSurvey,donateConfig:preservedDonate,sectors:preservedSectors,stories:mergeDefaultStories(data.portalConfig.stories||portalState.stories),googleSheetUrl:url,mapStyle:MAP_STYLES[data.portalConfig.mapStyle]?data.portalConfig.mapStyle:portalState.mapStyle};savePortalState();initEditableStaticTexts();pickHeroSubtitleVariant();if(leafletMap){renderMapRoutes();renderMapCities()}}else{portalState.mapRoutes=upgradeMapRoutesPrecision(portalState.mapRoutes,portalState.mapRoutes);portalState.sectors=cleanLegacySectors(portalState.sectors);portalState.stories=mergeDefaultStories(portalState.stories);savePortalState();initEditableStaticTexts();pickHeroSubtitleVariant();if(leafletMap){renderMapRoutes();renderMapCities()}}}renderSectors();renderFaqs();renderStories();renderPublicProtocol();renderPublicResultsTable();renderAdminApplications();renderAdminResultsSection();updateGoogleSheetStatusUI('✓ Синхронизировано',true);if(showNotification)showToast('Данные загружены из Google')}catch(e){console.warn('pull warn:',e);loadPublicVisitCounter(needVisitHit);updateGoogleSheetStatusUI('⚠️ Автономный режим',false);if(showNotification)showToast('Не удалось загрузить','error')}}
 
 function exportPageData(){if(!isAdminLoggedIn)return;const modal=document.getElementById('custom-modal');document.getElementById('modal-title').textContent='Экспорт конфигурации (JSON)';document.getElementById('modal-desc').textContent='Скопируйте JSON:';document.getElementById('modal-input-wrap').classList.remove('hidden');const ta=document.getElementById('modal-textarea');ta.value=JSON.stringify(portalState,null,2);const ok=document.getElementById('modal-confirm');ok.textContent='Скопировать JSON';modal.classList.remove('hidden');modal.classList.add('flex');ok.onclick=async()=>{await copyTextToClipboard(ta.value);modal.classList.add('hidden');modal.classList.remove('flex');showToast('JSON скопирован')};document.getElementById('modal-cancel').onclick=()=>{modal.classList.add('hidden');modal.classList.remove('flex')}}
 function openImportModal(){if(!isAdminLoggedIn)return;const modal=document.getElementById('custom-modal');document.getElementById('modal-title').textContent='Импорт (JSON)';document.getElementById('modal-desc').textContent='Вставьте JSON:';document.getElementById('modal-input-wrap').classList.remove('hidden');const ta=document.getElementById('modal-textarea');ta.value='';const ok=document.getElementById('modal-confirm');ok.textContent='Импортировать';modal.classList.remove('hidden');modal.classList.add('flex');ok.onclick=()=>{try{const imp=JSON.parse(ta.value);portalState={schemaVersion:CURRENT_SCHEMA_VERSION,updatedAt:Date.now(),raceTargetUTC:imp.raceTargetUTC||portalState.raceTargetUTC||defaultPortalState.raceTargetUTC,allowEarlyGpxUpload:typeof imp.allowEarlyGpxUpload==='boolean'?imp.allowEarlyGpxUpload:portalState.allowEarlyGpxUpload,mapLineWeight:parseInt(imp.mapLineWeight,10)||portalState.mapLineWeight||3,mapStyle:MAP_STYLES[imp.mapStyle]?imp.mapStyle:portalState.mapStyle,googleSheetUrl:imp.googleSheetUrl||portalState.googleSheetUrl||defaultPortalState.googleSheetUrl,textEdits:imp.textEdits||{},mapRoutes:Array.isArray(imp.mapRoutes)?imp.mapRoutes:portalState.mapRoutes,sectors:Array.isArray(imp.sectors)?imp.sectors:portalState.sectors,faqs:Array.isArray(imp.faqs)?imp.faqs:portalState.faqs,stories:Array.isArray(imp.stories)?imp.stories:portalState.stories};savePortalState();location.reload()}catch(e){showToast('Ошибка формата JSON','error')}};document.getElementById('modal-cancel').onclick=()=>{modal.classList.add('hidden');modal.classList.remove('flex')}}
@@ -3804,7 +3866,34 @@ function doGet(e) {
   let portalConfig = null;
   const cfgRows = cfgSheet.getDataRange().getValues();
   if (cfgRows.length > 1 && cfgRows[1][1]) { try { portalConfig = JSON.parse(cfgRows[1][1]); } catch (err) {} }
-  return json_({ status: 'ok', registrations, results, stories, portalConfig });
+  const visits = recordOrGetVisits_(ss, p.visit === '1');
+  return json_({ status: 'ok', registrations, results, stories, portalConfig, visits });
+}
+function recordOrGetVisits_(ss, shouldIncrement) {
+  const lock = LockService.getScriptLock();
+  const gotLock = lock.tryLock(3000);
+  try {
+    const sheet = getOrCreateSheet_(ss, 'Stats', ['Key', 'Value']);
+    const rows = sheet.getDataRange().getValues();
+    let rowIdx = -1;
+    let count = 0;
+    for (let i = 1; i < rows.length; i++) {
+      if (String(rows[i][0]) === 'site_visits') { rowIdx = i + 1; count = parseInt(rows[i][1], 10) || 0; break; }
+    }
+    if (shouldIncrement) {
+      count += 1;
+      if (rowIdx !== -1) sheet.getRange(rowIdx, 2).setValue(count);
+      else sheet.appendRow(['site_visits', count]);
+    } else if (rowIdx === -1) {
+      count = 1;
+      sheet.appendRow(['site_visits', count]);
+    }
+    return count;
+  } catch (err) {
+    return 0;
+  } finally {
+    if (gotLock) lock.releaseLock();
+  }
 }
 function doPost(e) {
   const ss = SpreadsheetApp.getActiveSpreadsheet();
@@ -4118,7 +4207,9 @@ recalcAdminResultPreview();
 const gsInputEl=document.getElementById('admin-gsheet-url-input');
 if(gsInputEl)gsInputEl.value=getGoogleSheetUrl();
 updateGoogleSheetStatusUI();
+initCachedVisitCounter();
 if(getGoogleSheetUrl())pullFromGoogleSheet(false);
+else loadPublicVisitCounter(!getVisitSessionFlag());
 });
 })();
 </script>
