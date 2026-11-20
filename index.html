@@ -213,6 +213,15 @@ img,video{max-width:100%;height:auto}
 .vk-fb-strava:hover{background:rgba(252,76,2,0.28);border-color:#fc4c02;color:#ff6b2c}
 .vk-fb-coffee{background:rgba(245,158,11,0.14);border-color:rgba(245,158,11,0.42);color:#fcd34d}
 .vk-fb-coffee:hover{background:rgba(245,158,11,0.26);border-color:#fbbf24}
+#up-blogger-portal input.flex-1{min-width:0}
+.vk-code-row{display:flex;flex-direction:column;gap:0.5rem}
+.vk-code-row input{width:100%;min-width:0}
+.vk-code-row button{width:100%;flex-shrink:0}
+@media (min-width:640px){
+.vk-code-row{flex-direction:row;align-items:center}
+.vk-code-row input{flex:1 1 0%;width:auto;min-width:0}
+.vk-code-row button{width:auto}
+}
 </style>
 </head>
 <body class="antialiased selection:bg-ochre-500 selection:text-graphite-950">
@@ -715,9 +724,9 @@ img,video{max-width:100%;height:auto}
 <div class="flex items-center justify-between gap-2"><span class="font-mono font-bold text-volga-400 uppercase">✉️ Подтверждение</span><button type="button" onclick="cancelPreAuthVerification()" class="text-slate-400 hover:text-white font-mono text-[11px]">← Изменить</button></div>
 <p class="text-slate-300 leading-relaxed">На адрес <strong id="pre-auth-target-email" class="text-white font-mono"></strong> отправлен код:</p>
 <div id="pre-auth-mail-hint" class="hidden p-2.5 rounded-lg bg-ochre-500/10 border border-ochre-500/40 text-ochre-200 text-[11px] leading-relaxed"></div>
-<div class="flex items-center gap-2">
-<input type="text" id="email-verify-code-input" maxlength="6" placeholder="6-значный код" class="flex-1 bg-graphite-900 border border-graphite-700 rounded-xl px-3 py-2.5 text-sm text-white font-mono tracking-widest text-center focus:outline-none focus:border-volga-400">
-<button type="button" onclick="confirmEmailVerificationCode()" class="px-4 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-graphite-950 font-bold text-xs uppercase tracking-wider transition shrink-0">Подтвердить →</button>
+<div class="vk-code-row">
+<input type="text" id="email-verify-code-input" maxlength="6" inputmode="numeric" autocomplete="one-time-code" placeholder="6-значный код" class="bg-graphite-900 border border-graphite-700 rounded-xl px-3 py-2.5 text-sm text-white font-mono tracking-widest text-center focus:outline-none focus:border-volga-400">
+<button type="button" onclick="confirmEmailVerificationCode()" class="px-4 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-graphite-950 font-bold text-xs uppercase tracking-wider transition">Подтвердить →</button>
 </div>
 <div class="flex items-center justify-end pt-1 text-[11px] font-mono text-slate-400"><button type="button" onclick="requestEmailVerificationCode()" class="text-volga-400 hover:underline">Отправить код повторно</button></div>
 </div>
@@ -725,7 +734,7 @@ img,video{max-width:100%;height:auto}
 <div class="flex items-center justify-between gap-2"><span class="font-mono font-bold text-ochre-400 uppercase">🔑 Восстановление пароля</span><button type="button" onclick="closePasswordResetBox()" class="text-slate-400 hover:text-white font-mono text-[11px]">← Назад ко входу</button></div>
 <p class="text-slate-300 leading-relaxed">Укажите <strong>Email</strong>, получите 6-значный код на почту и задайте новый пароль (мин. 8 знаков, буквы + цифры).</p>
 <div class="space-y-2.5">
-<div><label for="reset-email-input" class="block text-[11px] font-mono text-slate-400 mb-1">Email участника *</label><div class="flex gap-2"><input type="email" id="reset-email-input" placeholder="rider@example.com" class="flex-1 bg-graphite-900 border border-graphite-700 rounded-xl px-3 py-2 text-xs text-white font-mono focus:outline-none focus:border-ochre-500"><button type="button" onclick="requestPasswordResetCode()" id="reset-send-code-btn" class="px-3.5 py-2 rounded-xl bg-volga-500 hover:bg-volga-400 text-graphite-950 font-bold text-xs uppercase tracking-wider transition shrink-0">Получить код</button></div></div>
+<div><label for="reset-email-input" class="block text-[11px] font-mono text-slate-400 mb-1">Email участника *</label><div class="vk-code-row"><input type="email" id="reset-email-input" placeholder="rider@example.com" class="bg-graphite-900 border border-graphite-700 rounded-xl px-3 py-2 text-xs text-white font-mono focus:outline-none focus:border-ochre-500"><button type="button" onclick="requestPasswordResetCode()" id="reset-send-code-btn" class="px-3.5 py-2 rounded-xl bg-volga-500 hover:bg-volga-400 text-graphite-950 font-bold text-xs uppercase tracking-wider transition">Получить код</button></div></div>
 <div id="reset-mail-hint" class="hidden p-2.5 rounded-lg bg-ochre-500/10 border border-ochre-500/40 text-ochre-200 text-[11px] leading-relaxed"></div>
 <div class="space-y-2.5 pt-2 border-t border-graphite-800">
 <div><label for="reset-code-input" class="block text-[11px] font-mono text-slate-400 mb-1">6-значный код из письма *</label><input type="text" id="reset-code-input" maxlength="6" placeholder="123456" class="w-full bg-graphite-900 border border-graphite-700 rounded-xl px-3 py-2 text-sm text-white font-mono tracking-widest text-center focus:outline-none focus:border-volga-400"></div>
