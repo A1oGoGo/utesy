@@ -901,7 +901,7 @@ img,video{max-width:100%;height:auto}
 <div class="p-4 border-t border-graphite-800 space-y-3">
 <p class="text-xs text-slate-300 leading-relaxed">URL веб-приложения <strong>Google Apps Script</strong>:</p>
 <div class="flex flex-col sm:flex-row gap-2">
-<input type="url" id="admin-gsheet-url-input" value="https://script.google.com/macros/s/AKfycbx9EkxdYVQ9HwRpOt3ggwLGsFdUfuJq9XavcY0R5BlWzKoB1Gt2w1bzZUR383W_pkKL/exec" placeholder="https://script.google.com/macros/s/.../exec" class="flex-1 bg-graphite-900 border border-graphite-700 rounded-xl px-3.5 py-2 text-xs text-white font-mono focus:outline-none focus:border-emerald-400">
+<input type="url" id="admin-gsheet-url-input" value="https://script.google.com/macros/s/AKfycbxqhqXFE2rf7rQB8uyPdng0waKKXB-kxbSG7ZNx9P42lH70erJgZYxSokrRp6Fk5ZbYGw/exec" placeholder="https://script.google.com/macros/s/.../exec" class="flex-1 bg-graphite-900 border border-graphite-700 rounded-xl px-3.5 py-2 text-xs text-white font-mono focus:outline-none focus:border-emerald-400">
 <button type="button" onclick="saveGoogleSheetUrl()" class="px-4 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-graphite-950 font-bold text-xs uppercase tracking-wider transition shrink-0">Сохранить URL</button>
 <button type="button" onclick="pullFromGoogleSheet(true)" class="px-3.5 py-2 rounded-xl bg-graphite-800 hover:bg-graphite-700 border border-volga-500/40 text-volga-300 font-mono text-xs transition shrink-0">🔄 Загрузить</button>
 <button type="button" onclick="pushAllToGoogleSheet()" class="px-3.5 py-2 rounded-xl bg-graphite-800 hover:bg-graphite-700 border border-ochre-500/40 text-ochre-300 font-mono text-xs transition shrink-0">☁️ Выгрузить</button>
@@ -1210,9 +1210,10 @@ const LEGACY_GSHEET_URLS=[
 'https://script.google.com/macros/s/AKfycbys3PU7VdQ2FGPse1f3VHnACfIVVrKjaVSWQ0ALtcEOoxRiadcLo1cRI6GTSxi07fUFuXg/exec',
 'https://script.google.com/macros/s/AKfycbzD8lj4ZR1Kw-2pb3SaN_OTJ4ZxiY5BzopoLI-gromtgo5lA0J26kUeAlfcuf8qGFGZXA/exec',
 'https://script.google.com/macros/s/AKfycbwmxmJnL3i3UilIpK8LC8vx4HLJHM-P08NnPT8dzFB8Kk-51FE7G6B_gO0DZ2BSBGAdzA/exec',
-'https://script.google.com/macros/s/AKfycbwljQJSPk3A7uXriSS7Jw_qbzviV4x9OtvjKsnhb3fVsVcQOe0ymP8a54tezHQDJ5xj/exec'
+'https://script.google.com/macros/s/AKfycbwljQJSPk3A7uXriSS7Jw_qbzviV4x9OtvjKsnhb3fVsVcQOe0ymP8a54tezHQDJ5xj/exec',
+'https://script.google.com/macros/s/AKfycbx9EkxdYVQ9HwRpOt3ggwLGsFdUfuJq9XavcY0R5BlWzKoB1Gt2w1bzZUR383W_pkKL/exec'
 ];
-const CURRENT_GSHEET_URL='https://script.google.com/macros/s/AKfycbx9EkxdYVQ9HwRpOt3ggwLGsFdUfuJq9XavcY0R5BlWzKoB1Gt2w1bzZUR383W_pkKL/exec';
+const CURRENT_GSHEET_URL='https://script.google.com/macros/s/AKfycbxqhqXFE2rf7rQB8uyPdng0waKKXB-kxbSG7ZNx9P42lH70erJgZYxSokrRp6Fk5ZbYGw/exec';
 
 const MAP_STYLES={
 minecraft:{name:'Minecraft',icon:'⛏',badge:'⛏ МИР УТЁСОВ',artUrl:'',fallbackArtUrl:'',grass:['#4a7c3a','#558b42','#3d6b2f','#4f843d','#487938','#427233'],steppe:['#8c8248','#9a8f50','#7e7540','#857c45'],floodplain:['#397a3e','#448c49','#2f6a34'],salt:'#d8e8ea',riverOuter:'#1a4a6a',riverMain:'#3d8fb5',riverHi:'#6fc3e0',cityStone:'#a89070',cityRoof:'#c9a77a',cityWall:'#8b7355',cityWindow:'#f5d76e',labelBg:'rgba(20,15,8,0.92)',labelFg:'#f5d76e',labelBorder:'#3d2914',routeOutline:'#1a1208',font:"'Press Start 2P', monospace",tree:'#265218',treeHi:'#3c7a26',mountain:'#786a52',cliff:'#ded8c8'},
