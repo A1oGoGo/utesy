@@ -13,9 +13,6 @@
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23090c10'/%3E%3Cpath d='M4 24L12 10L18 19L22 14L28 24H4Z' fill='%23f59e0b'/%3E%3Cpath d='M4 26H28' stroke='%2322d3ee' stroke-width='2.5' stroke-linecap='round'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" onerror="this.onerror=null;this.href='https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css'">
 <script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin="anonymous" onerror="var s=document.createElement('script');s.src='https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js';s.crossOrigin='anonymous';document.head.appendChild(s);"></script>
-<link rel="stylesheet" href="https://unpkg.com/maplibre-gl@5/dist/maplibre-gl.css" crossorigin="" onerror="this.onerror=null;this.href='https://cdn.jsdelivr.net/npm/maplibre-gl@5/dist/maplibre-gl.css'">
-<script defer src="https://unpkg.com/maplibre-gl@5/dist/maplibre-gl.js" crossorigin="anonymous" onerror="var s=document.createElement('script');s.src='https://cdn.jsdelivr.net/npm/maplibre-gl@5/dist/maplibre-gl.js';s.crossOrigin='anonymous';document.head.appendChild(s);"></script>
-<script defer src="https://unpkg.com/maplibre-contour@0.1.1/dist/index.min.js" crossorigin="anonymous" onerror="var s=document.createElement('script');s.src='https://cdn.jsdelivr.net/npm/maplibre-contour@0.1.1/dist/index.min.js';s.crossOrigin='anonymous';document.head.appendChild(s);"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;700&family=Oswald:wght@600;700&family=Press+Start+2P&display=swap" rel="stylesheet">
@@ -216,36 +213,6 @@ img,video{max-width:100%;height:auto}
 .vk-fb-strava:hover{background:rgba(252,76,2,0.28);border-color:#fc4c02;color:#ff6b2c}
 .vk-fb-coffee{background:rgba(245,158,11,0.14);border-color:rgba(245,158,11,0.42);color:#fcd34d}
 .vk-fb-coffee:hover{background:rgba(245,158,11,0.26);border-color:#fbbf24}
-
-/* === MapLibre GL JS 3D TOPO + 3D ФОТО === */
-#up-blogger-portal #maplibre-map{background:#0d1117;font-family:'Inter',sans-serif}
-#up-blogger-portal #map-card-container.map-is-fullscreen #maplibre-map,
-#up-blogger-portal #map-card-container:fullscreen #maplibre-map,
-#up-blogger-portal #map-card-container:-webkit-full-screen #maplibre-map{flex:1 1 auto!important;width:100%!important;height:100%!important;min-height:0!important}
-.ml-topo-bar{position:absolute;top:10px;left:52px;max-width:calc(100% - 148px);z-index:465;display:flex;flex-wrap:wrap;align-items:center;gap:4px;padding:4px;border-radius:10px;background:rgba(13,17,23,0.9);border:1px solid #30363d;box-shadow:0 4px 12px rgba(0,0,0,0.5);backdrop-filter:blur(6px)}
-.ml-topo-btn{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;padding:5px 8px;border-radius:7px;border:1px solid #30363d;background:#161b22;color:#cbd5e1;cursor:pointer;transition:all 0.15s ease;line-height:1.1}
-.ml-topo-btn:hover{background:#21262d;color:#fff;border-color:#64748b}
-.ml-topo-btn.is-active{background:#06b6d4;color:#090c10;border-color:#22d3ee}
-.ml-topo-btn.is-active-amber{background:#f59e0b;color:#090c10;border-color:#fbbf24}
-.ml-topo-sep{width:1px;height:18px;background:#30363d;margin:0 2px}
-#up-blogger-portal .maplibregl-marker.ml-photo-marker-wrap{z-index:10}
-#up-blogger-portal .maplibregl-marker.ml-photo-marker-wrap:hover{z-index:2000}
-#up-blogger-portal .maplibregl-popup{z-index:2500}
-#up-blogger-portal .maplibregl-popup-content{background:rgba(13,17,23,0.96)!important;color:#e6edf3!important;border:1px solid #30363d!important;border-radius:12px!important;padding:14px 16px!important;box-shadow:0 12px 30px rgba(0,0,0,0.6)!important;font-family:'Inter',sans-serif!important}
-#up-blogger-portal .maplibregl-popup-tip{border-top-color:#0d1117!important;border-bottom-color:#0d1117!important}
-#up-blogger-portal .maplibregl-popup-close-button{top:6px;right:6px;width:24px;height:24px;border-radius:6px;background:#161b22;border:1px solid #30363d;color:#94a3b8;font-size:14px;line-height:20px}
-#up-blogger-portal .maplibregl-popup-close-button:hover{background:#ef4444;color:#fff;border-color:#ef4444}
-#up-blogger-portal .maplibregl-popup-content .mc-popup-badge{display:inline-block;background:rgba(245,158,11,0.18);color:#fbbf24;border:1px solid rgba(245,158,11,0.4);border-radius:6px;font-family:'JetBrains Mono',monospace;font-size:10px;padding:2px 7px;margin-bottom:6px}
-#up-blogger-portal .maplibregl-popup-content .mc-popup-title{font-family:'Oswald',sans-serif;font-size:15px;font-weight:700;color:#fff;margin-bottom:5px;line-height:1.35}
-#up-blogger-portal .maplibregl-popup-content .mc-popup-desc{font-size:12px;color:#cbd5e1;line-height:1.45;margin-bottom:8px}
-#up-blogger-portal .maplibregl-popup-content .mc-popup-coords{font-family:'JetBrains Mono',monospace;font-size:10px;color:#67e8f9;margin-bottom:6px}
-#up-blogger-portal .maplibregl-popup-content .mc-popup-btn{display:block;width:100%;text-align:center;padding:7px 10px;margin-top:5px;border-radius:8px;font-size:12px;font-weight:600;text-decoration:none;background:#10b981;color:#090c10;border:1px solid transparent;cursor:pointer}
-#up-blogger-portal .maplibregl-popup-content .mc-popup-btn:hover{background:#34d399}
-#up-blogger-portal .maplibregl-popup-content .mc-popup-btn.cyan{background:#06b6d4;color:#090c10}
-#up-blogger-portal .maplibregl-popup-content .mc-popup-btn.cyan:hover{background:#22d3ee}
-#up-blogger-portal .maplibregl-popup-content .mc-popup-btn.dark{background:#161b22;color:#cbd5e1;border-color:#30363d}
-#up-blogger-portal .maplibregl-popup-content .mc-popup-btn.dark:hover{background:#21262d;color:#fff}
-@media (max-width:640px){.ml-topo-bar{top:auto;bottom:34px;left:8px;right:8px;max-width:none;justify-content:center}}
 </style>
 </head>
 <body class="antialiased selection:bg-ochre-500 selection:text-graphite-950">
@@ -577,25 +544,14 @@ img,video{max-width:100%;height:auto}
 <div id="map-collapsible-body">
 <div id="map-fullscreen-wrap" class="relative">
 <div id="leaflet-map" class="w-full h-[420px] sm:h-[520px] z-10"></div>
-<div id="maplibre-map" class="hidden w-full h-[420px] sm:h-[520px] z-10"></div>
-
-<div id="ml-topo-controls" class="ml-topo-bar hidden" aria-label="Слои 3D-топокарты">
-<button type="button" class="ml-topo-btn is-active" data-mlbase="openfreemap" onclick="setMapLibreSubLayer('openfreemap')" title="Векторная карта OpenFreeMap + 3D рельеф">OpenFreeMap</button>
-<button type="button" class="ml-topo-btn" data-mlbase="cyclosm" onclick="setMapLibreSubLayer('cyclosm')" title="Велокарта CyclOSM поверх 3D-рельефа">CyclOSM</button>
-<button type="button" class="ml-topo-btn" data-mlbase="opentopomap" onclick="setMapLibreSubLayer('opentopomap')" title="Топокарта OpenTopoMap поверх 3D-рельефа">OpenTopoMap</button>
-<span class="ml-topo-sep" aria-hidden="true"></span>
-<button type="button" id="ml-btn-contours" class="ml-topo-btn is-active-amber" onclick="toggleMapLibreContours()" title="Горизонтали высот (maplibre-contour)">Горизонтали</button>
-<button type="button" id="ml-btn-3d" class="ml-topo-btn is-active-amber" onclick="toggleMapLibre3D()" title="Переключить 3D-рельеф / плоский вид 2D">3D</button>
-</div>
-
 <details id="map-style-picker" open class="group/picker absolute top-2 right-2 z-[470] rounded-xl p-1" style="background:rgba(13,17,23,0.88);border:1.5px solid #30363d;box-shadow:0 4px 12px rgba(0,0,0,0.55);backdrop-filter:blur(6px)">
 <summary title="Стили и слои карты" aria-label="Стили и слои карты" class="cursor-pointer text-[#f5d76e] hover:text-white px-2 py-1 flex items-center justify-center gap-1 select-none rounded-lg hover:bg-graphite-800/80 transition"><span class="text-sm leading-none">🗺️</span><span class="text-[9px] font-mono text-ochre-400 group-open/picker:rotate-180 transition-transform leading-none">▼</span></summary>
 <div class="flex flex-col gap-1 pt-1 mt-1 border-t border-graphite-700">
 <button type="button" class="map-style-btn active-mc" data-mapstyle="minecraft" onclick="setMapStyle('minecraft')" title="Minecraft">⛏ MC</button>
 <button type="button" class="map-style-btn" data-mapstyle="heroes" onclick="setMapStyle('heroes')" title="Heroes of Might and Magic III">🏰 HoMM</button>
 <button type="button" class="map-style-btn" data-mapstyle="diablo" onclick="setMapStyle('diablo')" title="Diablo II">💀 D2</button>
-<button type="button" class="map-style-btn" data-mapstyle="osm" onclick="setMapStyle('osm')" title="3D-топокарта (OpenFreeMap + Mapterhorn DEM + CyclOSM / OpenTopoMap)">⛰️ 3D TOPO</button>
-<button type="button" class="map-style-btn" data-mapstyle="topo_photos" onclick="setMapStyle('topo_photos')" title="3D-топокарта с круглыми миниатюрами фотографий по геометке">📷 ФОТО</button>
+<button type="button" class="map-style-btn" data-mapstyle="osm" onclick="setMapStyle('osm')" title="OpenTopoMap (Топокарта с рельефом)">⛰️ TOPO</button>
+<button type="button" class="map-style-btn" data-mapstyle="topo_photos" onclick="setMapStyle('topo_photos')" title="Топокарта OpenTopoMap с круглыми миниатюрами фотографий по геометке">📷 ФОТО</button>
 </div>
 </details>
 
@@ -1255,8 +1211,8 @@ remoteImgPath:'i.redd.it/oaqftq5lia2b1.jpg',
 fallbackArtUrl:'https://wsrv.nl/?url=i.redd.it/oaqftq5lia2b1.jpg&w=1400&q=80&output=webp',
 artFilter:'brightness(0.82) contrast(1.15) sepia(0.18)',
 grass:['#1e1712','#251c16','#18120e','#2a2019','#211914','#1a1410'],steppe:['#302116','#38271a','#281b12','#332318'],floodplain:['#18221a','#1e2920','#141c16'],salt:'#3a3538',riverOuter:'#1a0505',riverMain:'#961c1c',riverHi:'#ff5522',cityStone:'#4a3020',cityRoof:'#5a3c28',cityWall:'#2a1810',cityWindow:'#ff7700',labelBg:'rgba(10,4,4,0.95)',labelFg:'#ffaa22',labelBorder:'#8b1a1a',routeOutline:'#000000',font:"'Press Start 2P', monospace",tree:'#120906',treeHi:'#2e160e',mountain:'#3d271a',cliff:'#634c3d'},
-osm:{name:'3D TOPO (OpenFreeMap + Mapterhorn)',icon:'⛰️',badge:'⛰️ 3D TOPO',routeOutline:'#090c10'},
-topo_photos:{name:'3D TOPO + Фото трека',icon:'📷',badge:'📷 3D ФОТО',routeOutline:'#090c10'}
+osm:{name:'OpenTopoMap',icon:'⛰️',badge:'⛰️ OPENTOPOMAP',routeOutline:'#090c10'},
+topo_photos:{name:'Топокарта + Фото трека',icon:'📷',badge:'📷 ТОПО + ФОТО',routeOutline:'#090c10'}
 };
 
 let isEditMode=false,currentParticipantId=null,isAdminLoggedIn=false,currentAdminPassHash='',adminSessionToken='',leafletMap=null,mapPolylines={},mapRouteOutlines={},mapRouteGlows={},mapDecorationsLayer=null,mapCitiesLayer=null,mapRiverOverlay=null,gameArtOverlay=null,styledGridLayer=null,osmTileLayer=null,currentLineWeight=parseInt(localStorage.getItem(LINE_WEIGHT_KEY)||'3',10)||3,currentBgOpacity=parseInt(localStorage.getItem('volga_cliffs_bg_opacity')||'88',10)||88,currentMapStyle=localStorage.getItem(MAP_STYLE_KEY)||'minecraft',activeAiRouteId=null,currentResultsFilter='all',adminUploadedGpxData=null,uploadedRouteCoords=null,lastVerificationRequestTs=0,pendingAuthDraft=null,activeVerificationSession=null;
@@ -1461,7 +1417,7 @@ function loadPortalState(){try{const raw=localStorage.getItem(STORAGE_KEY);if(!r
 function stripHeavyCoordsForStorage(st){const c=JSON.parse(JSON.stringify(st)),core=new Set(['m-1','m-2','m-4']);if(Array.isArray(c.mapRoutes)){c.mapRoutes=c.mapRoutes.map(r=>{if(r&&core.has(r.id)){const{coords,...rest}=r;return rest}return r})}return c}
 async function loadExternalRoutesJson(){
 if(externalRoutesCoordsCache){
-if(applyExternalRoutesCache(portalState.mapRoutes)&&(leafletMap||maplibreMap))renderMapRoutes();
+if(applyExternalRoutesCache(portalState.mapRoutes)&&leafletMap)renderMapRoutes();
 return externalRoutesCoordsCache;
 }
 if(!externalRoutesFetchPromise){
@@ -1493,7 +1449,7 @@ if(!externalRoutesCoordsCache)externalRoutesFetchPromise=null;
 })();
 }
 const ext=await externalRoutesFetchPromise;
-if(ext&&applyExternalRoutesCache(portalState.mapRoutes)&&(leafletMap||maplibreMap)){
+if(ext&&applyExternalRoutesCache(portalState.mapRoutes)&&leafletMap){
 renderMapRoutes();
 }
 return ext;
@@ -1873,504 +1829,6 @@ if(lbl)lbl.textContent=currentBgOpacity+'%';
 if(gameArtOverlay)gameArtOverlay.setOpacity(currentBgOpacity/100);
 }
 
-// === MapLibre GL JS 3D TOPO + 3D ФОТО ===
-let maplibreMap=null,mlMapReady=false,mlContourRegistered=false,mlDemSource=null,mlActivePopup=null;
-let mlPhotoMarkers=[],mlBootRetryTimer=null,mlPendingAction=null;
-let mlSubLayer='openfreemap'; // 'openfreemap' | 'cyclosm' | 'opentopomap'
-let mlContoursEnabled=true;
-let mlTerrain3DEnabled=true;
-const ML_TERRAIN_EXAGGERATION=1.8;
-
-function isMapLibreStyle(key){
-return key==='osm'||key==='topo_photos';
-}
-
-function buildMapRoutePopupHtml(route){
-const sStory=sanitizeUrl(route.storyUrl);
-const sDownload=resolveTrackDownloadUrl(route);
-const multiStoriesHtml=(Array.isArray(route.storyLinks)&&route.storyLinks.length>0)?route.storyLinks.map(st=>{
-const u=sanitizeUrl(st.url);
-if(!u)return'';
-return `<div class="mc-popup-story-card" style="margin-top:6px;padding:7px;background:#161b22;border:1px solid #30363d;border-radius:8px"><div class="mc-popup-story-desc" style="font-size:11px;color:#cbd5e1;margin-bottom:5px;line-height:1.4">${escapeHtml(st.desc||'')}</div><a href="${escapeHtml(u)}" target="_blank" rel="noopener noreferrer" class="mc-popup-btn">📖 ${escapeHtml(st.title||'РАССКАЗ')} ↗</a></div>`;
-}).join(''):(sStory?`<a href="${escapeHtml(sStory)}" target="_blank" rel="noopener noreferrer" class="mc-popup-btn">📖 РАССКАЗ ↗</a>`:'');
-return `<div class="min-w-[230px] max-w-[300px]"><span class="mc-popup-badge">${escapeHtml(route.km)}</span><div class="mc-popup-title">${escapeHtml(route.name)}</div><div class="mc-popup-desc">${escapeHtml(route.desc)}</div>${multiStoriesHtml}<a href="${escapeHtml(sDownload)}" target="_blank" rel="noopener noreferrer" download class="mc-popup-btn cyan">📥 СКАЧАТЬ ТРЕК (.GPX) ↗</a><a href="https://notebook.google.com/notebook/7959d135-4395-4f56-8f7b-4fa29ddd0fd6/preview" target="_blank" rel="noopener noreferrer" class="mc-popup-btn cyan">✨ ИИ-БАЗА МАРШРУТА ↗</a><button type="button" onclick="closeActiveMapPopup()" class="mc-popup-btn dark">✕ ЗАКРЫТЬ</button></div>`;
-}
-
-function buildPhotoPopupHtml(p,idx){
-return `<div class="min-w-[230px] max-w-[280px]"><span class="mc-popup-badge">📷 ФОТО ${p.num} / ${TRACK_GEOTAG_PHOTOS.length} • ${escapeHtml(p.date)}</span><div class="mc-popup-title">${escapeHtml(p.title)}</div><div style="margin:6px 0;border:1px solid #30363d;border-radius:8px;overflow:hidden;background:#090c10;cursor:pointer" onclick="openTrackPhotoModal(${idx})"><img src="${escapeHtml(p.src)}" alt="${escapeHtml(p.title)}" style="width:100%;height:150px;object-fit:cover;display:block"></div><div class="mc-popup-desc">${escapeHtml(p.desc)}</div><div class="mc-popup-coords">📍 ${p.lat.toFixed(5)}, ${p.lng.toFixed(5)}</div><button type="button" onclick="openTrackPhotoModal(${idx})" class="mc-popup-btn cyan">🔍 ОТКРЫТЬ ФОТО НА ВЕСЬ ЭКРАН</button></div>`;
-}
-
-function buildRoutesGeoJSON(){
-const lineFeatures=[];
-const pointFeatures=[];
-(portalState.mapRoutes||[]).forEach(route=>{
-if(!Array.isArray(route.coords)||route.coords.length<2)return;
-const lngLatCoords=route.coords.map(c=>[c[1],c[0]]);
-lineFeatures.push({
-type:'Feature',
-properties:{id:route.id,name:route.name||'',km:route.km||'',color:route.color||'#f59e0b'},
-geometry:{type:'LineString',coordinates:lngLatCoords}
-});
-pointFeatures.push(
-{type:'Feature',properties:{id:route.id,color:'#10b981'},geometry:{type:'Point',coordinates:lngLatCoords[0]}},
-{type:'Feature',properties:{id:route.id,color:route.color||'#ef4444'},geometry:{type:'Point',coordinates:lngLatCoords[lngLatCoords.length-1]}}
-);
-});
-return{
-lines:{type:'FeatureCollection',features:lineFeatures},
-points:{type:'FeatureCollection',features:pointFeatures}
-};
-}
-
-function renderMapLibreRoutes(){
-if(!maplibreMap||!mlMapReady)return;
-const data=buildRoutesGeoJSON();
-const lineSrc=maplibreMap.getSource('up-routes-src');
-const ptSrc=maplibreMap.getSource('up-routes-pts-src');
-if(lineSrc)lineSrc.setData(data.lines);
-if(ptSrc)ptSrc.setData(data.points);
-if(maplibreMap.getLayer('up-routes-casing')){
-maplibreMap.setPaintProperty('up-routes-casing','line-width',currentLineWeight+3);
-}
-if(maplibreMap.getLayer('up-routes-line')){
-maplibreMap.setPaintProperty('up-routes-line','line-width',currentLineWeight+0.5);
-}
-}
-
-function clearMapLibrePhotoMarkers(){
-mlPhotoMarkers.forEach(item=>{try{item.marker.remove();}catch(e){}});
-mlPhotoMarkers=[];
-if(maplibreMap&&mlMapReady){
-const dotSrc=maplibreMap.getSource('up-photos-dots-src');
-if(dotSrc)dotSrc.setData({type:'FeatureCollection',features:[]});
-if(maplibreMap.getLayer('up-photos-dots')){
-maplibreMap.setLayoutProperty('up-photos-dots','visibility','none');
-}
-}
-}
-
-function updateMapLibrePhotoMarkerSizes(){
-if(!maplibreMap||mlPhotoMarkers.length===0)return;
-const z=maplibreMap.getZoom();
-const sz=z<=5?34:(z<=7?42:(z<=9?48:54));
-const spread=z>=10?0.2:(z>=8?0.65:1);
-mlPhotoMarkers.forEach(({marker,pinEl,photo})=>{
-pinEl.style.width=sz+'px';
-pinEl.style.height=sz+'px';
-const ox=Math.round((photo.offset?photo.offset[0]:0)*spread);
-const oy=Math.round((photo.offset?photo.offset[1]:0)*spread);
-marker.setOffset([ox,oy]);
-});
-}
-
-function renderMapLibrePhotos(){
-if(!maplibreMap||!mlMapReady)return;
-clearMapLibrePhotoMarkers();
-if(currentMapStyle!=='topo_photos')return;
-if(!isTrackPhotosLoaded){ensureTrackPhotosLoaded(false);return;}
-const dotFeatures=TRACK_GEOTAG_PHOTOS.map(p=>({
-type:'Feature',
-properties:{num:p.num},
-geometry:{type:'Point',coordinates:[p.lng,p.lat]}
-}));
-const dotSrc=maplibreMap.getSource('up-photos-dots-src');
-if(dotSrc)dotSrc.setData({type:'FeatureCollection',features:dotFeatures});
-if(maplibreMap.getLayer('up-photos-dots')){
-maplibreMap.setLayoutProperty('up-photos-dots','visibility','visible');
-}
-const z=maplibreMap.getZoom();
-const sz=z<=5?34:(z<=7?42:(z<=9?48:54));
-const spread=z>=10?0.2:(z>=8?0.65:1);
-TRACK_GEOTAG_PHOTOS.forEach((p,idx)=>{
-const ox=Math.round((p.offset?p.offset[0]:0)*spread);
-const oy=Math.round((p.offset?p.offset[1]:0)*spread);
-const wrap=document.createElement('div');
-wrap.className='ml-photo-marker-wrap';
-const pin=document.createElement('div');
-pin.className='mc-photo-pin';
-pin.style.width=sz+'px';
-pin.style.height=sz+'px';
-pin.title=p.title||'Фото на маршруте';
-pin.innerHTML=`<img src="${escapeHtml(p.src)}" alt="${escapeHtml(p.title)}"><span class="mc-photo-num">${p.num}</span>`;
-wrap.appendChild(pin);
-wrap.addEventListener('click',(ev)=>{
-ev.stopPropagation();
-const inFs=isMapFullscreen||Boolean(document.fullscreenElement||document.webkitFullscreenElement);
-if(inFs){
-if(mlActivePopup){mlActivePopup.remove();mlActivePopup=null;}
-openTrackPhotoModal(idx);
-return;
-}
-if(mlActivePopup)mlActivePopup.remove();
-mlActivePopup=new maplibregl.Popup({closeButton:true,maxWidth:'300px',offset:24})
-.setLngLat([p.lng,p.lat])
-.setHTML(buildPhotoPopupHtml(p,idx))
-.addTo(maplibreMap);
-});
-const marker=new maplibregl.Marker({element:wrap,anchor:'center',offset:[ox,oy]})
-.setLngLat([p.lng,p.lat])
-.addTo(maplibreMap);
-mlPhotoMarkers.push({marker,pinEl:pin,photo:p});
-});
-}
-
-function fitMapLibreToPhotos(){
-if(!Array.isArray(TRACK_GEOTAG_PHOTOS)||TRACK_GEOTAG_PHOTOS.length===0)return;
-if(!maplibreMap||!mlMapReady){mlPendingAction={type:'fitPhotos'};return;}
-const bounds=TRACK_GEOTAG_PHOTOS.reduce(
-(bb,p)=>bb.extend([p.lng,p.lat]),
-new maplibregl.LngLatBounds([TRACK_GEOTAG_PHOTOS[0].lng,TRACK_GEOTAG_PHOTOS[0].lat],[TRACK_GEOTAG_PHOTOS[0].lng,TRACK_GEOTAG_PHOTOS[0].lat])
-);
-maplibreMap.resize();
-maplibreMap.fitBounds(bounds,{padding:48,maxZoom:10,pitch:mlTerrain3DEnabled?48:0,duration:550});
-}
-
-function fitMapLibreToAllRoutes(){
-const allCoords=[];
-(portalState.mapRoutes||[]).forEach(r=>{
-if(Array.isArray(r.coords))r.coords.forEach(c=>allCoords.push([c[1],c[0]]));
-});
-if(allCoords.length<2)return;
-if(!maplibreMap||!mlMapReady){mlPendingAction={type:'fitAllRoutes'};return;}
-const bounds=allCoords.reduce(
-(bb,c)=>bb.extend(c),
-new maplibregl.LngLatBounds(allCoords[0],allCoords[0])
-);
-maplibreMap.resize();
-maplibreMap.fitBounds(bounds,{padding:35,pitch:mlTerrain3DEnabled?48:0,duration:500});
-}
-
-function focusMapLibreRoute(routeId){
-const route=(portalState.mapRoutes||[]).find(r=>r.id===routeId);
-if(!route||!Array.isArray(route.coords)||route.coords.length<2)return;
-if(!maplibreMap||!mlMapReady){mlPendingAction={type:'focusRoute',routeId};return;}
-const bounds=route.coords.reduce(
-(bb,c)=>bb.extend([c[1],c[0]]),
-new maplibregl.LngLatBounds([route.coords[0][1],route.coords[0][0]],[route.coords[0][1],route.coords[0][0]])
-);
-maplibreMap.resize();
-maplibreMap.fitBounds(bounds,{padding:42,pitch:mlTerrain3DEnabled?52:0,duration:600});
-const mid=route.coords[Math.floor(route.coords.length/2)];
-if(mlActivePopup)mlActivePopup.remove();
-mlActivePopup=new maplibregl.Popup({closeButton:true,maxWidth:'320px'})
-.setLngLat([mid[1],mid[0]])
-.setHTML(buildMapRoutePopupHtml(route))
-.addTo(maplibreMap);
-}
-
-function syncMapLibreControlsUI(){
-document.querySelectorAll('[data-mlbase]').forEach(btn=>{
-btn.classList.toggle('is-active',btn.dataset.mlbase===mlSubLayer);
-});
-const cBtn=document.getElementById('ml-btn-contours');
-if(cBtn)cBtn.classList.toggle('is-active-amber',mlContoursEnabled);
-const dBtn=document.getElementById('ml-btn-3d');
-if(dBtn){
-dBtn.classList.toggle('is-active-amber',mlTerrain3DEnabled);
-dBtn.textContent=mlTerrain3DEnabled?'3D':'2D';
-}
-}
-
-function applyMapLibreLayerVisibility(){
-if(!maplibreMap||!mlMapReady)return;
-const setVis=(id,visible)=>{
-if(maplibreMap.getLayer(id))maplibreMap.setLayoutProperty(id,'visibility',visible?'visible':'none');
-};
-setVis('cyclosm-layer',mlSubLayer==='cyclosm');
-setVis('opentopomap-layer',mlSubLayer==='opentopomap');
-setVis('mapterhorn-hillshade',mlSubLayer!=='opentopomap');
-setVis('contour-lines',mlContoursEnabled);
-setVis('contour-labels',mlContoursEnabled);
-if(mlTerrain3DEnabled){
-maplibreMap.setTerrain({source:'mapterhorn-terrain-dem',exaggeration:ML_TERRAIN_EXAGGERATION});
-}else{
-maplibreMap.setTerrain(null);
-}
-syncMapLibreControlsUI();
-}
-
-function setMapLibreSubLayer(layerKey){
-if(!['openfreemap','cyclosm','opentopomap'].includes(layerKey))return;
-mlSubLayer=layerKey;
-mlContoursEnabled=(layerKey!=='opentopomap');
-applyMapLibreLayerVisibility();
-const names={openfreemap:'OpenFreeMap (вектор)',cyclosm:'CyclOSM поверх 3D-рельефа',opentopomap:'OpenTopoMap поверх 3D-рельефа'};
-showToast('Слой 3D-карты: '+names[layerKey]);
-}
-
-function toggleMapLibreContours(){
-mlContoursEnabled=!mlContoursEnabled;
-applyMapLibreLayerVisibility();
-}
-
-function toggleMapLibre3D(){
-mlTerrain3DEnabled=!mlTerrain3DEnabled;
-applyMapLibreLayerVisibility();
-if(maplibreMap&&mlMapReady){
-maplibreMap.easeTo({pitch:mlTerrain3DEnabled?52:0,bearing:mlTerrain3DEnabled?maplibreMap.getBearing():0,duration:450});
-}
-}
-
-function initMapLibreTopo(attempt=0){
-const container=document.getElementById('maplibre-map');
-if(!container)return;
-if(typeof maplibregl==='undefined'||typeof mlcontour==='undefined'){
-if(attempt<40){
-clearTimeout(mlBootRetryTimer);
-mlBootRetryTimer=setTimeout(()=>initMapLibreTopo(attempt+1),150);
-}else{
-showToast('Не удалось загрузить MapLibre 3D','error');
-}
-return;
-}
-if(maplibreMap){
-maplibreMap.resize();
-return;
-}
-if(!mlContourRegistered){
-mlDemSource=new mlcontour.DemSource({
-url:'https://tiles.mapterhorn.com/{z}/{x}/{y}.webp',
-encoding:'terrarium',
-maxzoom:12,
-worker:true,
-cacheSize:100,
-timeoutMs:10000
-});
-mlDemSource.setupMaplibre(maplibregl);
-mlContourRegistered=true;
-}
-let initCenter=[47.5,51.2],initZoom=5;
-if(leafletMap){
-const c=leafletMap.getCenter();
-initCenter=[c.lng,c.lat];
-initZoom=Math.max(4,Math.min(16,(leafletMap.getZoom()||6)-1));
-}
-maplibreMap=new maplibregl.Map({
-container:'maplibre-map',
-style:'https://tiles.openfreemap.org/styles/liberty',
-center:initCenter,
-zoom:initZoom,
-minZoom:4,
-maxZoom:17,
-pitch:mlTerrain3DEnabled?50:0,
-maxPitch:75,
-attributionControl:false
-});
-maplibreMap.addControl(new maplibregl.NavigationControl({visualizePitch:true}),'top-left');
-maplibreMap.addControl(new maplibregl.ScaleControl({unit:'metric'}),'bottom-left');
-maplibreMap.addControl(new maplibregl.AttributionControl({compact:true,customAttribution:'OpenFreeMap • Mapterhorn DEM • CyclOSM • OpenTopoMap'}),'bottom-right');
-
-maplibreMap.on('load',()=>{
-mlMapReady=true;
-try{
-maplibreMap.setSky({'sky-color':'#88c6fc','horizon-color':'#e0f2fe','fog-color':'#e2e8f0','sky-horizon-blend':0.6,'horizon-fog-blend':0.5,'fog-ground-blend':0.2});
-}catch(e){}
-
-maplibreMap.addSource('mapterhorn-terrain-dem',{
-type:'raster-dem',
-encoding:'terrarium',
-tiles:[mlDemSource.sharedDemProtocolUrl],
-maxzoom:12,
-tileSize:512
-});
-maplibreMap.addSource('mapterhorn-hillshade-dem',{
-type:'raster-dem',
-encoding:'terrarium',
-tiles:[mlDemSource.sharedDemProtocolUrl],
-maxzoom:12,
-tileSize:512
-});
-
-maplibreMap.addSource('contour-source',{
-type:'vector',
-tiles:[mlDemSource.contourProtocolUrl({
-multiplier:1,
-overzoom:1,
-contourLayer:'contours',
-elevationKey:'ele',
-levelKey:'level',
-thresholds:{
-8:[50,200],
-9:[25,100],
-10:[20,100],
-11:[10,50],
-12:[10,50],
-13:[5,25],
-14:[5,20]
-}
-})],
-maxzoom:15
-});
-
-maplibreMap.addSource('cyclosm-src',{
-type:'raster',
-tiles:[
-'https://a.tile-cyclosm.openstreetmap.fr/cyclosm/{z}/{x}/{y}.png',
-'https://b.tile-cyclosm.openstreetmap.fr/cyclosm/{z}/{x}/{y}.png',
-'https://c.tile-cyclosm.openstreetmap.fr/cyclosm/{z}/{x}/{y}.png'
-],
-tileSize:256,
-maxzoom:19
-});
-maplibreMap.addSource('opentopomap-src',{
-type:'raster',
-tiles:[
-'https://a.tile.opentopomap.org/{z}/{x}/{y}.png',
-'https://b.tile.opentopomap.org/{z}/{x}/{y}.png',
-'https://c.tile.opentopomap.org/{z}/{x}/{y}.png'
-],
-tileSize:256,
-maxzoom:17
-});
-
-const firstSymbol=(maplibreMap.getStyle().layers||[]).find(l=>l.type==='symbol');
-maplibreMap.addLayer({
-id:'mapterhorn-hillshade',
-type:'hillshade',
-source:'mapterhorn-hillshade-dem',
-paint:{
-'hillshade-exaggeration':0.45,
-'hillshade-shadow-color':'#2b3340',
-'hillshade-highlight-color':'#fffaf0',
-'hillshade-accent-color':'#475569'
-}
-},firstSymbol?firstSymbol.id:undefined);
-
-maplibreMap.addLayer({
-id:'cyclosm-layer',
-type:'raster',
-source:'cyclosm-src',
-layout:{visibility:'none'},
-paint:{'raster-opacity':0.95}
-});
-maplibreMap.addLayer({
-id:'opentopomap-layer',
-type:'raster',
-source:'opentopomap-src',
-layout:{visibility:'none'},
-paint:{'raster-opacity':0.95}
-});
-
-maplibreMap.addLayer({
-id:'contour-lines',
-type:'line',
-source:'contour-source',
-'source-layer':'contours',
-paint:{
-'line-color':'rgba(120,78,34,0.62)',
-'line-width':['match',['get','level'],1,1.35,0.65]
-}
-});
-maplibreMap.addLayer({
-id:'contour-labels',
-type:'symbol',
-source:'contour-source',
-'source-layer':'contours',
-filter:['>',['get','level'],0],
-layout:{
-'symbol-placement':'line',
-'text-size':10,
-'text-field':['concat',['number-format',['get','ele'],{}],' м'],
-'text-font':['Noto Sans Regular'],
-'text-padding':8
-},
-paint:{
-'text-color':'#5c3a1a',
-'text-halo-color':'rgba(255,255,255,0.85)',
-'text-halo-width':1.3
-}
-});
-
-const geo=buildRoutesGeoJSON();
-maplibreMap.addSource('up-routes-src',{type:'geojson',data:geo.lines});
-maplibreMap.addSource('up-routes-pts-src',{type:'geojson',data:geo.points});
-maplibreMap.addSource('up-photos-dots-src',{type:'geojson',data:{type:'FeatureCollection',features:[]}});
-
-maplibreMap.addLayer({
-id:'up-routes-casing',
-type:'line',
-source:'up-routes-src',
-layout:{'line-join':'round','line-cap':'round'},
-paint:{'line-color':'#090c10','line-width':currentLineWeight+3,'line-opacity':0.75}
-});
-maplibreMap.addLayer({
-id:'up-routes-line',
-type:'line',
-source:'up-routes-src',
-layout:{'line-join':'round','line-cap':'round'},
-paint:{'line-color':['get','color'],'line-width':currentLineWeight+0.5,'line-opacity':0.96}
-});
-maplibreMap.addLayer({
-id:'up-routes-points',
-type:'circle',
-source:'up-routes-pts-src',
-paint:{'circle-radius':5.5,'circle-color':['get','color'],'circle-stroke-width':2,'circle-stroke-color':'#ffffff'}
-});
-maplibreMap.addLayer({
-id:'up-photos-dots',
-type:'circle',
-source:'up-photos-dots-src',
-layout:{visibility:'none'},
-paint:{'circle-radius':4.5,'circle-color':'#f59e0b','circle-stroke-width':2,'circle-stroke-color':'#090c10'}
-});
-
-maplibreMap.on('mouseenter','up-routes-line',()=>{maplibreMap.getCanvas().style.cursor='pointer'});
-maplibreMap.on('mouseleave','up-routes-line',()=>{maplibreMap.getCanvas().style.cursor=''});
-maplibreMap.on('click','up-routes-line',(ev)=>{
-const feat=ev.features&&ev.features[0];
-if(!feat)return;
-const route=(portalState.mapRoutes||[]).find(r=>r.id===feat.properties.id);
-if(!route)return;
-if(mlActivePopup)mlActivePopup.remove();
-mlActivePopup=new maplibregl.Popup({closeButton:true,maxWidth:'320px'}).setLngLat(ev.lngLat).setHTML(buildMapRoutePopupHtml(route)).addTo(maplibreMap);
-});
-maplibreMap.on('zoomend',updateMapLibrePhotoMarkerSizes);
-
-applyMapLibreLayerVisibility();
-renderMapLibreRoutes();
-renderMapLibrePhotos();
-
-if(mlPendingAction){
-const act=mlPendingAction;
-mlPendingAction=null;
-if(act.type==='fitPhotos')fitMapLibreToPhotos();
-else if(act.type==='fitAllRoutes')fitMapLibreToAllRoutes();
-else if(act.type==='focusRoute')focusMapLibreRoute(act.routeId);
-}
-});
-}
-
-function showMapLibreEngine(enable){
-const lfEl=document.getElementById('leaflet-map');
-const mlEl=document.getElementById('maplibre-map');
-const mlBar=document.getElementById('ml-topo-controls');
-if(!lfEl||!mlEl)return;
-const wasHidden=mlEl.classList.contains('hidden');
-if(enable){
-lfEl.classList.add('hidden');
-mlEl.classList.remove('hidden');
-if(mlBar)mlBar.classList.remove('hidden');
-initMapLibreTopo();
-if(wasHidden&&maplibreMap&&leafletMap){
-const c=leafletMap.getCenter();
-maplibreMap.jumpTo({center:[c.lng,c.lat],zoom:Math.max(4,Math.min(16,(leafletMap.getZoom()||6)-1))});
-}
-setTimeout(()=>{if(maplibreMap)maplibreMap.resize();},60);
-setTimeout(()=>{if(maplibreMap)maplibreMap.resize();},240);
-}else{
-if(!wasHidden&&maplibreMap&&leafletMap){
-const c=maplibreMap.getCenter();
-leafletMap.setView([c.lat,c.lng],Math.min(17,Math.max(5,Math.round(maplibreMap.getZoom()+1))),{animate:false});
-}
-if(mlActivePopup){mlActivePopup.remove();mlActivePopup=null;}
-clearMapLibrePhotoMarkers();
-mlEl.classList.add('hidden');
-if(mlBar)mlBar.classList.add('hidden');
-lfEl.classList.remove('hidden');
-setTimeout(()=>{if(leafletMap)leafletMap.invalidateSize();},60);
-}
-}
-
 function initLeafletMap(){const mc=document.getElementById('leaflet-map');if(!mc)return;if(leafletMap){leafletMap.invalidateSize();return}if(typeof L==='undefined'){showToast('Карта ещё грузится…','error');return}
 const pickerEl=document.getElementById('map-style-picker');
 if(pickerEl&&L.DomEvent){
@@ -2426,9 +1884,8 @@ return tile;
 });
 osmTileLayer=new ResilientTopoLayer({tileSize:256,maxNativeZoom:17,maxZoom:17,keepBuffer:2,updateWhenZooming:false});
 osmTileLayer.on('tileunload',function(e){if(e&&e.tile&&e.tile._cancelTopoLoad)e.tile._cancelTopoLoad();});
-const isTopoStyle=isMapLibreStyle(currentMapStyle);
-styledGridLayer.addTo(leafletMap);
-if(!isTopoStyle)applyGameArtOverlay(currentMapStyle);
+const isTopoStyle=(currentMapStyle==='osm'||currentMapStyle==='topo_photos');
+if(isTopoStyle){osmTileLayer.addTo(leafletMap)}else{styledGridLayer.addTo(leafletMap);applyGameArtOverlay(currentMapStyle)}
 mapRiverOverlay=L.layerGroup().addTo(leafletMap);
 mapDecorationsLayer=L.layerGroup().addTo(leafletMap);
 mapCitiesLayer=L.layerGroup().addTo(leafletMap);
@@ -2442,20 +1899,15 @@ const slider=document.getElementById('map-line-weight'),label=document.getElemen
 const opSlider=document.getElementById('map-bg-opacity'),opLabel=document.getElementById('bg-opacity-label');if(opSlider)opSlider.value=String(currentBgOpacity);if(opLabel)opLabel.textContent=currentBgOpacity+'%';
 updateMapStyleButtons();
 syncMapTopoModeUI();
-updateMapBadge();
-if(isMapLibreStyle(currentMapStyle))showMapLibreEngine(true);}
+updateMapBadge();}
 
 let TRACK_GEOTAG_PHOTOS=[];
 let isTrackPhotosLoaded=false,isTrackPhotosLoading=false;
 async function ensureTrackPhotosLoaded(fitAfterLoad=false){
 if(isTrackPhotosLoaded){
-renderMapPhotos();
-if(fitAfterLoad&&TRACK_GEOTAG_PHOTOS.length>0){
-if(isMapLibreStyle(currentMapStyle))fitMapLibreToPhotos();
-else if(leafletMap){
+if(fitAfterLoad&&leafletMap&&TRACK_GEOTAG_PHOTOS.length>0){
 const bounds=L.latLngBounds(TRACK_GEOTAG_PHOTOS.map(p=>[p.lat,p.lng]));
 leafletMap.fitBounds(bounds,{padding:[45,45],maxZoom:10});
-}
 }
 return;
 }
@@ -2470,10 +1922,9 @@ TRACK_GEOTAG_PHOTOS=data;
 isTrackPhotosLoaded=true;
 renderHeroPhotoStrip();
 if(activeInlinePhotoEl)showInlinePhotoPreview(activeInlinePhotoEl);
+if(leafletMap){
 renderMapPhotos();
 if(fitAfterLoad&&TRACK_GEOTAG_PHOTOS.length>0){
-if(isMapLibreStyle(currentMapStyle))fitMapLibreToPhotos();
-else if(leafletMap){
 const bounds=L.latLngBounds(TRACK_GEOTAG_PHOTOS.map(p=>[p.lat,p.lng]));
 leafletMap.fitBounds(bounds,{padding:[45,45],maxZoom:10});
 }
@@ -2488,12 +1939,37 @@ isTrackPhotosLoading=false;
 let mapPhotosLayer=null,activePhotoIdx=0;
 
 function renderMapPhotos(){
-if(mapPhotosLayer)mapPhotosLayer.clearLayers();
-if(isMapLibreStyle(currentMapStyle)){
-renderMapLibrePhotos();
-}else{
-clearMapLibrePhotoMarkers();
-}
+if(!leafletMap)return;
+if(!mapPhotosLayer)mapPhotosLayer=L.layerGroup().addTo(leafletMap);
+mapPhotosLayer.clearLayers();
+if(currentMapStyle!=='topo_photos')return;
+if(!isTrackPhotosLoaded){ensureTrackPhotosLoaded(false);return;}
+const z=leafletMap.getZoom()||6;
+const sz=z<=6?34:(z<=8?42:(z<=10?48:54));
+const spread=z>=11?0.2:(z>=9?0.65:1);
+TRACK_GEOTAG_PHOTOS.forEach((p,idx)=>{
+L.circleMarker([p.lat,p.lng],{
+radius:4,
+color:'#090c10',
+weight:2,
+fillColor:'#f59e0b',
+fillOpacity:1,
+interactive:false
+}).addTo(mapPhotosLayer);
+const ox=Math.round((p.offset?p.offset[0]:0)*spread);
+const oy=Math.round((p.offset?p.offset[1]:0)*spread);
+const html=`<div class="mc-photo-pin" style="width:${sz}px;height:${sz}px;transform:translate(${ox}px,${oy}px)" title="${escapeHtml(p.title)}"><img src="${escapeHtml(p.src)}" alt="${escapeHtml(p.title)}"><span class="mc-photo-num">${p.num}</span></div>`;
+const icon=L.divIcon({
+className:'mc-photo-marker',
+html,
+iconSize:[sz,sz],
+iconAnchor:[Math.round(sz/2),Math.round(sz/2)]
+});
+const marker=L.marker([p.lat,p.lng],{icon,interactive:true,zIndexOffset:960}).addTo(mapPhotosLayer);
+marker.bindPopup(`<div class="min-w-[230px] max-w-[280px]"><span class="mc-popup-badge">📷 ФОТО ${p.num} / ${TRACK_GEOTAG_PHOTOS.length} • ${escapeHtml(p.date)}</span><div class="mc-popup-title">${escapeHtml(p.title)}</div><div style="margin:6px 0;border:2px solid #1a1208;background:#090c10;cursor:pointer" onclick="openTrackPhotoModal(${idx})"><img src="${escapeHtml(p.src)}" alt="${escapeHtml(p.title)}" style="width:100%;height:150px;object-fit:cover;display:block"></div><div class="mc-popup-desc">${escapeHtml(p.desc)}</div><div class="mc-popup-coords" style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#1a1208;margin-bottom:6px">📍 ${p.lat.toFixed(5)}, ${p.lng.toFixed(5)}</div><button type="button" onclick="openTrackPhotoModal(${idx})" class="mc-popup-btn cyan">🔍 ОТКРЫТЬ ФОТО НА ВЕСЬ ЭКРАН</button></div>`,{closeButton:true,autoPan:true,className:'mc-popup'});
+marker.on('click',function(ev){const inFs=isMapFullscreen||Boolean(document.fullscreenElement||document.webkitFullscreenElement);if(inFs){if(ev&&ev.originalEvent)ev.originalEvent.stopPropagation();this.closePopup();openTrackPhotoModal(idx);}});
+marker.on('popupopen',function(){if(isMapFullscreen||Boolean(document.fullscreenElement||document.webkitFullscreenElement)){this.closePopup();}});
+});
 }
 
 
@@ -2709,45 +2185,7 @@ function stepTrackPhoto(dir){
 openTrackPhotoModal(activePhotoIdx+dir);
 }
 
-function setMapStyle(key){
-if(!MAP_STYLES[key])return;
-currentMapStyle=key;
-localStorage.setItem(MAP_STYLE_KEY,key);
-portalState.mapStyle=key;
-savePortalState();
-updateMapStyleButtons();
-syncMapTopoModeUI();
-updateMapBadge();
-if(isMapLibreStyle(key)){
-showMapLibreEngine(true);
-renderMapLibreRoutes();
-if(key==='topo_photos'){
-if(isTrackPhotosLoaded&&TRACK_GEOTAG_PHOTOS.length>0){
-renderMapLibrePhotos();
-fitMapLibreToPhotos();
-}else{
-ensureTrackPhotosLoaded(true);
-}
-}else{
-clearMapLibrePhotoMarkers();
-}
-showToast('Стиль карты: '+MAP_STYLES[key].name);
-return;
-}
-showMapLibreEngine(false);
-const bgColors={minecraft:'#3d6b2f',heroes:'#5d8a2c',diablo:'#1e1712'};
-const mapEl=document.getElementById('leaflet-map');
-if(mapEl)mapEl.style.background=bgColors[key]||'#3d6b2f';
-if(leafletMap){
-if(osmTileLayer&&leafletMap.hasLayer(osmTileLayer))leafletMap.removeLayer(osmTileLayer);
-if(styledGridLayer){styledGridLayer.setStyleKey(key);if(!leafletMap.hasLayer(styledGridLayer))styledGridLayer.addTo(leafletMap);}
-applyGameArtOverlay(key);
-leafletMap.invalidateSize();
-setTimeout(()=>{if(leafletMap)leafletMap.invalidateSize();},160);
-renderRiverVectorOverlay();renderMapRoutes();renderMapCities();renderMapPhotos();
-}
-showToast('Стиль карты: '+MAP_STYLES[key].name);
-}
+function setMapStyle(key){if(!MAP_STYLES[key])return;currentMapStyle=key;localStorage.setItem(MAP_STYLE_KEY,key);portalState.mapStyle=key;savePortalState();updateMapStyleButtons();syncMapTopoModeUI();updateMapBadge();const bgColors={minecraft:'#3d6b2f',heroes:'#5d8a2c',diablo:'#1e1712',osm:'#e8e4d8',topo_photos:'#e8e4d8'};const mapEl=document.getElementById('leaflet-map');if(mapEl)mapEl.style.background=bgColors[key]||'#3d6b2f';if(leafletMap){if(key==='osm'||key==='topo_photos'){_artOverlayReqId++;if(gameArtOverlay&&leafletMap.hasLayer(gameArtOverlay)){leafletMap.removeLayer(gameArtOverlay);gameArtOverlay=null}if(styledGridLayer&&leafletMap.hasLayer(styledGridLayer))leafletMap.removeLayer(styledGridLayer);if(osmTileLayer){if(!leafletMap.hasLayer(osmTileLayer))osmTileLayer.addTo(leafletMap);else if(osmTileLayer.redraw)osmTileLayer.redraw()}}else{if(osmTileLayer&&leafletMap.hasLayer(osmTileLayer))leafletMap.removeLayer(osmTileLayer);if(styledGridLayer){styledGridLayer.setStyleKey(key);if(!leafletMap.hasLayer(styledGridLayer))styledGridLayer.addTo(leafletMap)}applyGameArtOverlay(key)}leafletMap.invalidateSize();setTimeout(()=>{if(leafletMap)leafletMap.invalidateSize();},160);renderRiverVectorOverlay();renderMapRoutes();renderMapCities();renderMapPhotos();if(key==='topo_photos'){if(isTrackPhotosLoaded&&TRACK_GEOTAG_PHOTOS.length>0){const bounds=L.latLngBounds(TRACK_GEOTAG_PHOTOS.map(p=>[p.lat,p.lng]));leafletMap.fitBounds(bounds,{padding:[45,45],maxZoom:10});}else{ensureTrackPhotosLoaded(true);}}}showToast('Стиль карты: '+MAP_STYLES[key].name)}
 
 function syncMapTopoModeUI(){
 const isTopo=(currentMapStyle==='osm'||currentMapStyle==='topo_photos');
@@ -2792,10 +2230,10 @@ if(item.id==='m-2'||item.mapRouteId==='m-2')return 'https://drive.google.com/uc?
 if(item.id==='m-4'||item.mapRouteId==='m-4')return 'https://drive.google.com/uc?export=download&id=14E3o73JuerpHpKpuA6B5KUoNpqqzQ26j';
 return DEFAULT_DRIVE_TRACKS_FOLDER;
 }
-function renderMapRoutes(){renderMapLibreRoutes();if(!leafletMap)return;Object.values(mapPolylines).forEach(p=>leafletMap.removeLayer(p));Object.values(mapRouteOutlines).forEach(p=>leafletMap.removeLayer(p));Object.values(mapRouteGlows).forEach(p=>leafletMap.removeLayer(p));mapPolylines={};mapRouteOutlines={};mapRouteGlows={};const S=MAP_STYLES[currentMapStyle]||MAP_STYLES.minecraft;const adminRoutesList=document.getElementById('map-admin-routes-list');if(adminRoutesList)adminRoutesList.innerHTML='';portalState.mapRoutes.forEach(route=>{if(!Array.isArray(route.coords)||!route.coords.length)return;const isTopoMode=(currentMapStyle==='osm'||currentMapStyle==='topo_photos');const outline=L.polyline(route.coords,{color:isTopoMode?'#0f172a':(S.routeOutline||'#090c10'),weight:isTopoMode?(currentLineWeight+2):(currentLineWeight+6),opacity:isTopoMode?0.55:0.92,lineCap:'round',lineJoin:'round',smoothFactor:0.35,interactive:false}).addTo(leafletMap);const glow=L.polyline(route.coords,{color:route.color||'#f59e0b',weight:isTopoMode?currentLineWeight:(currentLineWeight+3),opacity:isTopoMode?0:0.45,lineCap:'round',lineJoin:'round',smoothFactor:0.35,interactive:false}).addTo(leafletMap);const poly=L.polyline(route.coords,{color:route.color||'#f59e0b',weight:isTopoMode?currentLineWeight:(currentLineWeight+1),opacity:isTopoMode?0.92:1,lineCap:'round',lineJoin:'round',smoothFactor:0.35,interactive:true}).addTo(leafletMap);const sStory=sanitizeUrl(route.storyUrl),sDownload=resolveTrackDownloadUrl(route),sFolder=sanitizeUrl(route.driveFolderUrl)||DEFAULT_DRIVE_TRACKS_FOLDER;const multiStoriesHtml=(Array.isArray(route.storyLinks)&&route.storyLinks.length>0)?route.storyLinks.map(st=>{const u=sanitizeUrl(st.url);if(!u)return'';return`<div class="mc-popup-story-card" style="margin-top:6px;padding:6px;background:rgba(26,18,8,0.18);border:1px solid #3d2914"><div class="mc-popup-story-desc" style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#1a1208;margin-bottom:4px;line-height:1.35">${escapeHtml(st.desc||'')}</div><a href="${escapeHtml(u)}" target="_blank" rel="noopener noreferrer" class="mc-popup-btn">📖 ${escapeHtml(st.title||'РАССКАЗ')} ↗</a></div>`}).join(''):(sStory?`<a href="${escapeHtml(sStory)}" target="_blank" rel="noopener noreferrer" class="mc-popup-btn">📖 РАССКАЗ ↗</a>`:'');poly.bindPopup(`<div class="min-w-[230px] max-w-[300px]"><span class="mc-popup-badge">${escapeHtml(route.km)}</span><div class="mc-popup-title">${escapeHtml(route.name)}</div><div class="mc-popup-desc">${escapeHtml(route.desc)}</div>${multiStoriesHtml}<a href="${escapeHtml(sDownload)}" target="_blank" rel="noopener noreferrer" download class="mc-popup-btn cyan">📥 СКАЧАТЬ ТРЕК (.GPX) ↗</a><a href="https://notebook.google.com/notebook/7959d135-4395-4f56-8f7b-4fa29ddd0fd6/preview" target="_blank" rel="noopener noreferrer" class="mc-popup-btn cyan">✨ ИИ-БАЗА МАРШРУТА ↗</a><button type="button" onclick="closeActiveMapPopup()" class="mc-popup-btn dark">✕ ЗАКРЫТЬ</button></div>`,{closeButton:true,autoPan:true,className:'mc-popup'});mapRouteOutlines[route.id]=outline;mapRouteGlows[route.id]=glow;mapPolylines[route.id]=poly;if(isAdminLoggedIn&&adminRoutesList){const item=document.createElement('div');item.className='p-2.5 rounded-xl bg-graphite-900 border border-graphite-800 flex items-center justify-between gap-2 text-xs';item.innerHTML=`<span class="inline-flex items-center gap-1.5 font-semibold text-white truncate"><span class="w-2.5 h-2.5 shrink-0" style="background:${escapeHtml(route.color)};border-radius:0"></span>${escapeHtml(route.name)} (${escapeHtml(route.km)})</span><div class="flex items-center gap-2 shrink-0"><button type="button" data-action="edit-route" data-id="${escapeHtml(route.id)}" class="font-mono text-volga-400 hover:underline">Изменить</button><button type="button" data-action="del-route" data-id="${escapeHtml(route.id)}" class="font-mono text-red-400 hover:underline">Удалить</button></div>`;adminRoutesList.appendChild(item)}});renderRouteDecorations()}
+function renderMapRoutes(){if(!leafletMap)return;Object.values(mapPolylines).forEach(p=>leafletMap.removeLayer(p));Object.values(mapRouteOutlines).forEach(p=>leafletMap.removeLayer(p));Object.values(mapRouteGlows).forEach(p=>leafletMap.removeLayer(p));mapPolylines={};mapRouteOutlines={};mapRouteGlows={};const S=MAP_STYLES[currentMapStyle]||MAP_STYLES.minecraft;const adminRoutesList=document.getElementById('map-admin-routes-list');if(adminRoutesList)adminRoutesList.innerHTML='';portalState.mapRoutes.forEach(route=>{if(!Array.isArray(route.coords)||!route.coords.length)return;const isTopoMode=(currentMapStyle==='osm'||currentMapStyle==='topo_photos');const outline=L.polyline(route.coords,{color:isTopoMode?'#0f172a':(S.routeOutline||'#090c10'),weight:isTopoMode?(currentLineWeight+2):(currentLineWeight+6),opacity:isTopoMode?0.55:0.92,lineCap:'round',lineJoin:'round',smoothFactor:0.35,interactive:false}).addTo(leafletMap);const glow=L.polyline(route.coords,{color:route.color||'#f59e0b',weight:isTopoMode?currentLineWeight:(currentLineWeight+3),opacity:isTopoMode?0:0.45,lineCap:'round',lineJoin:'round',smoothFactor:0.35,interactive:false}).addTo(leafletMap);const poly=L.polyline(route.coords,{color:route.color||'#f59e0b',weight:isTopoMode?currentLineWeight:(currentLineWeight+1),opacity:isTopoMode?0.92:1,lineCap:'round',lineJoin:'round',smoothFactor:0.35,interactive:true}).addTo(leafletMap);const sStory=sanitizeUrl(route.storyUrl),sDownload=resolveTrackDownloadUrl(route),sFolder=sanitizeUrl(route.driveFolderUrl)||DEFAULT_DRIVE_TRACKS_FOLDER;const multiStoriesHtml=(Array.isArray(route.storyLinks)&&route.storyLinks.length>0)?route.storyLinks.map(st=>{const u=sanitizeUrl(st.url);if(!u)return'';return`<div class="mc-popup-story-card" style="margin-top:6px;padding:6px;background:rgba(26,18,8,0.18);border:1px solid #3d2914"><div class="mc-popup-story-desc" style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#1a1208;margin-bottom:4px;line-height:1.35">${escapeHtml(st.desc||'')}</div><a href="${escapeHtml(u)}" target="_blank" rel="noopener noreferrer" class="mc-popup-btn">📖 ${escapeHtml(st.title||'РАССКАЗ')} ↗</a></div>`}).join(''):(sStory?`<a href="${escapeHtml(sStory)}" target="_blank" rel="noopener noreferrer" class="mc-popup-btn">📖 РАССКАЗ ↗</a>`:'');poly.bindPopup(`<div class="min-w-[230px] max-w-[300px]"><span class="mc-popup-badge">${escapeHtml(route.km)}</span><div class="mc-popup-title">${escapeHtml(route.name)}</div><div class="mc-popup-desc">${escapeHtml(route.desc)}</div>${multiStoriesHtml}<a href="${escapeHtml(sDownload)}" target="_blank" rel="noopener noreferrer" download class="mc-popup-btn cyan">📥 СКАЧАТЬ ТРЕК (.GPX) ↗</a><a href="https://notebook.google.com/notebook/7959d135-4395-4f56-8f7b-4fa29ddd0fd6/preview" target="_blank" rel="noopener noreferrer" class="mc-popup-btn cyan">✨ ИИ-БАЗА МАРШРУТА ↗</a><button type="button" onclick="closeActiveMapPopup()" class="mc-popup-btn dark">✕ ЗАКРЫТЬ</button></div>`,{closeButton:true,autoPan:true,className:'mc-popup'});mapRouteOutlines[route.id]=outline;mapRouteGlows[route.id]=glow;mapPolylines[route.id]=poly;if(isAdminLoggedIn&&adminRoutesList){const item=document.createElement('div');item.className='p-2.5 rounded-xl bg-graphite-900 border border-graphite-800 flex items-center justify-between gap-2 text-xs';item.innerHTML=`<span class="inline-flex items-center gap-1.5 font-semibold text-white truncate"><span class="w-2.5 h-2.5 shrink-0" style="background:${escapeHtml(route.color)};border-radius:0"></span>${escapeHtml(route.name)} (${escapeHtml(route.km)})</span><div class="flex items-center gap-2 shrink-0"><button type="button" data-action="edit-route" data-id="${escapeHtml(route.id)}" class="font-mono text-volga-400 hover:underline">Изменить</button><button type="button" data-action="del-route" data-id="${escapeHtml(route.id)}" class="font-mono text-red-400 hover:underline">Удалить</button></div>`;adminRoutesList.appendChild(item)}});renderRouteDecorations()}
 
-function updateMapLineWeight(val){currentLineWeight=Math.min(5,Math.max(2,parseInt(val,10)||3));localStorage.setItem(LINE_WEIGHT_KEY,String(currentLineWeight));portalState.mapLineWeight=currentLineWeight;savePortalState();const lbl=document.getElementById('line-width-label');if(lbl)lbl.textContent=currentLineWeight+'px';const isTopoMode=(currentMapStyle==='osm'||currentMapStyle==='topo_photos');Object.values(mapRouteOutlines).forEach(p=>p.setStyle({weight:isTopoMode?(currentLineWeight+2):(currentLineWeight+6)}));Object.values(mapRouteGlows).forEach(p=>p.setStyle({weight:isTopoMode?currentLineWeight:(currentLineWeight+3)}));Object.values(mapPolylines).forEach(p=>p.setStyle({weight:isTopoMode?currentLineWeight:(currentLineWeight+1)}));renderMapLibreRoutes();}
-function toggleMapCollapse(){const body=document.getElementById('map-collapsible-body'),sliders=document.getElementById('map-sliders-wrap'),icon=document.getElementById('map-collapse-icon'),textEl=document.getElementById('map-collapse-text');if(!body)return;body.classList.toggle('hidden');const hidden=body.classList.contains('hidden');if(sliders){sliders.classList.toggle('hidden',hidden);sliders.classList.toggle('flex',!hidden);}if(icon)icon.textContent=hidden?'▶':'▼';if(textEl)textEl.textContent=hidden?'Развернуть карту':'Свернуть карту';if(!hidden){if(!leafletMap)initLeafletMap();loadExternalRoutesJson();const fitAll=()=>{if(isMapLibreStyle(currentMapStyle)){if(maplibreMap)maplibreMap.resize();if(currentMapStyle==='topo_photos'&&isTrackPhotosLoaded)fitMapLibreToPhotos();else fitMapLibreToAllRoutes();return;}leafletMap.invalidateSize();const layers=Object.values(mapPolylines);if(layers.length)leafletMap.fitBounds(L.featureGroup(layers).getBounds(),{padding:[25,25]})};setTimeout(fitAll,80);setTimeout(fitAll,300)}}
+function updateMapLineWeight(val){currentLineWeight=Math.min(5,Math.max(2,parseInt(val,10)||3));localStorage.setItem(LINE_WEIGHT_KEY,String(currentLineWeight));portalState.mapLineWeight=currentLineWeight;savePortalState();const lbl=document.getElementById('line-width-label');if(lbl)lbl.textContent=currentLineWeight+'px';const isTopoMode=(currentMapStyle==='osm'||currentMapStyle==='topo_photos');Object.values(mapRouteOutlines).forEach(p=>p.setStyle({weight:isTopoMode?(currentLineWeight+2):(currentLineWeight+6)}));Object.values(mapRouteGlows).forEach(p=>p.setStyle({weight:isTopoMode?currentLineWeight:(currentLineWeight+3)}));Object.values(mapPolylines).forEach(p=>p.setStyle({weight:isTopoMode?currentLineWeight:(currentLineWeight+1)}))}
+function toggleMapCollapse(){const body=document.getElementById('map-collapsible-body'),sliders=document.getElementById('map-sliders-wrap'),icon=document.getElementById('map-collapse-icon'),textEl=document.getElementById('map-collapse-text');if(!body)return;body.classList.toggle('hidden');const hidden=body.classList.contains('hidden');if(sliders){sliders.classList.toggle('hidden',hidden);sliders.classList.toggle('flex',!hidden);}if(icon)icon.textContent=hidden?'▶':'▼';if(textEl)textEl.textContent=hidden?'Развернуть карту':'Свернуть карту';if(!hidden){if(!leafletMap)initLeafletMap();loadExternalRoutesJson();const fitAll=()=>{leafletMap.invalidateSize();const layers=Object.values(mapPolylines);if(layers.length)leafletMap.fitBounds(L.featureGroup(layers).getBounds(),{padding:[25,25]})};setTimeout(fitAll,80);setTimeout(fitAll,300)}}
 let isMapFullscreen=false;
 function syncMapFullscreenUI(active){
 isMapFullscreen=Boolean(active);
@@ -2814,10 +2252,6 @@ else picker.setAttribute('open','');
 if(leafletMap){
 setTimeout(()=>leafletMap.invalidateSize(),60);
 setTimeout(()=>leafletMap.invalidateSize(),260);
-}
-if(maplibreMap){
-setTimeout(()=>maplibreMap.resize(),60);
-setTimeout(()=>maplibreMap.resize(),260);
 }
 }
 function toggleMapFullscreen(){
@@ -2853,8 +2287,8 @@ const fsEl=document.fullscreenElement||document.webkitFullscreenElement;
 if(!fsEl&&isMapFullscreen)syncMapFullscreenUI(false);
 });
 function openMapSectionFromNav(){const b=document.getElementById('map-collapsible-body');if(b&&b.classList.contains('hidden'))toggleMapCollapse()}
-function focusRouteOnMap(routeId){const b=document.getElementById('map-collapsible-body');if(b&&b.classList.contains('hidden'))toggleMapCollapse();document.getElementById('interactive-map-section').scrollIntoView({behavior:'smooth',block:'center'});setTimeout(()=>{if(!leafletMap)initLeafletMap();loadExternalRoutesJson();if(isMapLibreStyle(currentMapStyle)){showMapLibreEngine(true);focusMapLibreRoute(routeId);return;}const p=mapPolylines[routeId];if(p&&leafletMap){leafletMap.invalidateSize();leafletMap.fitBounds(p.getBounds(),{padding:[30,30]});p.openPopup()}},250)}
-function closeActiveMapPopup(){if(leafletMap)leafletMap.closePopup();if(mlActivePopup){mlActivePopup.remove();mlActivePopup=null;}}
+function focusRouteOnMap(routeId){const b=document.getElementById('map-collapsible-body');if(b&&b.classList.contains('hidden'))toggleMapCollapse();document.getElementById('interactive-map-section').scrollIntoView({behavior:'smooth',block:'center'});setTimeout(()=>{if(!leafletMap)initLeafletMap();loadExternalRoutesJson();const p=mapPolylines[routeId];if(p&&leafletMap){leafletMap.invalidateSize();leafletMap.fitBounds(p.getBounds(),{padding:[30,30]});p.openPopup()}},250)}
+function closeActiveMapPopup(){if(leafletMap)leafletMap.closePopup()}
 function toggleMapAdminDrawer(){if(!isAdminLoggedIn){openAdminLoginModal();return}const body=document.getElementById('map-collapsible-body');if(body&&body.classList.contains('hidden'))toggleMapCollapse();const drawer=document.getElementById('map-admin-drawer');if(drawer){drawer.classList.toggle('hidden');if(!drawer.classList.contains('hidden'))drawer.scrollIntoView({behavior:'smooth',block:'center'})}}
 function handleGpxFileUpload(e){const file=e.target.files[0];if(!file)return;const reader=new FileReader();reader.onload=function(evt){const text=evt.target.result;try{if(file.name.endsWith('.json')||file.name.endsWith('.geojson')){const geo=JSON.parse(text);const coords=[];const extract=(arr)=>{if(!Array.isArray(arr))return;if(typeof arr[0]==='number'&&typeof arr[1]==='number')coords.push([arr[1],arr[0]]);else arr.forEach(extract)};if(geo.features)geo.features.forEach(f=>f.geometry&&extract(f.geometry.coordinates));else if(geo.coordinates)extract(geo.coordinates);uploadedRouteCoords=coords}else{const xml=new DOMParser().parseFromString(text,'text/xml');const pts=Array.from(xml.querySelectorAll('trkpt, rtept'));const step=pts.length>8000?Math.ceil(pts.length/8000):1;uploadedRouteCoords=[];for(let i=0;i<pts.length;i+=step){const lat=parseFloat(pts[i].getAttribute('lat')),lon=parseFloat(pts[i].getAttribute('lon'));if(!isNaN(lat)&&!isNaN(lon))uploadedRouteCoords.push([lat,lon])}}showToast(`Загружено точек: ${uploadedRouteCoords?uploadedRouteCoords.length:0}`)}catch(err){showToast('Не удалось прочитать файл','error')}};reader.readAsText(file)}
 function handleSaveMapRoute(e){e.preventDefault();if(!isAdminLoggedIn)return;const editId=document.getElementById('mr-edit-id').value;const name=document.getElementById('mr-name').value.trim();const km=document.getElementById('mr-km').value.trim();const color=document.getElementById('mr-color').value||'#f59e0b';const storyUrl=sanitizeUrl(document.getElementById('mr-story-url').value.trim());const trackUrl=sanitizeUrl(document.getElementById('mr-track-url').value.trim());const desc=document.getElementById('mr-desc').value.trim();if(editId){const idx=portalState.mapRoutes.findIndex(r=>r.id===editId);if(idx!==-1)portalState.mapRoutes[idx]={...portalState.mapRoutes[idx],name,km,color,storyUrl,trackUrl,desc,coords:uploadedRouteCoords&&uploadedRouteCoords.length>1?uploadedRouteCoords:portalState.mapRoutes[idx].coords}}else{portalState.mapRoutes.push({id:'m-'+Date.now(),name,km,color,storyUrl,trackUrl,desc,coords:uploadedRouteCoords&&uploadedRouteCoords.length>1?uploadedRouteCoords:[[54.314,48.403],[51.533,46.034]]})}uploadedRouteCoords=null;savePortalState();if(styledGridLayer)styledGridLayer.redraw();renderMapRoutes();resetMapRouteForm();showToast('Маршрут сохранён')}
@@ -4562,20 +3996,20 @@ const url=sanitizeUrl(rawUrl);
 if(!url)return;
 const isMob=isMobileOrTouchEnv();
 const isLocalOrWv=(window.location.protocol==='file:'||window.location.protocol==='content:'||window.location.origin==='null'||/wv|Telegram|FBAN|FBAV|Instagram/i.test(navigator.userAgent||''));
+const isTgScheme=/^tg:\/\//i.test(url);
 const tgInviteMatch=url.match(/^https?:\/\/(?:www\.)?(?:t\.me|telegram\.me)\/(?:\+|joinchat\/)([a-zA-Z0-9_-]+)/i);
-const tgUserMatch=(!tgInviteMatch)?url.match(/^https?:\/\/(?:www\.)?(?:t\.me|telegram\.me)\/([a-zA-Z0-9_]{3,})\/?$/i):null;
-if(tgInviteMatch||tgUserMatch){
-const tgDeep=tgInviteMatch?(`tg://join?invite=${tgInviteMatch[1]}`):(`tg://resolve?domain=${tgUserMatch[1]}`);
-if(isMob||isLocalOrWv){
+const tgPostMatch=(!tgInviteMatch)?url.match(/^https?:\/\/(?:www\.)?(?:t\.me|telegram\.me)\/([a-zA-Z0-9_]{3,})\/(\d+)/i):null;
+const tgUserMatch=(!tgInviteMatch&&!tgPostMatch)?url.match(/^https?:\/\/(?:www\.)?(?:t\.me|telegram\.me)\/([a-zA-Z0-9_]{3,})\/?$/i):null;
+if(isTgScheme||tgInviteMatch||tgPostMatch||tgUserMatch){
 if(evt){evt.preventDefault();evt.stopPropagation();}
+const tgDeep=isTgScheme?url:(tgInviteMatch?`tg://join?invite=${tgInviteMatch[1]}`:(tgPostMatch?`tg://resolve?domain=${tgPostMatch[1]}&post=${tgPostMatch[2]}`:`tg://resolve?domain=${tgUserMatch[1]}`));
 try{window.location.href=tgDeep;}catch(err){}
-setTimeout(()=>{
-if(!document.hidden){
-try{window.top.location.href=url;}catch(e1){try{window.location.href=url;}catch(e2){}}
-}
-},600);
 return;
 }
+if(/^https?:\/\/(?:www\.)?(?:t\.me|telegram\.me)\//i.test(url)){
+if(evt){evt.preventDefault();evt.stopPropagation();}
+window.open(url,'_blank','noopener,noreferrer');
+return;
 }
 if(isMob||isLocalOrWv){
 if(evt){evt.preventDefault();evt.stopPropagation();}
@@ -4595,8 +4029,11 @@ if(!w)window.location.href=url;
 document.addEventListener('click',(e)=>{
 const linkEl=e.target.closest('a[href]');
 if(linkEl){
+if(e.metaKey||e.ctrlKey||e.shiftKey||e.altKey||e.button!==0){
+return;
+}
 const rawHref=linkEl.getAttribute('href')||'';
-if(linkEl.closest('.leaflet-popup')||linkEl.closest('.maplibregl-popup')){
+if(linkEl.closest('.leaflet-popup')){
 e.stopPropagation();
 }
 if(/^https?:\/\//i.test(rawHref)||/^tg:\/\//i.test(rawHref)){
@@ -4637,7 +4074,7 @@ toggleAdminPasswordResetBox,requestAdminPasswordResetCode,confirmAdminPasswordRe
 setResultsFilter,toggleStoryForm,handleAddStory,triggerAdminGear,
 clearSurveyAnswers,handleSurveySubmit,computeSurveyScoreStats,
 recalcParticipantPreliminary,handleParticipantPreliminarySubmit,
-setMapStyle,setMapLibreSubLayer,toggleMapLibreContours,toggleMapLibre3D,updateMapBgOpacity,toggleMapFullscreen,openTrackPhotoModal,closeTrackPhotoModal,stepTrackPhoto,openPhotosLayerOnMap,openParticipantAuthBox,closeParticipantAuthBox,openAppThankYouModal,closeAppThankYouModal,scrollToAdminStories,renderAdminStoriesSection,setStoryStatusAdmin,openFaqAiPromptModal,copyFaqAiPromptDirect
+setMapStyle,updateMapBgOpacity,toggleMapFullscreen,openTrackPhotoModal,closeTrackPhotoModal,stepTrackPhoto,openPhotosLayerOnMap,openParticipantAuthBox,closeParticipantAuthBox,openAppThankYouModal,closeAppThankYouModal,scrollToAdminStories,renderAdminStoriesSection,setStoryStatusAdmin,openFaqAiPromptModal,copyFaqAiPromptDirect
 });
 
 window.addEventListener('DOMContentLoaded',()=>{
@@ -4655,7 +4092,7 @@ initEditableStaticTexts();
 pickHeroSubtitleVariant();
 const bgColors={minecraft:'#3d6b2f',heroes:'#7ba83a',diablo:'#0a0806',osm:'#e8e4d8',topo_photos:'#e8e4d8'};
 const mapEl=document.getElementById('leaflet-map');if(mapEl)mapEl.style.background=bgColors[currentMapStyle]||'#3d6b2f';
-const bootMap=()=>{const mapBodyEl=document.getElementById('map-collapsible-body');if(mapBodyEl&&!mapBodyEl.classList.contains('hidden')){if(typeof L!=='undefined'){initLeafletMap();loadExternalRoutesJson();setTimeout(()=>{if(isMapLibreStyle(currentMapStyle)){if(currentMapStyle==='topo_photos')ensureTrackPhotosLoaded(true);else fitMapLibreToAllRoutes();}else if(leafletMap){leafletMap.invalidateSize();const layers=Object.values(mapPolylines);if(layers.length)leafletMap.fitBounds(L.featureGroup(layers).getBounds(),{padding:[25,25]});}},200);}else{setTimeout(bootMap,120);}}};bootMap();ensureTrackPhotosLoaded(false);initInlineHeroPhotoLinks();
+const bootMap=()=>{const mapBodyEl=document.getElementById('map-collapsible-body');if(mapBodyEl&&!mapBodyEl.classList.contains('hidden')){if(typeof L!=='undefined'){initLeafletMap();loadExternalRoutesJson();setTimeout(()=>{if(leafletMap){leafletMap.invalidateSize();const layers=Object.values(mapPolylines);if(layers.length)leafletMap.fitBounds(L.featureGroup(layers).getBounds(),{padding:[25,25]});}},200);}else{setTimeout(bootMap,120);}}};bootMap();ensureTrackPhotosLoaded(false);initInlineHeroPhotoLinks();
 renderSectors();renderFaqs();renderStories();
 renderPublicProtocol();renderPublicResultsTable();
 renderAdminResultsSection();
